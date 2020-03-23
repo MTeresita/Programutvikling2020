@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="1080.0" prefWidth="1920.0">
+         <left>
+            <Pane prefHeight="1080.0" prefWidth="282.0" styleClass="gradient" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="center" layoutX="-1.0" layoutY="881.0" prefHeight="80.0" prefWidth="285.0" styleClass="label-price" stylesheets="@styles.css" text="Total: 4999 NOK" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="61.0" layoutX="14.0" layoutY="741.0" stroke="WHITE" strokeType="INSIDE" width="61.0" />
+                  <Text fill="WHITE" layoutX="91.0" layoutY="757.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produktnavn">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="91.0" layoutY="797.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2499 NOK">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Text>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="61.0" layoutX="14.0" layoutY="657.0" stroke="WHITE" strokeType="INSIDE" width="61.0" />
+                  <Text fill="WHITE" layoutX="91.0" layoutY="673.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produktnavn">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="91.0" layoutY="713.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2500 NOK">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Text>
+                  <Button layoutX="14.0" layoutY="826.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="72.0" styleClass="save" stylesheets="@styles.css" text="Lagre">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="196.0" layoutY="826.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="72.0" styleClass="delete" stylesheets="@styles.css" text="Slett">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="105.0" layoutY="826.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="72.0" styleClass="button-basket" stylesheets="@styles.css" text="Hent">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Text layoutX="21.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RÅFETDATA.NO">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#531180" />
+                              <Stop color="#531180" offset="0.007662835249042145" />
+                              <Stop color="#6a24ab" offset="0.4329501915708812" />
+                              <Stop color="#481180" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </Text>
+               </children></Pane>
+         </left>
+         <center>
+            <Pane prefHeight="1063.0" prefWidth="1709.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
+               <children>
+                  <Text layoutX="75.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kabinett" wrappingWidth="193.13671875">
+                     <font>
+                        <Font name="System Bold" size="35.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="75.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prosessor" wrappingWidth="193.13671875">
+                     <font>
+                        <Font name="System Bold" size="35.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="75.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Skjermkort" wrappingWidth="193.13671875">
+                     <font>
+                        <Font name="System Bold" size="35.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="75.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minne" wrappingWidth="193.13671875">
+                     <font>
+                        <Font name="System Bold" size="35.0" />
+                     </font>
+                  </Text>
+                  <ChoiceBox layoutX="310.0" layoutY="131.0" prefHeight="32.0" prefWidth="150.0" styleClass="choicebox-product" stylesheets="@styles.css" />
+                  <ChoiceBox layoutX="310.0" layoutY="247.0" prefHeight="32.0" prefWidth="150.0" styleClass="choicebox-product" stylesheets="@styles.css" />
+                  <ChoiceBox layoutX="310.0" layoutY="362.0" prefHeight="32.0" prefWidth="150.0" styleClass="choicebox-product" stylesheets="@styles.css" />
+                  <ChoiceBox layoutX="310.0" layoutY="477.0" prefHeight="32.0" prefWidth="150.0" styleClass="choicebox-product" stylesheets="@styles.css" />
+                  <Text layoutX="625.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kabinett" wrappingWidth="193.13671875">
+                     <font>
+                        <Font name="System Bold" size="35.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="625.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prosessor" wrappingWidth="193.13671875">
+                     <font>
+                        <Font name="System Bold" size="35.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="625.0" layoutY="612.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Skjermkort" wrappingWidth="193.13671875">
+                     <font>
+                        <Font name="System Bold" size="35.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="625.0" layoutY="840.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minne" wrappingWidth="193.13671875">
+                     <font>
+                        <Font name="System Bold" size="35.0" />
+                     </font>
+                  </Text>
+                  <TableView layoutX="625.0" layoutY="168.0" prefHeight="129.0" prefWidth="340.0">
+                    <columns>
+                      <TableColumn prefWidth="263.0" text="Produkt" />
+                      <TableColumn minWidth="0.0" prefWidth="75.0" text="Pris" />
+                    </columns>
+                  </TableView>
+                  <TableView layoutX="625.0" layoutY="395.0" prefHeight="146.0" prefWidth="343.0">
+                    <columns>
+                      <TableColumn prefWidth="270.0" text="Produkt" />
+                      <TableColumn prefWidth="72.0" text="Pris" />
+                    </columns>
+                  </TableView>
+                  <TableView layoutX="625.0" layoutY="624.0" prefHeight="155.0" prefWidth="343.0">
+                    <columns>
+                      <TableColumn prefWidth="272.0" text="Produkt" />
+                      <TableColumn prefWidth="69.0" text="Pris" />
+                    </columns>
+                  </TableView>
+                  <TableView layoutX="625.0" layoutY="854.0" prefHeight="134.0" prefWidth="350.0">
+                    <columns>
+                      <TableColumn prefWidth="281.0" text="Produkt" />
+                      <TableColumn prefWidth="68.0" text="Pris" />
+                    </columns>
+                  </TableView>
+               </children></Pane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

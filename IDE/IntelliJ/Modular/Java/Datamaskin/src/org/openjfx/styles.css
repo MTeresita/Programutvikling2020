@@ -1,0 +1,31 @@
+.label-price {
+    -fx-text-fill: white;
+    -fx-padding: 25px;
+    -fx-background-color: rgba(256,256,256,0.2);
+    -fx-border-radius: 30;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Roboto Light";
+
+}
+.gradient{
+    -fx-background-color: linear-gradient(to bottom left, #C23EB1, #4A1082 );
+}
+
+.choicebox-product{
+    -fx-background-color: #E2E2E2;
+
+}
+
+.button-basket{
+    -fx-background-color: #E2E2E2;
+}
+
+.save{
+    -fx-background-color: #34e386;
+}
+
+.delete{
+    -fx-background-color: #e3345a;
+    -fx-text-fill: white;
+}
