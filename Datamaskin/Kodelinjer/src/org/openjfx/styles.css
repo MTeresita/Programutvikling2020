@@ -29,3 +29,6 @@
     -fx-background-color: #e3345a;
     -fx-text-fill: white;
 }
+.root{
+    -fx-background-radius: 30;
+}
