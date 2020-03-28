@@ -1,7 +1,7 @@
 package org.openjfx.Models;
 
 public class Produkt {
-
+  // DENNE ER DROPPET, ERSTATTET MED KOMPONENETERTABLEVIEW
     private String navn;
     private double pris;
     private String kategori;

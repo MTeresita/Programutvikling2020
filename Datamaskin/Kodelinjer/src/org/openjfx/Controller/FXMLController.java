@@ -1,7 +1,5 @@
 package org.openjfx.Controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,8 +10,7 @@ import javafx.scene.control.TableView;
 import org.openjfx.Model.Interfaces.scenebytte;
 
 import org.openjfx.Models.Konfigurasjon;
-import org.openjfx.Models.Produkt;
-import org.openjfx.Models.ProduktListe;
+import org.openjfx.Models.KomponenterListe;
 
 import java.util.ArrayList;
 
@@ -31,7 +28,8 @@ public class FXMLController {
 
     //proof of concept
     public Konfigurasjon k = new Konfigurasjon(); //lager en generell liste som brukes gjennom kontrolleren
-    public ProduktListe pl = new ProduktListe();
+    public KomponenterListe kl = new KomponenterListe();
+
 
 
 
@@ -52,21 +50,21 @@ public class FXMLController {
 
 
         //proof of concept
-        Produkt p1 = new Produkt("Intel i5", "CPU", 3000.0);
-        Produkt p2 = new Produkt("AMD Ryzen", "CPU", 5000.0);
-        Produkt p3 = new Produkt("Asus Z-500", "MOTHERBOARD", 2000.0);
-        Produkt p4 = new Produkt("AMD X570", "MOTHERBOARD", 4000.0);
-        Produkt p5 = new Produkt("Nvidia Geforce 1060", "GPU", 4000.0);
-        Produkt p6 = new Produkt("Nvidia Geforece 2080", "GPU", 10000.0);
-        Produkt p7 = new Produkt("Corsair 8GB 3200MHZ", "RAM", 1000.0);
-        Produkt p8 = new Produkt("Kingston 16GB 3200MHZ", "RAM", 2000.0);
-        Produkt p9 = new Produkt("Intel ssd 512GB", "HARD DRIVE", 500.0);
-        Produkt p10 = new Produkt("Kingston ssd 1TB", "HARD DRIVE", 900.0);
+        KomponenterTableView p1 = new KomponenterTableView("Intel i5", "CPU", 3000.0);
+        KomponenterTableView p2 = new KomponenterTableView("AMD Ryzen", "CPU", 5000.0);
+        KomponenterTableView p3 = new KomponenterTableView("Asus Z-500", "MOTHERBOARD", 2000.0);
+        KomponenterTableView p4 = new KomponenterTableView("AMD X570", "MOTHERBOARD", 4000.0);
+        KomponenterTableView p5 = new KomponenterTableView("Nvidia Geforce 1060", "GPU", 4000.0);
+        KomponenterTableView p6 = new KomponenterTableView("Nvidia Geforece 2080", "GPU", 10000.0);
+        KomponenterTableView p7 = new KomponenterTableView("Corsair 8GB 3200MHZ", "RAM", 1000.0);
+        KomponenterTableView p8 = new KomponenterTableView("Kingston 16GB 3200MHZ", "RAM", 2000.0);
+        KomponenterTableView p9 = new KomponenterTableView("Intel ssd 512GB", "HARD DRIVE", 500.0);
+        KomponenterTableView p10 = new KomponenterTableView("Kingston ssd 1TB", "HARD DRIVE", 900.0);
 
-        pl.setProdukter(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10);
+        kl.setKomponenter(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10);
 
 
-        ArrayList<Produkt> valgteProdukter = pl.getProdukter(p1, p3, p5, p7, p10); //lager utvalg av valgte produkter
+        ArrayList<KomponenterTableView> valgteProdukter = kl.getProdukter(p1, p3, p5, p7, p10); //lager utvalg av valgte produkter
         k.setValgteProdukter(valgteProdukter);
 
         System.out.println(k.toString());
@@ -75,20 +73,23 @@ public class FXMLController {
         System.out.println(k.toString());
         //proof of concept
 
-
         populateTable();
     }
 
 
-    public void populateTable() {
-        KomponenterTableView alleKomponenter = new KomponenterTableView();
+    public void populateTable() { //henter fra .csv fil
+
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
+        komponenter.setItems(kl.createTableFromFile());
+    }
 
-        komponenter.setItems(alleKomponenter.createTableFromFile());
-
-
+    public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
+        produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
+        kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
+        pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
+        komponenter.setItems(kl.getObservableList());
     }
 
     @FXML
