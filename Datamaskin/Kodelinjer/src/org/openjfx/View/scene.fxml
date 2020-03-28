@@ -92,12 +92,12 @@
                      </columns>
                   </TableView>
 
-                  <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="619.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="560.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Bilder/images.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="newProduct" layoutX="660.0" layoutY="28.0" mnemonicParsing="false" onAction="#logInEvent" styleClass="button-basket" stylesheets="@../styles.css" text="Registrer nytt produkt" />
+                  <Button fx:id="newProduct" layoutX="601.0" layoutY="28.0" mnemonicParsing="false" onAction="#logInEvent" styleClass="button-basket" stylesheets="@../styles.css" text="Registrer nytt produkt" />
                </children></Pane>
          </center>
       </BorderPane>
