@@ -92,7 +92,12 @@ public class FXMLController {
     }
 
     @FXML
-    public void logInEvent(ActionEvent event) {
-        scenebytte.routeToSite(event, "loggInnAdmin");
+    public void leggTilKomponent(ActionEvent event) {
+        System.out.println("trykket på legg til komponent");
+        //k.setNyttProdukt(); //her skal det valgte produktet fra tablview sendes som parameter
+    }
+    @FXML
+    public void logOutEvent(ActionEvent event) {
+        scenebytte.routeToSite(event, "loggInnBruker");
     }
 }

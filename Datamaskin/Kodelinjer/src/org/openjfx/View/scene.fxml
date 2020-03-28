@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.FXMLController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.FXMLController">
    <children>
       <BorderPane prefHeight="900.0" prefWidth="1100.0">
          <left>
@@ -84,7 +84,7 @@
                         <Font name="System Bold" size="35.0" />
                      </font>
                   </Text>
-                  <TableView fx:id="komponenter" layoutX="50.0" layoutY="119.0" prefHeight="589.0" prefWidth="684.0">
+                  <TableView fx:id="komponenter" layoutX="50.0" layoutY="119.0" prefHeight="544.0" prefWidth="684.0">
                      <columns>
                         <TableColumn fx:id="produktnavn" prefWidth="320.3333740234375" text="Produkt navn" />
                         <TableColumn fx:id="kategori" minWidth="0.0" prefWidth="219.66668701171875" text="Kategori" />
@@ -92,12 +92,17 @@
                      </columns>
                   </TableView>
 
-                  <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="560.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="643.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Bilder/images.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="newProduct" layoutX="601.0" layoutY="28.0" mnemonicParsing="false" onAction="#logInEvent" styleClass="button-basket" stylesheets="@../styles.css" text="Registrer nytt produkt" />
+                  <Button fx:id="newProduct" layoutX="677.0" layoutY="30.0" mnemonicParsing="false" onAction="#logOutEvent" styleClass="button-basket" stylesheets="@../styles.css" text="Logg ut" />
+                  <Button layoutX="574.0" layoutY="679.0" mnemonicParsing="false" onAction="#leggTilKomponent" prefHeight="35.0" prefWidth="163.0" styleClass="save" stylesheets="@../styles.css" text="Legg til komponent">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                </children></Pane>
          </center>
       </BorderPane>

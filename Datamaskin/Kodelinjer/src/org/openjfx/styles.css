@@ -14,13 +14,14 @@
 
 .choicebox-product{
     -fx-background-color: #E2E2E2;
-
 }
 
 .button-basket{
     -fx-background-color: #E2E2E2;
 }
-
+Button{
+    -fx-cursor: pointer;
+}
 .save{
     -fx-background-color: #34e386;
 }

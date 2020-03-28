@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.LoggInnBrukerController">
+    <children>
+        <BorderPane prefHeight="500.0" prefWidth="600.0">
+            <left>
+                <Pane prefHeight="200.0" prefWidth="200.0" styleClass="gradient" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Text layoutX="16.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RÅFETDATA.NO">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#531180" />
+                              <Stop color="#531180" offset="0.007662835249042145" />
+                              <Stop color="#6a24ab" offset="0.4329501915708812" />
+                              <Stop color="#481180" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </Text>
+               </children></Pane>
+            </left>
+            <center>
+                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button fx:id="btnLogin" layoutX="97.0" layoutY="199.0" mnemonicParsing="false" onAction="#loginEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Logg inn" />
+                        <Text fill="#393939" layoutX="25.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Text>
+                        <Text fill="#393939" layoutX="25.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Text>
+                    <TextField fx:id="txtuser" layoutX="25.0" layoutY="111.0" style="-fx-border-color: Purple;" />
+                    <PasswordField fx:id="txtpass" layoutX="25.0" layoutY="163.0" style="-fx-border-color: Purple;" />
+                  <Button fx:id="btnLogin1" layoutX="93.0" layoutY="439.0" mnemonicParsing="false" onAction="#loginEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
+                  <Text fill="#393939" layoutX="21.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#393939" layoutX="21.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="txtuser1" layoutX="22.0" layoutY="349.0" style="-fx-border-color: Purple;" />
+                  <PasswordField fx:id="txtpass1" layoutX="21.0" layoutY="403.0" style="-fx-border-color: Purple;" />
+                  <Text fill="#393939" layoutX="25.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg Inn">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#393939" layoutX="21.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Text>
+                  <Line endX="250.0" layoutX="125.0" layoutY="262.0" startX="-100.0" />
+                  <Button fx:id="btnLogin2" layoutX="288.0" layoutY="199.0" mnemonicParsing="false" onAction="#loginEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Logg inn" />
+                  <Text fill="#393939" layoutX="216.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#393939" layoutX="216.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="txtuser2" layoutX="216.0" layoutY="111.0" style="-fx-border-color: Purple;" />
+                  <PasswordField fx:id="txtpass2" layoutX="216.0" layoutY="163.0" style="-fx-border-color: Purple;" />
+                  <Text fill="#393939" layoutX="216.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg Inn Admin">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Text>
+                    </children>
+                </Pane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>
