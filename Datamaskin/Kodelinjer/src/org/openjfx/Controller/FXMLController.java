@@ -4,30 +4,50 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 import org.openjfx.Model.Interfaces.scenebytte;
+
 import org.openjfx.Models.Konfigurasjon;
 import org.openjfx.Models.Produkt;
 import org.openjfx.Models.ProduktListe;
 
 import java.util.ArrayList;
 
+import org.openjfx.Models.KomponenterTableView;
+
+
 public class FXMLController {
-    
+
     @FXML
     private Label label;
 
     @FXML
     private Button newProduct;
 
+
     //proof of concept
     public Konfigurasjon k = new Konfigurasjon(); //lager en generell liste som brukes gjennom kontrolleren
     public ProduktListe pl = new ProduktListe();
+
+
+
+    @FXML
+    TableView <KomponenterTableView> komponenter;
+
+    @FXML
+    TableColumn<KomponenterTableView, String> produktnavn, kategori;
+
+    @FXML
+    TableColumn<KomponenterTableView, Double> pris;
 
 
     public void initialize() {
         String javaVersion = System.getProperty("java.version");
         String javafxVersion = System.getProperty("javafx.version");
 //        label.setText("Hello, JavaFX " + javafxVersion + "\nRunning on Java " + javaVersion + ".");
+
 
         //proof of concept
         Produkt p1 = new Produkt("CPU", 3000.0, "Intel i5");
@@ -52,6 +72,15 @@ public class FXMLController {
         k.setNyttProdukt(p4);
         System.out.println(k.toString());
         //proof of concept
+
+
+        populateTable();
+    }
+
+    public void populateTable() {
+        produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
+        kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
+        pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
 
     }
 
