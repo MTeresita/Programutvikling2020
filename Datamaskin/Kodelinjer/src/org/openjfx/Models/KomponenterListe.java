@@ -39,11 +39,11 @@ public class KomponenterListe {
         return produkterIterator;
     }
 
-    public ObservableList<KomponenterTableView> getObservableList(){
+    public ObservableList<KomponenterTableView> getObservableList(){ //henter den globale oservablelist
         return komponenterListeObservable;
     }
 
-    public ObservableList<KomponenterTableView> createTableFromFile() {
+    public ObservableList<KomponenterTableView> createTableFromFile() { //henter fra fil og skriver til global observablelist
         try {
             BufferedReader reader = new BufferedReader(new FileReader("./komponenter.csv"));
 
