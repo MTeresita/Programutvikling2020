@@ -38,15 +38,12 @@ public class FXMLController {
 
 
     public void populateTable() {
-        ObservableList<KomponenterTableView> testList = FXCollections.observableArrayList();
-
-        KomponenterTableView etkomponent = new KomponenterTableView("Intel", "CPU", 2999.99);
-        testList.add(etkomponent);
+        KomponenterTableView alleKomponenter = new KomponenterTableView();
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
 
-        komponenter.setItems(testList);
+        komponenter.setItems(alleKomponenter.createTableFromFile());
 
     }
 
