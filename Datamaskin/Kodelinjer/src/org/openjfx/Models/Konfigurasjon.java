@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Konfigurasjon {
+
     ArrayList<Produkt> konfigListe = new ArrayList<Produkt>();
+
     private double sluttPris;
 
     public void setNyttProdukt(Produkt produkt) { //for bruker
@@ -22,6 +24,14 @@ public class Konfigurasjon {
             setKonfigListe(konfigListeIterator);//setter også sluttpris
         }
     }
+
+    public void setValgteProdukter(ArrayList<Produkt> produkter) { //for bruker
+        konfigListe.clear();
+        for(Produkt p : produkter){
+           konfigListe.add(p);
+        }
+    }
+
     public void lagSluttPris(){
         double sluttPrisIterator = 0.0;
         ArrayList<Produkt> konfigListeIterator = konfigListe; //lager en midlertidig kopi av hovedlisten

@@ -1,6 +1,7 @@
 package org.openjfx.Models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ProduktListe {
 
@@ -12,12 +13,21 @@ public class ProduktListe {
 
 
     //funksjoner:
-    public void leggTilProdukt(Produkt produkt){
-        produkter.add(produkt);
+    public void leggTilProdukt(Produkt... produkter){
+
     }
 
-    public ArrayList<Produkt> getProdukter() {
-        return produkter;
+    public void setProdukter(Produkt... produkter) {
+        Collections.addAll(this.produkter, produkter);
+    }
+
+    public ArrayList<Produkt> getProdukter(Produkt... produkter) {
+        ArrayList<Produkt> produkterIterator = new ArrayList<Produkt>();
+
+        for(Produkt p : produkter){
+            produkterIterator.add(p);
+        }
+        return produkterIterator;
     }
 
 }

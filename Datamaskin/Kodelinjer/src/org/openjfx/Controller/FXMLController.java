@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import org.openjfx.Model.Interfaces.scenebytte;
 import org.openjfx.Models.Konfigurasjon;
 import org.openjfx.Models.Produkt;
+import org.openjfx.Models.ProduktListe;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,8 @@ public class FXMLController {
 
     //proof of concept
     public Konfigurasjon k = new Konfigurasjon(); //lager en generell liste som brukes gjennom kontrolleren
+    public ProduktListe pl = new ProduktListe();
+
 
     public void initialize() {
         String javaVersion = System.getProperty("java.version");
@@ -38,10 +41,11 @@ public class FXMLController {
         Produkt p9 = new Produkt("HARD DRIVE", 500.0, "Intel ssd 512GB");
         Produkt p10 = new Produkt("HARD DRIVE", 900.0, "Kingston ssd 1TB");
 
-        k.setNyttProdukt(p1);
-        k.setNyttProdukt(p3);
-        k.setNyttProdukt(p9);
-        k.setNyttProdukt(p10);
+        pl.setProdukter(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10);
+
+
+        ArrayList<Produkt> valgteProdukter = pl.getProdukter(p1, p3, p5, p7, p10); //lager utvalg av valgte produkter
+        k.setValgteProdukter(valgteProdukter);
 
         System.out.println(k.toString());
 
