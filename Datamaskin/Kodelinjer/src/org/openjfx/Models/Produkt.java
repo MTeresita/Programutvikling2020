@@ -2,13 +2,13 @@ package org.openjfx.Models;
 
 public class Produkt {
     private String kategori;
-    private int pris;
+    private double pris;
 
     public String getKategori() {
         return kategori;
     }
 
-    public int getPris() {
+    public double getPris() {
         return pris;
     }
 }

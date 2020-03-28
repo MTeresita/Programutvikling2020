@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 public class Konfigurasjon {
     ArrayList<Produkt> konfigListe = new ArrayList<Produkt>();
-    private int sluttPris;
+    private double sluttPris;
 
     public void setNyttProdukt(Produkt produkt) {
         ArrayList<Produkt> konfigListeIterator = konfigListe; //lager en midlertidig kopi av hovedlisten
@@ -24,7 +24,7 @@ public class Konfigurasjon {
         }
     }
     public void lagSluttPris(){
-        int sluttPrisIterator = 0;
+        double sluttPrisIterator = 0.0;
         ArrayList<Produkt> konfigListeIterator = konfigListe; //lager en midlertidig kopi av hovedlisten
         Iterator itr = konfigListeIterator.iterator(); //lager en iterator
 
@@ -40,13 +40,13 @@ public class Konfigurasjon {
         this.konfigListe = konfigListe;
         lagSluttPris(); //hver gang konfigListe endres på, kjøres lagSluttPris
     }
-    public void setSluttPris(int sluttPris) {
+    public void setSluttPris(double sluttPris) {
         this.sluttPris = sluttPris;
     }
     public ArrayList<Produkt> getKonfigListe() {
         return konfigListe;
     }
-    public int getSluttPris() {
+    public double getSluttPris() {
         return sluttPris;
     }
 }
