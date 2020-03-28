@@ -1,4 +1,4 @@
-package org.openjfx.Avvik;
+package org.openjfx.Models.Avvik;
 
 public class AvvikAdministrator {
 }

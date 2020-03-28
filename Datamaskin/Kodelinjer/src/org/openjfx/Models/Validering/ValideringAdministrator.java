@@ -1,4 +1,4 @@
-package org.openjfx.Validering;
+package org.openjfx.Models.Validering;
 
 public class ValideringAdministrator {
 }
