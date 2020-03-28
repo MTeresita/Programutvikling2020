@@ -3,10 +3,10 @@ package org.openjfx.Models;
 public class Produkt {
 
     private String navn;
-    private Double pris;
+    private double pris;
     private String kategori;
 
-    public Produkt(String navn, Double pris, String kategori) {
+    public Produkt(String navn, double pris, String kategori) {
         this.navn = navn;
         this.pris = pris;
         this.kategori = kategori;
