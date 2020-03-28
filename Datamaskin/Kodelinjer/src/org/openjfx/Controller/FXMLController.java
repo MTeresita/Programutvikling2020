@@ -19,7 +19,7 @@ public class FXMLController {
     private Button newProduct;
 
     //proof of concept
-    public Konfigurasjon k = new Konfigurasjon(); //lager en generel liste som brukes gjennom kontrolleren
+    public Konfigurasjon k = new Konfigurasjon(); //lager en generell liste som brukes gjennom kontrolleren
 
     public void initialize() {
         String javaVersion = System.getProperty("java.version");
