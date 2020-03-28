@@ -5,12 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.openjfx.Model.Interfaces.scenebytte;
+
+import java.io.*;
+import java.util.Scanner;
 
 public class LoggInnBrukerController {
 
@@ -24,31 +24,38 @@ public class LoggInnBrukerController {
     Label lblMessage;
 
     @FXML
-    Button btnLogin;
+    Button btnLoginBruker, btnLoginAdmin, btnRegistrer;
 
-    /**
-     * @throws Exception
-     * Logg inn metode som sjekker om passord og brukernavn stemmer.
-     * Det er kun gjort slik at ADMIN har tilgang til programmet.
-     */
     @FXML
 
-    public void loginEvent() throws Exception {
-        Stage stage = (Stage) btnLogin.getScene().getWindow();
-        if (txtuser.getText().equals("ADMIN") && txtpass.getText().equals("ADMIN")) {
-            Stage primaryStage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/org/openjfx/View/scene.fxml"));
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-            stage.close();
-        } else {
-            lblMessage.setText("Feil brukernavn eller passord");
-        }
+    public void loginEventBruker() throws Exception {
+        Stage stage = (Stage) btnLoginBruker.getScene().getWindow();
+            BufferedReader reader = null;
+            try {
+                reader = new BufferedReader(new FileReader("./Brukere.csv"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            if (reader != null) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] split = line.split(";");
+                    if (txtuser.getText().equals(split[0]) && txtpass.getText().equals(split[1])) {
+                        Stage primaryStage = new Stage();
+                        Parent root = FXMLLoader.load(getClass().getResource("/org/openjfx/View/scene.fxml"));
+                        Scene scene = new Scene(root);
+                        primaryStage.setScene(scene);
+                        primaryStage.show();
+                        stage.close();
+                    }
+                }
+            }
 
     }
 
-    public void forsideEvent(ActionEvent actionEvent) {
-        scenebytte.routeToSite(actionEvent, "scene");
+    public void loginEventAdmin(ActionEvent actionEvent) {
+    }
+
+    public void registerEvent(ActionEvent actionEvent) {
     }
 }
