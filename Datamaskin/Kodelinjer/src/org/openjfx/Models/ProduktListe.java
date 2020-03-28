@@ -1,12 +1,11 @@
 package org.openjfx.Models;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ProduktListe {
 
 
-    private ArrayList<Produkt> valgteProdukter = new ArrayList<Produkt>();
+    private ArrayList<Produkt> produkter = new ArrayList<Produkt>();
 
     //konstruktør:
 
@@ -14,14 +13,11 @@ public class ProduktListe {
 
     //funksjoner:
     public void leggTilProdukt(Produkt produkt){
-        valgteProdukter.add(produkt);
+        produkter.add(produkt);
     }
 
-    public String hentProduktliste(){
-        String listing="";
-        for(Produkt liste : valgteProdukter){
-            listing+= liste+ " ";
-        }
-        return listing;
+    public ArrayList<Produkt> getProdukter() {
+        return produkter;
     }
+
 }
