@@ -11,10 +11,9 @@ public class Konfigurasjon {
         ArrayList<Produkt> konfigListeIterator = konfigListe; //lager en midlertidig kopi av hovedlisten
         boolean ok = true; //om false er eksisterende produkt oppdatert, om true legges nytt produkt til listen
         for(Produkt p : konfigListeIterator){ //sjekk om produkt med samme kategori er i listen fra før
-            if(p.getKategori() == produkt.getKategori()){
+            if(p.getKategori() == produkt.getKategori() && produkt.getKategori() !=  "HARD DRIVE"){ //gjør unntak for HARD DRIVE, ettersom en data kan ha mange hdd-er
                 konfigListeIterator.set(konfigListeIterator.indexOf(p), produkt); //if so, oppdater liste med nytt produkt
                 setKonfigListe(konfigListeIterator); //setter også sluttpris
-
                 ok = false;
             }
         }
@@ -29,7 +28,7 @@ public class Konfigurasjon {
 
         Iterator itr = konfigListeIterator.iterator(); //lager en iterator
 
-        while(itr.hasNext()){ //usikker om dette funker
+        while(itr.hasNext()){
             Produkt produkt = (Produkt)itr.next();
             sluttPrisIterator += produkt.getPris();
         }
