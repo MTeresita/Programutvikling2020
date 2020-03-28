@@ -17,7 +17,10 @@ public class FXMLController {
 
     @FXML
     private Button newProduct;
-    
+
+    //proof of concept
+    public Konfigurasjon k = new Konfigurasjon(); //lager en generel liste som brukes gjennom kontrolleren
+
     public void initialize() {
         String javaVersion = System.getProperty("java.version");
         String javafxVersion = System.getProperty("javafx.version");
@@ -27,7 +30,7 @@ public class FXMLController {
         Produkt p1 = new Produkt("CPU", 3000.0, "Intel i5");
         Produkt p2 = new Produkt("MOTHERBOARD", 1000.0, "Asus z150");
         Produkt p3 = new Produkt("MOTHERBOARD", 2000.0, "Asus a500");
-        Konfigurasjon k = new Konfigurasjon();
+
 
         k.setNyttProdukt(p1);
         k.setNyttProdukt(p2);
