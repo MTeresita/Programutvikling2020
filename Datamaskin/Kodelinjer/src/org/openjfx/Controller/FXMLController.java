@@ -1,5 +1,7 @@
 package org.openjfx.Controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -77,10 +79,15 @@ public class FXMLController {
         populateTable();
     }
 
+
     public void populateTable() {
+        KomponenterTableView alleKomponenter = new KomponenterTableView();
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
+
+        komponenter.setItems(alleKomponenter.createTableFromFile());
+
 
     }
 
