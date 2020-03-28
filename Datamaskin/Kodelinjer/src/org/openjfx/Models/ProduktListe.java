@@ -5,7 +5,12 @@ import java.util.ArrayList;
 
 public class ProduktListe {
 
+
     private ArrayList<Produkt> valgteProdukter = new ArrayList<Produkt>();
+
+    //konstruktør:
+
+
 
     //funksjoner:
     public void leggTilProdukt(Produkt produkt){
