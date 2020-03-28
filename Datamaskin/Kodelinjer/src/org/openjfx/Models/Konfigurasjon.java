@@ -7,13 +7,13 @@ public class Konfigurasjon {
     ArrayList<Produkt> konfigListe = new ArrayList<Produkt>();
     private double sluttPris;
 
-    public void setNyttProdukt(Produkt produkt) {
+    public void setNyttProdukt(Produkt produkt) { //for bruker
         ArrayList<Produkt> konfigListeIterator = konfigListe; //lager en midlertidig kopi av hovedlisten
         boolean ok = true; //om false er eksisterende produkt oppdatert, om true legges nytt produkt til listen
         for(Produkt p : konfigListeIterator){ //sjekk om produkt med samme kategori er i listen fra før
             if(p.getKategori() == produkt.getKategori()){
                 konfigListeIterator.set(konfigListeIterator.indexOf(p), produkt); //if so, oppdater liste med nytt produkt
-                setKonfigListe(konfigListeIterator); //stter også sluttpris
+                setKonfigListe(konfigListeIterator); //setter også sluttpris
 
                 ok = false;
             }
@@ -26,6 +26,7 @@ public class Konfigurasjon {
     public void lagSluttPris(){
         double sluttPrisIterator = 0.0;
         ArrayList<Produkt> konfigListeIterator = konfigListe; //lager en midlertidig kopi av hovedlisten
+
         Iterator itr = konfigListeIterator.iterator(); //lager en iterator
 
         while(itr.hasNext()){ //usikker om dette funker
@@ -48,5 +49,19 @@ public class Konfigurasjon {
     }
     public double getSluttPris() {
         return sluttPris;
+    }
+
+    //proof of concept
+    public String toString(){
+        String ut ="Her er ut: \n";
+
+        Iterator itr = konfigListe.iterator(); //lager en iterator
+
+        while(itr.hasNext()){ //usikker om dette funker
+            Produkt p = (Produkt)itr.next();
+            ut += "Navn: "+p.getNavn()+", Kategori: "+p.getKategori()+", Pris: "+p.getPris()+"\n";
+        }
+        ut += "Sluttpris: "+getSluttPris();
+        return ut;
     }
 }
