@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.openjfx.Model.Interfaces.scenebytte;
+import org.openjfx.Models.Interfaces.SceneChanger;
 
 public class LoggInnAdminController {
 
@@ -49,6 +49,6 @@ public class LoggInnAdminController {
     }
 
     public void forsideEvent(ActionEvent actionEvent) {
-        scenebytte.routeToSite(actionEvent, "scene");
+        SceneChanger.routeToSite(actionEvent, "scene");
     }
 }

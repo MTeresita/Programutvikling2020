@@ -1,7 +1,7 @@
 package org.openjfx.Controller;
 
 import javafx.event.ActionEvent;
-import org.openjfx.Model.Interfaces.scenebytte;
+import org.openjfx.Models.Interfaces.SceneChanger;
 
 public class RegistrerProduktController {
 
@@ -9,6 +9,6 @@ public class RegistrerProduktController {
     }
 
     public void forsideBtn(ActionEvent actionEvent) {
-        scenebytte.routeToSite(actionEvent, "scene");
+        SceneChanger.routeToSite(actionEvent, "scene");
     }
 }

@@ -86,8 +86,8 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="txtuser2" layoutX="216.0" layoutY="111.0" style="-fx-border-color: Purple;" />
-                  <PasswordField fx:id="txtpass2" layoutX="216.0" layoutY="163.0" style="-fx-border-color: Purple;" />
+                  <TextField fx:id="txtadminuser" layoutX="216.0" layoutY="111.0" style="-fx-border-color: Purple;" />
+                  <PasswordField fx:id="txtadminpass" layoutX="216.0" layoutY="163.0" style="-fx-border-color: Purple;" />
                   <Text fill="#393939" layoutX="216.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg Inn Admin">
                      <font>
                         <Font name="System Bold" size="21.0" />

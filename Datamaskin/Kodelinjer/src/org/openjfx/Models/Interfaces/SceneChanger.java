@@ -1,4 +1,4 @@
-package org.openjfx.Model.Interfaces;
+package org.openjfx.Models.Interfaces;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-public interface scenebytte {
+public interface SceneChanger {
 
     static void routeToSite(ActionEvent event, String path) {
         String BASE_PATH = "/org/openjfx/View/";
@@ -18,7 +18,7 @@ public interface scenebytte {
 
         try {
             FXMLLoader loader = new FXMLLoader();
-            URL url = scenebytte.class.getResource(BASE_PATH + path + FILE_ENDING);
+            URL url = SceneChanger.class.getResource(BASE_PATH + path + FILE_ENDING);
             loader.setLocation(url);
 
             Parent parent = loader.load();
