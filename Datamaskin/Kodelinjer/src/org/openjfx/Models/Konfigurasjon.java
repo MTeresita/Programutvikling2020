@@ -13,14 +13,14 @@ public class Konfigurasjon {
         for(Produkt p : konfigListeIterator){ //sjekk om produkt med samme kategori er i listen fra før
             if(p.getKategori() == produkt.getKategori()){
                 konfigListeIterator.set(konfigListeIterator.indexOf(p), produkt); //if so, oppdater liste med nytt produkt
-                setKonfigListe(konfigListeIterator);
+                setKonfigListe(konfigListeIterator); //stter også sluttpris
 
                 ok = false;
             }
         }
         if(ok){
             konfigListeIterator.add(produkt);
-            setKonfigListe(konfigListeIterator);
+            setKonfigListe(konfigListeIterator);//setter også sluttpris
         }
     }
     public void lagSluttPris(){
