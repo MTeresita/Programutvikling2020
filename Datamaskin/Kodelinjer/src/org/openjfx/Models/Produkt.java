@@ -6,7 +6,7 @@ public class Produkt {
     private double pris;
     private String kategori;
 
-    public Produkt(String kategori, double pris, String navn) {
+    public Produkt(String navn, String kategori, double pris) {
         this.navn = navn;
         this.pris = pris;
         this.kategori = kategori;
