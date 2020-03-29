@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -15,8 +16,9 @@ import java.io.IOException;
 import static org.openjfx.Models.Avvik.AlertHelper.showAlertWindow;
 import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
 
+
 public class VerifyLogin {
-    public static  void verifyLogin(String user, String pass, String file, String path, Button button) throws IOException {
+    public static  void verifyLogin(String user, String pass, String file, String path, Button button, Label label) throws IOException {
         Stage stage = (Stage) button.getScene().getWindow();
         BufferedReader reader = null;
         try {
@@ -37,13 +39,10 @@ public class VerifyLogin {
                     primaryStage.show();
                     stage.close();
                 }
-                /*else {
-                    showAlertWindow(Alert.AlertType.ERROR,windowHelper(button), "Kunne ikke logge inn",
-                            "\n Feil brukernavn eller passord" +
-                                    "\nPrøv igjen!");
+                else {
+                    label.setText("Feil brukernavn eller passord");
                 }
 
-                 */
             }
         }
     }
@@ -69,5 +68,14 @@ public class VerifyLogin {
         }
         return found;
 
+    }
+    public static void reloadPage(Button button, String path) throws IOException {
+        Stage stage = (Stage) button.getScene().getWindow();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(VerifyLogin.class.getResource(path));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        stage.close();
     }
 }
