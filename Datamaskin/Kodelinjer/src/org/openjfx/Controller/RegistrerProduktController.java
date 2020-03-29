@@ -78,7 +78,7 @@ public Label lblMessage;
             if(!checkExistingBruker(user.getText(), "./Brukere.csv")){
             lblMessage.setText("Ny bruker opprettet");
             BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
-            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
+            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Bruker.csv");
             user.clear();
             pass.clear();
             reloadPage(registrerbtn, "/org/openjfx/View/registrerProdukt.fxml");
