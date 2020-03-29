@@ -3,6 +3,7 @@ package org.openjfx.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import org.openjfx.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 
@@ -38,6 +39,7 @@ public class LoggInnBrukerController {
     public void loginEventAdmin(ActionEvent actionEvent) throws IOException {
         verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv",
                 "/org/openjfx/View/registrerProdukt.fxml" , btnLoginAdmin, lblMessage);
+
     }
 
     public void registerEvent(ActionEvent actionEvent) throws IOException {

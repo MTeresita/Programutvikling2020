@@ -2,15 +2,13 @@ package org.openjfx.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import org.openjfx.Models.Interfaces.SceneChanger;
+
+import static org.openjfx.HjelpeKlasser.BrukerSystemHjelpeKlasse.reloadPage;
 
 public class LoggInnAdminController {
 
@@ -34,14 +32,8 @@ public class LoggInnAdminController {
     @FXML
 
     public void loginEvent() throws Exception {
-        Stage stage = (Stage) btnLogin.getScene().getWindow();
         if (txtuser.getText().equals("ADMIN") && txtpass.getText().equals("ADMIN")) {
-            Stage primaryStage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/org/openjfx/View/registrerProdukt.fxml"));
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-            stage.close();
+            reloadPage(btnLogin, "/org/openjfx/View/registrerProdukt.fxml");
         } else {
             lblMessage.setText("Feil brukernavn eller passord");
         }

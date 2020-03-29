@@ -14,8 +14,9 @@ import java.io.IOException;
 
 
 public class BrukerSystemHjelpeKlasse {
-    public static  void verifyLogin(String user, String pass, String file, String path, Button button, Label label) throws IOException {
-        Stage stage = (Stage) button.getScene().getWindow();
+    public static  void verifyLogin(String user, String pass, String file, String path,
+                                    Button button, Label label) throws IOException {
+
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(file));
@@ -27,13 +28,8 @@ public class BrukerSystemHjelpeKlasse {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] split = line.split(";");
-                if (user.equals(split[0]) && pass.equals(split[1])) {
-                    Stage primaryStage = new Stage();
-                    Parent root = FXMLLoader.load(BrukerSystemHjelpeKlasse.class.getResource(path));
-                    Scene scene = new Scene(root);
-                    primaryStage.setScene(scene);
-                    primaryStage.show();
-                    stage.close();
+                    if (user.equals(split[0]) && pass.equals(split[1])) {
+                    reloadPage(button, path);
                 }
                 else {
                     label.setText("Feil brukernavn eller passord");
