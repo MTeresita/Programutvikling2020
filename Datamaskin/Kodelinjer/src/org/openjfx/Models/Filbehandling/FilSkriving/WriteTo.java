@@ -1,4 +1,4 @@
-package org.openjfx.Models.Filbehandling;
+package org.openjfx.Models.Filbehandling.FilSkriving;
 
 import org.openjfx.Models.Interfaces.WriteToFile;
 

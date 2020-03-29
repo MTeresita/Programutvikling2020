@@ -2,20 +2,15 @@ package org.openjfx.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-import org.openjfx.Models.BrukerRegister;
-import org.openjfx.Models.Filbehandling.WriteTo;
-import org.openjfx.Models.VerifyLogin;
+import org.openjfx.HjelpeKlasser.BrukerRegister;
+import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 
 import java.io.*;
 
 import static org.openjfx.Models.Avvik.AlertHelper.showAlertWindow;
 import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
-import static org.openjfx.Models.VerifyLogin.*;
+import static org.openjfx.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
 
 public class LoggInnBrukerController {
 
