@@ -3,6 +3,9 @@ package org.openjfx.Models;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 //legger til Implementering av serializable for støtting av binær fil jobj.
@@ -92,6 +95,25 @@ public class Produkt implements Serializable {
     //funksjoner:
 
     //read og writeObject til serialisering.
+    private void writeObject(ObjectOutputStream s) throws Exception {
+        s.defaultWriteObject();
+        s.writeUTF(txtNavn.getValue());
+        s.writeUTF(txtKategori.getValue());
+        s.writeDouble(txtPris.getValue());
+
+    }
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+
+        String navn = s.readUTF();
+        String kategori = s.readUTF();
+        double pris = s.readDouble();
+
+
+        this.txtNavn = new SimpleStringProperty(navn);
+        this.txtKategori = new SimpleStringProperty(kategori);
+        this.txtPris = new SimpleDoubleProperty(pris);
+        
+    }
 
 
 }
