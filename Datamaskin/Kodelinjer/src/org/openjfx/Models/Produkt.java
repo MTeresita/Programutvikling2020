@@ -3,7 +3,10 @@ package org.openjfx.Models;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Produkt {
+import java.io.Serializable;
+
+//legger til Implementering av serializable for støtting av binær fil jobj.
+public class Produkt implements Serializable {
 
     private String navn;
     private double pris;
@@ -88,7 +91,7 @@ public class Produkt {
 
     //funksjoner:
 
-
+    //read og writeObject til serialisering.
 
 
 }
