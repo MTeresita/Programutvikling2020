@@ -2,6 +2,7 @@ package org.openjfx.FilHenting;
 
 import org.openjfx.Model.Interfaces.FilHenting;
 import org.openjfx.Models.Produkt;
+import org.openjfx.Parsing.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,16 +13,19 @@ import java.util.List;
 
 public class FilHentingBruker implements FilHenting {
     @Override
-    public List<Produkt> read(String path) throws IOException {
+    public List<Produkt> lesingFraFil(String path) throws IOException {
         ArrayList<Produkt> list = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(path))) {
-            String line;
+            String linje;
 
             //Lager en ny produktlinje.
-            while((line=reader.readLine()) != null) {
-                //list.add(line); må parses.
+            while ((linje = reader.readLine()) != null) {
+
+                //bruker parseProdukt til å gjøre om til et objekt fra fil.
+                list.add((KonfigurasjonsParser.parseProdukt(linje)));
+
             }
+            return list;
         }
-        return list;
     }
 }

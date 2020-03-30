@@ -1,32 +1,35 @@
 package org.openjfx.Parsing;
 
+import org.openjfx.Formaterer.*;
+import org.openjfx.Models.Produkt;
+
 public class KonfigurasjonsParser {
 
 
+    //Parser produkt fra fil til string:
+    public static Produkt parseProdukt(String str){
 
-
-    //fra Oblig1:
-
-    /*ArrayList<Person> liste = new ArrayList<>();
-        PersonFormaterer
-        String[] string= str.split(PersonFormaterer.DELIMITER);
+        String[] string = str.split(KonfigurasjonsFormaterer.DELIMITER);
 
         String navn= string[0];
-        //String alder=string[1];
-        String epost=string[2];
-        String datoUformatert= string[3];
-        String tlf=string[4];
+        String pris= string[1];
+        String kategori= string[2];
+
+        System.out.println("String produkt: "+ navn+ " "+pris+ " "+ kategori);
 
 
-        //formatert fødselsdato
-        String [] datePartisjon = datoUformatert.split("/");
-        int year = Integer.parseInt(datePartisjon[2]);
-        int day = Integer.parseInt(datePartisjon[0]);
-        int month = Integer.parseInt(datePartisjon[1]);
-        Dato fdato= new Dato(day, month, year);
+        //parser pris, for å kunne lage et nytt objekt.
+        Double prisFormatert=0.0;
+        try{
+            prisFormatert= Double.parseDouble(pris);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
 
-        System.out.println("Formatert person: "+navn+" : "+epost+" : "+tlf+" : "+fdato);
+        Produkt etProdukt= new Produkt(navn,prisFormatert,kategori);
+        return etProdukt;
 
-        Person enPerson = new Person(navn,epost,tlf,fdato);
-        return enPerson;*/
+    }
+
 }
