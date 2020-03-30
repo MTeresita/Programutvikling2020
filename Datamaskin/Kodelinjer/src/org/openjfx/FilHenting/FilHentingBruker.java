@@ -1,4 +1,4 @@
-package org.openjfx.Models.FilHenting;
+package org.openjfx.FilHenting;
 
 import org.openjfx.Model.Interfaces.FilHenting;
 import org.openjfx.Models.Produkt;
@@ -11,10 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-public class FilHentingAdministrator implements FilHenting {
-
+public class FilHentingBruker implements FilHenting {
     @Override
     public List<Produkt> lesingFraFil(String path) throws IOException {
         ArrayList<Produkt> list = new ArrayList<>();
@@ -31,5 +28,4 @@ public class FilHentingAdministrator implements FilHenting {
             return list;
         }
     }
-
 }
