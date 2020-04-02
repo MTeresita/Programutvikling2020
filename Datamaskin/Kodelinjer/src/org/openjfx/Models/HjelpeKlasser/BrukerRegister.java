@@ -1,4 +1,4 @@
-package org.openjfx.HjelpeKlasser;
+package org.openjfx.Models.HjelpeKlasser;
 
 public class BrukerRegister {
 

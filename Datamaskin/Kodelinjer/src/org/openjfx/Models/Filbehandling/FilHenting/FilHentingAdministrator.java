@@ -1,6 +1,8 @@
 package org.openjfx.Models.Filbehandling.FilHenting;
 
 import org.openjfx.Models.Produkt;
+import org.openjfx.Models.Parsing.*;
+
 
 import java.io.*;
 import java.util.ArrayList;

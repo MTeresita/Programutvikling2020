@@ -8,7 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.openjfx.Models.Interfaces.SceneChanger;
 
-import static org.openjfx.HjelpeKlasser.BrukerSystemHjelpeKlasse.reloadPage;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.reloadPage;
 
 public class LoggInnAdminController {
 
