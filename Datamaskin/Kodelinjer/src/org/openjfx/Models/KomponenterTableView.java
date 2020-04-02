@@ -15,6 +15,8 @@ public class KomponenterTableView {
 
     private SimpleStringProperty navn, kategori;
     private SimpleDoubleProperty pris;
+    public ObservableList<KomponenterTableView> komponenterTableViews = FXCollections.observableArrayList();
+
 
     public KomponenterTableView() {
     }
@@ -60,29 +62,6 @@ public class KomponenterTableView {
     public void setPris(double pris) {
         this.pris.set(pris);
     }
-    public ObservableList<KomponenterTableView> komponenterTableViews = FXCollections.observableArrayList();
-    public ObservableList<KomponenterTableView> createTableFromFile() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("./komponenter.csv"));
 
-            String komponenter;
-            while ((komponenter = reader.readLine()) != null) {
-                //3.
-                String [] komponentfields = komponenter.split(";");
-                double pris = Double. parseDouble(komponentfields[2]);
-                //4.
-                KomponenterTableView inputRecord = new KomponenterTableView(komponentfields[0], komponentfields[1],
-                        pris);
-                //5.
-                komponenterTableViews.add(inputRecord);
 
-            }
-        } catch (FileNotFoundException ex) {
-            System.out.println("Cannot read file");
-        } catch (IOException ex) {
-            System.out.println("File not found#" + ex.getCause());
-        }
-
-        return komponenterTableViews;
-    }
 }

@@ -1,16 +1,7 @@
 package org.openjfx.Models;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
-//legger til Implementering av serializable for støtting av binær fil jobj.
-public class Produkt implements Serializable {
-
+public class Produkt {
+  // DENNE ER DROPPET, ERSTATTET MED KOMPONENETERTABLEVIEW
     private String navn;
     private double pris;
     private String kategori;
@@ -117,5 +108,5 @@ public class Produkt implements Serializable {
             this.txtPris = new SimpleDoubleProperty(pris);
 
         }
-        
+
 }
