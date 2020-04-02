@@ -1,5 +1,12 @@
 package org.openjfx.Models;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class Produkt {
   // DENNE ER DROPPET, ERSTATTET MED KOMPONENETERTABLEVIEW
     private String navn;
