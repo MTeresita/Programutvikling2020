@@ -1,4 +1,4 @@
-package org.openjfx.FilLagring;
+package org.openjfx.Models.Filbehandling.FilLagring;
 
 import org.openjfx.Model.Interfaces.FilLagring;
 

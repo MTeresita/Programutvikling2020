@@ -1,6 +1,6 @@
-package org.openjfx.Parsing;
+package org.openjfx.Models.Parsing;
 
-import org.openjfx.Formaterer.*;
+import org.openjfx.Models.Formaterer.*;
 import org.openjfx.Models.Produkt;
 
 public class KonfigurasjonsParser {

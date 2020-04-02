@@ -2,7 +2,7 @@ package org.openjfx.Models.Filbehandling.FilHenting;
 
 import org.openjfx.Model.Interfaces.FilHenting;
 import org.openjfx.Models.Produkt;
-import org.openjfx.Parsing.*;
+import org.openjfx.Models.Parsing.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;

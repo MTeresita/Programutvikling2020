@@ -1,4 +1,4 @@
-package org.openjfx.Formaterer;
+package org.openjfx.Models.Formaterer;
 
 import org.openjfx.Models.Produkt;
 
