@@ -9,21 +9,20 @@ import java.util.Iterator;
 public class Konfigurasjon {
 
     ArrayList<KomponenterTableView> konfigListe = new ArrayList<KomponenterTableView>();
-    ObservableList<KomponenterTableView> konfigListeObservable;
+    ObservableList<KomponenterTableView> konfigListeObservable; //trenger kanskje ikke denne
 
     private double sluttPris;
 
     public void setNyttKomponent(KomponenterTableView komponent) { //for bruker
         ArrayList<KomponenterTableView> konfigListeIterator = konfigListe; //lager en midlertidig kopi av hovedlisten
 
-
         boolean ok = true; //om false er eksisterende komponent oppdatert, om true legges nytt komponent til listen
 
         for(KomponenterTableView p : konfigListeIterator){ //sjekk om komponent med samme kategori er i listen fra før
-            if(p.getKategori() == komponent.getKategori() && !komponent.getKategori().equals("HARD DRIVE")){ //gjør unntak for HARD DRIVE, ettersom en data kan ha mange hdd-er
+            if(p.getKategori().equals(komponent.getKategori()) && !komponent.getKategori().equals("HARD DRIVE")){ //gjør unntak for HARD DRIVE, ettersom en data kan ha mange hdd-er
                 konfigListeIterator.set(konfigListeIterator.indexOf(p), komponent); //if so, oppdater liste med nytt komponent
 
-                //konfigListeObservable.set(konfigListeIterator.indexOf(p), komponent); //setter elementer i observablelist
+                //konfigListeObservable.set(konfigListeIterator.indexOf(p), komponent); //setter elementer i observablelist, ikke fungerende
 
                 setKonfigListe(konfigListeIterator); //setter også sluttpris
                 ok = false;
