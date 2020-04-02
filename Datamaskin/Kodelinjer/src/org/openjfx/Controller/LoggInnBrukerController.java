@@ -2,53 +2,64 @@ package org.openjfx.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import org.openjfx.Model.Interfaces.scenebytte;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import org.openjfx.HjelpeKlasser.BrukerRegister;
+import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
+
+import java.io.*;
+
+import static org.openjfx.Models.Avvik.AlertHelper.showAlertWindow;
+import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
+import static org.openjfx.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
 
 public class LoggInnBrukerController {
 
     @FXML
-    TextField txtuser;
+    TextField txtuser, txtadminuser, txtuser1;
 
     @FXML
-    PasswordField txtpass;
+    PasswordField txtpass, txtadminpass, txtpass1;
 
     @FXML
     Label lblMessage;
 
     @FXML
-    Button btnLogin;
+    Button btnLoginBruker, btnLoginAdmin, btnRegistrer;
 
-    /**
-     * @throws Exception
-     * Logg inn metode som sjekker om passord og brukernavn stemmer.
-     * Det er kun gjort slik at ADMIN har tilgang til programmet.
-     */
     @FXML
 
-    public void loginEvent() throws Exception {
-        Stage stage = (Stage) btnLogin.getScene().getWindow();
-        if (txtuser.getText().equals("ADMIN") && txtpass.getText().equals("ADMIN")) {
-            Stage primaryStage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/org/openjfx/View/scene.fxml"));
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-            stage.close();
-        } else {
-            lblMessage.setText("Feil brukernavn eller passord");
-        }
+    public void loginEventBruker() throws Exception {
+        verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv",
+                            "/org/openjfx/View/scene.fxml", btnLoginBruker, lblMessage);
+    }
+
+
+
+    public void loginEventAdmin(ActionEvent actionEvent) throws IOException {
+        verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv",
+                "/org/openjfx/View/registrerProdukt.fxml" , btnLoginAdmin, lblMessage);
 
     }
 
-    public void forsideEvent(ActionEvent actionEvent) {
-        scenebytte.routeToSite(actionEvent, "scene");
+    public void registerEvent(ActionEvent actionEvent) throws IOException {
+        if (checkExistingBruker(txtuser1.getText(), "./Brukere.csv")){
+            showAlertWindow(Alert.AlertType.ERROR,windowHelper(btnRegistrer), "Bruker eksisterer",
+                    "\nBrukere eksisterer." +
+                            "\nPrøv igjen!");
+            txtuser1.clear();
+            txtpass1.clear();
+        }
+        else {
+            BrukerRegister enBruker = new BrukerRegister(txtuser1.getText(), txtpass1.getText());
+            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
+
+            showAlertWindow(Alert.AlertType.INFORMATION,windowHelper(btnRegistrer), "Velkommen",
+                    "Bruker opprrettet");
+            System.out.println("Bruker eksisterer");
+            reloadPage(btnRegistrer, "/org/openjfx/View/loggInnBruker.fxml");
+
+
+        }
     }
 }

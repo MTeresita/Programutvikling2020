@@ -1,4 +1,4 @@
-package org.openjfx.Models.FilHenting;
+package org.openjfx.Models.Filbehandling.FilHenting;
 
 import org.openjfx.Model.Interfaces.FilHenting;
 import org.openjfx.Models.Produkt;
