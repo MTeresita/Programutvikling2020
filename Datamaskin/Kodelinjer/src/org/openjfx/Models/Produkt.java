@@ -1,5 +1,12 @@
 package org.openjfx.Models;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class Produkt {
   // DENNE ER DROPPET, ERSTATTET MED KOMPONENETERTABLEVIEW
     private String navn;
@@ -96,7 +103,7 @@ public class Produkt {
             s.writeDouble(txtPris.getValue());
 
         }
-        private void readObject (ObjectInputStream s) throws IOException, ClassNotFoundException {
+        private void readObject (ObjectInputStream s) throws IOException, ClassNotFoundException, IOException {
 
             String navn = s.readUTF();
             String kategori = s.readUTF();
