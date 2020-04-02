@@ -13,30 +13,37 @@ public class Konfigurasjon {
 
     private double sluttPris;
 
-    public void setNyttProdukt(KomponenterTableView produkt) { //for bruker
+    public void setNyttKomponent(KomponenterTableView komponent) { //for bruker
         ArrayList<KomponenterTableView> konfigListeIterator = konfigListe; //lager en midlertidig kopi av hovedlisten
 
-        boolean ok = true; //om false er eksisterende produkt oppdatert, om true legges nytt produkt til listen
 
-        for(KomponenterTableView p : konfigListeIterator){ //sjekk om produkt med samme kategori er i listen fra før
-            if(p.getKategori() == produkt.getKategori() && produkt.getKategori() !=  "HARD DRIVE"){ //gjør unntak for HARD DRIVE, ettersom en data kan ha mange hdd-er
+        boolean ok = true; //om false er eksisterende komponent oppdatert, om true legges nytt komponent til listen
 
-                konfigListeIterator.set(konfigListeIterator.indexOf(p), produkt); //if so, oppdater liste med nytt produkt
+        for(KomponenterTableView p : konfigListeIterator){ //sjekk om komponent med samme kategori er i listen fra før
+            if(p.getKategori() == komponent.getKategori() && !komponent.getKategori().equals("HARD DRIVE")){ //gjør unntak for HARD DRIVE, ettersom en data kan ha mange hdd-er
+                konfigListeIterator.set(konfigListeIterator.indexOf(p), komponent); //if so, oppdater liste med nytt komponent
+
+                //konfigListeObservable.set(konfigListeIterator.indexOf(p), komponent); //setter elementer i observablelist
 
                 setKonfigListe(konfigListeIterator); //setter også sluttpris
                 ok = false;
             }
         }
+
         if(ok){
-            konfigListeIterator.add(produkt);
+            konfigListeIterator.add(komponent);
             setKonfigListe(konfigListeIterator);//setter også sluttpris
         }
     }
 
-    public void setValgteProdukter(ArrayList<KomponenterTableView> produkter) { //for bruker
+    public void slettKomponent(int index){
+        konfigListe.remove(index);
+    }
+
+    public void setValgteKomponenter(ArrayList<KomponenterTableView> komponenter) { //for bruker
         konfigListe.clear();
         ArrayList<KomponenterTableView> konfigListeIterator = konfigListe;
-        for(KomponenterTableView p : produkter){
+        for(KomponenterTableView p : komponenter){
            konfigListeIterator.add(p);
         }
         setKonfigListe(konfigListeIterator);
@@ -67,16 +74,23 @@ public class Konfigurasjon {
     public void setSluttPris(double sluttPris) {
         this.sluttPris = sluttPris;
     }
-    public ArrayList<KomponenterTableView> getKonfigListe() {
-        return konfigListe;
-    }
+
     public double getSluttPris() {
         return sluttPris;
     }
 
+    public ArrayList<KomponenterTableView> getKonfigListe() {
+        return konfigListe;
+    }
+    public ObservableList<KomponenterTableView> getKonfigListeObservable() {
+        return konfigListeObservable;
+    }
+
+
     //proof of concept
+
     public String toString(){
-        String ut ="Her er ut: \n";
+        String ut ="Dette er listen over valgte komponeneter: \n";
 
         Iterator itr = konfigListe.iterator(); //lager en iterator
 
