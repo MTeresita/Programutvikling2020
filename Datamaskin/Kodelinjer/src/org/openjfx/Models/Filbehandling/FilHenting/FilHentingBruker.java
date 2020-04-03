@@ -4,6 +4,7 @@ import org.openjfx.Models.Produkt;
 import org.openjfx.Models.Parsing.KonfigurasjonsParser;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -26,5 +27,9 @@ public class FilHentingBruker implements org.openjfx.Model.Interfaces.FilHenting
             }
             return list;
         }
+        catch(FileNotFoundException fe){
+            fe.getMessage();
+        }
+        return list;
     }
 }

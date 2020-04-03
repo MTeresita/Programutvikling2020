@@ -2,8 +2,8 @@ package org.openjfx.Models.Avvik;
 
 import java.io.IOException;
 
-public class AvvikBruker extends IOException {
-    public AvvikBruker(String melding){
+public class AvvikProdukt extends IOException {
+    public AvvikProdukt(String melding){
         super(melding);
     }
 }

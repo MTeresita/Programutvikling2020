@@ -5,6 +5,7 @@ import org.openjfx.Models.Produkt;
 import org.openjfx.Models.Parsing.*;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,6 +19,7 @@ public class FilHentingAdministrator implements FilHenting {
     @Override
     public List<Produkt> lesingFraFil(String path) throws IOException {
         ArrayList<Produkt> list = new ArrayList<>();
+
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(path))) {
             String linje;
 
@@ -27,9 +29,16 @@ public class FilHentingAdministrator implements FilHenting {
                 //bruker parseProdukt til å gjøre om til et objekt fra fil.
                 list.add((KonfigurasjonsParser.parseProdukt(linje)));
 
-            }
+                }
             return list;
         }
+
+        catch (FileNotFoundException fe){
+            fe.getMessage();
+        }
+
+        return list;
+
     }
 
 }

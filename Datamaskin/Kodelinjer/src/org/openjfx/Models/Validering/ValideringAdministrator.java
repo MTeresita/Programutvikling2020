@@ -2,10 +2,12 @@ package org.openjfx.Models.Validering;
 //regEx for loggInnAdmin, og registrering av ny admin.
 
 
+import org.openjfx.Models.Avvik.AvvikAdministrator;
+
 public class ValideringAdministrator {
 
 
-    public boolean validerLoggInnAdmin(String brukernavn, String passord){
+    public boolean validerLoggInnAdmin(String brukernavn, String passord) throws AvvikAdministrator {
 
 
         boolean validering=false;
@@ -15,10 +17,19 @@ public class ValideringAdministrator {
             if(passord.matches("^[A-æøå0-9-._]{8,}$")){
                 validering=true;
             }
+            else{
+                validering=false;
+                throw new AvvikAdministrator("Passord må være minst 8 tegn langt");
+            }
 
         }
-        else if(brukernavn.isBlank() || brukernavn.isEmpty() || passord.isBlank() || passord.isEmpty()){
+        else{
             validering=false;
+            throw new AvvikAdministrator("Brukernavn må være mellom 2 og 50 tegn");
+        }
+        if(brukernavn.isBlank() || brukernavn.isEmpty() || passord.isBlank() || passord.isEmpty()){
+            validering=false;
+            throw new AvvikAdministrator("Brukernavn og passord må fylles inn.");
         }
 
         return validering;
