@@ -29,8 +29,8 @@ public class KonfigurasjonsParserBruker {
 
 
 
-        Konfigurasjon etProdukt= new Konfigurasjon(navn, kategori, prisDouble, sluttprisDouble);
-        return etProdukt;
+        Konfigurasjon enKonfigurasjon= new Konfigurasjon(navn, kategori, prisDouble, sluttprisDouble);
+        return enKonfigurasjon;
 
     }
 
