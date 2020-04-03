@@ -1,6 +1,5 @@
 package org.openjfx.Models.Filbehandling.FilLagring;
 
-import org.openjfx.Models.KomponenterListe;
 import org.openjfx.Models.KomponenterTableView;
 import org.openjfx.Models.Produkt;
 
@@ -15,7 +14,7 @@ public class FilLagringAdmin {
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             for(KomponenterTableView ktv : liste){
-                Produkt produkt = new Produkt(ktv.getNavn(), ktv.getKategori(), ktv.getPris());
+                Produkt produkt = new Produkt(ktv.getNavn(), ktv.getPris(), ktv.getKategori());
                 o.writeObject(produkt);
             }
 

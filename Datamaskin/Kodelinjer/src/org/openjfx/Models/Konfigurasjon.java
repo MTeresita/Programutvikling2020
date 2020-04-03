@@ -56,6 +56,7 @@ public class Konfigurasjon {
 
     public void slettKomponent(int index){
         konfigListe.remove(index);
+        lagSluttPris();
     }
 
     public void setValgteKomponenter(ArrayList<KomponenterTableView> komponenter) { //for bruker

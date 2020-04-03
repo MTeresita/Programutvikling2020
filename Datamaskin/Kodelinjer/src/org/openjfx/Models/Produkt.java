@@ -1,11 +1,5 @@
 package org.openjfx.Models;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Produkt extends Object implements Serializable {
@@ -17,7 +11,7 @@ public class Produkt extends Object implements Serializable {
     public Produkt() {
     }
 
-    public Produkt(String navn, String kategori, double pris){
+    public Produkt(String navn, double pris, String kategori){
 
             this.navn = navn;
             this.pris = pris;

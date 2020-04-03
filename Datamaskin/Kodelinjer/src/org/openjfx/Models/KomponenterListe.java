@@ -33,7 +33,17 @@ public class KomponenterListe {
     }
     public void henteFraObjectFil(){
         FilHentingAdministrator fha = new FilHentingAdministrator();
-        fha.hentFraFil();
+        ArrayList<Produkt> produktListe = fha.hentFraFil();
+        setKomponenterFraFil(produktListe);
+    }
+    public void setKomponenterFraFil(ArrayList<Produkt> liste){
+        komponenter.clear();
+        komponenterListeObservable.clear();
+        for(Produkt p : liste){
+            KomponenterTableView k = new KomponenterTableView(p.getNavn(), p.getKategori(), p.getPris(), false);
+            komponenter.add(k);
+            komponenterListeObservable.add(k);
+        }
     }
 
     public void setKomponenter(KomponenterTableView... komponenter) {
