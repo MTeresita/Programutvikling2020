@@ -20,10 +20,10 @@ public class KomponenterListe {
 
 
 
-    //funksjoner:
+   /* //funksjoner:
     public void leggTilProdukt(Produkt... produkter){
 
-    }
+    }*/
 
     public void setKomponenter(KomponenterTableView... komponenter) {
         Collections.addAll(this.komponenter, komponenter);
