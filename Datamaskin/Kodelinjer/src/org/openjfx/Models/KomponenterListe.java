@@ -17,10 +17,7 @@ public class KomponenterListe {
 
     private ArrayList<KomponenterTableView> komponenter = new ArrayList<KomponenterTableView>();
     private ObservableList<KomponenterTableView> komponenterListeObservable = FXCollections.observableArrayList();;
-
-    //konstruktør:
-
-
+    
 
     //funksjoner:
     public void leggTilProdukt(Produkt... produkter){
