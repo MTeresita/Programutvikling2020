@@ -1,6 +1,6 @@
 package org.openjfx.Models.Formaterer;
 
-import org.openjfx.Models.Konfigurasjon;
+import org.openjfx.Models.KomponenterTableView;
 
 import java.text.ParseException;
 import java.util.List;
@@ -10,14 +10,14 @@ public class KonfigurasjonsFormatererBruker {
     public static String DELIMITER=";";
 
     //formaterer Komponenter-objekt med ; i mellom.
-    public static String formaterKonfigurasjon(Konfigurasjon valg){
-        return valg.getKategori()+DELIMITER+ valg.getNavn()+ DELIMITER+ valg.getPris()+DELIMITER+valg.getSluttPris();
+    public static String formaterKonfigurasjon(KomponenterTableView valg){
+        return valg.getNavn()+DELIMITER+ valg.getKategori()+ DELIMITER+ valg.getPris();
     }
 
-    public static String formaterPersoner(List<Konfigurasjon> plist) throws ParseException {
+    public static String formaterPersoner(List<KomponenterTableView> plist) throws ParseException {
         //type string klasse som kan dynamsik utvides på en god måte.
         StringBuffer str =  new StringBuffer();
-        for(Konfigurasjon p: plist){
+        for(KomponenterTableView p: plist){
             str.append(formaterKonfigurasjon(p));
             str.append("\n");
         }

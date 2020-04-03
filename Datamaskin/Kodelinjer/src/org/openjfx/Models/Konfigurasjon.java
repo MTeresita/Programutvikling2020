@@ -6,16 +6,15 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Konfigurasjon extends KomponenterTableView {
+public class Konfigurasjon {
 
     ArrayList<KomponenterTableView> konfigListe = new ArrayList<KomponenterTableView>();
     ObservableList<KomponenterTableView> konfigListeObservable; //trenger kanskje ikke denne
 
     private double sluttPris;
 
-    public Konfigurasjon(String navn, String kategori, double pris, double sluttPris){
-        super(navn, kategori, pris);
-        this.sluttPris=sluttPris;
+    public Konfigurasjon(){
+
     }
 
     public void setNyttKomponent(KomponenterTableView komponent) { //for bruker

@@ -10,7 +10,10 @@ public class KonfigurasjonsParserBruker {
     public static Konfigurasjon parseKonfigurasjonBruker(String str){
 
         String[] string = str.split(KonfigurasjonsFormatererBruker.DELIMITER);
-        //Dette skal kanskje ikke splittes på dette.
+
+        //løkke:
+
+
         String navn= string[0];
         String kategori= string[1];
         String pris= string[2];
@@ -28,8 +31,8 @@ public class KonfigurasjonsParserBruker {
         }
 
 
-
-        Konfigurasjon enKonfigurasjon= new Konfigurasjon(navn, kategori, prisDouble, sluttprisDouble);
+        //Skal returnere en liste med komponenterTableView
+        Konfigurasjon enKonfigurasjon= new Konfigurasjon();
         return enKonfigurasjon;
 
     }

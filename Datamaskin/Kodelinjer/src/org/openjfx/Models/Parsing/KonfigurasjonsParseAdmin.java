@@ -24,7 +24,7 @@ public class KonfigurasjonsParseAdmin {
         }
 
 
-        KomponenterListe enKomponenterListe= new KomponenterListe(navn, kategori, doublePris);
+        KomponenterListe enKomponenterListe= new KomponenterListe();
 
         return enKomponenterListe;
 

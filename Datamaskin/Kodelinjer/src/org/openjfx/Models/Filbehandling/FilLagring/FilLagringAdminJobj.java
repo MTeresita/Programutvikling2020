@@ -8,6 +8,8 @@ import java.nio.file.Path;
 
 //import org.openjfx.Models.Formaterer.KonfigurasjonsFormaterer;
 
+//MÅ FINNE UT AV DET MED JOBJ.
+
 
 public class FilLagringAdminJobj implements FilLagring {
 
