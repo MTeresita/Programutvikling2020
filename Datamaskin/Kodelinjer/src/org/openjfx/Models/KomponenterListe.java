@@ -2,6 +2,8 @@ package org.openjfx.Models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.openjfx.Models.Filbehandling.FilHenting.FilHentingAdministrator;
+import org.openjfx.Models.Filbehandling.FilLagring.FilLagringAdmin;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -23,6 +25,15 @@ public class KomponenterListe {
     //funksjoner:
     public void leggTilProdukt(Produkt... produkter){
 
+    }
+
+    public void lagreTilObjectFil(){
+        FilLagringAdmin fla = new FilLagringAdmin();
+        fla.lagreTilFil(this.komponenter);
+    }
+    public void henteFraObjectFil(){
+        FilHentingAdministrator fha = new FilHentingAdministrator();
+        fha.hentFraFil();
     }
 
     public void setKomponenter(KomponenterTableView... komponenter) {
@@ -56,6 +67,7 @@ public class KomponenterListe {
                 KomponenterTableView inputRecord = new KomponenterTableView(komponentfields[0], komponentfields[1], pris, Boolean.parseBoolean(komponentfields[3]));
                 //5.
                 komponenterListeObservable.add(inputRecord);
+                this.komponenter.add(inputRecord);
 
             }
 

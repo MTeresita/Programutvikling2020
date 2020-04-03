@@ -5,13 +5,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 
-public class KomponenterTableView {
+public class KomponenterTableView implements Serializable {
 
     private SimpleStringProperty navn, kategori;
     private SimpleDoubleProperty pris;

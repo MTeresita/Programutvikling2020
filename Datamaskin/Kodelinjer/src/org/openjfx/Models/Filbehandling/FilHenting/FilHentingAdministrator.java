@@ -1,35 +1,30 @@
 package org.openjfx.Models.Filbehandling.FilHenting;
 
-import org.openjfx.Model.Interfaces.FilHenting;
+import org.openjfx.Models.KomponenterTableView;
 import org.openjfx.Models.Produkt;
-import org.openjfx.Parsing.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
+public class FilHentingAdministrator {
+    public void hentFraFil() {
+        try {
+            ArrayList<Produkt> list = new ArrayList<>();
 
+            FileInputStream f = new FileInputStream(new File("komponentlist.jobj"));
+            ObjectInputStream o = new ObjectInputStream(f);
 
-public class FilHentingAdministrator implements FilHenting {
-
-    @Override
-    public List<Produkt> lesingFraFil(String path) throws IOException {
-        ArrayList<Produkt> list = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(path))) {
-            String linje;
-
-            //Lager en ny produktlinje.
-            while ((linje = reader.readLine()) != null) {
-
-                //bruker parseProdukt til å gjøre om til et objekt fra fil.
-                list.add((KonfigurasjonsParser.parseProdukt(linje)));
-
+            while ((o.readObject()) != null) {
+                Object produkt = (Produkt) o.readObject();
+                Produkt prod = new Produkt();
+                prod = (Produkt)produkt;
+                System.out.println(prod.getNavn());
             }
-            return list;
+
+            o.close();
+            f.close();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Feil i lesing av objectfil: " + e);
         }
     }
-
 }

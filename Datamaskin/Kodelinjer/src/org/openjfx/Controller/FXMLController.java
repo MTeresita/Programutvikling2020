@@ -76,6 +76,8 @@ public class FXMLController {
         //proof of concept
         */
         populateTable();
+        kl.lagreTilObjectFil();
+        kl.henteFraObjectFil();
     }
 
 
