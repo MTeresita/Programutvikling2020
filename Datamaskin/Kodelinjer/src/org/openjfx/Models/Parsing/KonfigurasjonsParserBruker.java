@@ -16,9 +16,20 @@ public class KonfigurasjonsParserBruker {
         String pris= string[2];
         String sluttPris=string[3];
 
+        double prisDouble=0;
+        double sluttprisDouble=0;
 
-        //trenger en konstruktør i Konfigurasjon.
-        Konfigurasjon etProdukt= new Konfigurasjon();
+        try{
+            prisDouble=Double.parseDouble(pris);
+            sluttprisDouble=Double.parseDouble(sluttPris);
+        }
+        catch(Exception e){
+            e.getMessage();
+        }
+
+
+
+        Konfigurasjon etProdukt= new Konfigurasjon(navn, kategori, prisDouble, sluttprisDouble);
         return etProdukt;
 
     }

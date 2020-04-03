@@ -6,12 +6,17 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Konfigurasjon {
+public class Konfigurasjon extends KomponenterTableView {
 
     ArrayList<KomponenterTableView> konfigListe = new ArrayList<KomponenterTableView>();
     ObservableList<KomponenterTableView> konfigListeObservable; //trenger kanskje ikke denne
 
     private double sluttPris;
+
+    public Konfigurasjon(String navn, String kategori, double pris, double sluttPris){
+        super(navn, kategori, pris);
+        this.sluttPris=sluttPris;
+    }
 
     public void setNyttKomponent(KomponenterTableView komponent) { //for bruker
         ArrayList<KomponenterTableView> konfigListeIterator = konfigListe; //lager en midlertidig kopi av hovedlisten

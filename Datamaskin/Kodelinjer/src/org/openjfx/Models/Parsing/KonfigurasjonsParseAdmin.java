@@ -13,8 +13,18 @@ public class KonfigurasjonsParseAdmin {
         String pris= string[2];
 
 
-        //trenger en kontstruktør eller en metode i komponenterListe
-        KomponenterListe etProdukt= new KomponenterListe();
+        double doublePris=0.0;
+
+        try{
+            doublePris=Double.parseDouble(pris);
+
+        }
+        catch(Exception e){
+            e.getMessage();
+        }
+
+
+        KomponenterListe etProdukt= new KomponenterListe(navn, kategori,doublePris);
 
         return etProdukt;
 

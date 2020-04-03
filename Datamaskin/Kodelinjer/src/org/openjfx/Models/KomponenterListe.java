@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class KomponenterListe {
+public class KomponenterListe extends KomponenterTableView{
 
 
     private ArrayList<KomponenterTableView> komponenter = new ArrayList<KomponenterTableView>();
@@ -18,7 +18,9 @@ public class KomponenterListe {
 
     //konstruktør:
 
-
+    public KomponenterListe(String navn, String kategori, double pris){
+        super(navn, kategori, pris);
+    }
 
    /* //funksjoner:
     public void leggTilProdukt(Produkt... produkter){
