@@ -1,6 +1,6 @@
-package org.openjfx.Model.Interfaces;
+package org.openjfx.Models.Interfaces;//package org.openjfx.Model.Interfaces;
 
-import org.openjfx.Models.Produkt;
+//import org.openjfx.Models.Produkt;
 
 import java.io.IOException;
 import java.nio.file.Path;

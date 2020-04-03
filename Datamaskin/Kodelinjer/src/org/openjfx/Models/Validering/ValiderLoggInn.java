@@ -7,7 +7,7 @@ import org.openjfx.Models.Avvik.AvvikLoggInn;
 public class ValiderLoggInn {
 
 
-    public boolean validerLoggInn(String brukernavn, String passord) throws AvvikLoggInn {
+    public static boolean valideringLoggInn(String brukernavn, String passord) throws AvvikLoggInn {
 
 
         boolean validering=false;

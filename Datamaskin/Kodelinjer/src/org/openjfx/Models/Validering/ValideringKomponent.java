@@ -4,7 +4,7 @@ import org.openjfx.Models.Avvik.AvvikProdukt;
 
 public class ValideringKomponent {
 
-    public boolean validerNyKomponent(String produktnavn, String nykategori, double pris) throws AvvikProdukt {
+    public static boolean validerNyKomponent(String produktnavn, String nykategori, double pris) throws AvvikProdukt {
         boolean validering=false;
 
         //matcher alle bokstaver A-ÆØÅ mellom 2-50 i lengde og tegn som !-.,
