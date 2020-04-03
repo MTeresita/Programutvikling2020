@@ -19,6 +19,25 @@ public class Konfigurasjon {
         boolean ok = true; //om false er eksisterende komponent oppdatert, om true legges nytt komponent til listen
 
         for(KomponenterTableView p : konfigListeIterator){ //sjekk om komponent med samme kategori er i listen fra før
+            if (p.getKategori().equals(komponent.getKategori()) && !komponent.isDuplikat()) {
+                konfigListeIterator.set(konfigListeIterator.indexOf(p), komponent);
+                setKonfigListe(konfigListeIterator);
+                ok = false;
+            }
+        }
+        if(ok){
+            konfigListeIterator.add(komponent);
+            setKonfigListe(konfigListeIterator);//setter også sluttpris
+        }
+    }
+
+    /* //erstattet dette med ny løkke som tar hensyn til duplikat datafelt
+    public void setNyttKomponent(KomponenterTableView komponent) { //for bruker
+        ArrayList<KomponenterTableView> konfigListeIterator = konfigListe; //lager en midlertidig kopi av hovedlisten
+
+        boolean ok = true; //om false er eksisterende komponent oppdatert, om true legges nytt komponent til listen
+
+        for(KomponenterTableView p : konfigListeIterator){ //sjekk om komponent med samme kategori er i listen fra før
             if(p.getKategori().equals(komponent.getKategori()) && !komponent.getKategori().equals("HARD DRIVE")){ //gjør unntak for HARD DRIVE, ettersom en data kan ha mange hdd-er
                 konfigListeIterator.set(konfigListeIterator.indexOf(p), komponent); //if so, oppdater liste med nytt komponent
 
@@ -33,7 +52,7 @@ public class Konfigurasjon {
             konfigListeIterator.add(komponent);
             setKonfigListe(konfigListeIterator);//setter også sluttpris
         }
-    }
+    }*/
 
     public void slettKomponent(int index){
         konfigListe.remove(index);

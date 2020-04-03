@@ -99,7 +99,7 @@ public class FXMLController {
     @FXML
     public void leggTilKomponentEvent(ActionEvent event){ //henter valgt komponent fra tableview fra knappetrykk på "legg til komponent"
         KomponenterTableView valgtKomponent = komponenter.getSelectionModel().getSelectedItem(); //henter valgt komponent
-        System.out.println("Dette er det valgte komponentet: "+valgtKomponent.getNavn());
+        System.out.println("Dette er det valgte komponentet: "+valgtKomponent.getNavn()+", "+valgtKomponent.isDuplikat());
         k.setNyttKomponent(valgtKomponent); //legger til i konfigurasjon
         System.out.println(k.toString());
         populateListview();

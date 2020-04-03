@@ -15,16 +15,26 @@ public class KomponenterTableView {
 
     private SimpleStringProperty navn, kategori;
     private SimpleDoubleProperty pris;
+    private boolean duplikat; //true = kan ha flere av komponenten i konfigurasjon, false = kan kun ha ett av komponenten i konfigurasjon
     public ObservableList<KomponenterTableView> komponenterTableViews = FXCollections.observableArrayList();
 
 
     public KomponenterTableView() {
     }
 
-    public KomponenterTableView(String navn, String kategori, double pris) {
+    public KomponenterTableView(String navn, String kategori, double pris, boolean duplikat) {
         this.navn = new SimpleStringProperty(navn);
         this.kategori = new SimpleStringProperty(kategori);
         this.pris = new SimpleDoubleProperty(pris);
+        this.duplikat = duplikat;
+    }
+
+    public boolean isDuplikat() {
+        return duplikat;
+    }
+
+    public void setDuplikat(boolean duplikat) {
+        this.duplikat = duplikat;
     }
 
     public String getNavn() {

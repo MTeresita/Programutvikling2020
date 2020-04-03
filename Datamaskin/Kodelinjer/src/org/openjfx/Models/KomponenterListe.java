@@ -53,12 +53,12 @@ public class KomponenterListe {
                 String [] komponentfields = komponenter.split(";");
                 double pris = Double. parseDouble(komponentfields[2]);
                 //4.
-                KomponenterTableView inputRecord = new KomponenterTableView(komponentfields[0], komponentfields[1],
-                        pris);
+                KomponenterTableView inputRecord = new KomponenterTableView(komponentfields[0], komponentfields[1], pris, Boolean.parseBoolean(komponentfields[3]));
                 //5.
                 komponenterListeObservable.add(inputRecord);
 
             }
+
         } catch (FileNotFoundException ex) {
             System.out.println("Cannot read file");
         } catch (IOException ex) {
