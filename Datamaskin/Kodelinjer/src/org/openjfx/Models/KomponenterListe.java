@@ -17,7 +17,7 @@ public class KomponenterListe {
 
     private ArrayList<KomponenterTableView> komponenter = new ArrayList<KomponenterTableView>();
     private ObservableList<KomponenterTableView> komponenterListeObservable = FXCollections.observableArrayList();;
-    
+
 
     //funksjoner:
     public void leggTilProdukt(Produkt... produkter){
@@ -37,7 +37,7 @@ public class KomponenterListe {
         komponenter.clear();
         komponenterListeObservable.clear();
         for(Produkt p : liste){
-            KomponenterTableView k = new KomponenterTableView(p.getNavn(), p.getKategori(), p.getPris(), false);
+            KomponenterTableView k = new KomponenterTableView(p.getNavn(), p.getKategori(), p.getPris(), p.isDuplikat());
             komponenter.add(k);
             komponenterListeObservable.add(k);
         }
@@ -59,6 +59,10 @@ public class KomponenterListe {
 
     public ObservableList<KomponenterTableView> getObservableList(){ //henter den globale oservablelist
         return komponenterListeObservable;
+    }
+
+    public ArrayList<KomponenterTableView> getList(){
+        return komponenter;
     }
 
     public ObservableList<KomponenterTableView> createTableFromFile() { //henter fra fil og skriver til global observablelist

@@ -7,16 +7,16 @@ public class Produkt extends Object implements Serializable {
     private String navn;
     private double pris;
     private String kategori;
+    private boolean duplikat;
 
     public Produkt() {
     }
 
-    public Produkt(String navn, double pris, String kategori){
-
+    public Produkt(String navn, double pris, String kategori, boolean duplikat){
             this.navn = navn;
             this.pris = pris;
             this.kategori = kategori;
-
+            this.duplikat = duplikat;
         }
 
         public String getNavn () {
@@ -43,12 +43,11 @@ public class Produkt extends Object implements Serializable {
             this.kategori = kategori;
         }
 
-        //oppretter gettere og setter for SimpleProperty
+        public boolean isDuplikat() {
+            return duplikat;
+        }
 
-
-        //funksjoner:
-
-        //read og writeObject til serialisering.
-
-
+        public void setDuplikat(boolean duplikat) {
+            this.duplikat = duplikat;
+        }
 }

@@ -22,7 +22,7 @@ public class FilHentingAdministrator {
                     Object produktObject = (Produkt) o.readObject();
                     Produkt produkt = new Produkt();
                     produkt = (Produkt)produktObject;
-                    System.out.println(produkt.getNavn());
+                    System.out.println(produkt.getNavn() + ", "+produkt.isDuplikat());
                     list.add(produkt);
                 }else{
                     ok = false;

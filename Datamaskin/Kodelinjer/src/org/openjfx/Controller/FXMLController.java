@@ -41,13 +41,16 @@ public class FXMLController {
 
 
 
-    //proof of concept
     public Konfigurasjon k = new Konfigurasjon(); //lager en generell liste av konfigurasjon som brukes gjennom kontrolleren
     public KomponenterListe kl = new KomponenterListe();
 
     public void initialize() {
+         //bruker disse for å resette jobj filen med komponenter fra csv
+        kl.createTableFromFile();
+        kl.lagreTilObjectFil();
+
         populateTable();
-        //kl.lagreTilObjectFil();
+
     }
 
     public void populateTable() { //henter fra .csv fil

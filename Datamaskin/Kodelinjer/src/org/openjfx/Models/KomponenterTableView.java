@@ -13,6 +13,7 @@ public class KomponenterTableView implements Serializable {
     private SimpleStringProperty navn, kategori;
     private SimpleDoubleProperty pris;
     private boolean duplikat; //true = kan ha flere av komponenten i konfigurasjon, false = kan kun ha ett av komponenten i konfigurasjon
+
     public ObservableList<KomponenterTableView> komponenterTableViews = FXCollections.observableArrayList();
 
 
