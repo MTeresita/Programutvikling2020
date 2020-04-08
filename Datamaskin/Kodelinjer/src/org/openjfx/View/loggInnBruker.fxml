@@ -39,25 +39,9 @@
             <center>
                 <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
                     <children>
-                        <Text fill="#393939" layoutX="25.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                        </Text>
-                        <Text fill="#393939" layoutX="25.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord">
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                        </Text>
-                    <TextField fx:id="txtuser" layoutX="25.0" layoutY="111.0" style="-fx-border-color: Purple;" />
-                    <PasswordField fx:id="txtpass" layoutX="25.0" layoutY="163.0" style="-fx-border-color: Purple;" />
-                        <Button fx:id="btnLoginBruker" layoutX="97.0" layoutY="199.0" mnemonicParsing="false" onAction="#loginEventBruker" onKeyPressed="#loginEventBruker" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Logg inn" />
-                  <TextField fx:id="txtadminuser" layoutX="216.0" layoutY="111.0" style="-fx-border-color: Purple;" />
-                  <PasswordField fx:id="txtadminpass" layoutX="216.0" layoutY="163.0" style="-fx-border-color: Purple;" />
-                  <Button fx:id="btnLoginAdmin" layoutX="288.0" layoutY="199.0" mnemonicParsing="false" onAction="#loginEventAdmin" onKeyPressed="#loginEventAdmin" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Logg inn" />
                   <TextField fx:id="txtuser1" layoutX="22.0" layoutY="349.0" style="-fx-border-color: Purple;" />
                   <PasswordField fx:id="txtpass1" layoutX="21.0" layoutY="403.0" style="-fx-border-color: Purple;" />
-                  <Button fx:id="btnRegistrer" layoutX="93.0" layoutY="439.0" mnemonicParsing="false" onAction="#registerEvent" onKeyPressed="#registerEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
+                  <Button fx:id="btnRegistrer" layoutX="86.0" layoutY="450.0" mnemonicParsing="false" onAction="#registerEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
                   <Text fill="#393939" layoutX="21.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -68,33 +52,55 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <Text fill="#393939" layoutX="25.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg Inn">
-                     <font>
-                        <Font name="System Bold" size="21.0" />
-                     </font>
-                  </Text>
                   <Text fill="#393939" layoutX="21.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font>
                   </Text>
+                  <PasswordField fx:id="txtpass11" layoutX="200.0" layoutY="403.0" style="-fx-border-color: Purple;" />
                   <Line endX="250.0" layoutX="125.0" layoutY="262.0" startX="-100.0" />
-                  <Text fill="#393939" layoutX="216.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
+                  <Label fx:id="lblMessage" layoutX="202.0" layoutY="270.0" prefHeight="103.0" prefWidth="177.0" textFill="#f20202" />
+                  <Pane fx:id="adminPane" layoutX="200.0" layoutY="69.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Text fill="#393939" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#393939" layoutX="14.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="btnLoginAdmin" layoutX="48.0" layoutY="146.0" mnemonicParsing="false" onAction="#loginEventAdmin" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Logg inn" />
+                        <TextField fx:id="txtadminuser" layoutX="14.0" layoutY="40.0" style="-fx-border-color: Purple;" />
+                        <PasswordField fx:id="txtadminpass" layoutX="14.0" layoutY="100.0" style="-fx-border-color: Purple;" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="brukerPane" layoutX="17.0" layoutY="82.0" prefHeight="173.0" prefWidth="181.0">
+                     <children>
+                              <Text fill="#393939" layoutX="12.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
+                                  <font>
+                                      <Font name="System Bold" size="12.0" />
+                                  </font>
+                              </Text>
+                              <Text fill="#393939" layoutX="12.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord">
+                                  <font>
+                                      <Font name="System Bold" size="12.0" />
+                                  </font>
+                              </Text>
+                          <TextField fx:id="txtuser" layoutX="9.0" layoutY="27.0" style="-fx-border-color: Purple;" />
+                          <PasswordField fx:id="txtpass" layoutX="9.0" layoutY="87.0" style="-fx-border-color: Purple;" />
+                              <Button fx:id="btnLoginBruker" layoutX="41.0" layoutY="132.0" mnemonicParsing="false" onAction="#loginEventBruker" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Logg inn" />
+                     </children>
+                  </Pane>
+                  <Button fx:id="admin" layoutX="232.0" layoutY="30.0" mnemonicParsing="false" onAction="#adminbtn" prefHeight="27.0" prefWidth="116.0" text="Admin" />
+                  <Button fx:id="bruker" layoutX="50.0" layoutY="30.0" mnemonicParsing="false" onAction="#brukerbtn" prefHeight="27.0" prefWidth="116.0" text="Bruker" />
+                  <Text fill="#393939" layoutX="200.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Skriv passordet på nytt">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <Text fill="#393939" layoutX="216.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Text>
-                  <Text fill="#393939" layoutX="216.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg Inn Admin">
-                     <font>
-                        <Font name="System Bold" size="21.0" />
-                     </font>
-                  </Text>
-                  <Label fx:id="lblMessage" layoutX="209.0" layoutY="321.0" prefHeight="103.0" prefWidth="177.0" textFill="#f20202" />
                     </children>
                 </Pane>
             </center>
