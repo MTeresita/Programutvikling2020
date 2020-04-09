@@ -6,17 +6,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import org.openjfx.Models.Interfaces.SceneChanger;
 
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.reloadPage;
+import java.io.IOException;
+
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.verifyLogin;
+import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
 
 public class LoggInnAdminController {
+    @FXML
+    TextField txtadminuser;
 
     @FXML
-    TextField txtuser;
-
-    @FXML
-    PasswordField txtpass;
+    PasswordField txtadminpass;
 
     @FXML
     Label lblMessage;
@@ -24,23 +25,13 @@ public class LoggInnAdminController {
     @FXML
     Button btnLogin;
 
-    /**
-     * @throws Exception
-     * Logg inn metode som sjekker om passord og brukernavn stemmer.
-     * Det er kun gjort slik at ADMIN har tilgang til programmet.
-     */
-    @FXML
-
-    public void loginEvent() throws Exception {
-        if (txtuser.getText().equals("ADMIN") && txtpass.getText().equals("ADMIN")) {
-            reloadPage(btnLogin, "/org/openjfx/View/registrerProdukt.fxml");
-        } else {
-            lblMessage.setText("Feil brukernavn eller passord");
-        }
-
+    public void loginEvent(ActionEvent actionEvent) throws IOException {
+        verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv", lblMessage);
+        routeToSite(actionEvent, "registrerProdukt");
     }
 
-    public void forsideEvent(ActionEvent actionEvent) {
-        SceneChanger.routeToSite(actionEvent, "scene");
+
+    public void tilbakeKnapp(ActionEvent actionEvent) {
+        routeToSite(actionEvent, "loggInn");
     }
 }

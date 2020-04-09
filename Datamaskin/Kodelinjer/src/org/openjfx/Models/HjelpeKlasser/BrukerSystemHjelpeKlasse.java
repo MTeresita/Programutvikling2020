@@ -14,8 +14,7 @@ import java.io.IOException;
 
 
 public class BrukerSystemHjelpeKlasse {
-    public static  void verifyLogin(String user, String pass, String file, String path,
-                                    Button button, Label label) throws IOException {
+    public static  void verifyLogin(String user, String pass, String file, Label label) throws IOException {
 
         BufferedReader reader = null;
         try {
@@ -29,7 +28,6 @@ public class BrukerSystemHjelpeKlasse {
             while ((line = reader.readLine()) != null) {
                 String[] split = line.split(";");
                     if (user.equals(split[0]) && pass.equals(split[1])) {
-                    reloadPage(button, path);
                 }
                 else {
                     label.setText("Feil brukernavn eller passord");
@@ -60,14 +58,5 @@ public class BrukerSystemHjelpeKlasse {
         }
         return found;
 
-    }
-    public static void reloadPage(Button button, String path) throws IOException {
-        Stage stage = (Stage) button.getScene().getWindow();
-        Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(BrukerSystemHjelpeKlasse.class.getResource(path));
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        stage.close();
     }
 }

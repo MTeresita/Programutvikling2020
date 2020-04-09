@@ -46,7 +46,7 @@ public Label lblMessage;
 
                 showAlertWindow(Alert.AlertType.INFORMATION,windowHelper(registrerbtn), "Ny admin",
                         "Bruker opprrettet");
-                reloadPage(registrerbtn,"/org/openjfx/View/registrerProdukt.fxml" );
+                clear();
             }
             else{
                 lblMessage.setText("Bruker eksisterer");
@@ -62,15 +62,19 @@ public Label lblMessage;
                     showAlertWindow(Alert.AlertType.INFORMATION,windowHelper(registrerbtn), "Ny bruker",
                             "Bruker opprrettet");
 
-                    reloadPage(registrerbtn, "/org/openjfx/View/registrerProdukt.fxml");
+                    clear();
                 } else {
                     lblMessage.setText("Bruker eksisterer");
                 }
         }
 
     }
+    public void clear(){
+        user.clear();
+        pass.clear();
+    }
 
     public void forsideBtn(ActionEvent actionEvent) {
-        SceneChanger.routeToSite(actionEvent, "loggInnBruker");
+        SceneChanger.routeToSite(actionEvent, "loggInn");
     }
 }

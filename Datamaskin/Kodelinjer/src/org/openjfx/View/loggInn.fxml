@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -10,14 +11,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.LoggInnAdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.LoggInnController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
          <left>
-            <Pane prefHeight="400.0" prefWidth="165.0" styleClass="gradient" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="tilbakeKnapp" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#tilbakeKnapp" text="Tilbake" />
-               </children></Pane>
+            <Pane prefHeight="400.0" prefWidth="165.0" styleClass="gradient" stylesheets="@../styles.css" BorderPane.alignment="CENTER" />
          </left>
          <center>
             <Pane prefHeight="386.0" prefWidth="395.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
@@ -33,12 +31,16 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="txtadminuser" layoutX="84.0" layoutY="99.0" style="-fx-border-color: Purple;" />
-                  <PasswordField fx:id="txtadminpass" layoutX="84.0" layoutY="165.0" style="-fx-border-color: Purple;" />
-                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="73.0" layoutY="293.0" prefHeight="74.0" prefWidth="242.0" textFill="#ee0404" />
-                  <Text layoutX="59.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn som Administrator">
+                  <TextField fx:id="txtuser" layoutX="84.0" layoutY="99.0" style="-fx-border-color: Purple;" />
+                  <PasswordField fx:id="txtpass" layoutX="84.0" layoutY="165.0" style="-fx-border-color: Purple;" />
+                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="252.0" layoutY="107.0" prefHeight="74.0" prefWidth="178.0" textFill="#ee0404" />
+                  <Hyperlink fx:id="registrerbruker" layoutX="179.0" layoutY="285.0" onAction="#registrerbruker" prefHeight="26.0" prefWidth="114.0" text="Registrer deg her" />
+                  <Text layoutX="97.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ikke bruker? " />
+                  <Text layoutX="97.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator" />
+                  <Hyperlink fx:id="loginAdmin" layoutX="188.0" layoutY="323.0" onAction="#loginAdmin" prefHeight="26.0" prefWidth="114.0" text="Logg på her" />
+                  <Text layoutX="55.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn bruker" wrappingWidth="189.22900390625">
                      <font>
-                        <Font name="System Bold" size="17.0" />
+                        <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
                </children>
