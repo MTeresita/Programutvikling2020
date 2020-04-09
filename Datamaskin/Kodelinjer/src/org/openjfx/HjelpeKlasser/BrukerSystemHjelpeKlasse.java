@@ -39,7 +39,7 @@ public class BrukerSystemHjelpeKlasse {
         }
     }
 
-    public static boolean checkExistingBruker(String user, String file) throws IOException {
+    public static boolean checkExistingBruker(String username, String file) throws IOException {
         boolean found = false;
         BufferedReader reader = null;
         try {
@@ -52,7 +52,7 @@ public class BrukerSystemHjelpeKlasse {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] split = line.split(";");
-                if (user.equals(split[0])) {
+                if (username.equals(split[0])) {
                     found = true;
                 }
 

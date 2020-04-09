@@ -3,7 +3,6 @@ package org.openjfx.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import org.openjfx.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
