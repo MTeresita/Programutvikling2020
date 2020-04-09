@@ -8,19 +8,19 @@ import javafx.collections.ObservableList;
 import java.io.*;
 
 
-public class KomponenterTableView implements Serializable {
+public class Komponent implements Serializable {
 
     private SimpleStringProperty navn, kategori;
     private SimpleDoubleProperty pris;
     private boolean duplikat; //true = kan ha flere av komponenten i konfigurasjon, false = kan kun ha ett av komponenten i konfigurasjon
 
-    public ObservableList<KomponenterTableView> komponenterTableViews = FXCollections.observableArrayList();
+    public ObservableList<Komponent> komponenterTableViews = FXCollections.observableArrayList();
 
 
-    public KomponenterTableView() {
+    public Komponent() {
     }
 
-    public KomponenterTableView(String navn, String kategori, double pris, boolean duplikat) {
+    public Komponent(String navn, String kategori, double pris, boolean duplikat) {
         this.navn = new SimpleStringProperty(navn);
         this.kategori = new SimpleStringProperty(kategori);
         this.pris = new SimpleDoubleProperty(pris);

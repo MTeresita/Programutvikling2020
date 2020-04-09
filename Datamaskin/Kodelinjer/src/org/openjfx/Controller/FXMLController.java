@@ -4,12 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import org.openjfx.Models.Avvik.AlertHelper;
 import org.openjfx.Models.Interfaces.SceneChanger;
 
 import org.openjfx.Models.Konfigurasjon;
 import org.openjfx.Models.KomponenterListe;
 
-import org.openjfx.Models.KomponenterTableView;
+import org.openjfx.Models.Komponent;
+
+import java.io.IOException;
 
 
 public class FXMLController {
@@ -31,13 +34,13 @@ public class FXMLController {
     private ListView<String> listview;
 
     @FXML
-    TableView <KomponenterTableView> komponenter;
+    TableView <Komponent> komponenter;
 
     @FXML
-    TableColumn<KomponenterTableView, String> produktnavn, kategori;
+    TableColumn<Komponent, String> produktnavn, kategori;
 
     @FXML
-    TableColumn<KomponenterTableView, Double> pris;
+    TableColumn<Komponent, Double> pris;
 
 
 
@@ -50,7 +53,7 @@ public class FXMLController {
         kl.createTableFromFile();
         kl.lagreTilObjectFil();
         */
-        
+
         populateTable();
 
     }
@@ -73,7 +76,7 @@ public class FXMLController {
 
     @FXML
     public void leggTilKomponentEvent(ActionEvent event){ //henter valgt komponent fra tableview fra knappetrykk på "legg til komponent"
-        KomponenterTableView valgtKomponent = komponenter.getSelectionModel().getSelectedItem(); //henter valgt komponent
+        Komponent valgtKomponent = komponenter.getSelectionModel().getSelectedItem(); //henter valgt komponent
         System.out.println("Dette er det valgte komponentet: "+valgtKomponent.getNavn()+", "+valgtKomponent.isDuplikat());
         k.setNyttKomponent(valgtKomponent); //legger til i konfigurasjon
         System.out.println(k.toString());
@@ -83,14 +86,17 @@ public class FXMLController {
     @FXML
     public void slettKomponentViaListView(){
         System.out.println(listview.getSelectionModel().getSelectedIndex());
+        try {
+            k.slettKomponent(listview.getSelectionModel().getSelectedIndex());
+            populateListview();
+        } catch(Exception e){
 
-        k.slettKomponent(listview.getSelectionModel().getSelectedIndex());
-        populateListview();
+        }
     }
 
     public void populateListview(){ //legger ut komponeter fra konfigurasjon sin ArrayList
         listview.getItems().clear();
-        for(KomponenterTableView ktv : k.getKonfigListe()){
+        for(Komponent ktv : k.getKonfigListe()){
             listview.getItems().add(ktv.getNavn() + "\n" +ktv.getPris()+" NOK");
         }
         listview.refresh();

@@ -15,8 +15,8 @@ import java.util.Collections;
 public class KomponenterListe {
 
 
-    private ArrayList<KomponenterTableView> komponenter = new ArrayList<KomponenterTableView>();
-    private ObservableList<KomponenterTableView> komponenterListeObservable = FXCollections.observableArrayList();;
+    private ArrayList<Komponent> komponenter = new ArrayList<Komponent>();
+    private ObservableList<Komponent> komponenterListeObservable = FXCollections.observableArrayList();;
 
 
     //funksjoner:
@@ -37,36 +37,36 @@ public class KomponenterListe {
         komponenter.clear();
         komponenterListeObservable.clear();
         for(Produkt p : liste){
-            KomponenterTableView k = new KomponenterTableView(p.getNavn(), p.getKategori(), p.getPris(), p.isDuplikat());
+            Komponent k = new Komponent(p.getNavn(), p.getKategori(), p.getPris(), p.isDuplikat());
             komponenter.add(k);
             komponenterListeObservable.add(k);
         }
     }
 
-    public void setKomponenter(KomponenterTableView... komponenter) {
+    public void setKomponenter(Komponent... komponenter) {
         Collections.addAll(this.komponenter, komponenter);
         komponenterListeObservable.addAll(komponenter);
     }
 
-    public ArrayList<KomponenterTableView> getProdukter(KomponenterTableView... produkter) {
-        ArrayList<KomponenterTableView> produkterIterator = new ArrayList<KomponenterTableView>();
+    public ArrayList<Komponent> getProdukter(Komponent... produkter) {
+        ArrayList<Komponent> produkterIterator = new ArrayList<Komponent>();
 
-        for(KomponenterTableView p : produkter){
+        for(Komponent p : produkter){
             produkterIterator.add(p);
         }
         return produkterIterator;
     }
 
-    public ObservableList<KomponenterTableView> getObservableList(){ //henter den globale oservablelist
+    public ObservableList<Komponent> getObservableList(){ //henter den globale oservablelist
         return komponenterListeObservable;
     }
 
-    public ArrayList<KomponenterTableView> getList(){
+    public ArrayList<Komponent> getList(){
         return komponenter;
     }
 
     //brukes ikke lengre
-    public ObservableList<KomponenterTableView> createTableFromFile() { //henter fra fil og skriver til global observablelist
+    public ObservableList<Komponent> createTableFromFile() { //henter fra fil og skriver til global observablelist
         try {
             BufferedReader reader = new BufferedReader(new FileReader("./komponenter.csv"));
 
@@ -76,7 +76,7 @@ public class KomponenterListe {
                 String [] komponentfields = komponenter.split(";");
                 double pris = Double. parseDouble(komponentfields[2]);
                 //4.
-                KomponenterTableView inputRecord = new KomponenterTableView(komponentfields[0], komponentfields[1], pris, Boolean.parseBoolean(komponentfields[3]));
+                Komponent inputRecord = new Komponent(komponentfields[0], komponentfields[1], pris, Boolean.parseBoolean(komponentfields[3]));
                 //5.
                 komponenterListeObservable.add(inputRecord);
                 this.komponenter.add(inputRecord);

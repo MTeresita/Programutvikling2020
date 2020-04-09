@@ -1,7 +1,5 @@
 package org.openjfx.Models.Filbehandling.FilHenting;
 
-import org.openjfx.Models.KomponenterListe;
-import org.openjfx.Models.KomponenterTableView;
 import org.openjfx.Models.Produkt;
 
 import java.io.*;
@@ -13,23 +11,23 @@ public class FilHentingAdministrator {
 
     public ArrayList<Produkt> hentFraFil() {
         try {
-            FileInputStream f = new FileInputStream(new File("komponentlist.jobj"));
-            ObjectInputStream o = new ObjectInputStream(f);
+            FileInputStream fis = new FileInputStream(new File("komponentlist.jobj"));
+            ObjectInputStream ois = new ObjectInputStream(fis);
 
             boolean ok = true;
             while (ok) {
-                if(o != null){
-                    Object produktObject = (Produkt) o.readObject();
+                if(ois != null){
+                    Object produktObject = (Produkt) ois.readObject();
                     Produkt produkt = new Produkt();
                     produkt = (Produkt)produktObject;
-                    System.out.println(produkt.getNavn() + ", "+produkt.isDuplikat());
+
                     list.add(produkt);
                 }else{
                     ok = false;
                 }
             }
-            o.close();
-            f.close();
+            ois.close();
+            fis.close();
 
         } catch (IOException | ClassNotFoundException e) {
             //System.out.println("Feil i lesing av objectfil: " + e);
