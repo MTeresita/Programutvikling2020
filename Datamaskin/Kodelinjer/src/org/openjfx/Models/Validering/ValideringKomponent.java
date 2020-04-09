@@ -4,6 +4,8 @@ import org.openjfx.Models.Avvik.AvvikProdukt;
 
 public class ValideringKomponent {
 
+
+
     public static boolean validerProduktnavn(String produktnavn) throws AvvikProdukt {
         boolean validering;
 
