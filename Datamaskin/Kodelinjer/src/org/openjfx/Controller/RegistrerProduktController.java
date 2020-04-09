@@ -3,7 +3,7 @@ package org.openjfx.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import org.openjfx.HjelpeKlasser.BrukerRegister;
+import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.Interfaces.SceneChanger;
 import org.openjfx.Models.Komponent;
@@ -12,7 +12,7 @@ import org.openjfx.Models.KomponenterListe;
 import java.io.IOException;
 
 import static org.openjfx.Models.Avvik.AlertHelper.*;
-import static org.openjfx.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
 
 
 public class RegistrerProduktController {
