@@ -9,9 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
+/*
 public class FilHentingBruker implements org.openjfx.Model.Interfaces.FilHenting {
-    @Override
+   /* @Override
     public List<Produkt> lesingFraFil(String path) throws IOException {
         ArrayList<Produkt> list = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(path))) {
@@ -27,4 +27,8 @@ public class FilHentingBruker implements org.openjfx.Model.Interfaces.FilHenting
             return list;
         }
     }
+
+
 }
+
+ */
