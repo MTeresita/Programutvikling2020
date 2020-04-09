@@ -65,6 +65,7 @@ public class KomponenterListe {
         return komponenter;
     }
 
+    //brukes ikke lengre
     public ObservableList<KomponenterTableView> createTableFromFile() { //henter fra fil og skriver til global observablelist
         try {
             BufferedReader reader = new BufferedReader(new FileReader("./komponenter.csv"));

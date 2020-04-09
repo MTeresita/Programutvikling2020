@@ -46,9 +46,11 @@ public class FXMLController {
 
     public void initialize() {
          //bruker disse for å resette jobj filen med komponenter fra csv
+        /*
         kl.createTableFromFile();
         kl.lagreTilObjectFil();
-
+        */
+        
         populateTable();
 
     }
