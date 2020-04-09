@@ -29,13 +29,13 @@ public class ValiderLoggInn {
 
     public static boolean validerPassord(String passord) throws AvvikLoggInn {
         boolean validering;
-
-        if(passord.matches("^[A-æøå]((?![-]$)[A-æøå.,'-]?){2,50}$")) {
+        //"^[A-æøå]((?![-]$)[A-æøå.,'-]?){2,50}$"
+        if(passord.matches("^[A-ZÆØÅa-zæøå]{5,50}$")) {
             validering=true;
         }
         else{
             validering=false;
-            throw new AvvikLoggInn("Brukernavn må være minst 8 tegn langt");
+            throw new AvvikLoggInn("Passord må være minst 5 bokstaver langt");
         }
         if(passord.isBlank() || passord.isEmpty()){
             validering=false;
