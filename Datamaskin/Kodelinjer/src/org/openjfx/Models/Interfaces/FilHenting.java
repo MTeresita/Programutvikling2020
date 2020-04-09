@@ -1,4 +1,4 @@
-package org.openjfx.Model.Interfaces;
+package org.openjfx.Models.Interfaces;
 
 import java.io.IOException;
 import java.util.List;
