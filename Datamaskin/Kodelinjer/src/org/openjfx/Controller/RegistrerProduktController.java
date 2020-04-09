@@ -44,15 +44,26 @@ public KomponenterListe kl = new KomponenterListe();
         populateTableWithList();
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
+        kl.henteFraObjectFil();
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
         komponenter.setItems(kl.getObservableList());
+        populateKategoriCombobox();
+    }
+    public void populateKategoriCombobox(){
+        kategoriCombobox.getItems().add("Ny Kategori..."); //legger til "ny kategori..." som førstevalg
+        for(Komponent k : kl.getObservableList()){
+            if(!kategoriCombobox.getItems().contains(k.getKategori())){ //Om kategori er lagt til fra før, legges den ikke til igjen
+                kategoriCombobox.getItems().add(k.getKategori());
+            }
+
+        }
+
     }
 
     public void registrerbtn(ActionEvent actionEvent) throws IOException {
         // er det admin eller bruker sjek --> hvilken fil skal den til
-
         if(adminORuser.getSelectionModel().getSelectedItem().equals("Admin")){
             if(!checkExistingBruker(user.getText(), "./Admin.csv")) {
                 lblMessage.setText("Ny admin bruker opprettet");
@@ -89,5 +100,13 @@ public KomponenterListe kl = new KomponenterListe();
 
     public void forsideBtn(ActionEvent actionEvent) {
         SceneChanger.routeToSite(actionEvent, "loggInnBruker");
+    }
+
+    @FXML
+    public void registererProdukt(ActionEvent event){
+        Komponent nyKomponent = new Komponent(produktNavn.getText(), kategori.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+        kl.getObservableList().add(nyKomponent);
+        komponenter.refresh();
+
     }
 }
