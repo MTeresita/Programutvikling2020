@@ -19,10 +19,11 @@ public class KomponenterListe {
     private ObservableList<Komponent> komponenterListeObservable = FXCollections.observableArrayList();;
 
 
-    //funksjoner:
+
+   /* //funksjoner:
     public void leggTilProdukt(Produkt... produkter){
 
-    }
+    }*/
 
     public void lagreTilObjectFil(){
         FilLagringAdmin fla = new FilLagringAdmin();
