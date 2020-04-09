@@ -17,10 +17,8 @@ class ValideringKomponentTestTest {
 
     @Test
     void testKomponenterFalse() throws AvvikProdukt {
-
-        //assertThrows(AvvikProdukt.class, () -> (""));
-        assertFalse(ValideringKomponent.validerProduktnavn(""));
-        assertFalse(ValideringKomponent.validerNyKategori(""));
-        assertFalse(ValideringKomponent.validerPris(0));
+        assertThrows(AvvikProdukt.class, () -> ValideringKomponent.validerProduktnavn(""));
+        assertThrows(AvvikProdukt.class, () -> ValideringKomponent.validerNyKategori(""));
+        assertThrows(AvvikProdukt.class, () -> ValideringKomponent.validerPris(0));
     }
 }

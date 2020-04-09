@@ -10,7 +10,6 @@ public class ValideringKomponent {
         boolean validering;
 
         if(produktnavn.matches("^[A-ZÆØÅa-zæøå]{2,50}$")) {
-
             validering=true;
         }
         else{

@@ -17,11 +17,11 @@ public class ValiderLoggInn {
         }
         else{
             validering=false;
-            //throw new AvvikLoggInn("Brukernavn må være minst 8 tegn langt");
+            throw new AvvikLoggInn("Brukernavn må være minst 8 tegn langt");
         }
         if(brukernavn.isBlank() || brukernavn.isEmpty()){
             validering=false;
-           // throw new AvvikLoggInn("Brukernavn må fylles inn");
+           throw new AvvikLoggInn("Brukernavn må fylles inn");
         }
 
         return validering;
@@ -35,11 +35,11 @@ public class ValiderLoggInn {
         }
         else{
             validering=false;
-            //throw new AvvikLoggInn("Brukernavn må være minst 8 tegn langt");
+            throw new AvvikLoggInn("Brukernavn må være minst 8 tegn langt");
         }
         if(passord.isBlank() || passord.isEmpty()){
             validering=false;
-            //throw new AvvikLoggInn("Brukernavn og passord må fylles inn.");
+            throw new AvvikLoggInn("Brukernavn og passord må fylles inn.");
         }
 
         return validering;
