@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.RegistrerProduktController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.RegistrerProduktController">
    <children>
       <BorderPane prefHeight="780.0" prefWidth="1100.0">
          <left>
@@ -87,16 +87,16 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="pris2" layoutX="91.0" layoutY="540.0" prefHeight="27.0" prefWidth="220.0" stylesheets="@../styles.css" />
-                  <TextField fx:id="pris3" layoutX="208.0" layoutY="597.0" prefHeight="27.0" prefWidth="103.0" stylesheets="@../styles.css" />
+                  <TextField fx:id="produktNavn" layoutX="91.0" layoutY="540.0" prefHeight="27.0" prefWidth="220.0" stylesheets="@../styles.css" />
+                  <TextField fx:id="kategoriNavn" layoutX="208.0" layoutY="597.0" prefHeight="27.0" prefWidth="103.0" stylesheets="@../styles.css" />
                   <Text fill="#404040" layoutX="210.0" layoutY="577.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn (ved opprettelse av ny kategori)" wrappingWidth="133.73095703125">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <Button fx:id="registrerbtn" layoutX="203.0" layoutY="703.0" mnemonicParsing="false" onAction="#registrerbtn" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
+                  <Button fx:id="registrerProduktBtn" layoutX="203.0" layoutY="703.0" mnemonicParsing="false" onAction="#registrerProduktBtn" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
                   <ComboBox fx:id="adminORuser" layoutX="487.0" layoutY="540.0" prefHeight="27.0" prefWidth="221.0" promptText="Velg" />
-                  <ComboBox fx:id="kategori" layoutX="89.0" layoutY="596.0" prefHeight="27.0" prefWidth="107.0" promptText="Velg" />
+                  <ComboBox fx:id="kategoriCombobox" layoutX="89.0" layoutY="596.0" prefHeight="27.0" prefWidth="107.0" promptText="Velg" />
                   <Label fx:id="lblMessage" layoutX="487.0" layoutY="741.0" prefHeight="30.0" prefWidth="244.0" />
                </children>
             </Pane>

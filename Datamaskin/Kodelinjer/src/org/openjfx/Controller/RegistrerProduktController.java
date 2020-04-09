@@ -6,6 +6,8 @@ import javafx.scene.control.*;
 import org.openjfx.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.Interfaces.SceneChanger;
+import org.openjfx.Models.Komponent;
+import org.openjfx.Models.KomponenterListe;
 
 import java.io.IOException;
 
@@ -15,22 +17,37 @@ import static org.openjfx.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
 
 public class RegistrerProduktController {
 @FXML
-public TextField user, pass;
+public TextField user, pass, produktNavn, kategoriNavn;
 
 @FXML
-public Button registrerbtn;
+public Button registrerbtn, registrerProduktBtn;
 
 @FXML
-public ComboBox adminORuser;
+public ComboBox adminORuser, kategoriCombobox;
 
 @FXML
 public Label lblMessage;
 
+@FXML
+TableView <Komponent> komponenter;
+
+@FXML
+TableColumn<Komponent, String> produktnavn, kategori;
+
+@FXML
+TableColumn<Komponent, Double> pris;
+
+public KomponenterListe kl = new KomponenterListe();
 
     public void initialize() {
         adminORuser.getItems().setAll("Admin", "Bruker");
-
-
+        populateTableWithList();
+    }
+    public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
+        produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
+        kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
+        pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
+        komponenter.setItems(kl.getObservableList());
     }
 
     public void registrerbtn(ActionEvent actionEvent) throws IOException {
