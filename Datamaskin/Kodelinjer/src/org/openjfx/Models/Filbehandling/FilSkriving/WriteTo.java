@@ -25,6 +25,7 @@ public class WriteTo implements WriteToFile{
     }
 
     public static void writeToCSVFile(WriteToFile writer, Object obj, String path) {
+        //generell metode som skriver ti csv fil.
         try {
             writer.writer(obj, path);
         } catch (IOException e) {

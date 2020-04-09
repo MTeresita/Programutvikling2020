@@ -25,18 +25,21 @@ public class LoggInnController {
 
     
     public void loginEvent(ActionEvent event) throws Exception {
+        //bruker verifyLogin metoden, går gjennom fil og sender ut feilmeldinger til lblMessage.
         verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv", lblMessage);
         routeToSite(event, "scene");
 
     }
 
     public void registrerbruker(ActionEvent actionEvent) {
+        //når den klikkes på, vil du bli sendt til registrer bruker siden
         registrerbruker.setOnMouseClicked(e -> {
             routeToSite(actionEvent, "registrerBruker");
         });
     }
 
     public void loginAdmin(ActionEvent actionEvent) {
+        //når den klikkes på, vil du bli sendt til logg inn admin siden
         loginAdmin.setOnMouseClicked(e -> {
             routeToSite(actionEvent, "loggInnAdmin");
         });

@@ -45,7 +45,7 @@ public class AlertHelper {
 
     /**
      * Denne metoden tar in valgene som kommer inn i alertBoksene.
-     * Slik at når man har en confirmation alerbox, skal man kunne konfigurere hva som skal skje
+     * Slik at når man har en confirmation alertbox, skal man kunne konfigurere hva som skal skje
      * om bruker trykker OK eller cancel.
      * @param alert Tar inn en alert
      * @return resultatet.

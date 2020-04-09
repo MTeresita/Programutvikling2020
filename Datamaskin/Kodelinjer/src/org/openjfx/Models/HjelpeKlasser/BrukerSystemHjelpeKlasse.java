@@ -14,6 +14,8 @@ import java.io.IOException;
 
 
 public class BrukerSystemHjelpeKlasse {
+
+    // generell metode som går gjennom filene for å finne bruker.
     public static  void verifyLogin(String user, String pass, String file, Label label) throws IOException {
 
         BufferedReader reader = null;
@@ -25,11 +27,15 @@ public class BrukerSystemHjelpeKlasse {
 
         if (reader != null) {
             String line;
+
             while ((line = reader.readLine()) != null) {
+                // splitter filen med ;
                 String[] split = line.split(";");
+                //hvis brukernavnet og passordet er like --> vil du kunne logge inn
                     if (user.equals(split[0]) && pass.equals(split[1])) {
                 }
                 else {
+                    //hvis ikke, sender den en melding til label
                     label.setText("Feil brukernavn eller passord");
                 }
 
@@ -50,12 +56,14 @@ public class BrukerSystemHjelpeKlasse {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] split = line.split(";");
+                //hvis brukernavnet eksisterer --> er den funnet
                 if (username.equals(split[0])) {
                     found = true;
                 }
 
             }
         }
+        //ikke funnet, returnerer false
         return found;
 
     }

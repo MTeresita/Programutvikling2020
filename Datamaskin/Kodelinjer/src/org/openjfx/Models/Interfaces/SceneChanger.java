@@ -13,6 +13,7 @@ import java.net.URL;
 public interface SceneChanger {
 
     static void routeToSite(ActionEvent event, String path) {
+        //generell oppsett for pathing
         String BASE_PATH = "/org/openjfx/View/";
         String FILE_ENDING = ".fxml";
 
@@ -30,6 +31,7 @@ public interface SceneChanger {
         }catch (IOException io){
             io.printStackTrace();
         }
+        //ikke sikkert denne er nødvending
         System.out.println("Du blir sendt til: " + path);
     }
 

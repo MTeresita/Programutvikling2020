@@ -26,6 +26,7 @@ public class LoggInnAdminController {
     Button btnLogin;
 
     public void loginEvent(ActionEvent actionEvent) throws IOException {
+        //bruker verifyLogin metoden, går gjennom fil og sender ut feilmeldinger til lblMessage.
         verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv", lblMessage);
         routeToSite(actionEvent, "registrerProdukt");
     }

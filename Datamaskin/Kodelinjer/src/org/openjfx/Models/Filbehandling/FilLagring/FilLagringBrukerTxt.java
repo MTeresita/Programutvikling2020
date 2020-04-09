@@ -1,6 +1,5 @@
 package org.openjfx.Models.Filbehandling.FilLagring;
 
-import org.openjfx.Model.Interfaces.FilLagring;
 
 import java.io.IOException;
 import java.nio.file.Files;

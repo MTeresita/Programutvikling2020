@@ -28,24 +28,34 @@ public class RegistrerBrukerController {
     Label lblMessage;
 
     public void registerEvent(ActionEvent actionEvent) throws IOException {
+        //hvis passordene på begge felt er like så..
         if(txtpass.getText().equals(txtpass1.getText())) {
+
+            //sjekker først om bruker eksisterer
             if (checkExistingBruker(txtuser.getText(), "./Brukere.csv")) {
+
+                //eksiterer bruker, send pop up feilmelding
                 showAlertWindow(Alert.AlertType.ERROR, windowHelper(registrerbtn), "Bruker eksisterer",
                         "\nBrukere eksisterer." +
                                 "\nPrøv igjen!");
 
-            } else {
+            }
+            else {
+                //eksiterer ikke bruker, blir den opprett og skrevet til Brukere.csv
                 BrukerRegister enBruker = new BrukerRegister(txtuser.getText(), txtpass.getText());
                 WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
 
+                //Pop up melding om at brukeren er registrert
                 showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerbtn), "Velkommen",
                         "Bruker opprettet");
+
+                //når du trykker ok, vil du bli sendt tilbake til logg inn siden
                 routeToSite(actionEvent, "loggInn");
             }
         }
         else {
+            //send feilmelding om at passordene ikke er like
             lblMessage.setText("Passordene er ikke like");
-
         }
     }
 
