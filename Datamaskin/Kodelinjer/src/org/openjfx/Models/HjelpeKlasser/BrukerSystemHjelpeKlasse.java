@@ -1,4 +1,4 @@
-package org.openjfx.HjelpeKlasser;
+package org.openjfx.Models.HjelpeKlasser;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

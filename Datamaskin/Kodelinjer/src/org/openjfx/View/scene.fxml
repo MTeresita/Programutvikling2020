@@ -55,7 +55,7 @@
 
                   <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="16.0" layoutY="720.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Bilder/images.png" />
+                        <Image url="@Bilder/images.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="newProduct" layoutX="57.0" layoutY="718.0" mnemonicParsing="false" onAction="#logOutEvent" prefHeight="37.0" prefWidth="210.0" styleClass="button-basket" stylesheets="@../styles.css" text="Logg ut">

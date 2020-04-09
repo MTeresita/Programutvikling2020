@@ -3,15 +3,19 @@ package org.openjfx.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
 import javafx.scene.layout.Pane;
 import org.openjfx.HjelpeKlasser.BrukerRegister;
+
+import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
+
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 
 import java.io.*;
 
 import static org.openjfx.Models.Avvik.AlertHelper.showAlertWindow;
 import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
-import static org.openjfx.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
 
 public class LoggInnBrukerController {
 

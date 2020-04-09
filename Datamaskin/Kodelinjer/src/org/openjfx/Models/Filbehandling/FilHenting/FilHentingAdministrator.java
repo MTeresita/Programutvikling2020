@@ -1,8 +1,7 @@
 package org.openjfx.Models.Filbehandling.FilHenting;
 
-import org.openjfx.Model.Interfaces.FilHenting;
 import org.openjfx.Models.Produkt;
-import org.openjfx.Parsing.*;
+import org.openjfx.Models.Parsing.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,24 +11,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import java.io.*;
+import java.util.ArrayList;
 
-public class FilHentingAdministrator implements FilHenting {
+public class FilHentingAdministrator {
 
-    @Override
-    public List<Produkt> lesingFraFil(String path) throws IOException {
-        ArrayList<Produkt> list = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(path))) {
-            String linje;
+    public ArrayList<Produkt> list = new ArrayList<Produkt>();
 
-            //Lager en ny produktlinje.
-            while ((linje = reader.readLine()) != null) {
+    public ArrayList<Produkt> hentFraFil() {
+        try {
+            FileInputStream fis = new FileInputStream(new File("komponentlist.jobj"));
+            ObjectInputStream ois = new ObjectInputStream(fis);
 
-                //bruker parseProdukt til å gjøre om til et objekt fra fil.
-                list.add((KonfigurasjonsParser.parseProdukt(linje)));
+            boolean ok = true;
+            while (ok) {
+                if(ois != null){
+                    Object produktObject = (Produkt) ois.readObject();
+                    Produkt produkt = new Produkt();
+                    produkt = (Produkt)produktObject;
 
+                    list.add(produkt);
+                }else{
+                    ok = false;
+                }
             }
-            return list;
-        }
-    }
+            ois.close();
+            fis.close();
 
+        } catch (IOException | ClassNotFoundException e) {
+            //System.out.println("Feil i lesing av objectfil: " + e);
+            //kaster visst exception uansett hva man gjør, men så lenge man handler den gpr det fint https://stackoverflow.com/questions/27409718/java-reading-multiple-objects-from-a-file-as-they-were-in-an-array
+        }
+        return list;
+    }
 }

@@ -5,26 +5,34 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 
-public class KomponenterTableView {
+public class Komponent implements Serializable {
 
     private SimpleStringProperty navn, kategori;
     private SimpleDoubleProperty pris;
-    public ObservableList<KomponenterTableView> komponenterTableViews = FXCollections.observableArrayList();
+    private boolean duplikat; //true = kan ha flere av komponenten i konfigurasjon, false = kan kun ha ett av komponenten i konfigurasjon
+
+    public ObservableList<Komponent> komponenterTableViews = FXCollections.observableArrayList();
 
 
-    public KomponenterTableView() {
+    public Komponent() {
     }
 
-    public KomponenterTableView(String navn, String kategori, double pris) {
+    public Komponent(String navn, String kategori, double pris, boolean duplikat) {
         this.navn = new SimpleStringProperty(navn);
         this.kategori = new SimpleStringProperty(kategori);
         this.pris = new SimpleDoubleProperty(pris);
+        this.duplikat = duplikat;
+    }
+
+    public boolean isDuplikat() {
+        return duplikat;
+    }
+
+    public void setDuplikat(boolean duplikat) {
+        this.duplikat = duplikat;
     }
 
     public String getNavn() {
