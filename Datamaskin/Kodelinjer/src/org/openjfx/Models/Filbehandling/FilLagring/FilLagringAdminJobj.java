@@ -11,9 +11,7 @@ import java.nio.file.Path;
 //import org.openjfx.Models.Formaterer.KonfigurasjonsFormaterer;
 
 
-
-
-public class FilLagringAdminJobj implements FilLagring {
+public class FilLagringAdminJobj implements FilLagring { //BRUKES IKKE
 
     public void skrivString(String str, Path path) throws IOException{
         Files.write(path, str.getBytes());
