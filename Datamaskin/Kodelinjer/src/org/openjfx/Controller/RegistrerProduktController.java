@@ -52,6 +52,7 @@ public KomponenterListe kl = new KomponenterListe();
         populateKategoriCombobox();
     }
     public void populateKategoriCombobox(){
+        kategoriCombobox.getItems().clear();
         kategoriCombobox.getItems().add("Ny Kategori..."); //legger til "ny kategori..." som førstevalg
         for(Komponent k : kl.getObservableList()){
             if(!kategoriCombobox.getItems().contains(k.getKategori())){ //Om kategori er lagt til fra før, legges den ikke til igjen
@@ -104,9 +105,17 @@ public KomponenterListe kl = new KomponenterListe();
 
     @FXML
     public void registererProdukt(ActionEvent event){
-        Komponent nyKomponent = new Komponent(produktNavn.getText(), kategori.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
-        kl.getObservableList().add(nyKomponent);
-        komponenter.refresh();
 
+        if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
+            Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+            kl.getObservableList().add(nyKomponent);
+        }
+        else{
+            Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+            kl.getObservableList().add(nyKomponent);
+        }
+
+        komponenter.refresh();
+        populateKategoriCombobox();
     }
 }
