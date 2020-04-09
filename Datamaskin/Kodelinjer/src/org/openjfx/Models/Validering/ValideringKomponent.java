@@ -4,35 +4,52 @@ import org.openjfx.Models.Avvik.AvvikProdukt;
 
 public class ValideringKomponent {
 
-    public static boolean validerNyKomponent(String produktnavn, String nykategori, double pris) throws AvvikProdukt {
-        boolean validering=false;
+    public static boolean validerProduktnavn(String produktnavn) throws AvvikProdukt {
+        boolean validering;
 
-        //matcher alle bokstaver A-ÆØÅ mellom 2-50 i lengde og tegn som !-.,
-        if(produktnavn.matches("^[A-æøå]((?![-]$)[A-æøå.,'-]?){2,50}$")){
+        if(produktnavn.matches("^[A-ZÆØÅa-zæøå]{2,50}$")) {
 
-            if(nykategori.matches("^[A-æøå]((?![-]$)[A-æøå.,'-]?){2,50}$") && pris>0) {
-                validering=true;
-            }
-            else{
-                validering=false;
-                throw new AvvikProdukt("Kategori må være mellom 2 og 50 tegn.");
-            }
-
+            validering=true;
         }
         else{
             validering=false;
             throw new AvvikProdukt("Produktnavn må være mellom 2 og 50 tegn.");
         }
-        if(produktnavn.isBlank() || produktnavn.isEmpty() || nykategori.isBlank() || nykategori.isEmpty() || pris<=0){
+        if(produktnavn.isBlank() || produktnavn.isEmpty()){
             validering=false;
-            throw new AvvikProdukt("Pris må være over 0 og kan ikke være lik 0. Alle feltene må fylles inn");
+            throw new AvvikProdukt("Alle feltene må fylles inn");
 
         }
         return validering;
     }
 
+    public static boolean validerNyKategori(String nyKategori) throws AvvikProdukt {
+        boolean validering;
+        if(nyKategori.matches("^[A-ZÆØÅa-zæøå]{2,50}$")){
+            validering=true;
 
+        }
+        else{
+            validering=false;
+            throw new AvvikProdukt("Alle feltene må fylles inn");
+        }
+        if(nyKategori.isBlank() || nyKategori.isEmpty()){
+            validering=false;
+            throw new AvvikProdukt("Alle felter må fylles inn");
+        }
+        return validering;
+    }
 
-
+    public static boolean validerPris(double pris) throws AvvikProdukt {
+        boolean validering;
+        if(pris>0){
+            validering =true;
+        }
+        else{
+            validering=false;
+            throw new AvvikProdukt("Pris må være over 0 kr");
+        }
+        return validering;
+    }
 }
 

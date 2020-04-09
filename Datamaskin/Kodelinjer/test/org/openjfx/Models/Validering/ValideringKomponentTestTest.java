@@ -9,15 +9,16 @@ class ValideringKomponentTestTest {
 
     @Test
     void testKomponenterTrue() throws AvvikProdukt {
-        assertTrue(ValideringKomponent.validerNyKomponent("HalloHallo","HalloHallo99", 23));
-        assertTrue(ValideringKomponent.validerNyKomponent("aaaaAAAAA", "HalloHalloHHH88999", 100));
-       // assertTrue(ValideringKomponent.validerNyKomponent("", "", 0));
+        assertTrue(ValideringKomponent.validerProduktnavn("HalloHallo"));
+        assertTrue(ValideringKomponent.validerNyKategori("proosessor"));
+        assertTrue(ValideringKomponent.validerPris(100.0));
 
     }
 
     @Test
     void testKomponenterFalse() throws AvvikProdukt {
-        assertFalse(ValideringKomponent.validerNyKomponent("Hallo23Hallo","90am", -90));
-        assertFalse(ValideringKomponent.validerNyKomponent("892482482948942","100000", 0));
+        assertFalse(ValideringKomponent.validerProduktnavn("o"));
+        assertFalse(ValideringKomponent.validerNyKategori("o"));
+        assertFalse(ValideringKomponent.validerPris(0));
     }
 }
