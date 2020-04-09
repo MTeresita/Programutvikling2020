@@ -17,7 +17,7 @@ import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
 
 public class RegistrerProduktController {
 @FXML
-public TextField user, pass, produktNavn, kategoriNavn;
+public TextField user, pass, produktNavn, kategoriNavn, produktPris;
 
 @FXML
 public Button registrerbtn, registrerProduktBtn;

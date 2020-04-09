@@ -40,13 +40,13 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="pris" layoutX="91.0" layoutY="655.0" prefHeight="27.0" prefWidth="220.0" stylesheets="@../styles.css" />
+                  <TextField fx:id="produktPris" layoutX="91.0" layoutY="655.0" prefHeight="27.0" prefWidth="220.0" stylesheets="@../styles.css" />
                   <Button layoutX="609.0" layoutY="418.0" mnemonicParsing="false" onAction="#registrerbtn" prefHeight="25.0" prefWidth="108.0" styleClass="delete" stylesheets="@../styles.css" text="Slett valgte rader" />
                   <TableView layoutX="89.0" layoutY="141.0" prefHeight="271.0" prefWidth="628.0">
                     <columns>
-                      <TableColumn prefWidth="295.0" text="Produktnavn" />
-                      <TableColumn prefWidth="218.0" text="Kategori" />
-                        <TableColumn minWidth="0.0" prefWidth="114.0" text="Pris" />
+                      <TableColumn fx:id="produktnavn" prefWidth="295.0" text="Produktnavn" />
+                      <TableColumn fx:id="kategori" prefWidth="218.0" text="Kategori" />
+                        <TableColumn fx:id="pris" minWidth="0.0" prefWidth="114.0" text="Pris" />
                     </columns>
                   </TableView>
                   <Text layoutX="89.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste over produkter">
@@ -94,7 +94,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <Button fx:id="registrerProduktBtn" layoutX="203.0" layoutY="703.0" mnemonicParsing="false" onAction="#registrerProduktBtn" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
+                  <Button fx:id="registrerProduktBtn" layoutX="203.0" layoutY="703.0" mnemonicParsing="false" onAction="#registrerbtn" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
                   <ComboBox fx:id="adminORuser" layoutX="487.0" layoutY="540.0" prefHeight="27.0" prefWidth="221.0" promptText="Velg" />
                   <ComboBox fx:id="kategoriCombobox" layoutX="89.0" layoutY="596.0" prefHeight="27.0" prefWidth="107.0" promptText="Velg" />
                   <Label fx:id="lblMessage" layoutX="487.0" layoutY="741.0" prefHeight="30.0" prefWidth="244.0" />
