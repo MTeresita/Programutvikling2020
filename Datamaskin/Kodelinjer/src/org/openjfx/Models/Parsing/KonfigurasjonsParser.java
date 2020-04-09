@@ -4,7 +4,7 @@ import org.openjfx.Models.Formaterer.*;
 import org.openjfx.Models.Produkt;
 
 public class KonfigurasjonsParser {
-
+/*
 
     //Parser produkt fra fil til string:
     public static Produkt parseProdukt(String str){
@@ -31,5 +31,5 @@ public class KonfigurasjonsParser {
         return etProdukt;
 
     }
-
+*/
 }
