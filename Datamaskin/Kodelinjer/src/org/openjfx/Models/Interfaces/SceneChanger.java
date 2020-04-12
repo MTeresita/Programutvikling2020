@@ -17,6 +17,7 @@ public interface SceneChanger {
         String BASE_PATH = "/org/openjfx/View/";
         String FILE_ENDING = ".fxml";
 
+
         try {
             FXMLLoader loader = new FXMLLoader();
             URL url = SceneChanger.class.getResource(BASE_PATH + path + FILE_ENDING);
@@ -24,7 +25,6 @@ public interface SceneChanger {
 
             Parent parent = loader.load();
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
             Scene scene = new Scene(parent);
             stage.setScene(scene);
             stage.centerOnScreen();
