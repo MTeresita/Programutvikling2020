@@ -3,6 +3,7 @@ package org.openjfx.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.openjfx.Models.Avvik.ValidationHelper;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.Interfaces.SceneChanger;
@@ -40,8 +41,6 @@ TableColumn<Komponent, Double> pris;
 public KomponenterListe kl = new KomponenterListe();
 
     public void initialize() {
-        // setter inn verdier i comboBoxen
-        adminORuser.getItems().setAll("Admin", "Bruker");
         populateTableWithList();
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
@@ -65,28 +64,33 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     public void registrerbtn(ActionEvent actionEvent) throws IOException {
+        ValidationHelper validationHelper = new ValidationHelper();
+        String invalidInputs = validationHelper.getInvalidInput(user.getText(), pass.getText(), pass.getText());
+
         // er det admin eller bruker sjek --> hvilken fil skal den til
-        if(adminORuser.getSelectionModel().getSelectedItem().equals("Admin")){
-            if(!checkExistingBruker(user.getText(), "./Admin.csv")) {
+        String value = String.valueOf(adminORuser.getValue());
 
-                //en ny bruker blir registrer
-                BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
+        switch (value){
+            case "Admin":
+                if(!checkExistingBruker(user.getText(), "./Admin.csv")) {
 
-                //skrives til Admin.csv
-                WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
-                showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
-                        "Bruker opprettet");
-                //resetter inputs for registrering
-                clear();
-            }
-            else{
-                //eksisterer bruker, send feilmelding
-                lblMessage.setText("Bruker eksisterer");
-            }
+                    //en ny bruker blir registrer
+                    BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
 
-        }
-            //Er bruker valgt
-            else {
+                    //skrives til Admin.csv
+                    WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
+                    showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
+                            "Bruker opprettet");
+                    //resetter inputs for registrering
+                    clear();
+                }
+                else{
+                    //eksisterer bruker, send feilmelding
+                    lblMessage.setText("Bruker eksisterer");
+                }
+                break;
+
+            case "Bruker":
                 if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
                     //opprett ny bruker
                     BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
@@ -104,6 +108,10 @@ public KomponenterListe kl = new KomponenterListe();
                     //eksisterer bruker, send feilmelding
                     lblMessage.setText("Bruker eksisterer");
                 }
+               break;
+
+            default:
+                lblMessage.setText("Bruker eksiterer");
         }
 
     }
