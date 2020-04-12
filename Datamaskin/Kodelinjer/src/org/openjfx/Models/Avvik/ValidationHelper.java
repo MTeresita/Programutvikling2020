@@ -25,7 +25,7 @@ public class ValidationHelper {
         return true;
     }
 
-    // denne fungerer ikke riktig
+    //TODO: denne fungerer ikke riktig
     private boolean checkPasswordFormat(String password, String password1) throws InvalidPasswordException{
         if(!Pattern.matches("^(?=.*[0-9]).{8,20}$",password) && !password.equals("N/A") && !password.isEmpty() &&
                 (!Pattern.matches("^(?=.*[0-9]).{8,20}$",password1))
