@@ -43,7 +43,7 @@ public class LoggInnAdminController {
     public void loginEvent() throws IOException {
         //bruker verifyLogin metoden, går gjennom fil og sender ut feilmeldinger til lblMessage.
         if(verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
-            newScene(btnLogin, "scene");
+            newScene(btnLogin, "registrerProdukt");
         }
         else{
             lblMessage.setText("Feil brukernavn eller passord");

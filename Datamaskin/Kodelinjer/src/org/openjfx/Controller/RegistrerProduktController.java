@@ -75,10 +75,6 @@ public KomponenterListe kl = new KomponenterListe();
                 //skrives til Admin.csv
                 WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
 
-                //pop up vindu som bekrefter at bruker har blitt opprettet
-                showAlertWindow(Alert.AlertType.INFORMATION,windowHelper(registrerbtn), "Ny admin",
-                        "Bruker opprrettet");
-
                 //resetter inputs for registrering
                 clear();
             }
@@ -98,8 +94,6 @@ public KomponenterListe kl = new KomponenterListe();
                     WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
 
                     //popup vindu som bekrefter at en ny bruker har blitt opprettet
-                    showAlertWindow(Alert.AlertType.INFORMATION,windowHelper(registrerbtn), "Ny bruker",
-                            "Bruker opprrettet");
 
                     //resetter inputs for registrering
                     clear();
