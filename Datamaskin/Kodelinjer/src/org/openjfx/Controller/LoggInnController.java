@@ -3,6 +3,9 @@ package org.openjfx.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.newScene;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.verifyLogin;
 import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
 
@@ -23,12 +26,28 @@ public class LoggInnController {
     @FXML
     Hyperlink registrerbruker, loginAdmin;
 
-    
-    public void loginEvent(ActionEvent event) throws Exception {
-        //bruker verifyLogin metoden, går gjennom fil og sender ut feilmeldinger til lblMessage.
-        verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv", lblMessage);
-        routeToSite(event, "scene");
+    public void initialize(){
+        txtpass.setOnKeyPressed(e ->{
+            KeyCode key = e.getCode();
 
+            if(key.equals(KeyCode.ENTER) ){
+                try {
+                    loginEvent();
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+    }
+    
+    public void loginEvent() throws Exception {
+        if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
+            newScene(btnLogin, "scene");
+        }
+        else{
+            lblMessage.setText("Feil brukernavn eller passord");
+        }
     }
 
     public void registrerbruker(ActionEvent actionEvent) {
@@ -44,4 +63,5 @@ public class LoggInnController {
             routeToSite(actionEvent, "loggInnAdmin");
         });
     }
+
 }

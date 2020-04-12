@@ -94,7 +94,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <Button fx:id="registrerbtn" layoutX="203.0" layoutY="703.0" mnemonicParsing="false" onAction="#registrerbtn" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
+                  <Button fx:id="nyttproduktbtn" layoutX="203.0" layoutY="703.0" mnemonicParsing="false" onAction="#nyttProdbtn" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
                   <ComboBox fx:id="adminORuser" layoutX="487.0" layoutY="540.0" prefHeight="27.0" prefWidth="221.0" promptText="Velg" />
                   <ComboBox fx:id="kategori" layoutX="89.0" layoutY="596.0" prefHeight="27.0" prefWidth="107.0" promptText="Velg" />
                   <Label fx:id="lblMessage" layoutX="487.0" layoutY="741.0" prefHeight="30.0" prefWidth="244.0" />

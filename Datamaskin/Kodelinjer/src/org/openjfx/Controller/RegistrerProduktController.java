@@ -18,7 +18,7 @@ public class RegistrerProduktController {
 public TextField user, pass;
 
 @FXML
-public Button registrerbtn;
+public Button registrerbtn, nyttproduktbtn;
 
 @FXML
 public ComboBox adminORuser;
@@ -88,5 +88,8 @@ public Label lblMessage;
 
     public void forsideBtn(ActionEvent actionEvent) {
         SceneChanger.routeToSite(actionEvent, "loggInn");
+    }
+
+    public void nyttProdbtn(ActionEvent event) {
     }
 }
