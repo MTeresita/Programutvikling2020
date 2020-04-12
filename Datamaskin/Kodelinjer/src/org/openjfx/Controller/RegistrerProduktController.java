@@ -20,7 +20,7 @@ public class RegistrerProduktController {
 public TextField user, pass, produktNavn, kategoriNavn, produktPris;
 
 @FXML
-public Button registrerbtn, registrerProduktBtn;
+public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilFil;
 
 @FXML
 public ComboBox adminORuser, kategoriCombobox;
@@ -74,7 +74,8 @@ public KomponenterListe kl = new KomponenterListe();
 
                 //skrives til Admin.csv
                 WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
-
+                showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
+                        "Bruker opprettet");
                 //resetter inputs for registrering
                 clear();
             }
@@ -94,7 +95,7 @@ public KomponenterListe kl = new KomponenterListe();
                     WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
 
                     //popup vindu som bekrefter at en ny bruker har blitt opprettet
-
+                    showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
                     //resetter inputs for registrering
                     clear();
 
@@ -130,5 +131,8 @@ public KomponenterListe kl = new KomponenterListe();
 
         komponenter.refresh();
         populateKategoriCombobox();
+    }
+
+    public void slettRader(ActionEvent event) {
     }
 }

@@ -41,7 +41,7 @@
                      </font>
                   </Text>
                   <TextField fx:id="produktPris" layoutX="91.0" layoutY="655.0" prefHeight="27.0" prefWidth="301.0" stylesheets="@../styles.css" />
-                  <Button layoutX="609.0" layoutY="418.0" mnemonicParsing="false" onAction="#registrerbtn" prefHeight="25.0" prefWidth="108.0" styleClass="delete" stylesheets="@../styles.css" text="Slett valgte rader" />
+                  <Button fx:id="slettRader" layoutX="609.0" layoutY="418.0" mnemonicParsing="false" onAction="#slettRader" prefHeight="25.0" prefWidth="108.0" styleClass="delete" stylesheets="@../styles.css" text="Slett valgte rader" />
                   <TableView fx:id="komponenter" layoutX="89.0" layoutY="141.0" prefHeight="271.0" prefWidth="628.0">
                     <columns>
                       <TableColumn fx:id="produktnavn" prefWidth="295.0" text="Produktnavn" />
@@ -81,7 +81,7 @@
                      </font>
                   </Text>
                   <TextField fx:id="pass" layoutX="528.0" layoutY="655.0" prefHeight="27.0" prefWidth="179.0" stylesheets="@../styles.css" />
-                  <Button layoutX="599.0" layoutY="692.0" mnemonicParsing="false" onAction="#registrerbtn" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
+                  <Button fx:id="registrerBruker" layoutX="599.0" layoutY="692.0" mnemonicParsing="false" onAction="#registrerbtn" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
                   <Text fill="#404040" layoutX="91.0" layoutY="532.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produktnavn" wrappingWidth="140.02001953125">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -98,7 +98,7 @@
                   <ComboBox fx:id="adminORuser" layoutX="527.0" layoutY="540.0" prefHeight="27.0" prefWidth="179.0" promptText="Velg" />
                   <ComboBox fx:id="kategoriCombobox" layoutX="89.0" layoutY="596.0" prefHeight="27.0" prefWidth="135.0" promptText="Velg" />
                   <Label fx:id="lblMessage" layoutX="487.0" layoutY="741.0" prefHeight="30.0" prefWidth="244.0" />
-                  <Button fx:id="registrerProduktBtn1" layoutX="487.0" layoutY="418.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Lagre til fil" />
+                  <Button fx:id="lagreTilFil" layoutX="487.0" layoutY="418.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Lagre til fil" />
                </children>
             </Pane>
          </center>
