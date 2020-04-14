@@ -17,7 +17,7 @@ public class ValiderLoggInn {
         }
         else{
             validering=false;
-            throw new AvvikLoggInn("Brukernavn må være minst 8 tegn langt");
+            throw new AvvikLoggInn("Brukernavn må være minst 8 tegn langt og ikke lenger enn 50 tegn");
         }
         if(brukernavn.isBlank() || brukernavn.isEmpty()){
             validering=false;

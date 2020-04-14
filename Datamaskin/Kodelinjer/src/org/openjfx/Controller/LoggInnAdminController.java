@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import org.openjfx.Models.Avvik.AvvikLoggInn;
+import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.IOException;
 
@@ -41,6 +43,17 @@ public class LoggInnAdminController {
     }
 
     public void loginEvent() throws IOException {
+
+        //prøver å implementere validering.
+        try{
+            ValiderLoggInn.valideringBrukernavn(txtadminuser.getText());
+            ValiderLoggInn.validerPassord(txtadminpass.getText());
+        }catch (AvvikLoggInn e){
+            //hvordan får jeg ut avviksmeldingen fra ValiderLoggInn? Ingen hensikt å kaste avvik i valideringsklassen?
+            lblMessage.setText("Feil lengde på passord og brukernavn");
+
+        }
+
         //bruker verifyLogin metoden, går gjennom fil og sender ut feilmeldinger til lblMessage.
         if(verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
             newScene(btnLogin, "registrerProdukt");
