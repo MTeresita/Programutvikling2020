@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.openjfx.Models.Avvik.AvvikLoggInn;
+import org.openjfx.Models.Avvik.AvvikProdukt;
 import org.openjfx.Models.Avvik.ValidationHelper;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
@@ -11,6 +12,7 @@ import org.openjfx.Models.Interfaces.SceneChanger;
 import org.openjfx.Models.Komponent;
 import org.openjfx.Models.KomponenterListe;
 import org.openjfx.Models.Validering.ValiderLoggInn;
+import org.openjfx.Models.Validering.ValideringKomponent;
 
 import java.io.IOException;
 
@@ -152,11 +154,33 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     @FXML
-    public void registererProdukt(ActionEvent event){
+    public void registererProdukt(ActionEvent event) throws AvvikProdukt {
 
+        double pris=Double.parseDouble(produktPris.getText());
+        
         if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
-            Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
-            kl.getObservableList().add(nyKomponent);
+            if(ValideringKomponent.validerNyKategori(kategoriNavn.getText())){
+                if(ValideringKomponent.validerProduktnavn(produktNavn.getText())){
+                    if(ValideringKomponent.validerPris(pris)){
+                        Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                        kl.getObservableList().add(nyKomponent);
+                    }
+                    else{
+                        lblMessage.setText("Pris må være over 0 kr");
+                        throw new AvvikProdukt("Feil i pris.");
+
+                    }
+                }
+                else{
+                    lblMessage.setText("Produktnavn må være mer enn 2 bokstaver langt.");
+                    throw new AvvikProdukt("Feil i produktnavn.");
+                }
+            }
+            else{
+                lblMessage.setText("Kategori må være mer enn 2 bokstaver langt.");
+                throw new AvvikProdukt("Feil i kategorinavn.");
+            }
+
         }
         else{
             Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
