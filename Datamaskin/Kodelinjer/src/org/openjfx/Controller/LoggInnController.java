@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import org.openjfx.Models.Avvik.AvvikLoggInn;
+import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.newScene;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.verifyLogin;
@@ -41,13 +43,26 @@ public class LoggInnController {
         });
     }
     
-    public void loginEvent() throws Exception {
-        if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
-            newScene(btnLogin, "scene");
+    public void loginEvent() throws Exception, AvvikLoggInn {
+        if(ValiderLoggInn.valideringBrukernavn(txtuser.getText()) == true){
+            if(ValiderLoggInn.validerPassord(txtpass.getText()) == true){
+                if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
+                    newScene(btnLogin, "scene");
+                }
+                else{
+                    lblMessage.setText("Feil brukernavn eller passord");
+                }
+            }
+            else{
+                lblMessage.setText("Passordet må være minst 5 bokstaver langt.");
+                throw new AvvikLoggInn("Feil i lengde på passordet");
+            }
         }
         else{
-            lblMessage.setText("Feil brukernavn eller passord");
+            lblMessage.setText("Brukernavn må være minst 5 bokstaver langt.");
+            throw new AvvikLoggInn("Feil i lengde på brukernavn");
         }
+
     }
 
     public void registrerbruker(ActionEvent actionEvent) {

@@ -42,25 +42,35 @@ public class LoggInnAdminController {
         });
     }
 
-    public void loginEvent() throws IOException {
+    public void loginEvent() throws IOException, AvvikLoggInn {
 
-        //prøver å implementere validering.
-        try{
-            ValiderLoggInn.valideringBrukernavn(txtadminuser.getText());
-            ValiderLoggInn.validerPassord(txtadminpass.getText());
-        }catch (AvvikLoggInn e){
-            //hvordan får jeg ut avviksmeldingen fra ValiderLoggInn? Ingen hensikt å kaste avvik i valideringsklassen?
-            lblMessage.setText("Feil lengde på passord og brukernavn");
+        //Validering av brukernavn og passord:
+        if(ValiderLoggInn.valideringBrukernavn(txtadminuser.getText()) == true){
 
-        }
 
-        //bruker verifyLogin metoden, går gjennom fil og sender ut feilmeldinger til lblMessage.
-        if(verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
-            newScene(btnLogin, "registrerProdukt");
+            if(ValiderLoggInn.validerPassord(txtadminpass.getText()) == true){
+                //sjekker om brukerinformasjon passer med det som er i filen.
+                //bruker verifyLogin metoden, går gjennom fil og sender ut feilmeldinger til lblMessage.
+                if(verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
+                    newScene(btnLogin, "registrerProdukt");
+                }
+                else{
+                    lblMessage.setText("Feil brukernavn eller passord");
+
+                }
+            }
+            else{
+                lblMessage.setText("Passord må være minst 5 bokstaver langt.");
+                throw new AvvikLoggInn("Feil i lengden på passord.");
+            }
+
         }
         else{
-            lblMessage.setText("Feil brukernavn eller passord");
+            lblMessage.setText("Brukernavn må være minst 5 bokstaver");
+            throw new AvvikLoggInn("Feil i lengden på brukernavn.");
         }
+
+
     }
 
 

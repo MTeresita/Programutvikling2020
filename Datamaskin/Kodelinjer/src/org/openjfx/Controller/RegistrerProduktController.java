@@ -3,12 +3,14 @@ package org.openjfx.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.openjfx.Models.Avvik.AvvikLoggInn;
 import org.openjfx.Models.Avvik.ValidationHelper;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.Interfaces.SceneChanger;
 import org.openjfx.Models.Komponent;
 import org.openjfx.Models.KomponenterListe;
+import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.IOException;
 
@@ -72,41 +74,64 @@ public KomponenterListe kl = new KomponenterListe();
 
         switch (value){
             case "Admin":
-                if(!checkExistingBruker(user.getText(), "./Admin.csv")) {
+                if(ValiderLoggInn.valideringBrukernavn(user.getText())){
+                    if(ValiderLoggInn.validerPassord(pass.getText())){
+                        if(!checkExistingBruker(user.getText(), "./Admin.csv")) {
 
-                    //en ny bruker blir registrer
-                    BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
+                            //en ny bruker blir registrer
+                            BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
 
-                    //skrives til Admin.csv
-                    WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
-                    showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
-                            "Bruker opprettet");
-                    //resetter inputs for registrering
-                    clear();
+                            //skrives til Admin.csv
+                            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
+                            showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
+                                    "Bruker opprettet");
+                            //resetter inputs for registrering
+                            clear();
+                        }
+                        else{
+                            //eksisterer bruker, send feilmelding
+                            lblMessage.setText("Bruker eksisterer");
+                        }
+                    }
+                    else{
+                        lblMessage.setText("Passordet må være minst 5 bokstaver langt.");
+                        throw new AvvikLoggInn("Feil i lengde på passordet");
+                    }
                 }
                 else{
-                    //eksisterer bruker, send feilmelding
-                    lblMessage.setText("Bruker eksisterer");
+                    lblMessage.setText("Brukernavn må være minst 5 bokstaver langt.");
+                    throw new AvvikLoggInn("Feil i lengde på brukernavn");
                 }
                 break;
 
             case "Bruker":
-                if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
-                    //opprett ny bruker
-                    BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
+                if(ValiderLoggInn.valideringBrukernavn(user.getText())){
+                    if(ValiderLoggInn.validerPassord(pass.getText())){
+                        if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
+                            //opprett ny bruker
+                            BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
 
-                    //skriver til Brukere.csv
-                    WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
+                            //skriver til Brukere.csv
+                            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
 
-                    //popup vindu som bekrefter at en ny bruker har blitt opprettet
-                    showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
-                    //resetter inputs for registrering
-                    clear();
-
+                            //popup vindu som bekrefter at en ny bruker har blitt opprettet
+                            showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
+                            //resetter inputs for registrering
+                            clear();
+                        }
+                        else {
+                            //eksisterer bruker, send feilmelding
+                            lblMessage.setText("Bruker eksisterer");
+                        }
+                    }
+                    else{
+                        lblMessage.setText("Passordet må være minst 5 bokstaver langt.");
+                        throw new AvvikLoggInn("Feil i lengde på passordet");
+                    }
                 }
-                else {
-                    //eksisterer bruker, send feilmelding
-                    lblMessage.setText("Bruker eksisterer");
+                else{
+                    lblMessage.setText("Brukernavn må være minst 5 bokstaver langt.");
+                    throw new AvvikLoggInn("Feil i lengde på brukernavn");
                 }
                break;
 
@@ -119,6 +144,7 @@ public KomponenterListe kl = new KomponenterListe();
         //resetter inputfeltene
         user.clear();
         pass.clear();
+
     }
 
     public void forsideBtn(ActionEvent actionEvent) {
