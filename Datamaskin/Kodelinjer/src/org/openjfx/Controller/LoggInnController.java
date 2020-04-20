@@ -7,6 +7,8 @@ import javafx.scene.input.KeyCode;
 import org.openjfx.Models.Avvik.AvvikLoggInn;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 
+import java.io.FileNotFoundException;
+
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.newScene;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.verifyLogin;
 import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
@@ -43,9 +45,21 @@ public class LoggInnController {
         });
     }
     
-    public void loginEvent() throws Exception, AvvikLoggInn {
-        if(ValiderLoggInn.valideringBrukernavn(txtuser.getText()) == true){
-            if(ValiderLoggInn.validerPassord(txtpass.getText()) == true){
+    public void loginEvent() throws Exception, AvvikLoggInn, FileNotFoundException {
+
+        try{
+            ValiderLoggInn.valideringBrukernavn(txtuser.getText());
+            ValiderLoggInn.validerPassord(txtpass.getText());
+            if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
+                newScene(btnLogin, "scene");
+            }
+        } catch (AvvikLoggInn | FileNotFoundException e){
+            lblMessage.setText("Feil brukernavn eller passord");
+        }
+
+        /*
+        if(ValiderLoggInn.valideringBrukernavn(txtuser.getText())){
+            if(ValiderLoggInn.validerPassord(txtpass.getText())){
                 if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
                     newScene(btnLogin, "scene");
                 }
@@ -61,7 +75,7 @@ public class LoggInnController {
         else{
             lblMessage.setText("Brukernavn må være minst 5 bokstaver langt.");
             throw new AvvikLoggInn("Feil i lengde på brukernavn");
-        }
+        }*/
 
     }
 

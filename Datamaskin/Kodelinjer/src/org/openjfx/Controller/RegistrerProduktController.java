@@ -3,8 +3,9 @@ package org.openjfx.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.openjfx.Models.Avvik.AvvikKomponentPris;
 import org.openjfx.Models.Avvik.AvvikLoggInn;
-import org.openjfx.Models.Avvik.AvvikProdukt;
+import org.openjfx.Models.Avvik.AvvikKomponent;
 import org.openjfx.Models.Avvik.ValidationHelper;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
@@ -12,6 +13,7 @@ import org.openjfx.Models.Interfaces.SceneChanger;
 import org.openjfx.Models.Komponent;
 import org.openjfx.Models.KomponenterListe;
 import org.openjfx.Models.Validering.ValiderLoggInn;
+import org.openjfx.Models.Validering.ValideringKomponent;
 
 import java.io.IOException;
 
@@ -157,16 +159,25 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     @FXML
-    public void registererProdukt(ActionEvent event) throws AvvikProdukt {
+    public void registererProdukt(ActionEvent event) throws AvvikKomponent, AvvikKomponentPris {
 
+        try{
+            if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                ValideringKomponent.validerNyKategori(kategoriNavn.getText());
+                ValideringKomponent.validerProduktnavn(produktNavn.getText());
+                ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
 
-        if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
-            Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
-            kl.getObservableList().add(nyKomponent);
-        }
-        else{
-            Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
-            kl.getObservableList().add(nyKomponent);
+                kl.getObservableList().add(nyKomponent);
+            }else{
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                ValideringKomponent.validerProduktnavn(produktNavn.getText());
+                ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
+                kl.getObservableList().add(nyKomponent);
+            }
+
+        }catch(AvvikKomponent | AvvikKomponentPris e){
+            lblMessage.setText("Noe gikk galt i registrering av nytt produkt.");
         }
 
         komponenter.refresh();

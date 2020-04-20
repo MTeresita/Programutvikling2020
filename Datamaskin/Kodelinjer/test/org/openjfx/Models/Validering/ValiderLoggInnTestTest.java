@@ -1,13 +1,13 @@
 package org.openjfx.Models.Validering;
 
 import org.junit.jupiter.api.Test;
+import org.openjfx.Models.Avvik.AvvikLoggInn;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ValiderLoggInnTestTest {
     @Test
-    public void testLoggInnSann(){
+    public void testLoggInnSann() throws AvvikLoggInn {
         //Bare små bokstaver:
         assertTrue(ValiderLoggInn.valideringBrukernavn("camillacamilla"));
         assertTrue(ValiderLoggInn.valideringBrukernavn("camillacamilla"));
@@ -20,9 +20,9 @@ class ValiderLoggInnTestTest {
 
     }
     @Test
-    public void testLoggInnFeil(){
+    public void testLoggInnFeil() throws AvvikLoggInn {
         //tomme felt:
-        /*
+
         assertThrows(AvvikLoggInn.class, () -> ValiderLoggInn.valideringBrukernavn(""));
         assertThrows(AvvikLoggInn.class, () -> ValiderLoggInn.validerPassord(""));
         //for kort input:
@@ -32,7 +32,7 @@ class ValiderLoggInnTestTest {
         assertThrows(AvvikLoggInn.class, () -> ValiderLoggInn.valideringBrukernavn("aaaaaaaaaaaaaaakkakflakflafkajfkalfjalfjlaffjlalfjlalfjlafjlajfjlalfjjlaljf"));
         assertThrows(AvvikLoggInn.class, () -> ValiderLoggInn.validerPassord("aklafkaøfkølaflkkfaølkaøklfkløkøakøfkøafkkjgkrjiegmkslngklsjgklsjglsjglksgjlsgjlsgjgs"));
 
-         */
+
         //tomme felt:
         assertFalse(ValiderLoggInn.valideringBrukernavn(""));
         assertFalse(ValiderLoggInn.validerPassord(""));
