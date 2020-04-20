@@ -1,20 +1,20 @@
 package org.openjfx.Models.Validering;
 
-import org.openjfx.Models.Avvik.AvvikKomponent;
+import org.openjfx.Models.Avvik.AvvikKomponentNyKategori;
+import org.openjfx.Models.Avvik.AvvikKomponentProduktnavn;
 import org.openjfx.Models.Avvik.AvvikKomponentPris;
-import org.openjfx.Models.Avvik.AvvikLoggInn;
 
 public class ValideringKomponent {
 
 
 
-    public static boolean validerProduktnavn(String produktnavn) throws AvvikKomponent {
+    public static boolean validerProduktnavn(String produktnavn) throws AvvikKomponentProduktnavn {
 
         if(!produktnavn.matches("^[A-ZÆØÅa-zæøå]{5,50}$")){
-            throw new AvvikKomponent("Produktnavn må være mellom 2 og 50 tegn.");
+            throw new AvvikKomponentProduktnavn("Produktnavn må være mellom 2 og 50 tegn.");
         }
         else if(produktnavn.isBlank() || produktnavn.isEmpty()){
-            throw new AvvikKomponent("Alle feltene må fylles inn");
+            throw new AvvikKomponentProduktnavn("Alle feltene må fylles inn");
         }
         else{
             return true;
@@ -22,13 +22,13 @@ public class ValideringKomponent {
 
     }
 
-    public static boolean validerNyKategori(String nyKategori) throws AvvikKomponent{
+    public static boolean validerNyKategori(String nyKategori) throws AvvikKomponentNyKategori {
 
         if(!nyKategori.matches("^[A-ZÆØÅa-zæøå]{5,50}$")){
-            throw new AvvikKomponent("Produktnavn må være mellom 2 og 50 tegn.");
+            throw new AvvikKomponentNyKategori("Produktnavn må være mellom 2 og 50 tegn.");
         }
         else if(nyKategori.isBlank() || nyKategori.isEmpty()){
-            throw new AvvikKomponent("Alle feltene må fylles inn");
+            throw new AvvikKomponentNyKategori("Alle feltene må fylles inn");
         }
         else{
             return true;

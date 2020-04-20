@@ -4,7 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import org.openjfx.Models.Avvik.AvvikLoggInn;
+import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
+import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.FileNotFoundException;
@@ -45,7 +46,7 @@ public class LoggInnController {
         });
     }
     
-    public void loginEvent() throws Exception, AvvikLoggInn, FileNotFoundException {
+    public void loginEvent() throws Exception, AvvikLoggInnBrukernavn, FileNotFoundException {
 
         try{
             ValiderLoggInn.valideringBrukernavn(txtuser.getText());
@@ -53,30 +54,9 @@ public class LoggInnController {
             if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
                 newScene(btnLogin, "scene");
             }
-        } catch (AvvikLoggInn | FileNotFoundException e){
+        } catch (AvvikLoggInnBrukernavn | FileNotFoundException | AvvikLoggInnPassord e){
             lblMessage.setText("Feil brukernavn eller passord");
         }
-
-        /*
-        if(ValiderLoggInn.valideringBrukernavn(txtuser.getText())){
-            if(ValiderLoggInn.validerPassord(txtpass.getText())){
-                if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
-                    newScene(btnLogin, "scene");
-                }
-                else{
-                    lblMessage.setText("Feil brukernavn eller passord");
-                }
-            }
-            else{
-                lblMessage.setText("Passordet må være minst 5 bokstaver langt.");
-                throw new AvvikLoggInn("Feil i lengde på passordet");
-            }
-        }
-        else{
-            lblMessage.setText("Brukernavn må være minst 5 bokstaver langt.");
-            throw new AvvikLoggInn("Feil i lengde på brukernavn");
-        }*/
-
     }
 
     public void registrerbruker(ActionEvent actionEvent) {

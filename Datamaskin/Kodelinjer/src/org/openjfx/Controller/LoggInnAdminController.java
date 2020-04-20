@@ -7,7 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import org.openjfx.Models.Avvik.AvvikLoggInn;
+import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
+import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.IOException;
@@ -42,36 +43,23 @@ public class LoggInnAdminController {
         });
     }
 
-    public void loginEvent() throws IOException, AvvikLoggInn {
+    public void loginEvent() throws IOException, AvvikLoggInnBrukernavn, AvvikLoggInnPassord {
 
         //Validering av brukernavn og passord:
-        if(ValiderLoggInn.valideringBrukernavn(txtadminuser.getText()) == true){
-
-
-            if(ValiderLoggInn.validerPassord(txtadminpass.getText()) == true){
-                //sjekker om brukerinformasjon passer med det som er i filen.
-                //bruker verifyLogin metoden, går gjennom fil og sender ut feilmeldinger til lblMessage.
-                if(verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
-                    newScene(btnLogin, "registrerProdukt");
-                }
-                else{
-                    lblMessage.setText("Feil brukernavn eller passord");
-
-                }
-            }
-            else{
-                lblMessage.setText("Passord må være minst 5 bokstaver langt.");
-                throw new AvvikLoggInn("Feil i lengden på passord.");
+        try {
+            ValiderLoggInn.valideringBrukernavn(txtadminuser.getText());
+            ValiderLoggInn.validerPassord(txtadminpass.getText());
+            if (verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
+                newScene(btnLogin, "registrerProdukt");
             }
 
-        }
-        else{
-            lblMessage.setText("Brukernavn må være minst 5 bokstaver");
-            throw new AvvikLoggInn("Feil i lengden på brukernavn.");
-        }
+        } catch (AvvikLoggInnBrukernavn | AvvikLoggInnPassord e) {
+            lblMessage.setText("Feil i lengden på brukenavn eller passord");
 
+        }
 
     }
+
 
 
     public void tilbakeKnapp(ActionEvent actionEvent) {
