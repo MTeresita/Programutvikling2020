@@ -85,13 +85,13 @@ public KomponenterListe kl = new KomponenterListe();
                             //skrives til Admin.csv
                             WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
                             showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
-                                    "Bruker opprettet");
+                                    "Administrator opprettet");
                             //resetter inputs for registrering
                             clear();
                         }
                         else{
                             //eksisterer bruker, send feilmelding
-                            lblMessage.setText("Bruker eksisterer");
+                            lblMessage.setText("Administrator eksisterer");
                         }
                     }
                     else{
