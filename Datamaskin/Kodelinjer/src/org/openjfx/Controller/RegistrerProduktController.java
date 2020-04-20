@@ -6,18 +6,17 @@ import javafx.scene.control.*;
 import org.openjfx.Models.Avvik.AvvikLoggInn;
 import org.openjfx.Models.Avvik.AvvikProdukt;
 import org.openjfx.Models.Avvik.ValidationHelper;
-import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
+import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Interfaces.SceneChanger;
 import org.openjfx.Models.Komponent;
 import org.openjfx.Models.KomponenterListe;
 import org.openjfx.Models.Validering.ValiderLoggInn;
-import org.openjfx.Models.Validering.ValideringKomponent;
 
 import java.io.IOException;
 
 import static org.openjfx.Models.Avvik.AlertHelper.*;
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.checkExistingBruker;
 
 
 public class RegistrerProduktController {
@@ -79,7 +78,7 @@ public KomponenterListe kl = new KomponenterListe();
                 if(ValiderLoggInn.valideringBrukernavn(user.getText())){
                     if(ValiderLoggInn.validerPassord(pass.getText())){
                         if(!checkExistingBruker(user.getText(), "./Admin.csv")) {
-
+                            lblMessage.setText("");
                             //en ny bruker blir registrer
                             BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
 
@@ -110,6 +109,7 @@ public KomponenterListe kl = new KomponenterListe();
                 if(ValiderLoggInn.valideringBrukernavn(user.getText())){
                     if(ValiderLoggInn.validerPassord(pass.getText())){
                         if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
+                            lblMessage.setText("");
                             //opprett ny bruker
                             BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
 
@@ -117,12 +117,15 @@ public KomponenterListe kl = new KomponenterListe();
                             WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
 
                             //popup vindu som bekrefter at en ny bruker har blitt opprettet
-                            showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
+                            showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Ny bruker opprettet",
+                                    "Bruker opprettet");
+                            //showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
                             //resetter inputs for registrering
                             clear();
+
                         }
                         else {
-                            //eksisterer bruker, send feilmelding
+                            //eksisterer bruker, send f eilmelding
                             lblMessage.setText("Bruker eksisterer");
                         }
                     }
@@ -156,31 +159,10 @@ public KomponenterListe kl = new KomponenterListe();
     @FXML
     public void registererProdukt(ActionEvent event) throws AvvikProdukt {
 
-        double pris=Double.parseDouble(produktPris.getText());
-        
+
         if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
-            if(ValideringKomponent.validerNyKategori(kategoriNavn.getText())){
-                if(ValideringKomponent.validerProduktnavn(produktNavn.getText())){
-                    if(ValideringKomponent.validerPris(pris)){
-                        Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
-                        kl.getObservableList().add(nyKomponent);
-                    }
-                    else{
-                        lblMessage.setText("Pris må være over 0 kr");
-                        throw new AvvikProdukt("Feil i pris.");
-
-                    }
-                }
-                else{
-                    lblMessage.setText("Produktnavn må være mer enn 2 bokstaver langt.");
-                    throw new AvvikProdukt("Feil i produktnavn.");
-                }
-            }
-            else{
-                lblMessage.setText("Kategori må være mer enn 2 bokstaver langt.");
-                throw new AvvikProdukt("Feil i kategorinavn.");
-            }
-
+            Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+            kl.getObservableList().add(nyKomponent);
         }
         else{
             Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT

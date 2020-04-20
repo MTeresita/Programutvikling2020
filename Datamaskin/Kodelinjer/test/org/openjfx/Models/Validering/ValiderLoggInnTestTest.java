@@ -1,21 +1,28 @@
 package org.openjfx.Models.Validering;
 
 import org.junit.jupiter.api.Test;
-import org.openjfx.Models.Avvik.AvvikLoggInn;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ValiderLoggInnTestTest {
     @Test
-    public void testLoggInnSann() throws AvvikLoggInn {
-        assertTrue(ValiderLoggInn.valideringBrukernavn("camillaharic"));
+    public void testLoggInnSann(){
+        //Bare små bokstaver:
+        assertTrue(ValiderLoggInn.valideringBrukernavn("camillacamilla"));
+        assertTrue(ValiderLoggInn.valideringBrukernavn("camillacamilla"));
+        //store og små bokstaver:
+        assertTrue(ValiderLoggInn.valideringBrukernavn("HalloHallo"));
         assertTrue(ValiderLoggInn.validerPassord("HalloHallo"));
+        //bare store bokstaver:
+        assertTrue(ValiderLoggInn.valideringBrukernavn("HALLOEN"));
+        assertTrue(ValiderLoggInn.validerPassord("HALLOEN"));
 
     }
     @Test
-    public void testLoggInnFeil() throws AvvikLoggInn{
+    public void testLoggInnFeil(){
         //tomme felt:
+        /*
         assertThrows(AvvikLoggInn.class, () -> ValiderLoggInn.valideringBrukernavn(""));
         assertThrows(AvvikLoggInn.class, () -> ValiderLoggInn.validerPassord(""));
         //for kort input:
@@ -24,5 +31,19 @@ class ValiderLoggInnTestTest {
         //for lang input:
         assertThrows(AvvikLoggInn.class, () -> ValiderLoggInn.valideringBrukernavn("aaaaaaaaaaaaaaakkakflakflafkajfkalfjalfjlaffjlalfjlalfjlafjlajfjlalfjjlaljf"));
         assertThrows(AvvikLoggInn.class, () -> ValiderLoggInn.validerPassord("aklafkaøfkølaflkkfaølkaøklfkløkøakøfkøafkkjgkrjiegmkslngklsjgklsjglsjglksgjlsgjlsgjgs"));
+
+         */
+        //tomme felt:
+        assertFalse(ValiderLoggInn.valideringBrukernavn(""));
+        assertFalse(ValiderLoggInn.validerPassord(""));
+        //For kort input:
+        assertFalse(ValiderLoggInn.valideringBrukernavn("a"));
+        assertFalse(ValiderLoggInn.validerPassord("a"));
+        //for lang input:
+        assertFalse(ValiderLoggInn.valideringBrukernavn("aaaaaaaaaaaaaaakkakflakflafkajfkalfjalfjlaffjlalfjlalfjlafjlajfjlalfjjlaljf"));
+        assertFalse(ValiderLoggInn.validerPassord("aaaaaaaaaaaaaaakkakflakflafkajfkalfjalfjlaffjlalfjlalfjlafjlajfjlalfjjlaljf"));
+        //med tall:
+        assertFalse(ValiderLoggInn.valideringBrukernavn("12345"));
+        assertFalse(ValiderLoggInn.validerPassord("12345"));
     }
 }
