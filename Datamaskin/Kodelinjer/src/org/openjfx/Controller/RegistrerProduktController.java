@@ -148,8 +148,8 @@ public KomponenterListe kl = new KomponenterListe();
     @FXML
     public void registererProdukt(ActionEvent event) throws AvvikKomponentProduktnavn, AvvikKomponentPris, AvvikKomponentNyKategori {
 
-        try{
-            if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
+        try {
+            if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
                 Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
 
                 ValideringKomponent.validerProduktnavn(produktNavn.getText());
@@ -157,36 +157,34 @@ public KomponenterListe kl = new KomponenterListe();
                 ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
 
                 kl.getObservableList().add(nyKomponent);
-            }else{
+            } else {
                 Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
                 ValideringKomponent.validerProduktnavn(produktNavn.getText());
                 ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
                 kl.getObservableList().add(nyKomponent);
             }
 
-        }catch(AvvikKomponentProduktnavn | AvvikKomponentPris | AvvikKomponentNyKategori e){
-            if(e instanceof AvvikKomponentProduktnavn){
+        } catch (AvvikKomponentProduktnavn | AvvikKomponentPris | AvvikKomponentNyKategori e) {
+            if (e instanceof AvvikKomponentProduktnavn) {
                 lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to bokstaver.");
-            }
-            else if(e instanceof AvvikKomponentNyKategori){
+            } else if (e instanceof AvvikKomponentNyKategori) {
                 lblMessage.setText("Feil i kategori! Kategori må være minst to bokstaver langt.");
-            }
-            else if(e instanceof AvvikKomponentPris){
+            } else if (e instanceof AvvikKomponentPris) {
                 lblMessage.setText("Pris må være høyere enn 0 NOK og mindre enn 1000 000 NOK");
             }
 
 
-        if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
-            Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
-            kl.getObservableList().add(nyKomponent);
-        }
-        else{
-            Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
-            kl.getObservableList().add(nyKomponent);
-        }
+            if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                kl.getObservableList().add(nyKomponent);
+            } else {
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                kl.getObservableList().add(nyKomponent);
+            }
 
-        komponenter.refresh();
-        populateKategoriCombobox();
+            komponenter.refresh();
+            populateKategoriCombobox();
+        }
     }
 
     public void slettRader(ActionEvent event) {
