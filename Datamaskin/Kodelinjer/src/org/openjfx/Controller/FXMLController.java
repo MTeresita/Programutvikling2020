@@ -1,10 +1,11 @@
 package org.openjfx.Controller;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import org.openjfx.Models.Avvik.AlertHelper;
+import org.openjfx.Models.Avvik.AlertHelper.*;
 import org.openjfx.Models.Interfaces.SceneChanger;
 
 import org.openjfx.Models.Konfigurasjon;
@@ -12,7 +13,8 @@ import org.openjfx.Models.KomponenterListe;
 
 import org.openjfx.Models.Komponent;
 
-import java.io.IOException;
+
+import static org.openjfx.Models.KomponenterListe.searchTableView;
 
 
 public class FXMLController {
@@ -34,6 +36,9 @@ public class FXMLController {
     private ListView<String> listview;
 
     @FXML
+    TextField filterData;
+
+    @FXML
     TableView <Komponent> komponenter;
 
     @FXML
@@ -53,8 +58,9 @@ public class FXMLController {
         kl.createTableFromFile();
         kl.lagreTilObjectFil();
         */
-
         populateTable();
+        searchTableView(kl, filterData, komponenter);
+        komponenter.setPlaceholder(new Label("Ingen treff"));
 
     }
 
@@ -104,9 +110,6 @@ public class FXMLController {
         lblSluttPris.setText(Double.toString(k.getSluttPris())+" NOK");
     }
 
-
-
-    @FXML
     public void logOutEvent(ActionEvent event) {
         SceneChanger.routeToSite(event, "loggInn");
     }

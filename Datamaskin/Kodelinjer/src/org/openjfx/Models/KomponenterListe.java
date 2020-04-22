@@ -2,6 +2,10 @@ package org.openjfx.Models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import org.openjfx.Models.Filbehandling.FilHenting.FilHentingAdministrator;
 import org.openjfx.Models.Filbehandling.FilLagring.FilLagringAdmin;
 
@@ -91,6 +95,33 @@ public class KomponenterListe {
         }
 
         return komponenterListeObservable;
+    }
+
+    public static void searchTableView(KomponenterListe kl, TextField textField, TableView tableView){
+        FilteredList<Komponent> filteredData = new FilteredList<>
+                (kl.getObservableList(), p -> true);
+
+        textField.textProperty().addListener((observableValue, oldValue, newValue) ->{
+            filteredData.setPredicate(searchTableView -> {
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+                if(searchTableView.getNavn().toLowerCase().contains(lowerCaseFilter) ||
+                        searchTableView.getKategori().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                }
+                return false;
+            });
+        } );
+
+        SortedList<Komponent> sortedList =  new SortedList<>(filteredData);
+
+        sortedList.comparatorProperty().bind(tableView.comparatorProperty());
+
+        tableView.setItems(sortedList);
+
     }
 
 }
