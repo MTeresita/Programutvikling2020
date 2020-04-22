@@ -55,7 +55,17 @@ public class LoggInnController {
                 newScene(btnLogin, "scene");
             }
         } catch (AvvikLoggInnBrukernavn | FileNotFoundException | AvvikLoggInnPassord e){
-            lblMessage.setText("Feil brukernavn eller passord");
+
+            if (e instanceof AvvikLoggInnBrukernavn){
+                lblMessage.setText("Feil brukernavn");
+            }
+            else if (e instanceof FileNotFoundException){
+                lblMessage.setText("Fil ikke funnet");
+            }
+            else if(e instanceof AvvikLoggInnPassord){
+                lblMessage.setText("Feil passord");
+            }
+
         }
     }
 
