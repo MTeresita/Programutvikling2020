@@ -44,6 +44,7 @@ public KomponenterListe kl = new KomponenterListe();
 
     public void initialize() {
         populateTableWithList();
+        komponenter.getSortOrder().add(pris);
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
         kl.henteFraObjectFil();
@@ -147,6 +148,7 @@ public KomponenterListe kl = new KomponenterListe();
 
     @FXML
     public void registererProdukt(ActionEvent event) throws AvvikKomponentProduktnavn, AvvikKomponentPris, AvvikKomponentNyKategori {
+
 
         try {
             if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
