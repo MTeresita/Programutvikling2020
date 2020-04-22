@@ -146,13 +146,14 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     @FXML
-    public void registererProdukt(ActionEvent event) throws AvvikKomponentProduktnavn, AvvikKomponentPris {
+    public void registererProdukt(ActionEvent event) throws AvvikKomponentProduktnavn, AvvikKomponentPris, AvvikKomponentNyKategori {
 
         try{
             if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
                 Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
-                ValideringKomponent.validerNyKategori(kategoriNavn.getText());
+
                 ValideringKomponent.validerProduktnavn(produktNavn.getText());
+                ValideringKomponent.validerNyKategori(kategoriNavn.getText());
                 ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
 
                 kl.getObservableList().add(nyKomponent);
@@ -164,7 +165,16 @@ public KomponenterListe kl = new KomponenterListe();
             }
 
         }catch(AvvikKomponentProduktnavn | AvvikKomponentPris | AvvikKomponentNyKategori e){
-            lblMessage.setText("Noe gikk galt i registrering av nytt produkt.");
+            if(e instanceof AvvikKomponentProduktnavn){
+                lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to bokstaver.");
+            }
+            else if(e instanceof AvvikKomponentNyKategori){
+                lblMessage.setText("Feil i kategori! Kategori må være minst to bokstaver langt.");
+            }
+            else if(e instanceof AvvikKomponentPris){
+                lblMessage.setText("Pris må være høyere enn 0 NOK og mindre enn 1000 000 NOK");
+            }
+
         }
 
         komponenter.refresh();

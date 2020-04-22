@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
+import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 import org.openjfx.Models.Avvik.ValidationHelper;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
@@ -29,7 +30,7 @@ public class RegistrerBrukerController {
     @FXML
     Label lblMessage;
 
-    public void registerEvent(ActionEvent actionEvent) throws IOException, AvvikLoggInnBrukernavn {
+    public void registerEvent(ActionEvent actionEvent) throws IOException, AvvikLoggInnBrukernavn, AvvikLoggInnPassord {
 
         //oppretter et objekt av klassen
         ValidationHelper validationHelper = new ValidationHelper();
@@ -56,8 +57,14 @@ public class RegistrerBrukerController {
                 routeToSite(actionEvent, "loggInn");
             }
 
-        } catch (AvvikLoggInnBrukernavn e) {
-            lblMessage.setText("Feil i brukernavn eller passord");
+        } catch (AvvikLoggInnBrukernavn | AvvikLoggInnPassord e) {
+
+            if(e instanceof AvvikLoggInnBrukernavn) {
+                lblMessage.setText("Feil i brukernavn! Brukernavn må være minst 5 bokstaver langt.");
+            }
+            else if(e instanceof AvvikLoggInnPassord){
+                lblMessage.setText("Feil i passord! Passord må være minst 5 bokstaver langt.");
+            }
         }
     }
 

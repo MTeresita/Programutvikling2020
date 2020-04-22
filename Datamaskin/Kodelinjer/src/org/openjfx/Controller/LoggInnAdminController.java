@@ -54,8 +54,12 @@ public class LoggInnAdminController {
             }
 
         } catch (AvvikLoggInnBrukernavn | AvvikLoggInnPassord e) {
-            lblMessage.setText("Feil i lengden på brukenavn eller passord");
-
+            if(e instanceof AvvikLoggInnBrukernavn){
+                lblMessage.setText("Feil i brukernavn! Brukernavn må være minst 5 bokstaver langt.");
+            }
+            else if(e instanceof AvvikLoggInnPassord){
+                lblMessage.setText("Feil i passord! Passord må være minst 5 bokstaver langt.");
+            }
         }
 
     }

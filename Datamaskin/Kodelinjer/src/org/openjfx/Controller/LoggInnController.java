@@ -57,13 +57,13 @@ public class LoggInnController {
         } catch (AvvikLoggInnBrukernavn | FileNotFoundException | AvvikLoggInnPassord e){
 
             if (e instanceof AvvikLoggInnBrukernavn){
-                lblMessage.setText("Feil brukernavn");
+                lblMessage.setText("Feil i brukernavn! Brukernavn må være minst 5 bokstaver langt.");
             }
             else if (e instanceof FileNotFoundException){
                 lblMessage.setText("Fil ikke funnet");
             }
             else if(e instanceof AvvikLoggInnPassord){
-                lblMessage.setText("Feil passord");
+                lblMessage.setText("Feil i passord! Passord må være minst fem bokstaver langt.");
             }
 
         }
