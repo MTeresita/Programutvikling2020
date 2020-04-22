@@ -33,17 +33,12 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-<<<<<<< Updated upstream
-                  <TextField fx:id="txtadminuser" layoutX="84.0" layoutY="99.0" style="-fx-border-color: Purple;" />
-                  <PasswordField fx:id="txtadminpass" layoutX="84.0" layoutY="165.0" style="-fx-border-color: Purple;" />
-                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="13.0" layoutY="293.0" prefHeight="90.0" prefWidth="416.0" textFill="#ee0404" />
-                  <Text layoutX="59.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn som Administrator">
-=======
-                  <TextField fx:id="txtadminuser" layoutX="134.0" layoutY="159.0" style="-fx-border-color: Purple;" />
-                  <PasswordField fx:id="txtadminpass" layoutX="134.0" layoutY="225.0" style="-fx-border-color: Purple;" />
+
+                  <TextField fx:id="txtadminuser" layoutX="134.0" layoutY="159.0" />
+                  <PasswordField fx:id="txtadminpass" layoutX="134.0" layoutY="225.0"  />
                   <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="13.0" layoutY="293.0" prefHeight="90.0" prefWidth="416.0" textFill="#ee0404" />
                   <Text layoutX="105.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn som Administrator">
->>>>>>> Stashed changes
+
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
