@@ -3,11 +3,9 @@ package org.openjfx.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import org.openjfx.Models.Avvik.AvvikLoggInn;
-import org.openjfx.Models.Avvik.AvvikProdukt;
-import org.openjfx.Models.Avvik.ValidationHelper;
-import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
+import org.openjfx.Models.Avvik.*;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
+import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Interfaces.SceneChanger;
 import org.openjfx.Models.Komponent;
 import org.openjfx.Models.KomponenterListe;
@@ -17,7 +15,7 @@ import org.openjfx.Models.Validering.ValideringKomponent;
 import java.io.IOException;
 
 import static org.openjfx.Models.Avvik.AlertHelper.*;
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.checkExistingBruker;
 
 
 public class RegistrerProduktController {
@@ -76,64 +74,58 @@ public KomponenterListe kl = new KomponenterListe();
 
         switch (value){
             case "Admin":
-                if(ValiderLoggInn.valideringBrukernavn(user.getText())){
-                    if(ValiderLoggInn.validerPassord(pass.getText())){
-                        if(!checkExistingBruker(user.getText(), "./Admin.csv")) {
+                try{
+                    ValiderLoggInn.valideringBrukernavn(user.getText());
+                    ValiderLoggInn.validerPassord(pass.getText());
+                    if(!checkExistingBruker(user.getText(), "./Admin.csv")) {
+                        lblMessage.setText("");
+                        //en ny bruker blir registrer
+                        BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
 
-                            //en ny bruker blir registrer
-                            BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
-
-                            //skrives til Admin.csv
-                            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
-                            showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
-                                    "Bruker opprettet");
-                            //resetter inputs for registrering
-                            clear();
-                        }
-                        else{
-                            //eksisterer bruker, send feilmelding
-                            lblMessage.setText("Bruker eksisterer");
-                        }
+                        //skrives til Admin.csv
+                        WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
+                        showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
+                                "Administrator opprettet");
+                        //resetter inputs for registrering
+                        clear();
                     }
                     else{
-                        lblMessage.setText("Passordet må være minst 5 bokstaver langt.");
-                        throw new AvvikLoggInn("Feil i lengde på passordet");
+                        //eksisterer bruker, send feilmelding
+                        lblMessage.setText("Administrator eksisterer");
                     }
                 }
-                else{
-                    lblMessage.setText("Brukernavn må være minst 5 bokstaver langt.");
-                    throw new AvvikLoggInn("Feil i lengde på brukernavn");
+                catch(AvvikLoggInnBrukernavn e){
+                    lblMessage.setText("Feil Brukernavn eller passord");
                 }
                 break;
 
             case "Bruker":
-                if(ValiderLoggInn.valideringBrukernavn(user.getText())){
-                    if(ValiderLoggInn.validerPassord(pass.getText())){
-                        if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
-                            //opprett ny bruker
-                            BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
+                try{
+                    ValiderLoggInn.valideringBrukernavn(user.getText());
+                    ValiderLoggInn.validerPassord(pass.getText());
+                    if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
+                        lblMessage.setText("");
+                        //opprett ny bruker
+                        BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
 
-                            //skriver til Brukere.csv
-                            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
+                        //skriver til Brukere.csv
+                        WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
 
-                            //popup vindu som bekrefter at en ny bruker har blitt opprettet
-                            showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
-                            //resetter inputs for registrering
-                            clear();
-                        }
-                        else {
-                            //eksisterer bruker, send feilmelding
-                            lblMessage.setText("Bruker eksisterer");
-                        }
+                        //popup vindu som bekrefter at en ny bruker har blitt opprettet
+                        showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Ny bruker opprettet",
+                                "Bruker opprettet");
+                        //showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
+                        //resetter inputs for registrering
+                        clear();
+
                     }
-                    else{
-                        lblMessage.setText("Passordet må være minst 5 bokstaver langt.");
-                        throw new AvvikLoggInn("Feil i lengde på passordet");
+                    else {
+                        //eksisterer bruker, send f eilmelding
+                        lblMessage.setText("Bruker eksisterer");
                     }
                 }
-                else{
-                    lblMessage.setText("Brukernavn må være minst 5 bokstaver langt.");
-                    throw new AvvikLoggInn("Feil i lengde på brukernavn");
+                catch(AvvikLoggInnBrukernavn e){
+                    lblMessage.setText("Feil i brukernavn eller passord");
                 }
                break;
 
@@ -154,37 +146,35 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     @FXML
-    public void registererProdukt(ActionEvent event) throws AvvikProdukt {
+    public void registererProdukt(ActionEvent event) throws AvvikKomponentProduktnavn, AvvikKomponentPris, AvvikKomponentNyKategori {
 
-        double pris=Double.parseDouble(produktPris.getText());
-        
-        if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
-            if(ValideringKomponent.validerNyKategori(kategoriNavn.getText())){
-                if(ValideringKomponent.validerProduktnavn(produktNavn.getText())){
-                    if(ValideringKomponent.validerPris(pris)){
-                        Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
-                        kl.getObservableList().add(nyKomponent);
-                    }
-                    else{
-                        lblMessage.setText("Pris må være over 0 kr");
-                        throw new AvvikProdukt("Feil i pris.");
+        try{
+            if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
 
-                    }
-                }
-                else{
-                    lblMessage.setText("Produktnavn må være mer enn 2 bokstaver langt.");
-                    throw new AvvikProdukt("Feil i produktnavn.");
-                }
-            }
-            else{
-                lblMessage.setText("Kategori må være mer enn 2 bokstaver langt.");
-                throw new AvvikProdukt("Feil i kategorinavn.");
+                ValideringKomponent.validerProduktnavn(produktNavn.getText());
+                ValideringKomponent.validerNyKategori(kategoriNavn.getText());
+                ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
+
+                kl.getObservableList().add(nyKomponent);
+            }else{
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                ValideringKomponent.validerProduktnavn(produktNavn.getText());
+                ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
+                kl.getObservableList().add(nyKomponent);
             }
 
-        }
-        else{
-            Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
-            kl.getObservableList().add(nyKomponent);
+        }catch(AvvikKomponentProduktnavn | AvvikKomponentPris | AvvikKomponentNyKategori e){
+            if(e instanceof AvvikKomponentProduktnavn){
+                lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to bokstaver.");
+            }
+            else if(e instanceof AvvikKomponentNyKategori){
+                lblMessage.setText("Feil i kategori! Kategori må være minst to bokstaver langt.");
+            }
+            else if(e instanceof AvvikKomponentPris){
+                lblMessage.setText("Pris må være høyere enn 0 NOK og mindre enn 1000 000 NOK");
+            }
+
         }
 
         komponenter.refresh();

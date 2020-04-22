@@ -4,8 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import org.openjfx.Models.Avvik.AvvikLoggInn;
+import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
+import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 import org.openjfx.Models.Validering.ValiderLoggInn;
+
+import java.io.FileNotFoundException;
 
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.newScene;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.verifyLogin;
@@ -43,26 +46,27 @@ public class LoggInnController {
         });
     }
     
-    public void loginEvent() throws Exception, AvvikLoggInn {
-        if(ValiderLoggInn.valideringBrukernavn(txtuser.getText()) == true){
-            if(ValiderLoggInn.validerPassord(txtpass.getText()) == true){
-                if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
-                    newScene(btnLogin, "scene");
-                }
-                else{
-                    lblMessage.setText("Feil brukernavn eller passord");
-                }
-            }
-            else{
-                lblMessage.setText("Passordet må være minst 5 bokstaver langt.");
-                throw new AvvikLoggInn("Feil i lengde på passordet");
-            }
-        }
-        else{
-            lblMessage.setText("Brukernavn må være minst 5 bokstaver langt.");
-            throw new AvvikLoggInn("Feil i lengde på brukernavn");
-        }
+    public void loginEvent() throws Exception, AvvikLoggInnBrukernavn, FileNotFoundException {
 
+        try{
+            ValiderLoggInn.valideringBrukernavn(txtuser.getText());
+            ValiderLoggInn.validerPassord(txtpass.getText());
+            if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
+                newScene(btnLogin, "scene");
+            }
+        } catch (AvvikLoggInnBrukernavn | FileNotFoundException | AvvikLoggInnPassord e){
+
+            if (e instanceof AvvikLoggInnBrukernavn){
+                lblMessage.setText("Feil i brukernavn! Brukernavn må være minst 5 bokstaver langt.");
+            }
+            else if (e instanceof FileNotFoundException){
+                lblMessage.setText("Fil ikke funnet");
+            }
+            else if(e instanceof AvvikLoggInnPassord){
+                lblMessage.setText("Feil i passord! Passord må være minst fem bokstaver langt.");
+            }
+
+        }
     }
 
     public void registrerbruker(ActionEvent actionEvent) {
