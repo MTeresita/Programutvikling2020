@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.openjfx.Models.Filbehandling.FilHenting.FilHentingAdministrator;
@@ -98,28 +99,41 @@ public class KomponenterListe {
     }
 
     public static void searchTableView(KomponenterListe kl, TextField textField, TableView tableView){
+        // setter som default at hvis den ikke finner noe, skal Ingen treff dukke opp i tableviewet
+        tableView.setPlaceholder(new Label("Ingen treff"));
+
+        //En obersable list i en filteredlist --> denne har all data
         FilteredList<Komponent> filteredData = new FilteredList<>
                 (kl.getObservableList(), p -> true);
 
+        // Setter filter predicate for når bruker søker eller endre inout i skrivefeltet
         textField.textProperty().addListener((observableValue, oldValue, newValue) ->{
             filteredData.setPredicate(searchTableView -> {
+
+                // Hvis filterlisten er tom, hvis alle komponeneter
                 if(newValue == null || newValue.isEmpty()){
                     return true;
                 }
 
+                //Sammelign inputtext med det som ligger i listen.
                 String lowerCaseFilter = newValue.toLowerCase();
+
                 if(searchTableView.getNavn().toLowerCase().contains(lowerCaseFilter) ||
-                        searchTableView.getKategori().toLowerCase().contains(lowerCaseFilter)){
-                    return true;
+                        searchTableView.getKategori().toLowerCase().contains(lowerCaseFilter)
+                || Double.toString(searchTableView.getPris()).toLowerCase().contains(lowerCaseFilter)){
+                    return true; // fant en match
                 }
-                return false;
+                return false; // ingen match
             });
         } );
 
+        // Setter den filtrerte listen i en sortert liste
         SortedList<Komponent> sortedList =  new SortedList<>(filteredData);
 
+        //binder den sortete listen til tableviewr
         sortedList.comparatorProperty().bind(tableView.comparatorProperty());
 
+        //legger til sortert og filtrert liste data i tableviewet
         tableView.setItems(sortedList);
 
     }
