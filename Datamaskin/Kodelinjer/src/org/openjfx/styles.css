@@ -6,10 +6,12 @@
     -fx-font-size: 20px;
     -fx-font-weight: bold;
     -fx-font-family: "Roboto Light";
-
+}
+.bg-white{
+    -fx-background-color: #fff;
 }
 .gradient{
-    -fx-background-color: linear-gradient(to bottom left, #C23EB1, #4A1082 );
+    -fx-background-color: linear-gradient(to bottom left, #f9b16e, #f68080 );
 }
 
 .choicebox-product{
@@ -17,13 +19,18 @@
 }
 
 .button-basket{
-    -fx-background-color: #E2E2E2;
+    -fx-background-color: #fff;
 }
 Button{
-    -fx-cursor: pointer;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
 }
 .save{
-    -fx-background-color: #34e386;
+    -fx-background-color: #27ba6c;
+    -fx-text-fill: white;
+}
+.save:hover{
+
 }
 
 .delete{
@@ -35,7 +42,7 @@ Button{
 }
 /*Listview*/
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
-    -fx-background-color: #34e386;
+    -fx-background-color: white;
     -fx-text-fill: black;
 }
 .list-view{
@@ -53,5 +60,33 @@ Button{
 }
 .list-cell:filled:hover {
     -fx-background-color: rgba(256,256,256,0.2);
+    -fx-text-fill: white;
+}
+
+/*combobox*/
+.combo-box .list-cell:filled:selected:focused {
+    -fx-background-color: none;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+.combo-box .list-cell:filled:selected:hover{
+    -fx-background-color: lightgrey;
+    -fx-text-fill: black;
+}
+.combo-box .list-view{
+    -fx-background-color: rgba(256,256,256,1);
+}
+.combo-box .list-cell{
+    -fx-background-color: none;
+    -fx-text-fill: rgba(70,70,70,1);
+}
+.combo-box .list-cell:even { /* <=== changed to even */
+    -fx-background-color: none;
+}
+.combo-box .list-cell:odd { /* <=== changed to even */
+    -fx-background-color: none;
+}
+.combo-box .list-cell:filled:hover {
+    -fx-background-color: #f9b16e;
     -fx-text-fill: white;
 }

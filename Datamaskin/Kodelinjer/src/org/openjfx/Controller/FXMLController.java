@@ -109,5 +109,6 @@ public class FXMLController {
     @FXML
     public void logOutEvent(ActionEvent event) {
         SceneChanger.routeToSite(event, "loggInn");
+
     }
 }
