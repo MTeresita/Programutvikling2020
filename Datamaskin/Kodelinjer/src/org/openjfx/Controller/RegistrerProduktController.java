@@ -175,6 +175,14 @@ public KomponenterListe kl = new KomponenterListe();
                 lblMessage.setText("Pris må være høyere enn 0 NOK og mindre enn 1000 000 NOK");
             }
 
+
+        if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
+            Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+            kl.getObservableList().add(nyKomponent);
+        }
+        else{
+            Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+            kl.getObservableList().add(nyKomponent);
         }
 
         komponenter.refresh();
