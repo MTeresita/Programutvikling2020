@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.FXMLController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.FXMLController">
    <children>
       <BorderPane prefHeight="900.0" prefWidth="1100.0">
          <left>
@@ -62,12 +62,12 @@
          <center>
             <Pane prefHeight="1063.0" prefWidth="1010.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
                <children>
-                  <Text layoutX="50.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Komponenter" wrappingWidth="287.13671875">
+                  <Text fill="#464646" layoutX="48.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Komponenter" wrappingWidth="287.13671875">
                      <font>
                         <Font name="System Bold" size="35.0" />
                      </font>
                   </Text>
-                  <TableView fx:id="komponenter" layoutX="50.0" layoutY="130.0" prefHeight="589.0" prefWidth="684.0">
+                  <TableView fx:id="komponenter" layoutX="50.0" layoutY="130.0" prefHeight="589.0" prefWidth="684.0" stylesheets="@../styles.css">
                      <columns>
                         <TableColumn fx:id="produktnavn" prefWidth="320.3333740234375" text="Produkt navn" />
                         <TableColumn fx:id="kategori" minWidth="0.0" prefWidth="219.66668701171875" text="Kategori" />
@@ -79,7 +79,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="filterData" layoutX="558.0" layoutY="85.0" promptText="Søk" />
+                  <TextField fx:id="filterData" layoutX="371.0" layoutY="98.0" prefHeight="25.0" prefWidth="362.0" promptText="Søk" stylesheets="@../styles.css" />
                </children></Pane>
          </center>
       </BorderPane>

@@ -44,6 +44,7 @@ public KomponenterListe kl = new KomponenterListe();
 
     public void initialize() {
         populateTableWithList();
+        kategoriNavn.setDisable(true);
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
         kl.henteFraObjectFil();
@@ -54,14 +55,19 @@ public KomponenterListe kl = new KomponenterListe();
         populateKategoriCombobox();
     }
     public void populateKategoriCombobox(){
-        kategoriCombobox.getItems().clear();
-        kategoriCombobox.getItems().add("Ny Kategori..."); //legger til "ny kategori..." som førstevalg
+        //kategoriCombobox.getItems().clear();
+
         for(Komponent k : kl.getObservableList()){
+            if (!kategoriCombobox.getItems().contains("Ny Kategori...")){
+                kategoriCombobox.getItems().add("Ny Kategori..."); //legger til "ny kategori..." som førstevalg
+            }
             if(!kategoriCombobox.getItems().contains(k.getKategori())){ //Om kategori er lagt til fra før, legges den ikke til igjen
                 kategoriCombobox.getItems().add(k.getKategori());
             }
-
         }
+        kategoriCombobox.setValue("Velg kategori");
+        kategoriCombobox.setPromptText("Velg kategori");
+
 
     }
 
@@ -138,6 +144,9 @@ public KomponenterListe kl = new KomponenterListe();
         //resetter inputfeltene
         user.clear();
         pass.clear();
+        produktNavn.clear();
+        kategoriNavn.clear();
+        produktPris.clear();
 
     }
 
@@ -146,44 +155,61 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     @FXML
+    public void setKategoriTilgjengelig(ActionEvent event){
+        System.out.println("setKategori: "+kategoriCombobox.getSelectionModel().getSelectedItem().toString());
+        if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
+            kategoriNavn.setDisable(false);
+        }else{
+            kategoriNavn.setDisable(true);
+        }
+    }
+
+    @FXML
     public void registererProdukt(ActionEvent event) throws AvvikKomponentProduktnavn, AvvikKomponentPris, AvvikKomponentNyKategori {
+        //System.out.println("Fra combobox: "+kategoriCombobox.getSelectionModel().getSelectedItem().toString());
 
         try {
-            if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
-                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
 
+            if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Velg kategori")){
+                lblMessage.setText("Du må velge en eksisterende eller lage en ny kategori.");
+                //LAGE AVVIK HER?
+            }
+            else if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
                 ValideringKomponent.validerProduktnavn(produktNavn.getText());
                 ValideringKomponent.validerNyKategori(kategoriNavn.getText());
                 ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
 
-                kl.getObservableList().add(nyKomponent);
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                sjekkForDuplikater(nyKomponent);
+
             } else {
-                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
                 ValideringKomponent.validerProduktnavn(produktNavn.getText());
                 ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
-                kl.getObservableList().add(nyKomponent);
+
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                sjekkForDuplikater(nyKomponent);
             }
+        komponenter.refresh();
+        populateKategoriCombobox();
 
         } catch (AvvikKomponentProduktnavn | AvvikKomponentPris | AvvikKomponentNyKategori e) {
             if (e instanceof AvvikKomponentProduktnavn) {
-                lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to bokstaver.");
+                lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to tegn.");
             } else if (e instanceof AvvikKomponentNyKategori) {
-                lblMessage.setText("Feil i kategori! Kategori må være minst to bokstaver langt.");
+                lblMessage.setText("Feil i kategori! Kategori må være minst to tegn.");
             } else if (e instanceof AvvikKomponentPris) {
-                lblMessage.setText("Pris må være høyere enn 0 NOK og mindre enn 1000 000 NOK");
+                lblMessage.setText("Pris må være høyere enn 0 NOK og mindre enn 1 000 000 NOK");
             }
-
-
-            if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
-                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
-                kl.getObservableList().add(nyKomponent);
-            } else {
-                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
-                kl.getObservableList().add(nyKomponent);
-            }
-
-            komponenter.refresh();
-            populateKategoriCombobox();
+        }
+    }
+    public boolean sjekkForDuplikater(Komponent nyKomponent){
+        if(kl.finnDuplikat(nyKomponent)){
+            lblMessage.setText("Komponeneten er allerede registrert");
+            return true;
+        }else{
+            kl.getObservableList().add(nyKomponent);
+            lblMessage.setText("Komponent lagt til i liste!");
+            return false;
         }
     }
 
