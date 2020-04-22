@@ -30,6 +30,8 @@ public ComboBox adminORuser, kategoriCombobox;
 
 @FXML
 public Label lblMessage;
+@FXML
+public CheckBox checkBox;
 
 @FXML
 TableView <Komponent> komponenter;
@@ -150,17 +152,23 @@ public KomponenterListe kl = new KomponenterListe();
 
         try{
             if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
-                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
 
                 ValideringKomponent.validerProduktnavn(produktNavn.getText());
                 ValideringKomponent.validerNyKategori(kategoriNavn.getText());
                 ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
-
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), checkBox.isSelected());
+                if(checkBox.isSelected()){
+                    kl.getObservableList().add(nyKomponent);
+                }
                 kl.getObservableList().add(nyKomponent);
             }else{
-                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+
                 ValideringKomponent.validerProduktnavn(produktNavn.getText());
                 ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), checkBox.isSelected());
+                if(checkBox.isSelected()){
+                    kl.getObservableList().add(nyKomponent);
+                }
                 kl.getObservableList().add(nyKomponent);
             }
 
