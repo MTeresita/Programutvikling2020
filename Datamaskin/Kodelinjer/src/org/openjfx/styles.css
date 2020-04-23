@@ -40,6 +40,18 @@ Button{
 .root{
     -fx-background-radius: 30;
 }
+.text-field{
+    -fx-background-color: -fx-text-box-border, -fx-background ;
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-background-radius: 5px;
+    -fx-border-insets: 1;
+    -fx-border-color: -fx-background;
+
+}
+.text-field:focused {
+    -fx-border-color: #f9b16e;
+    -fx-border-insets: 1;
+}
 /*Listview*/
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     -fx-background-color: white;
@@ -67,7 +79,6 @@ Button{
 .combo-box .list-cell:filled:selected:focused {
     -fx-background-color: none;
     -fx-text-fill: black;
-    -fx-font-weight: bold;
 }
 .combo-box .list-cell:filled:selected:hover{
     -fx-background-color: lightgrey;
@@ -78,7 +89,7 @@ Button{
 }
 .combo-box .list-cell{
     -fx-background-color: none;
-    -fx-text-fill: rgba(70,70,70,1);
+    -fx-text-fill: rgba(100,100,100,1);
 }
 .combo-box .list-cell:even { /* <=== changed to even */
     -fx-background-color: none;

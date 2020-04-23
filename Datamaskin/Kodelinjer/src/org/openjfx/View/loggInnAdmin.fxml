@@ -22,22 +22,22 @@
          <center>
             <Pane prefHeight="386.0" prefWidth="395.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnLogin" layoutX="205.0" layoutY="270.0" mnemonicParsing="false" onAction="#loginEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Logg inn" />
-                  <Text fill="#393939" layoutX="134.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
+                  <Button fx:id="btnLogin" layoutX="206.0" layoutY="212.0" mnemonicParsing="false" onAction="#loginEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Logg inn" />
+                  <Text fill="#393939" layoutX="138.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <Text fill="#393939" layoutX="134.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord">
+                  <Text fill="#393939" layoutX="138.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
 
-                  <TextField fx:id="txtadminuser" layoutX="134.0" layoutY="159.0" />
-                  <PasswordField fx:id="txtadminpass" layoutX="134.0" layoutY="225.0"  />
+                  <TextField fx:id="txtadminuser" layoutX="138.0" layoutY="109.0" stylesheets="@../styles.css" />
+                  <PasswordField fx:id="txtadminpass" layoutX="138.0" layoutY="167.0" stylesheets="@../styles.css" />
                   <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="13.0" layoutY="293.0" prefHeight="90.0" prefWidth="416.0" textFill="#ee0404" />
-                  <Text layoutX="105.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn som Administrator">
+                  <Text layoutX="138.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn Admin">
 
                      <font>
                         <Font name="System Bold" size="17.0" />

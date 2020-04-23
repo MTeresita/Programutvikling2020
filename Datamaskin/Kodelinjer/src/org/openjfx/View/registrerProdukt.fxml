@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.RegistrerProduktController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.RegistrerProduktController">
    <children>
       <BorderPane prefHeight="780.0" prefWidth="1100.0">
          <left>
@@ -33,7 +33,7 @@
                         <Font name="System Bold" size="21.0" />
                      </font>
                   </Text>
-                  <Text fill="#404040" layoutX="91.0" layoutY="592.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategori" wrappingWidth="92.73095703125">
+                  <Text fill="#404040" layoutX="91.0" layoutY="591.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategori" wrappingWidth="92.73095703125">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -93,7 +93,7 @@
                   </Text>
                   <TextField fx:id="produktNavn" layoutX="91.0" layoutY="540.0" prefHeight="27.0" prefWidth="302.0" stylesheets="@../styles.css" />
                   <TextField fx:id="kategoriNavn" layoutX="231.0" layoutY="596.0" prefHeight="27.0" prefWidth="161.0" stylesheets="@../styles.css" />
-                  <Text fill="#404040" layoutX="231.0" layoutY="592.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn (ved opprettelse av ny kategori)" wrappingWidth="230.73095703125">
+                  <Text fill="#404040" layoutX="233.0" layoutY="591.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn " wrappingWidth="46.73095703125">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -107,14 +107,15 @@
                   </FXCollections>
                </items>
                   </ComboBox>
-                  <ComboBox fx:id="kategoriCombobox" layoutX="89.0" layoutY="596.0" prefHeight="27.0" prefWidth="135.0" promptText="Velg" />
-                  <Label fx:id="lblMessage" layoutX="487.0" layoutY="741.0" prefHeight="30.0" prefWidth="244.0" />
-                  <Button fx:id="lagreTilFil" layoutX="487.0" layoutY="418.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Lagre til fil" />
-                  <CheckBox fx:id="checkBox" layoutX="93.0" layoutY="710.0" mnemonicParsing="false" text="Kryss av for duplikat" />
-                  <Label layoutX="93.0" layoutY="684.0" text="Kan bruker ha flere av denne i sin konfigurasjon?">
+                  <ComboBox fx:id="kategoriCombobox" layoutX="89.0" layoutY="596.0" onAction="#setKategoriTilgjengelig" prefHeight="27.0" prefWidth="135.0" styleClass="choicebox-product" stylesheets="@../styles.css" value="Velg kategori" />
+                  <Label fx:id="lblMessage" layoutX="91.0" layoutY="728.0" prefHeight="30.0" prefWidth="435.0" textFill="RED" />
+                  <Button fx:id="lagreTilFil" layoutX="462.0" layoutY="418.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Lagre til fil" />
+                  <TextField fx:id="filteredData" layoutX="556.0" layoutY="98.0" promptText="Søk her" />
+                  <Text fill="#545454" layoutX="267.0" layoutY="591.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(ved opprettelse av ny kategori)" wrappingWidth="197.73095703125">
                      <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
          </center>

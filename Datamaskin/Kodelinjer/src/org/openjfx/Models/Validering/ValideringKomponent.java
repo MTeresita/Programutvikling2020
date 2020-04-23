@@ -3,6 +3,8 @@ package org.openjfx.Models.Validering;
 import org.openjfx.Models.Avvik.AvvikKomponentNyKategori;
 import org.openjfx.Models.Avvik.AvvikKomponentProduktnavn;
 import org.openjfx.Models.Avvik.AvvikKomponentPris;
+import org.openjfx.Models.Komponent;
+import org.openjfx.Models.KomponenterListe;
 
 public class ValideringKomponent {
 
@@ -21,6 +23,7 @@ public class ValideringKomponent {
         }
 
     }
+
 
     public static boolean validerNyKategori(String nyKategori) throws AvvikKomponentNyKategori {
 
@@ -43,7 +46,7 @@ public class ValideringKomponent {
         else{
             return true;
         }
-
     }
+
 }
 
