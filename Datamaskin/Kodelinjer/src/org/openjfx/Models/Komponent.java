@@ -1,5 +1,6 @@
 package org.openjfx.Models;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -65,6 +66,9 @@ public class Komponent implements Serializable {
 
     public SimpleDoubleProperty prisProperty() {
         return pris;
+    }
+    public SimpleBooleanProperty duplikatProperty() {
+        return new SimpleBooleanProperty(duplikat);
     }
 
     public void setPris(double pris) {

@@ -43,6 +43,9 @@ TableColumn<Komponent, String> produktnavn, kategori;
 @FXML
 TableColumn<Komponent, Double> pris;
 
+@FXML
+TableColumn<Komponent, Boolean> duplikat;
+
 public KomponenterListe kl = new KomponenterListe();
 
     public void initialize() {
@@ -54,6 +57,7 @@ public KomponenterListe kl = new KomponenterListe();
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
+        duplikat.setCellValueFactory(cellData -> cellData.getValue().duplikatProperty());
         komponenter.setItems(kl.getObservableList());
         populateKategoriCombobox();
     }
