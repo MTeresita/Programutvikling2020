@@ -1,14 +1,9 @@
 package org.openjfx.Controller;
 
-import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import org.openjfx.Models.Avvik.*;
-import org.openjfx.Models.Filbehandling.FilLagring.FilLagringAdmin;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Interfaces.SceneChanger;
@@ -55,13 +50,22 @@ TableColumn<Komponent, Boolean> duplikat;
 public KomponenterListe kl = new KomponenterListe();
 
     public void initialize() {
-        populateTableWithList();
+        populateTableWithJobj();
         komponenter.getSortOrder().add(pris);
         komponenter.setEditable(true);
         endringITableView(produktnavn,kategori, pris);
     }
-    public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
+    public void populateTableWithJobj(){ //henter jobj fil fra fra globale KomponeterListen "kl"
         kl.henteFraObjectFil();
+        produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
+        kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
+        pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
+        duplikat.setCellValueFactory(cellData -> cellData.getValue().duplikatProperty());
+        komponenter.setItems(kl.getObservableList());
+        populateKategoriCombobox();
+    }
+    public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
+        kl.getObservableList();
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
@@ -268,7 +272,6 @@ public KomponenterListe kl = new KomponenterListe();
         }else{
             System.out.println("ikke slettet");
         }
-        kl.lagreTilObjectFil();
         populateTableWithList();
     }
 
