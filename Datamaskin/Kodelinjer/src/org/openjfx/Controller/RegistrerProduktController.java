@@ -13,6 +13,7 @@ import org.openjfx.Models.Validering.ValiderLoggInn;
 import org.openjfx.Models.Validering.ValideringKomponent;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static org.openjfx.Models.Avvik.AlertHelper.*;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.checkExistingBruker;
@@ -170,7 +171,17 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     public void forsideBtn(ActionEvent actionEvent) {
-        SceneChanger.routeToSite(actionEvent, "loggInn");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Bekreft utlogging");
+        alert.setHeaderText("Endringer gjort uten å trykke lagre vil bli slettet!");
+        alert.setContentText("Er du sikker på at du vil avslutte?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            SceneChanger.routeToSite(actionEvent, "loggInn");
+        } else {
+           alert.close();
+        }
     }
 
     @FXML
@@ -186,8 +197,6 @@ public KomponenterListe kl = new KomponenterListe();
     @FXML
     public void registererProdukt(ActionEvent event) throws AvvikKomponentProduktnavn, AvvikKomponentPris, AvvikKomponentNyKategori {
         //System.out.println("Fra combobox: "+kategoriCombobox.getSelectionModel().getSelectedItem().toString());
-
-
         try {
 
             if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Velg kategori")){
@@ -245,7 +254,7 @@ public KomponenterListe kl = new KomponenterListe();
                 event.getRowValue().setKategori(event.getNewValue());
             }
         }catch (AvvikKomponentProduktnavn | AvvikKomponentNyKategori e) {
-            populateTableWithList();
+            komponenter.refresh();
             if (e instanceof AvvikKomponentProduktnavn) {
                 lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to tegn.");
 

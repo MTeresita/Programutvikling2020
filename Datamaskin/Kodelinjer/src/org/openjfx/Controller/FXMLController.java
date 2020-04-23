@@ -14,6 +14,8 @@ import org.openjfx.Models.KomponenterListe;
 import org.openjfx.Models.Komponent;
 
 
+import java.util.Optional;
+
 import static org.openjfx.Models.KomponenterListe.searchTableView;
 
 
@@ -109,7 +111,17 @@ public class FXMLController {
     }
 
     public void logOutEvent(ActionEvent event) {
-        SceneChanger.routeToSite(event, "loggInn");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Bekreft utlogging");
+        alert.setHeaderText("Endringer gjort uten å trykke lagre vil bli slettet!");
+        alert.setContentText("Er du sikker på at du vil logge ut?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            SceneChanger.routeToSite(event, "loggInn");
+        } else {
+            alert.close();
+        }
 
     }
 }

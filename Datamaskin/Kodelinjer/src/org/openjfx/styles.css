@@ -19,7 +19,7 @@
 }
 
 .button-basket{
-    -fx-background-color: #fff;
+    -fx-background-color: #f4f4f4;
 }
 Button{
     -fx-cursor: hand;
@@ -32,6 +32,7 @@ Button{
 .save:hover{
 
 }
+
 
 .delete{
     -fx-background-color: #e3345a;
@@ -51,6 +52,10 @@ Button{
 .text-field:focused {
     -fx-border-color: #f9b16e;
     -fx-border-insets: 1;
+
+}
+.search-bar{
+   -fx-prompt-text-fill: #343434;
 }
 /*Listview*/
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
@@ -74,6 +79,7 @@ Button{
     -fx-background-color: rgba(256,256,256,0.2);
     -fx-text-fill: white;
 }
+
 
 /*combobox*/
 .combo-box .list-cell:filled:selected:focused {
@@ -100,4 +106,16 @@ Button{
 .combo-box .list-cell:filled:hover {
     -fx-background-color: #f9b16e;
     -fx-text-fill: white;
+
+}
+
+/*tableview*/
+.table-view .column-header {
+    -fx-background-color: #f4f4f4;
+    -fx-text-fill: red;
+}
+.table-view .column-header .label{
+    -fx-text-fill: #323232;
+    -fx-font-weight: 600;
+    -fx-font-size: 14;
 }
