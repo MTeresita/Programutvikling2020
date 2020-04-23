@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.openjfx.Models.Avvik.*;
+import org.openjfx.Models.Filbehandling.FilLagring.FilLagringAdmin;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Interfaces.SceneChanger;
@@ -214,12 +215,17 @@ public KomponenterListe kl = new KomponenterListe();
             lblMessage.setText("Komponeneten er allerede registrert");
             return true;
         }else{
-            kl.getObservableList().add(nyKomponent);
+            //kl.getObservableList().add(nyKomponent);
+            kl.setKomponenter(nyKomponent);
             lblMessage.setText("Komponent lagt til i liste!");
             return false;
         }
     }
 
     public void slettRader(ActionEvent event) {
+    }
+
+    public void lagreTilFil(ActionEvent event){
+        kl.lagreTilObjectFil();
     }
 }

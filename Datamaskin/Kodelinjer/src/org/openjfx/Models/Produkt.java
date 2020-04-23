@@ -2,7 +2,7 @@ package org.openjfx.Models;
 
 import java.io.Serializable;
 
-public class Produkt extends Object implements Serializable {
+public class Produkt extends Object implements Serializable { //ER EN HJELPEKLASSE FOR KOMPONENTER
 
     private String navn;
     private double pris;
