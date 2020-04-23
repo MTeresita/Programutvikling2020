@@ -138,4 +138,16 @@ public class KomponenterListe {
 
     }
 
+    public boolean finnDuplikat(Komponent k) { //sjekker om komponent som registreres finnes fra før
+        for(Komponent a : komponenterListeObservable){
+            System.out.println(a.getNavn() + "\n");
+        }
+
+        for(Komponent komponent : komponenterListeObservable){
+            if(k.getNavn().equals(komponent.getNavn())){
+                return true;
+            }
+        }
+        return false;
+    }
 }
