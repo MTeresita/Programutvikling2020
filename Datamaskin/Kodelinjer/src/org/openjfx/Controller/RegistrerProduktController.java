@@ -35,6 +35,9 @@ public Label lblMessage;
 public CheckBox checkBox;
 
 @FXML
+public CheckBox checkBox;
+
+@FXML
 TableView <Komponent> komponenter;
 
 @FXML
@@ -42,6 +45,9 @@ TableColumn<Komponent, String> produktnavn, kategori;
 
 @FXML
 TableColumn<Komponent, Double> pris;
+
+@FXML
+TableColumn<Komponent, Boolean> duplikat;
 
 public KomponenterListe kl = new KomponenterListe();
 
@@ -56,6 +62,7 @@ public KomponenterListe kl = new KomponenterListe();
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
+        duplikat.setCellValueFactory(cellData -> cellData.getValue().duplikatProperty());
         komponenter.setItems(kl.getObservableList());
         populateKategoriCombobox();
     }
@@ -184,19 +191,16 @@ public KomponenterListe kl = new KomponenterListe();
                 ValideringKomponent.validerProduktnavn(produktNavn.getText());
                 ValideringKomponent.validerNyKategori(kategoriNavn.getText());
                 ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
+
                 Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), checkBox.isSelected());
-                if(checkBox.isSelected()){
-                    kl.getObservableList().add(nyKomponent);
-                }
-                kl.getObservableList().add(nyKomponent);
+                sjekkForDuplikater(nyKomponent);
+
             } else {
                 ValideringKomponent.validerProduktnavn(produktNavn.getText());
                 ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
-                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), checkBox.isSelected());
-                if(checkBox.isSelected()){
-                    kl.getObservableList().add(nyKomponent);
-                }
-                kl.getObservableList().add(nyKomponent);
+
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), checkBox.isSelected()); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                sjekkForDuplikater(nyKomponent);
             }
         komponenter.refresh();
         populateKategoriCombobox();
