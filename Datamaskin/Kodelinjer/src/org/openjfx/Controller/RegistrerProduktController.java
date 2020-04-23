@@ -230,6 +230,36 @@ public KomponenterListe kl = new KomponenterListe();
         }
     }
 
+    @FXML
+    public void endreTableViewDataString(TableColumn.CellEditEvent<Komponent, String> event) throws AvvikKomponentProduktnavn, AvvikKomponentNyKategori{ //Fra henrik
+        try{
+            if(event.getTableColumn().getText().equals("Produktnavn")){
+                ValideringKomponent.validerProduktnavn(event.getNewValue());
+                event.getRowValue().setNavn(event.getNewValue());
+            }else{
+                ValideringKomponent.validerNyKategori(event.getNewValue());
+                event.getRowValue().setKategori(event.getNewValue());
+            }
+        }catch (AvvikKomponentProduktnavn | AvvikKomponentNyKategori e) {
+            populateTableWithList();
+            if (e instanceof AvvikKomponentProduktnavn) {
+                lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to tegn.");
+
+            } else if (e instanceof AvvikKomponentNyKategori) {
+                lblMessage.setText("Feil i kategori! Kategori må være minst to tegn.");
+            }
+        }
+
+    }
+    @FXML
+    public void endreTableViewDataDouble(TableColumn.CellEditEvent<Komponent, Double> event){ //Fra henrik
+        event.getRowValue().setPris(event.getNewValue());
+    }
+    @FXML
+    public void endreTableViewDataBool(TableColumn.CellEditEvent<Komponent, Boolean> event){ //Fra henrik
+        event.getRowValue().setDuplikat(event.getNewValue());
+    }
+
     public void slettRader(ActionEvent event) {
     }
 

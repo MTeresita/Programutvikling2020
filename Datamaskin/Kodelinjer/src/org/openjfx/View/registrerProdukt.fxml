@@ -15,7 +15,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.cell.TextFieldTableCell?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.RegistrerProduktController">
    <children>
       <BorderPane prefHeight="780.0" prefWidth="1100.0">
@@ -48,10 +50,37 @@
                   <Button fx:id="slettRader" layoutX="580.0" layoutY="398.0" mnemonicParsing="false" onAction="#slettRader" prefHeight="25.0" prefWidth="137.0" styleClass="delete" stylesheets="@../styles.css" text="Slett valgte rader" />
                   <TableView fx:id="komponenter" layoutX="89.0" layoutY="121.0" prefHeight="271.0" prefWidth="628.0">
                     <columns>
-                      <TableColumn fx:id="produktnavn" prefWidth="202.0" text="Produktnavn" />
-                      <TableColumn fx:id="kategori" prefWidth="164.0" text="Kategori" />
-                      <TableColumn fx:id="pris" minWidth="0.0" prefWidth="159.0" text="Pris" />
-                       <TableColumn fx:id="duplikat" prefWidth="102.0" text="Duplikat" />
+                      <TableColumn fx:id="produktnavn" prefWidth="202.0" text="Produktnavn" onEditCommit="#endreTableViewDataString">
+                         <cellValueFactory>
+                            <PropertyValueFactory property="navn" />
+                         </cellValueFactory>
+                         <cellFactory>
+                            <TextFieldTableCell fx:factory="forTableColumn" />
+                         </cellFactory>
+                      </TableColumn>
+
+                      <TableColumn fx:id="kategori" prefWidth="164.0" text="Kategori" onEditCommit="#endreTableViewDataString">
+                         <cellValueFactory>
+                            <PropertyValueFactory property="kategori" />
+                         </cellValueFactory>
+                         <cellFactory>
+                            <TextFieldTableCell fx:factory="forTableColumn" />
+                         </cellFactory>
+                      </TableColumn>
+
+                      <TableColumn fx:id="pris" minWidth="0.0" prefWidth="159.0" text="Pris" onEditCommit="#endreTableViewDataDouble">
+                         <cellValueFactory>
+                            <PropertyValueFactory property="pris" />
+                         </cellValueFactory>
+                      </TableColumn>
+
+                       <TableColumn fx:id="duplikat" prefWidth="102.0" text="Duplikat" onEditCommit="#endreTableViewDataBool">
+                          <cellValueFactory>
+                             <PropertyValueFactory property="duplikat" />
+                          </cellValueFactory>
+
+                       </TableColumn>
+
                     </columns>
                   </TableView>
                   <Text layoutX="89.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-header-lower" text="Liste over produkter">
