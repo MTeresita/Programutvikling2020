@@ -32,6 +32,9 @@ public ComboBox adminORuser, kategoriCombobox;
 public Label lblMessage;
 
 @FXML
+public CheckBox checkBox;
+
+@FXML
 TableView <Komponent> komponenter;
 
 @FXML
@@ -179,14 +182,14 @@ public KomponenterListe kl = new KomponenterListe();
                 ValideringKomponent.validerNyKategori(kategoriNavn.getText());
                 ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
 
-                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(), Double.parseDouble(produktPris.getText()), checkBox.isSelected());
                 sjekkForDuplikater(nyKomponent);
 
             } else {
                 ValideringKomponent.validerProduktnavn(produktNavn.getText());
                 ValideringKomponent.validerPris(Double.parseDouble(produktPris.getText()));
 
-                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), false); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), checkBox.isSelected()); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
                 sjekkForDuplikater(nyKomponent);
             }
         komponenter.refresh();
