@@ -10,7 +10,7 @@ public class ValideringKomponent {
 
     public static boolean validerProduktnavn(String produktnavn) throws AvvikKomponentProduktnavn {
 
-        if(!produktnavn.matches("^[A-ZÆØÅa-zæøå]{5,50}$")){
+        if(!produktnavn.matches("^[A-ZÆØÅa-zæøå]{2,50}$")){
             throw new AvvikKomponentProduktnavn("Produktnavn må være mellom 2 og 50 tegn.");
         }
         else if(produktnavn.isBlank() || produktnavn.isEmpty()){
@@ -24,7 +24,7 @@ public class ValideringKomponent {
 
     public static boolean validerNyKategori(String nyKategori) throws AvvikKomponentNyKategori {
 
-        if(!nyKategori.matches("^[A-ZÆØÅa-zæøå]{5,50}$")){
+        if(!nyKategori.matches("^[A-ZÆØÅa-zæøå]{2,50}$")){
             throw new AvvikKomponentNyKategori("Produktnavn må være mellom 2 og 50 tegn.");
         }
         else if(nyKategori.isBlank() || nyKategori.isEmpty()){
