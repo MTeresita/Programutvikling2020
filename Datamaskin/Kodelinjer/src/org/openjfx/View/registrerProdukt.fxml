@@ -25,7 +25,7 @@
             </Pane>
          </left>
          <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="bg-white" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
+            <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" styleClass="bg-white" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
                <children>
                   <Text layoutX="90.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer nytt produkt">
                      <font>

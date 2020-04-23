@@ -1,8 +1,12 @@
 package org.openjfx.Controller;
 
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import org.openjfx.Models.Avvik.*;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
@@ -16,6 +20,7 @@ import java.io.IOException;
 
 import static org.openjfx.Models.Avvik.AlertHelper.*;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.checkExistingBruker;
+import static org.openjfx.Models.KomponenterListe.endringITableView;
 
 
 public class RegistrerProduktController {
@@ -40,11 +45,16 @@ TableColumn<Komponent, String> produktnavn, kategori;
 @FXML
 TableColumn<Komponent, Double> pris;
 
+@FXML
+Pane pane;
+
 public KomponenterListe kl = new KomponenterListe();
 
     public void initialize() {
         populateTableWithList();
         komponenter.getSortOrder().add(pris);
+        komponenter.setEditable(true);
+        endringITableView(produktnavn,kategori, pris);
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
         kl.henteFraObjectFil();
