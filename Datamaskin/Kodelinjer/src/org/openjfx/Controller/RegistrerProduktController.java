@@ -261,6 +261,15 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     public void slettRader(ActionEvent event) {
+        Komponent toDelete = komponenter.getSelectionModel().getSelectedItem();
+        System.out.println(toDelete.getNavn());
+        if(kl.slettKomponentFraListe(toDelete)){
+            System.out.println("Slettet");
+        }else{
+            System.out.println("ikke slettet");
+        }
+        kl.lagreTilObjectFil();
+        populateTableWithList();
     }
 
     public void lagreTilFil(ActionEvent event){

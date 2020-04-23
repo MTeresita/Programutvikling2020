@@ -160,6 +160,16 @@ public class KomponenterListe {
         kategori.setCellFactory(TextFieldTableCell.forTableColumn());
         pris.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
     }
+    public boolean slettKomponentFraListe(Komponent k){
+        for(Komponent komponent : komponenterListeObservable){
+            if(k.getNavn().equals(komponent.getNavn())){
+                komponenterListeObservable.remove(komponent);
+                komponenter.remove(komponent);
+                return true;
+            }
+        }
+        return false;
+    }
 
     /*
     public static void doChange(TableColumn produktnavn, TableColumn kategori, TableColumn pris){
