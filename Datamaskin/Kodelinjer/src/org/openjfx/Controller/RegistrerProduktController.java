@@ -31,8 +31,6 @@ public ComboBox adminORuser, kategoriCombobox;
 
 @FXML
 public Label lblMessage;
-@FXML
-public CheckBox checkBox;
 
 @FXML
 public CheckBox checkBox;
