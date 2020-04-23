@@ -26,7 +26,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button layoutX="14.0" layoutY="456.0" mnemonicParsing="false" onAction="#slettKomponentViaListView" prefHeight="35.0" prefWidth="254.0" styleClass="delete" stylesheets="@../styles.css" text="Slett">
+                  <Button layoutX="14.0" layoutY="456.0" mnemonicParsing="false" onAction="#slettKomponentViaListView" prefHeight="35.0" prefWidth="254.0" styleClass="delete" stylesheets="@../styles.css" text="Slett komponent">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -67,19 +67,19 @@
                         <Font name="System Bold" size="35.0" />
                      </font>
                   </Text>
-                  <TableView fx:id="komponenter" layoutX="50.0" layoutY="130.0" prefHeight="589.0" prefWidth="684.0" stylesheets="@../styles.css">
+                  <TableView fx:id="komponenter" layoutX="50.0" layoutY="130.0" prefHeight="521.0" prefWidth="684.0" stylesheets="@../styles.css">
                      <columns>
                         <TableColumn fx:id="produktnavn" prefWidth="320.3333740234375" text="Produkt navn" />
                         <TableColumn fx:id="kategori" minWidth="0.0" prefWidth="219.66668701171875" text="Kategori" />
                         <TableColumn fx:id="pris" prefWidth="144.33331298828125" text="Pris" />
                      </columns>
                   </TableView>
-                  <Button fx:id="leggTilKomponent" layoutX="464.0" layoutY="731.0" mnemonicParsing="false" onAction="#leggTilKomponentEvent" prefHeight="35.0" prefWidth="270.0" styleClass="save" stylesheets="@../styles.css" text="Legg til komponent">
+                  <Button fx:id="leggTilKomponent" layoutX="463.0" layoutY="661.0" mnemonicParsing="false" onAction="#leggTilKomponentEvent" prefHeight="35.0" prefWidth="270.0" styleClass="save" stylesheets="@../styles.css" text="Legg til komponent">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="filterData" layoutX="371.0" layoutY="98.0" prefHeight="25.0" prefWidth="362.0" promptText="Søk" stylesheets="@../styles.css" />
+                  <TextField fx:id="filterData" layoutX="50.0" layoutY="661.0" prefHeight="37.0" prefWidth="362.0" promptText="Søk" stylesheets="@../styles.css" />
                </children></Pane>
          </center>
       </BorderPane>
