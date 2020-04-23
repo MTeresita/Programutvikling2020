@@ -45,11 +45,12 @@
                   </Text>
                   <TextField fx:id="produktPris" layoutX="91.0" layoutY="646.0" prefHeight="27.0" prefWidth="301.0" stylesheets="@../styles.css" />
                   <Button fx:id="slettRader" layoutX="609.0" layoutY="418.0" mnemonicParsing="false" onAction="#slettRader" prefHeight="25.0" prefWidth="108.0" styleClass="delete" stylesheets="@../styles.css" text="Slett valgte rader" />
-                  <TableView fx:id="komponenter" layoutX="89.0" layoutY="141.0" prefHeight="271.0" prefWidth="628.0">
+                  <TableView fx:id="komponenter" layoutX="89.0" layoutY="141.0" prefHeight="261.0" prefWidth="724.0">
                     <columns>
                       <TableColumn fx:id="produktnavn" prefWidth="295.0" text="Produktnavn" />
                       <TableColumn fx:id="kategori" prefWidth="218.0" text="Kategori" />
                         <TableColumn fx:id="pris" minWidth="0.0" prefWidth="114.0" text="Pris" />
+                        <TableColumn fx:id="duplikat" prefWidth="75.0" text="Duplikat" />
                     </columns>
                   </TableView>
                   <Text layoutX="89.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste over produkter">
