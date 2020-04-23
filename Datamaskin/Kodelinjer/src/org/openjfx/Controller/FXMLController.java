@@ -60,8 +60,6 @@ public class FXMLController {
         */
         populateTable();
         searchTableView(kl, filterData, komponenter);
-        komponenter.setPlaceholder(new Label("Ingen treff"));
-
     }
 
     public void populateTable() { //henter fra .csv fil

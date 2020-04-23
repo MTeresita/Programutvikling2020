@@ -16,11 +16,12 @@ import java.io.IOException;
 
 import static org.openjfx.Models.Avvik.AlertHelper.*;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.checkExistingBruker;
+import static org.openjfx.Models.KomponenterListe.searchTableView;
 
 
 public class RegistrerProduktController {
 @FXML
-public TextField user, pass, produktNavn, kategoriNavn, produktPris;
+public TextField user, pass, produktNavn, kategoriNavn, produktPris, filteredData;
 
 @FXML
 public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilFil;
@@ -46,6 +47,7 @@ public KomponenterListe kl = new KomponenterListe();
         populateTableWithList();
         komponenter.getSortOrder().add(pris);
         kategoriNavn.setDisable(true);
+        searchTableView(kl, filteredData, komponenter);
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
         kl.henteFraObjectFil();
