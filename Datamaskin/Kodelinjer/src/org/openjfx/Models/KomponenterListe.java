@@ -145,11 +145,9 @@ public class KomponenterListe {
 
         for(Komponent komponent : komponenterListeObservable){
             if(k.getNavn().equals(komponent.getNavn())){
-                System.out.println(k.getNavn() + " was found in the list");
                 return true;
             }
         }
-        System.out.println(k.getNavn() + " was NOT found in the list");
         return false;
     }
 }
