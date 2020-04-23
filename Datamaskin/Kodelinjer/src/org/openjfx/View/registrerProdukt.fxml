@@ -109,7 +109,7 @@
                   <ComboBox fx:id="kategoriCombobox" layoutX="89.0" layoutY="596.0" onAction="#setKategoriTilgjengelig" prefHeight="27.0" prefWidth="135.0" styleClass="choicebox-product" stylesheets="@../styles.css" value="Velg kategori" />
                   <Label fx:id="lblMessage" layoutX="91.0" layoutY="728.0" prefHeight="30.0" prefWidth="435.0" textFill="RED" />
                   <Button fx:id="lagreTilFil" layoutX="462.0" layoutY="418.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" styleClass="save" stylesheets="@../styles.css" text="Lagre til fil" />
-                  <TextField fx:id="filteredData" layoutX="556.0" layoutY="98.0" promptText="Søk her" />
+                  <TextField fx:id="filteredData" layoutX="89.0" layoutY="418.0" prefHeight="29.0" prefWidth="360.0" promptText="Søk her" />
                   <Text fill="#545454" layoutX="267.0" layoutY="591.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(ved opprettelse av ny kategori)" wrappingWidth="197.73095703125">
                      <font>
                         <Font size="11.0" />
