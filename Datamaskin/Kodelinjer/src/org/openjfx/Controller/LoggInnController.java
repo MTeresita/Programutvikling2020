@@ -1,20 +1,36 @@
 package org.openjfx.Controller;
 
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
 import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.newScene;
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.verifyLogin;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
 import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
 
 public class LoggInnController {
+
+    @FXML
+    AnchorPane anchorRoot;
+
+    @FXML
+    StackPane parentContainer;
 
     @FXML
     TextField txtuser;
@@ -69,18 +85,25 @@ public class LoggInnController {
         }
     }
 
-    public void registrerbruker(ActionEvent actionEvent) {
-        //når den klikkes på, vil du bli sendt til registrer bruker siden
+    public void registrerbruker(ActionEvent actionEvent) throws IOException {
+        /*//når den klikkes på, vil du bli sendt til registrer bruker siden
         registrerbruker.setOnMouseClicked(e -> {
             routeToSite(actionEvent, "registrerBruker");
         });
+         */
+
+        slideSceneFromBottom(registrerbruker, "registrerBruker", parentContainer);
+
     }
 
-    public void loginAdmin(ActionEvent actionEvent) {
+    public void loginAdmin(ActionEvent actionEvent) throws IOException {
         //når den klikkes på, vil du bli sendt til logg inn admin siden
-        loginAdmin.setOnMouseClicked(e -> {
+        /*loginAdmin.setOnMouseClicked(e -> {
             routeToSite(actionEvent, "loggInnAdmin");
         });
+         */
+
+        slideSceneFromBottom(loginAdmin, "loggInnAdmin", parentContainer);
     }
 
 }
