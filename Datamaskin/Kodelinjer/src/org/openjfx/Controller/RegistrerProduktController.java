@@ -3,6 +3,7 @@ package org.openjfx.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import org.openjfx.Models.Avvik.*;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
@@ -48,6 +49,9 @@ TableColumn<Komponent, Double> pris;
 
 @FXML
 TableColumn<Komponent, Boolean> duplikat;
+
+@FXML
+ImageView tilbakemeldingImg;
 
 public KomponenterListe kl = new KomponenterListe();
 
@@ -315,7 +319,7 @@ public KomponenterListe kl = new KomponenterListe();
         switch (type){
             case "alert":
                 lblMessage.setTextFill(Color.web("#e3345a"));
-                lblMessage.setText(msg);
+                lblMessage.setText(msg);    
                 break;
             case "success" :
                 lblMessage.setTextFill(Color.web("#27ba6c"));
