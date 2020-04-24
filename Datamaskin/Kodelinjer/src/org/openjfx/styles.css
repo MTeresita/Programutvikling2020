@@ -21,22 +21,36 @@
 .button-basket{
     -fx-background-color: #f4f4f4;
 }
+.button-basket:hover{
+    -fx-background-color: #fcfcfc;
+}
+.button-basket:pressed{
+    -fx-background-color: #f0f0f0;
+}
 Button{
     -fx-cursor: hand;
     -fx-font-weight: bold;
 }
+
 .save{
     -fx-background-color: #27ba6c;
     -fx-text-fill: white;
 }
 .save:hover{
-
+    -fx-background-color: #38c77b;
 }
-
-
+.save:pressed{
+    -fx-background-color: #21a35e;
+}
 .delete{
     -fx-background-color: #e3345a;
     -fx-text-fill: white;
+}
+.delete:hover{
+    -fx-background-color: #ed3960;
+}
+.delete:pressed{
+    -fx-background-color: #d93256;
 }
 .root{
     -fx-background-radius: 30;

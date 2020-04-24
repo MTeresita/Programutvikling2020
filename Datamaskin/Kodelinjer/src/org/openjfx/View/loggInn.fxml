@@ -39,7 +39,7 @@
                   <Text fill="#393939" layoutX="105.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord" />
                   <TextField fx:id="txtuser" layoutX="106.0" layoutY="109.0" prefHeight="29.0" prefWidth="184.0" stylesheets="@../styles.css" />
                   <PasswordField fx:id="txtpass" layoutX="105.0" layoutY="167.0" prefHeight="29.0" prefWidth="185.0" stylesheets="@../styles.css" />
-                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="137.0" layoutY="243.0" prefHeight="43.0" prefWidth="161.0" textFill="#ee0404" wrapText="true">
+                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="105.0" layoutY="243.0" prefHeight="43.0" prefWidth="193.0" textFill="#ee0404" wrapText="true">
                      <font>
                         <Font size="11.0" />
                      </font></Label>

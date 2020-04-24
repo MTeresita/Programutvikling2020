@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -122,7 +123,7 @@
                   <Label fx:id="lblMessage" layoutX="91.0" layoutY="739.0" prefHeight="30.0" prefWidth="435.0" textFill="RED" />
                   <Button fx:id="lagreTilFil" layoutX="310.0" layoutY="417.0" mnemonicParsing="false" onAction="#lagreTilFil" prefHeight="25.0" prefWidth="85.0" styleClass="save" stylesheets="@../styles.css" text="Lagre til fil" />
                   <CheckBox fx:id="checkBox" layoutX="236.0" layoutY="671.0" mnemonicParsing="false" stylesheets="@../styles.css" text="Flere i samme konfigurasjon" textFill="#727272" />
-                  <TextField fx:id="filteredData" layoutX="88.0" layoutY="308.0" prefHeight="28.0" prefWidth="499.0" promptText="Søk her" styleClass="search-bar" stylesheets="@../styles.css" text="Søkefelt">
+                  <TextField fx:id="filteredData" layoutX="88.0" layoutY="308.0" prefHeight="28.0" prefWidth="499.0" promptText="Søk etter komponent" styleClass="search-bar" stylesheets="@../styles.css">
                      <font>
                         <Font size="11.0" />
                      </font></TextField>
@@ -135,6 +136,8 @@
                      </font>
                   </Text>
                   <Text fill="#5e5e5e" layoutX="230.0" layoutY="659.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duplikat" wrappingWidth="72.02001953125" />
+                  <Circle fill="#ffffff00" layoutX="565.0" layoutY="320.0" radius="7.0" stroke="#7c7c7c" strokeType="INSIDE" strokeWidth="2.5" />
+                  <Line endX="-95.0" endY="8.0" layoutX="669.0" layoutY="323.0" startX="-100.0" startY="1.666656494140625" stroke="#7c7c7c" strokeWidth="2.5" />
                </children>
             </Pane>
          </center>
