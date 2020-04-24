@@ -16,7 +16,7 @@ import java.io.IOException;
 
 import static org.openjfx.Models.Avvik.AlertHelper.*;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.checkExistingBruker;
-import static org.openjfx.Models.KomponenterListe.searchTableView;
+import static org.openjfx.Models.KomponenterListe.endringITableView;
 
 
 public class RegistrerProduktController {
@@ -50,13 +50,22 @@ TableColumn<Komponent, Boolean> duplikat;
 public KomponenterListe kl = new KomponenterListe();
 
     public void initialize() {
-        populateTableWithList();
+        populateTableWithJobj();
         komponenter.getSortOrder().add(pris);
-        kategoriNavn.setDisable(true);
-        searchTableView(kl, filteredData, komponenter);
+        komponenter.setEditable(true);
+        endringITableView(produktnavn,kategori, pris);
+    }
+    public void populateTableWithJobj(){ //henter jobj fil fra fra globale KomponeterListen "kl"
+        kl.henteFraObjectFil();
+        produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
+        kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
+        pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
+        duplikat.setCellValueFactory(cellData -> cellData.getValue().duplikatProperty());
+        komponenter.setItems(kl.getObservableList());
+        populateKategoriCombobox();
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
-        kl.henteFraObjectFil();
+        kl.getObservableList();
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
@@ -218,22 +227,55 @@ public KomponenterListe kl = new KomponenterListe();
             lblMessage.setText("Komponeneten er allerede registrert");
             return true;
         }else{
-            kl.getObservableList().add(nyKomponent);
+            //kl.getObservableList().add(nyKomponent);
+            kl.setKomponenter(nyKomponent);
             lblMessage.setText("Komponent lagt til i liste!");
             return false;
         }
     }
 
-    public void slettRader(ActionEvent event) {
-        
+    @FXML
+    public void endreTableViewDataString(TableColumn.CellEditEvent<Komponent, String> event) throws AvvikKomponentProduktnavn, AvvikKomponentNyKategori{ //Fra henrik
         try{
-            kl.slettKomponent(komponenter.getSelectionModel().getSelectedIndex());
+            if(event.getTableColumn().getText().equals("Produktnavn")){
+                ValideringKomponent.validerProduktnavn(event.getNewValue());
+                event.getRowValue().setNavn(event.getNewValue());
+            }else{
+                ValideringKomponent.validerNyKategori(event.getNewValue());
+                event.getRowValue().setKategori(event.getNewValue());
+            }
+        }catch (AvvikKomponentProduktnavn | AvvikKomponentNyKategori e) {
             populateTableWithList();
-            komponenter.refresh();
-            lblMessage.setText("Komponent fjernet fra listen.");
+            if (e instanceof AvvikKomponentProduktnavn) {
+                lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to tegn.");
 
-        }catch(Exception e){
-            System.out.println(e.getMessage());
+            } else if (e instanceof AvvikKomponentNyKategori) {
+                lblMessage.setText("Feil i kategori! Kategori må være minst to tegn.");
+            }
         }
+
+    }
+    @FXML
+    public void endreTableViewDataDouble(TableColumn.CellEditEvent<Komponent, Double> event){ //Fra henrik
+        event.getRowValue().setPris(event.getNewValue());
+    }
+    @FXML
+    public void endreTableViewDataBool(TableColumn.CellEditEvent<Komponent, Boolean> event){ //Fra henrik
+        event.getRowValue().setDuplikat(event.getNewValue());
+    }
+
+    public void slettRader(ActionEvent event) {
+        Komponent toDelete = komponenter.getSelectionModel().getSelectedItem();
+        System.out.println(toDelete.getNavn());
+        if(kl.slettKomponentFraListe(toDelete)){
+            System.out.println("Slettet");
+        }else{
+            System.out.println("ikke slettet");
+        }
+        populateTableWithList();
+    }
+
+    public void lagreTilFil(ActionEvent event){
+        kl.lagreTilObjectFil();
     }
 }

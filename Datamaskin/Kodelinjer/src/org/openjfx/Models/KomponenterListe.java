@@ -1,12 +1,17 @@
 package org.openjfx.Models;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.DoubleStringConverter;
 import org.openjfx.Models.Filbehandling.FilHenting.FilHentingAdministrator;
 import org.openjfx.Models.Filbehandling.FilLagring.FilLagringAdmin;
 
@@ -98,7 +103,7 @@ public class KomponenterListe {
         return komponenterListeObservable;
     }
 
-    public static void searchTableView(KomponenterListe kl, TextField textField, TableView tableView){
+    public static void searchTableView(KomponenterListe kl, TextField sokefelt, TableView tableView){
         // setter som default at hvis den ikke finner noe, skal Ingen treff dukke opp i tableviewet
         tableView.setPlaceholder(new Label("Ingen treff"));
 
@@ -107,7 +112,7 @@ public class KomponenterListe {
                 (kl.getObservableList(), p -> true);
 
         // Setter filter predicate for når bruker søker eller endre inout i skrivefeltet
-        textField.textProperty().addListener((observableValue, oldValue, newValue) ->{
+        sokefelt.textProperty().addListener((observableValue, oldValue, newValue) ->{
             filteredData.setPredicate(searchTableView -> {
 
                 // Hvis filterlisten er tom, hvis alle komponeneter
@@ -150,9 +155,41 @@ public class KomponenterListe {
         }
         return false;
     }
-
-    public void slettKomponent(int index){
-            komponenter.remove(index);
+    public static void endringITableView(TableColumn produktnavn, TableColumn kategori, TableColumn pris){
+        produktnavn.setCellFactory(TextFieldTableCell.forTableColumn());
+        kategori.setCellFactory(TextFieldTableCell.forTableColumn());
+        pris.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
     }
+    public boolean slettKomponentFraListe(Komponent k){
+        for(Komponent komponent : komponenterListeObservable){
+            if(k.getNavn().equals(komponent.getNavn())){
+                komponenterListeObservable.remove(komponent);
+                komponenter.remove(komponent);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+    public static void doChange(TableColumn produktnavn, TableColumn kategori, TableColumn pris){
+        produktnavn.setOnEditCommit(
+                (EventHandler<TableColumn.CellEditEvent<Komponent, String>>) t -> (t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                ).setNavn(t.getNewValue()));
+
+        kategori.setOnEditCommit(
+                (EventHandler<TableColumn.CellEditEvent<Komponent, String>>) t -> (t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                ).setKategori(t.getNewValue()));
+
+        pris.setOnEditCommit(
+                (EventHandler<TableColumn.CellEditEvent<Komponent, String>>) t -> (t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                ).setPris(Double.parseDouble(t.getNewValue())));
+
+    }
+
+     */
 
 }
