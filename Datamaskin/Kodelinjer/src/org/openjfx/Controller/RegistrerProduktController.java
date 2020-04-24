@@ -277,7 +277,8 @@ public KomponenterListe kl = new KomponenterListe();
             showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(slettRader), "Produkt: "+toDelete.getNavn()+" er slettet",
                     "Produkt: "+toDelete.getNavn()+" er slettet");
         }else{
-            System.out.println("ikke slettet");
+            showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(slettRader), "Produkt ble ikke slettet!",
+                    "Produktet ble ikke slettet");
         }
         populateTableWithList();
     }
