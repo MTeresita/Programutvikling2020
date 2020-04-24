@@ -18,6 +18,11 @@
     -fx-background-color: #E2E2E2;
 }
 
+/*buttons*/
+Button{
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
 .button-basket{
     -fx-background-color: #f4f4f4;
 }
@@ -27,11 +32,6 @@
 .button-basket:pressed{
     -fx-background-color: #f0f0f0;
 }
-Button{
-    -fx-cursor: hand;
-    -fx-font-weight: bold;
-}
-
 .save{
     -fx-background-color: #27ba6c;
     -fx-text-fill: white;
@@ -52,9 +52,8 @@ Button{
 .delete:pressed{
     -fx-background-color: #d93256;
 }
-.root{
-    -fx-background-radius: 30;
-}
+
+
 .text-field{
     -fx-background-color: -fx-text-box-border, -fx-background ;
     -fx-background-insets: 0, 0 0 0 0;
@@ -71,6 +70,8 @@ Button{
 .search-bar{
    -fx-prompt-text-fill: #343434;
 }
+
+
 /*Listview*/
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     -fx-background-color: white;

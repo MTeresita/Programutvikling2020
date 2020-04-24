@@ -3,6 +3,7 @@ package org.openjfx.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import org.openjfx.Models.Avvik.*;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
@@ -55,7 +56,9 @@ public KomponenterListe kl = new KomponenterListe();
         komponenter.getSortOrder().add(pris);
         komponenter.setEditable(true);
         endringITableView(produktnavn,kategori, pris);
+        lblMessage.setWrapText(true);
     }
+
     public void populateTableWithJobj(){ //henter jobj fil fra fra globale KomponeterListen "kl"
         kl.henteFraObjectFil();
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
@@ -87,6 +90,7 @@ public KomponenterListe kl = new KomponenterListe();
         }
         kategoriCombobox.setValue("Velg kategori");
         kategoriCombobox.setPromptText("Velg kategori");
+        kategoriNavn.setDisable(true);
 
 
     }
@@ -117,11 +121,13 @@ public KomponenterListe kl = new KomponenterListe();
                     }
                     else{
                         //eksisterer bruker, send feilmelding
-                        lblMessage.setText("Administrator eksisterer");
+                        setLabelTekst("alert", "Administrator eksisterer");
+                        //lblMessage.setText("Administrator eksisterer");
                     }
                 }
                 catch(AvvikLoggInnBrukernavn e){
-                    lblMessage.setText("Feil Brukernavn eller passord");
+                    //lblMessage.setText("Feil Brukernavn eller passord");
+                    setLabelTekst("alert", "Feil Brukernavn eller passord");
                 }
                 break;
 
@@ -147,16 +153,16 @@ public KomponenterListe kl = new KomponenterListe();
                     }
                     else {
                         //eksisterer bruker, send f eilmelding
-                        lblMessage.setText("Bruker eksisterer");
+                        setLabelTekst("alert", "Bruker eksisterer.");
                     }
                 }
                 catch(AvvikLoggInnBrukernavn e){
-                    lblMessage.setText("Feil i brukernavn eller passord");
+                    setLabelTekst("alert", "Feil i brukernavn eller passord.");
                 }
                break;
 
             default:
-                lblMessage.setText("Bruker eksiterer");
+                setLabelTekst("alert", "Bruker eksisterer");
         }
 
     }
@@ -200,7 +206,8 @@ public KomponenterListe kl = new KomponenterListe();
         try {
 
             if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Velg kategori")){
-                lblMessage.setText("Du må velge en eksisterende eller lage en ny kategori.");
+                setLabelTekst("alert", "Du må velge en eksisterende eller lage en ny kategori.");
+                //lblMessage.setText("Du må velge en eksisterende eller lage en ny kategori.");
                 //LAGE AVVIK HER?
             }
             else if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
@@ -218,27 +225,33 @@ public KomponenterListe kl = new KomponenterListe();
                 Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriCombobox.getSelectionModel().getSelectedItem().toString(), Double.parseDouble(produktPris.getText()), checkBox.isSelected()); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
                 sjekkForDuplikater(nyKomponent);
             }
-        komponenter.refresh();
-        populateKategoriCombobox();
+            clear();
+            komponenter.refresh();
+            populateKategoriCombobox();
 
         } catch (AvvikKomponentProduktnavn | AvvikKomponentPris | AvvikKomponentNyKategori e) {
             if (e instanceof AvvikKomponentProduktnavn) {
-                lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to tegn.");
+                setLabelTekst("alert", "Feil i produktnavn! Produktnavn må være minst to tegn.");
+                //lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to tegn.");
             } else if (e instanceof AvvikKomponentNyKategori) {
-                lblMessage.setText("Feil i kategori! Kategori må være minst to tegn.");
+                setLabelTekst("alert", "Feil i kategori! Kategori må være minst to tegn.");
+                //lblMessage.setText("Feil i kategori! Kategori må være minst to tegn.");
             } else if (e instanceof AvvikKomponentPris) {
-                lblMessage.setText("Pris må være høyere enn 0 NOK og mindre enn 1 000 000 NOK");
+                setLabelTekst("alert", "Pris må være høyere enn 0 NOK og mindre enn 1 000 000 NOK.");
+                //lblMessage.setText("Pris må være høyere enn 0 NOK og mindre enn 1 000 000 NOK");
             }
         }
     }
     public boolean sjekkForDuplikater(Komponent nyKomponent){
         if(kl.finnDuplikat(nyKomponent)){
-            lblMessage.setText("Komponeneten er allerede registrert");
+            setLabelTekst("alert", "Komponeneten er allerede registrert");
+            //lblMessage.setText("Komponeneten er allerede registrert");
             return true;
         }else{
             //kl.getObservableList().add(nyKomponent);
             kl.setKomponenter(nyKomponent);
-            lblMessage.setText("Komponent lagt til i liste!");
+            setLabelTekst("success", "Komponent lagt til i liste!");
+            //lblMessage.setText("Komponent lagt til i liste!");
             return false;
         }
     }
@@ -256,10 +269,12 @@ public KomponenterListe kl = new KomponenterListe();
         }catch (AvvikKomponentProduktnavn | AvvikKomponentNyKategori e) {
             komponenter.refresh();
             if (e instanceof AvvikKomponentProduktnavn) {
-                lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to tegn.");
+                setLabelTekst("alert", "Feil i produktnavn! Produktnavn må være minst to tegn.");
+                //lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to tegn.");
 
             } else if (e instanceof AvvikKomponentNyKategori) {
-                lblMessage.setText("Feil i kategori! Kategori må være minst to tegn.");
+                setLabelTekst("alert", "Feil i kategori! Kategori må være minst to tegn.");
+                //lblMessage.setText("Feil i kategori! Kategori må være minst to tegn.");
             }
         }
 
@@ -274,17 +289,42 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     public void slettRader(ActionEvent event) {
-        Komponent toDelete = komponenter.getSelectionModel().getSelectedItem();
-        System.out.println(toDelete.getNavn());
-        if(kl.slettKomponentFraListe(toDelete)){
-            System.out.println("Slettet");
-        }else{
-            System.out.println("ikke slettet");
+        try {
+            Komponent toDelete = komponenter.getSelectionModel().getSelectedItem();
+            if (kl.slettKomponentFraListe(toDelete)) {
+                setLabelTekst("success", "Komponent slettet.");
+            } else {
+                setLabelTekst("alert", "Noe gikk galt. Kunne ikke slette komponent.");
+            }
+            populateTableWithList();
+        }catch(NullPointerException e){
+            setLabelTekst("alert", "Noe gikk galt. Kunne ikke slette komponent.");
         }
-        populateTableWithList();
     }
 
     public void lagreTilFil(ActionEvent event){
-        kl.lagreTilObjectFil();
+        try {
+            kl.lagreTilObjectFil();
+            setLabelTekst("success", "Lagring var vellykket!");
+        }catch (Exception e){
+            setLabelTekst("alert", "Noe gikk galt. Kunne ikke lagre fil.");
+        }
+    }
+
+    public void setLabelTekst(String type, String msg){
+        switch (type){
+            case "alert":
+                lblMessage.setTextFill(Color.web("#e3345a"));
+                lblMessage.setText(msg);
+                break;
+            case "success" :
+                lblMessage.setTextFill(Color.web("#27ba6c"));
+                lblMessage.setText(msg);
+                break;
+            default:
+                lblMessage.setTextFill(Color.web("000"));
+                lblMessage.setText(msg);
+                break;
+        }
     }
 }
