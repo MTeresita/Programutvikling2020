@@ -60,10 +60,10 @@ public class RegistrerBrukerController {
         } catch (AvvikLoggInnBrukernavn | AvvikLoggInnPassord e) {
 
             if(e instanceof AvvikLoggInnBrukernavn) {
-                lblMessage.setText("Feil i brukernavn! Brukernavn må være minst 5 bokstaver langt.");
+                lblMessage.setText("Feil i brukernavn!\nBrukernavn må være minst 5 bokstaver langt.");
             }
             else if(e instanceof AvvikLoggInnPassord){
-                lblMessage.setText("Feil i passord! Passord må være minst 5 bokstaver langt.");
+                lblMessage.setText("Feil i passord!\nPassord må være minst 5 bokstaver langt.");
             }
         }
     }

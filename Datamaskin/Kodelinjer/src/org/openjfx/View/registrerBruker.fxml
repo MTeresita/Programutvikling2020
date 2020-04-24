@@ -19,10 +19,10 @@
                   <Button fx:id="tilbakeKnapp" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onAction="#tilbakeKnapp" prefHeight="24.0" prefWidth="67.0" styleClass="button-basket" stylesheets="@../styles.css" text="Tilbake" />
                </children></Pane>
          </left>
-         <center>
+         <right>
             <Pane prefHeight="386.0" prefWidth="395.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="registrerbtn" layoutX="212.0" layoutY="282.0" mnemonicParsing="false" onAction="#registerEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
+                  <Button fx:id="registrerbtn" layoutX="212.0" layoutY="274.0" mnemonicParsing="false" onAction="#registerEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
                   <Text fill="#393939" layoutX="140.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -35,7 +35,7 @@
                   </Text>
                   <TextField fx:id="txtuser" layoutX="140.0" layoutY="105.0" style="-fx-border-color: Purple;" />
                   <PasswordField fx:id="txtpass" layoutX="140.0" layoutY="171.0" style="-fx-border-color: Purple;" />
-                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="262.0" layoutY="163.0" prefHeight="72.0" prefWidth="167.0" />
+                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="24.0" layoutY="311.0" prefHeight="75.0" prefWidth="308.0" textFill="RED" />
                   <Text layoutX="139.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer deg" wrappingWidth="160.541015625">
                      <font>
                         <Font name="System Bold" size="21.0" />
@@ -49,7 +49,7 @@
                   </Text>
                </children>
             </Pane>
-         </center>
+         </right>
       </BorderPane>
    </children>
 </AnchorPane>
