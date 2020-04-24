@@ -12,7 +12,7 @@ public class ValideringKomponent {
 
     public static boolean validerProduktnavn(String produktnavn) throws AvvikKomponentProduktnavn {
 
-        if(!produktnavn.matches("^[A-ZÆØÅa-zæøå0-9 ]{5,50}$")){
+        if(!produktnavn.matches("^[A-ZÆØÅa-zæøå0-9 ]{2,50}$")){
             throw new AvvikKomponentProduktnavn("Produktnavn må være mellom 2 og 50 tegn.");
         }
         else if(produktnavn.isBlank() || produktnavn.isEmpty()){

@@ -43,10 +43,10 @@
                      <font>
                         <Font size="11.0" />
                      </font></Label>
-                  <Hyperlink fx:id="registrerbruker" layoutX="191.0" layoutY="292.0" onAction="#registrerbruker" prefHeight="26.0" prefWidth="114.0" text="Registrer deg her" />
+                  <Hyperlink fx:id="registrerbruker" layoutX="192.0" layoutY="292.0" onAction="#registrerbruker" prefHeight="26.0" prefWidth="114.0" text="Registrer deg her" />
                   <Text layoutX="108.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ikke bruker? " />
                   <Text layoutX="108.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator" />
-                  <Hyperlink fx:id="loginAdmin" layoutX="190.0" layoutY="330.0" onAction="#loginAdmin" prefHeight="26.0" prefWidth="114.0" text="Logg på her" />
+                  <Hyperlink fx:id="loginAdmin" layoutX="192.0" layoutY="330.0" onAction="#loginAdmin" prefHeight="26.0" prefWidth="114.0" text="Logg på her" />
                   <Text fill="#f79977" layoutX="105.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn bruker" wrappingWidth="189.22900390625">
                      <font>
                         <Font size="21.0" />

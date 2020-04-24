@@ -209,10 +209,9 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     @FXML
-    public void registererProdukt(ActionEvent event) throws AvvikKomponentProduktnavn, AvvikKomponentPris, AvvikKomponentNyKategori {
+    public void registererProdukt(ActionEvent event) throws AvvikKomponentProduktnavn, AvvikKomponentPris, AvvikKomponentNyKategori, NumberFormatException {
         //System.out.println("Fra combobox: "+kategoriCombobox.getSelectionModel().getSelectedItem().toString());
         try {
-
             if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Velg kategori")){
                 setLabelTekst("alert", "Du må velge en eksisterende eller lage en ny kategori.");
                 //lblMessage.setText("Du må velge en eksisterende eller lage en ny kategori.");
@@ -237,29 +236,23 @@ public KomponenterListe kl = new KomponenterListe();
             komponenter.refresh();
             populateKategoriCombobox();
 
-        } catch (AvvikKomponentProduktnavn | AvvikKomponentPris | AvvikKomponentNyKategori e) {
+        } catch (AvvikKomponentProduktnavn | AvvikKomponentPris | AvvikKomponentNyKategori | NumberFormatException e) {
             if (e instanceof AvvikKomponentProduktnavn) {
                 setLabelTekst("alert", "Feil i produktnavn! Produktnavn må være minst to tegn.");
-                //lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to tegn.");
             } else if (e instanceof AvvikKomponentNyKategori) {
                 setLabelTekst("alert", "Feil i kategori! Kategori må være minst to tegn.");
-                //lblMessage.setText("Feil i kategori! Kategori må være minst to tegn.");
-            } else if (e instanceof AvvikKomponentPris) {
+            } else if (e instanceof AvvikKomponentPris | e instanceof NumberFormatException) {
                 setLabelTekst("alert", "Pris må være høyere enn 0 NOK og mindre enn 1 000 000 NOK.");
-                //lblMessage.setText("Pris må være høyere enn 0 NOK og mindre enn 1 000 000 NOK");
             }
         }
     }
     public boolean sjekkForDuplikater(Komponent nyKomponent){
         if(kl.finnDuplikat(nyKomponent)){
             setLabelTekst("alert", "Komponeneten er allerede registrert");
-            //lblMessage.setText("Komponeneten er allerede registrert");
             return true;
         }else{
-            //kl.getObservableList().add(nyKomponent);
             kl.setKomponenter(nyKomponent);
             setLabelTekst("success", "Komponent lagt til i liste!");
-            //lblMessage.setText("Komponent lagt til i liste!");
             return false;
         }
     }
