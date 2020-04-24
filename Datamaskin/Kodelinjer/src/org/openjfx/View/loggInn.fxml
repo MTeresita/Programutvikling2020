@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -15,35 +16,40 @@
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
          <left>
-            <Pane prefHeight="400.0" prefWidth="165.0" styleClass="gradient" stylesheets="@../styles.css" BorderPane.alignment="CENTER" />
+            <Pane prefHeight="400.0" prefWidth="165.0" styleClass="gradient" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fill="WHITE" layoutX="12.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RÅFETDATA.NO">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="35.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VELKOMMEN!">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Line endX="7.0" layoutX="140.0" layoutY="61.0" startX="-125.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="1.25" />
+               </children></Pane>
          </left>
          <center>
             <Pane prefHeight="386.0" prefWidth="395.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnLogin" layoutX="206.0" layoutY="212.0" mnemonicParsing="false" onAction="#loginEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Logg inn" />
-                  <Text fill="#393939" layoutX="138.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Text>
-                  <Text fill="#393939" layoutX="138.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="txtuser" layoutX="138.0" layoutY="109.0" stylesheets="@../styles.css" />
-                  <PasswordField fx:id="txtpass" layoutX="138.0" layoutY="167.0" stylesheets="@../styles.css" />
-                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="137.0" layoutY="243.0" prefHeight="43.0" prefWidth="161.0" textFill="#ee0404" wrapText="true">
+                  <Button fx:id="btnLogin" layoutX="209.0" layoutY="213.0" mnemonicParsing="false" onAction="#loginEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Logg inn" />
+                  <Text fill="#393939" layoutX="106.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn" />
+                  <Text fill="#393939" layoutX="105.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord" />
+                  <TextField fx:id="txtuser" layoutX="106.0" layoutY="109.0" prefHeight="29.0" prefWidth="184.0" stylesheets="@../styles.css" />
+                  <PasswordField fx:id="txtpass" layoutX="105.0" layoutY="167.0" prefHeight="29.0" prefWidth="185.0" stylesheets="@../styles.css" />
+                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="105.0" layoutY="243.0" prefHeight="43.0" prefWidth="193.0" textFill="#ee0404" wrapText="true">
                      <font>
                         <Font size="11.0" />
                      </font></Label>
-                  <Hyperlink fx:id="registrerbruker" layoutX="211.0" layoutY="292.0" onAction="#registrerbruker" prefHeight="26.0" prefWidth="114.0" text="Registrer deg her" />
-                  <Text layoutX="128.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ikke bruker? " />
-                  <Text layoutX="128.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator" />
-                  <Hyperlink fx:id="loginAdmin" layoutX="210.0" layoutY="330.0" onAction="#loginAdmin" prefHeight="26.0" prefWidth="114.0" text="Logg på her" />
-                  <Text layoutX="138.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn bruker" wrappingWidth="189.22900390625">
+                  <Hyperlink fx:id="registrerbruker" layoutX="191.0" layoutY="292.0" onAction="#registrerbruker" prefHeight="26.0" prefWidth="114.0" text="Registrer deg her" />
+                  <Text layoutX="108.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ikke bruker? " />
+                  <Text layoutX="108.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator" />
+                  <Hyperlink fx:id="loginAdmin" layoutX="190.0" layoutY="330.0" onAction="#loginAdmin" prefHeight="26.0" prefWidth="114.0" text="Logg på her" />
+                  <Text fill="#f79977" layoutX="105.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn bruker" wrappingWidth="189.22900390625">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="21.0" />
                      </font>
                   </Text>
                </children>
