@@ -225,5 +225,15 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     public void slettRader(ActionEvent event) {
+        
+        try{
+            kl.slettKomponent(komponenter.getSelectionModel().getSelectedIndex());
+            populateTableWithList();
+            komponenter.refresh();
+            lblMessage.setText("Komponent fjernet fra listen.");
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }

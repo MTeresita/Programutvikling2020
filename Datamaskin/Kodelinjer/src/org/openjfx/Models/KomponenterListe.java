@@ -150,4 +150,9 @@ public class KomponenterListe {
         }
         return false;
     }
+
+    public void slettKomponent(int index){
+            komponenter.remove(index);
+    }
+
 }
