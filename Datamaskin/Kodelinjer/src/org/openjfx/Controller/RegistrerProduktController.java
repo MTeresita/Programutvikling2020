@@ -274,6 +274,8 @@ public KomponenterListe kl = new KomponenterListe();
         System.out.println(toDelete.getNavn());
         if(kl.slettKomponentFraListe(toDelete)){
             System.out.println("Slettet");
+            showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(slettRader), "Produkt: "+toDelete.getNavn()+" er slettet",
+                    "Produkt: "+toDelete.getNavn()+" er slettet");
         }else{
             System.out.println("ikke slettet");
         }
