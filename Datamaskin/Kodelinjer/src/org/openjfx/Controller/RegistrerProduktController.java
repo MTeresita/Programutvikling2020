@@ -97,12 +97,12 @@ public KomponenterListe kl = new KomponenterListe();
         // er det admin eller bruker sjek --> hvilken fil skal den til
         String value = String.valueOf(adminORuser.getValue());
 
-        switch (value){
+        switch (value) {
             case "Admin":
-                try{
+                try {
                     ValiderLoggInn.valideringBrukernavn(user.getText());
                     ValiderLoggInn.validerPassord(pass.getText());
-                    if(!checkExistingBruker(user.getText(), "./Admin.csv")) {
+                    if (!checkExistingBruker(user.getText(), "./Admin.csv")) {
                         lblMessage.setText("");
                         //en ny bruker blir registrer
                         BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
@@ -113,19 +113,22 @@ public KomponenterListe kl = new KomponenterListe();
                                 "Administrator opprettet");
                         //resetter inputs for registrering
                         clear();
-                    }
-                    else{
+                    } else {
                         //eksisterer bruker, send feilmelding
                         lblMessage.setText("Administrator eksisterer");
                     }
-                }
-                catch(AvvikLoggInnBrukernavn e){
-                    lblMessage.setText("Feil Brukernavn eller passord");
+                } catch (AvvikLoggInnBrukernavn | AvvikLoggInnPassord e) {
+                    if (e instanceof AvvikLoggInnBrukernavn) {
+                        lblMessage.setText("Feil i brukernavn! Brukernavn må være minst 5 bokstaver langt.");
+                    } else if (e instanceof AvvikLoggInnPassord) {
+                        lblMessage.setText("Feil i passord! Passord må være minst 5 bokstaver langt.");
+                    }
+
                 }
                 break;
 
             case "Bruker":
-                try{
+                try {
                     ValiderLoggInn.valideringBrukernavn(user.getText());
                     ValiderLoggInn.validerPassord(pass.getText());
                     if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
@@ -143,19 +146,21 @@ public KomponenterListe kl = new KomponenterListe();
                         //resetter inputs for registrering
                         clear();
 
-                    }
-                    else {
+                    } else {
                         //eksisterer bruker, send f eilmelding
                         lblMessage.setText("Bruker eksisterer");
                     }
+                } catch (AvvikLoggInnBrukernavn | AvvikLoggInnPassord e) {
+                    if (e instanceof AvvikLoggInnBrukernavn) {
+                        lblMessage.setText("Feil i brukernavn! Brukernavn må være minst 5 bokstaver langt.");
+                    } else if (e instanceof AvvikLoggInnPassord) {
+                        lblMessage.setText("Feil i passord! Passord må være minst 5 bokstaver langt.");
+                    }
                 }
-                catch(AvvikLoggInnBrukernavn e){
-                    lblMessage.setText("Feil i brukernavn eller passord");
-                }
-               break;
+                break;
 
             default:
-                lblMessage.setText("Bruker eksiterer");
+                lblMessage.setText("Feil i brukernavn eller passord!");
         }
 
     }
