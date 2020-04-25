@@ -7,17 +7,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.StackPane;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
 import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.IOException;
 
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.newScene;
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.verifyLogin;
-import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
 
 public class LoggInnAdminController {
+    @FXML
+    StackPane parentContainer;
     @FXML
     TextField txtadminuser;
 
@@ -28,7 +29,7 @@ public class LoggInnAdminController {
     Label lblMessage;
 
     @FXML
-    Button btnLogin;
+    Button btnLogin, tilbakeKnapp;
 
     public void initialize(){
         txtadminpass.setOnKeyPressed(e ->{
@@ -66,8 +67,8 @@ public class LoggInnAdminController {
 
 
 
-    public void tilbakeKnapp(ActionEvent actionEvent) {
-        routeToSite(actionEvent, "loggInn");
+    public void tilbakeKnapp() throws IOException {
+        slideSceneFromTop("loggInn", parentContainer);
     }
 
 }

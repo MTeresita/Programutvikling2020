@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
 import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 import org.openjfx.Models.Avvik.ValidationHelper;
@@ -17,6 +18,7 @@ import java.io.IOException;
 
 import static org.openjfx.Models.Avvik.AlertHelper.showAlertWindow;
 import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.slideSceneFromTop;
 import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
 
 public class RegistrerBrukerController {
@@ -25,10 +27,13 @@ public class RegistrerBrukerController {
     TextField txtuser, txtpass, txtpass1;
 
     @FXML
-    Button registrerbtn, tilbakeKnapp;
+    Button registrerbtn, tilbakeKnapp, brukere;
 
     @FXML
     Label lblMessage;
+
+    @FXML
+    StackPane parentContainer;
 
     public void registerEvent(ActionEvent actionEvent) throws IOException, AvvikLoggInnBrukernavn, AvvikLoggInnPassord {
 
@@ -71,7 +76,7 @@ public class RegistrerBrukerController {
 
 
 
-    public void tilbakeKnapp(ActionEvent actionEvent) {
-        routeToSite(actionEvent, "loggInn");
+    public void tilbakeKnapp(ActionEvent actionEvent) throws IOException {
+        slideSceneFromTop("loggInn", parentContainer);
     }
 }

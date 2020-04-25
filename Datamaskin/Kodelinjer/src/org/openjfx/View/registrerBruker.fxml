@@ -7,49 +7,56 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.RegistrerBrukerController">
+
+<StackPane fx:id="parentContainer" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.RegistrerBrukerController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
-         <left>
-            <Pane prefHeight="400.0" prefWidth="165.0" styleClass="gradient" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="tilbakeKnapp" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#tilbakeKnapp" prefHeight="25.0" prefWidth="139.0" styleClass="button-basket" stylesheets="@../styles.css" text="Tilbake" />
-               </children></Pane>
-         </left>
-         <right>
-            <Pane prefHeight="386.0" prefWidth="395.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="registrerbtn" layoutX="212.0" layoutY="282.0" mnemonicParsing="false" onAction="#registerEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
-                  <Text fill="#393939" layoutX="107.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn*" />
-                  <Text fill="#393939" layoutX="107.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord*" />
-                  <TextField fx:id="txtuser" layoutX="107.0" layoutY="105.0" prefWidth="185.0" stylesheets="@../styles.css" />
-                  <PasswordField fx:id="txtpass" layoutX="107.0" layoutY="171.0" prefHeight="29.0" prefWidth="185.0" stylesheets="@../styles.css" />
-                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="262.0" layoutY="163.0" prefHeight="72.0" prefWidth="167.0" />
-                  <Text fill="#f79977" layoutX="106.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer deg" wrappingWidth="160.541015625">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Text>
-                  <PasswordField fx:id="txtpass1" layoutX="107.0" layoutY="237.0" prefHeight="29.0" prefWidth="185.0" stylesheets="@../styles.css" />
-                  <Text fill="#393939" layoutX="107.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gjenta passord*" />
-               </children>
-            </Pane>
-         </right>
-      </BorderPane>
-      <Text fill="WHITE" layoutX="12.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RÅFETDATA.NO">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="20.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTRER BRUKER">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
-      <Line endX="7.0" layoutX="140.0" layoutY="61.0" startX="-125.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="1.25" />
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <BorderPane prefHeight="400.0" prefWidth="600.0">
+               <left>
+                  <Pane prefHeight="400.0" prefWidth="165.0" styleClass="gradient" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="tilbakeKnapp" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#tilbakeKnapp" prefHeight="25.0" prefWidth="139.0" styleClass="button-basket" stylesheets="@../styles.css" text="Tilbake" />
+                     </children>
+                  </Pane>
+               </left>
+               <right>
+                  <Pane prefHeight="386.0" prefWidth="395.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="registrerbtn" layoutX="212.0" layoutY="282.0" mnemonicParsing="false" onAction="#registerEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
+                        <Text fill="#393939" layoutX="107.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn*" />
+                        <Text fill="#393939" layoutX="107.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord*" />
+                        <TextField fx:id="txtuser" layoutX="107.0" layoutY="105.0" prefWidth="185.0" stylesheets="@../styles.css" />
+                        <PasswordField fx:id="txtpass" layoutX="107.0" layoutY="171.0" prefHeight="29.0" prefWidth="185.0" stylesheets="@../styles.css" />
+                        <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="262.0" layoutY="163.0" prefHeight="72.0" prefWidth="167.0" />
+                        <Text fill="#f79977" layoutX="106.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer deg" wrappingWidth="160.541015625">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Text>
+                        <PasswordField fx:id="txtpass1" layoutX="107.0" layoutY="237.0" prefHeight="29.0" prefWidth="185.0" stylesheets="@../styles.css" />
+                        <Text fill="#393939" layoutX="107.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gjenta passord*" />
+                     </children>
+                  </Pane>
+               </right>
+            </BorderPane>
+            <Text fill="WHITE" layoutX="12.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RÅFETDATA.NO">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="20.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTRER BRUKER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Line endX="7.0" layoutX="140.0" layoutY="61.0" startX="-125.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="1.25" />
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>

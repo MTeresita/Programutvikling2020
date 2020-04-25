@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import org.openjfx.Models.Avvik.*;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 import static org.openjfx.Models.Avvik.AlertHelper.*;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.checkExistingBruker;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.slideSceneFromRight;
 import static org.openjfx.Models.KomponenterListe.endringITableView;
 import static org.openjfx.Models.KomponenterListe.searchTableView;
 
@@ -28,7 +30,7 @@ public class RegistrerProduktController {
 public TextField user, pass, produktNavn, kategoriNavn, produktPris, filteredData;
 
 @FXML
-public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilFil;
+public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilFil, brukere;
 
 @FXML
 public ComboBox adminORuser, kategoriCombobox;
@@ -53,6 +55,9 @@ TableColumn<Komponent, Boolean> duplikat;
 
 @FXML
 ImageView tilbakemeldingImg;
+
+@FXML
+Pane parentContainer;
 
 public KomponenterListe kl = new KomponenterListe();
 
@@ -329,5 +334,10 @@ public KomponenterListe kl = new KomponenterListe();
                 lblMessage.setText(msg);
                 break;
         }
+    }
+
+    public void seBrukere() throws IOException {
+        slideSceneFromRight(brukere, "brukerAdministrasjon",parentContainer );
+        brukere.setVisible(false);
     }
 }
