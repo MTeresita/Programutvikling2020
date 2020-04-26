@@ -7,56 +7,49 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<StackPane fx:id="parentContainer" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.LoggInnAdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.LoggInnAdminController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <BorderPane prefHeight="400.0" prefWidth="600.0">
-               <left>
-                  <Pane prefHeight="400.0" prefWidth="165.0" styleClass="gradient" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
-                     <children>
-                        <Button fx:id="tilbakeKnapp" layoutX="10.0" layoutY="361.0" mnemonicParsing="false" onAction="#tilbakeKnapp" prefHeight="25.0" prefWidth="145.0" styleClass="button-basket" stylesheets="@../styles.css" text="Tilbake" />
-                     </children>
-                  </Pane>
-               </left>
-               <center>
-                  <Pane prefHeight="386.0" prefWidth="395.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
-                     <children>
-                        <Button fx:id="btnLogin" layoutX="209.0" layoutY="264.0" mnemonicParsing="false" onAction="#loginEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Logg inn" />
-                        <Text fill="#393939" layoutX="108.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn" />
-                        <Text fill="#393939" layoutX="108.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord" />
-      
-                        <TextField fx:id="txtadminuser" layoutX="108.0" layoutY="159.0" prefHeight="29.0" prefWidth="182.0" stylesheets="@../styles.css" />
-                        <PasswordField fx:id="txtadminpass" layoutX="108.0" layoutY="217.0" prefHeight="29.0" prefWidth="181.0" stylesheets="@../styles.css" />
-                        <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="13.0" layoutY="293.0" prefHeight="90.0" prefWidth="416.0" textFill="#ee0404" />
-                        <Text fill="#f79977" layoutX="108.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn admin">
-      
-                           <font>
-                              <Font size="21.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-               </center>
-            </BorderPane>
-            <Text fill="WHITE" layoutX="13.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RÅFETDATA.NO">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="36.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADMIN LOGIN">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Line endX="7.0" layoutX="141.0" layoutY="61.0" startX="-125.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="1.25" />
-         </children>
-      </AnchorPane>
+      <BorderPane prefHeight="400.0" prefWidth="600.0">
+         <left>
+            <Pane prefHeight="400.0" prefWidth="165.0" styleClass="gradient" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="tilbakeKnapp" layoutX="10.0" layoutY="361.0" mnemonicParsing="false" onAction="#tilbakeKnapp" prefHeight="25.0" prefWidth="145.0" styleClass="button-basket" stylesheets="@../styles.css" text="Tilbake" />
+               </children></Pane>
+         </left>
+         <center>
+            <Pane prefHeight="386.0" prefWidth="395.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnLogin" layoutX="209.0" layoutY="264.0" mnemonicParsing="false" onAction="#loginEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Logg inn" />
+                  <Text fill="#393939" layoutX="108.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn" />
+                  <Text fill="#393939" layoutX="108.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord" />
+
+                  <TextField fx:id="txtadminuser" layoutX="108.0" layoutY="159.0" prefHeight="29.0" prefWidth="182.0" stylesheets="@../styles.css" />
+                  <PasswordField fx:id="txtadminpass" layoutX="108.0" layoutY="217.0" prefHeight="29.0" prefWidth="181.0" stylesheets="@../styles.css" />
+                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="13.0" layoutY="293.0" prefHeight="90.0" prefWidth="416.0" textFill="#ee0404" />
+                  <Text fill="#f79977" layoutX="108.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn admin">
+
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+      <Text fill="WHITE" layoutX="13.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RÅFETDATA.NO">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="36.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADMIN LOGIN">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Line endX="7.0" layoutX="141.0" layoutY="61.0" startX="-125.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="1.25" />
    </children>
-</StackPane>
+</AnchorPane>

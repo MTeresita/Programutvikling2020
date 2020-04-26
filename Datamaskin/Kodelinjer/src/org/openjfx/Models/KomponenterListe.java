@@ -76,6 +76,32 @@ public class KomponenterListe {
         return komponenter;
     }
 
+    //brukes ikke lengre
+    public ObservableList<Komponent> createTableFromFile() { //henter fra fil og skriver til global observablelist
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("./komponenter.csv"));
+
+            String komponenter;
+            while ((komponenter = reader.readLine()) != null) {
+                //3.
+                String [] komponentfields = komponenter.split(";");
+                double pris = Double. parseDouble(komponentfields[2]);
+                //4.
+                Komponent inputRecord = new Komponent(komponentfields[0], komponentfields[1], pris, Boolean.parseBoolean(komponentfields[3]));
+                //5.
+                komponenterListeObservable.add(inputRecord);
+                this.komponenter.add(inputRecord);
+
+            }
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("Cannot read file");
+        } catch (IOException ex) {
+            System.out.println("File not found#" + ex.getCause());
+        }
+
+        return komponenterListeObservable;
+    }
 
     public static void searchTableView(KomponenterListe kl, TextField sokefelt, TableView tableView){
         // setter som default at hvis den ikke finner noe, skal Ingen treff dukke opp i tableviewet
