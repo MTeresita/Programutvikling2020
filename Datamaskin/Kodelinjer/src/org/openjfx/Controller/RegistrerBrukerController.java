@@ -6,20 +6,23 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
 import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 import org.openjfx.Models.Avvik.ValidationHelper;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
-import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.IOException;
 
 import static org.openjfx.Models.Avvik.AlertHelper.showAlertWindow;
 import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.slideSceneFromTop;
 import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
 
 public class RegistrerBrukerController {
+    @FXML
+    AnchorPane pane;
 
     @FXML
     TextField txtuser, txtpass, txtpass1;
@@ -34,16 +37,18 @@ public class RegistrerBrukerController {
 
         //oppretter et objekt av klassen
         ValidationHelper validationHelper = new ValidationHelper();
-        String invalidInputs = validationHelper.getInvalidInput(txtuser.getText(), txtpass.getText(), txtpass1.getText());
+        String invalidInputs = validationHelper.getRegistrationInvalidInput(txtuser.getText(), txtpass.getText(), txtpass1.getText());
 
+        /*
         try {
             //validerer brukernavn og passord
             ValiderLoggInn.valideringBrukernavn(txtuser.getText());
             ValiderLoggInn.validerPassord(txtpass.getText());
             //hvis strengen ikke er tom, sett alle feilmeldinger inn i en alertbox
+
+         */
             if (!invalidInputs.isEmpty()) {
-                showAlertWindow(Alert.AlertType.ERROR, windowHelper(registrerbtn), "Kunne ikke registrere",
-                        invalidInputs + "\nPrøv igjen");
+                lblMessage.setText(invalidInputs);
                 //hvis ikke så ...
             } else {
                 BrukerRegister enBruker = new BrukerRegister(txtuser.getText(), txtpass.getText());
@@ -57,7 +62,7 @@ public class RegistrerBrukerController {
                 routeToSite(actionEvent, "loggInn");
             }
 
-        } catch (AvvikLoggInnBrukernavn | AvvikLoggInnPassord e) {
+        } /*catch (AvvikLoggInnBrukernavn | AvvikLoggInnPassord e) {
 
             if(e instanceof AvvikLoggInnBrukernavn) {
                 lblMessage.setText("Feil i brukernavn!\nBrukernavn må være minst 5 bokstaver langt.");
@@ -66,12 +71,13 @@ public class RegistrerBrukerController {
                 lblMessage.setText("Feil i passord!\nPassord må være minst 5 bokstaver langt.");
             }
         }
-    }
+        }
+        */
 
 
 
 
-    public void tilbakeKnapp(ActionEvent actionEvent) {
-        routeToSite(actionEvent, "loggInn");
+    public void tilbakeKnapp(ActionEvent actionEvent) throws IOException {
+        slideSceneFromTop("loggInn", pane);
     }
 }

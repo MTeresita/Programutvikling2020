@@ -6,14 +6,23 @@ public class ValidationHelper {
 
     private StringBuilder invalidValues = new StringBuilder();
 
-    public String getInvalidInput(String username, String password, String password1) throws InvalidPasswordException {
+    public String getRegistrationInvalidInput(String username, String password, String password1) {
 
-        if(!checkFields(username, password, password1)){
+        if(!checkRegistrationFields(username, password, password1)){
             checkName(username);
-            checkPassword(password, password1);
+            checkDoublePassword(password, password1);
 
         }
         return invalidValues.toString();
+    }
+
+    public String getLogInInvalidInputs(String brukernavn, String passord){
+        if(!checkLogInFields(brukernavn, passord)){
+            checkName(brukernavn);
+            checkSinglePassword(passord);
+        }
+        return invalidValues.toString();
+
     }
 
 
@@ -25,20 +34,36 @@ public class ValidationHelper {
         return true;
     }
 
-    //TODO: denne fungerer ikke riktig
-    private boolean checkPasswordFormat(String password, String password1) throws InvalidPasswordException{
-        if(!Pattern.matches("^(?=.*[0-9]).{8,20}$",password) && !password.equals("N/A") && !password.isEmpty() &&
-                (!Pattern.matches("^(?=.*[0-9]).{8,20}$",password1))
-                && (!password1.equals("N/A") && !password1.isEmpty())){
-            throw new InvalidPasswordException("Minimum eight characters, at least one letter and one number\n");
+    private boolean checkSinglePasswordFormat(String passord) throws InvalidPasswordException{
+        if(!passord.matches("^[A-ZÆØÅa-zæøå]{5,50}$")){
+            throw new InvalidPasswordException("Feil i passord \n" +
+                    "Passord må være minst 5 bokstaver langt\n");
         }
         return true;
-
     }
 
-    private boolean checkPassword(String password, String password1){
+    private boolean checkSinglePassword(String passord){
+        try {
+            if(checkSinglePasswordFormat(passord)){
+                return true;
+            }
+        } catch (InvalidPasswordException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean checkDoublePasswordFormat(String passord, String passord1) throws InvalidPasswordException{
+        if(!passord.matches("^[A-ZÆØÅa-zæøå]{5,50}$") ||
+            !passord1.matches("^[A-ZÆØÅa-zæøå]{5,50}$")){
+            throw new InvalidPasswordException("Feil i passord!" + "\n" + "Passordene må være minst 5 bokstaver langt.\n");
+        }
+            return true;
+    }
+
+    private boolean checkDoublePassword(String password, String password1){
         try{
-            if(checkPasswordFormat(password,password1)){
+            if(checkDoublePasswordFormat(password,password1)){
                 return true;
             }
         }
@@ -60,12 +85,12 @@ public class ValidationHelper {
         return false;
     }
 
-    private boolean checkIfEmptyFields(String username, String password, String password1) throws EmptyFieldsException{
+    private boolean checkIfRegistrationEmptyFields(String username, String password, String password1) throws EmptyFieldsException{
 
         StringBuilder sb = new StringBuilder();
 
         if(username.isEmpty()){
-            sb.append("Brukernavnet kan ikke være tomt\n");
+            sb.append("Brukernavn feltet kan ikke være tomt\n");
         }
 
         if(password.isEmpty()){
@@ -86,9 +111,38 @@ public class ValidationHelper {
         return true;
     }
 
-    public boolean checkFields(String username, String pass, String pass1){
+    public boolean checkRegistrationFields(String username, String pass, String pass1){
         try {
-            if (checkIfEmptyFields(username, pass, pass1)) {
+            if (checkIfRegistrationEmptyFields(username, pass, pass1)) {
+                return true;
+            }
+        } catch (EmptyFieldsException ef) {
+            invalidValues.append(ef.getMessage());
+        }
+        return false;
+    }
+
+    private boolean checkifLogInFieldsEmpty(String brukernavn, String passord){
+        StringBuilder sb = new StringBuilder();
+
+        if(brukernavn.isEmpty()){
+            sb.append("Brukernavn feltet kan ikke være tomt\n");
+        }
+
+        if(passord.isEmpty()){
+            sb.append("Passord feltet kan ikke være tomt\n");
+        }
+
+        if(!sb.toString().isBlank()){
+            throw new EmptyFieldsException(sb.toString());
+        }
+
+        return true;
+    }
+
+    public boolean checkLogInFields(String brukernavn, String passord){
+        try {
+            if (checkifLogInFieldsEmpty(brukernavn, passord)) {
                 return true;
             }
         } catch (EmptyFieldsException ef) {

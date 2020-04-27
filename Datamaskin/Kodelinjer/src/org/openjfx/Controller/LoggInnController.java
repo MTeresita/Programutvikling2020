@@ -16,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
 import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
+import org.openjfx.Models.Avvik.ValidationHelper;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.FileNotFoundException;
@@ -63,6 +64,7 @@ public class LoggInnController {
     }
     
     public void loginEvent() throws Exception, AvvikLoggInnBrukernavn, FileNotFoundException {
+        /*
 
         try{
             ValiderLoggInn.valideringBrukernavn(txtuser.getText());
@@ -82,6 +84,21 @@ public class LoggInnController {
                 lblMessage.setText("Feil i passord! Passord må være minst fem bokstaver langt.");
             }
 
+        }*/
+
+        ValidationHelper validationHelper = new ValidationHelper();
+        String invalidInputs = validationHelper.getLogInInvalidInputs(txtuser.getText(), txtpass.getText());
+
+        if(!invalidInputs.isEmpty()){
+            lblMessage.setText(invalidInputs);
+        }
+        else {
+            if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
+                newScene(btnLogin, "scene");
+            }
+            else{
+                lblMessage.setText("Feil brukernavn eller passord");
+            }
         }
     }
 

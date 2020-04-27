@@ -103,7 +103,7 @@ public KomponenterListe kl = new KomponenterListe();
 
     public void registrerbtn(ActionEvent actionEvent) throws IOException {
         ValidationHelper validationHelper = new ValidationHelper();
-        String invalidInputs = validationHelper.getInvalidInput(user.getText(), pass.getText(), pass.getText());
+        String invalidInputs = validationHelper.getRegistrationInvalidInput(user.getText(), pass.getText(), pass.getText());
 
         // er det admin eller bruker sjek --> hvilken fil skal den til
         String value = String.valueOf(adminORuser.getValue());
