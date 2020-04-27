@@ -21,7 +21,7 @@
                </children></Pane>
          </left>
          <right>
-            <Pane prefHeight="386.0" prefWidth="395.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
+            <Pane prefHeight="400.0" prefWidth="435.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="registrerbtn" layoutX="212.0" layoutY="282.0" mnemonicParsing="false" onAction="#registerEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
                   <Text fill="#393939" layoutX="107.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn*" />
