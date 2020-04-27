@@ -102,14 +102,42 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     public void registrerbtn(ActionEvent actionEvent) throws IOException {
-        ValidationHelper validationHelper = new ValidationHelper();
-        String invalidInputs = validationHelper.getRegistrationInvalidInput(user.getText(), pass.getText(), pass.getText());
+        ValideringBruker valideringBruker = new ValideringBruker();
+        String invalidInputs = valideringBruker.getLogInInvalidInputs(user.getText(), pass.getText());
 
         // er det admin eller bruker sjek --> hvilken fil skal den til
         String value = String.valueOf(adminORuser.getValue());
+        System.out.println(adminORuser.getValue());
 
         switch (value) {
+            case "null":
+                lblMessage.setText("Ingen brukertype valgt \n" + invalidInputs);
+                break;
+
             case "Admin":
+
+                if(!invalidInputs.isEmpty()){
+                    lblMessage.setText(invalidInputs);
+                }
+                else{
+                    if (!checkExistingBruker(user.getText(), "./Admin.csv")) {
+                        lblMessage.setText("");
+                        //en ny bruker blir registrer
+                        BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
+
+                        //skrives til Admin.csv
+                        WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
+                        showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
+                                "Administrator opprettet");
+                        //resetter inputs for registrering
+                        clear();
+                    }
+                    else{
+                        setLabelTekst("alert", "Administrator eksisterer");
+                    }
+
+                }
+                /*
                 try {
                     ValiderLoggInn.valideringBrukernavn(user.getText());
                     ValiderLoggInn.validerPassord(pass.getText());
@@ -136,10 +164,36 @@ public KomponenterListe kl = new KomponenterListe();
                         setLabelTekst("alert", "Feil i passord! Passord må være minst 5 bokstaver langt.");
                     }
 
-                }
+                }*/
+
                 break;
 
             case "Bruker":
+
+                if(!invalidInputs.isEmpty()){
+                    lblMessage.setText(invalidInputs);
+                }
+                else {
+                    if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
+                        lblMessage.setText("");
+                        //opprett ny bruker
+                        BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
+
+                        //skriver til Brukere.csv
+                        WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
+
+                        //popup vindu som bekrefter at en ny bruker har blitt opprettet
+                        showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Ny bruker opprettet",
+                                "Bruker opprettet");
+                        //showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
+                        //resetter inputs for registrering
+                        clear();
+                    }
+                    else {
+                        setLabelTekst("alert", "Bruker eksisterer.");
+                    }
+                }
+                /*
                 try {
                     ValiderLoggInn.valideringBrukernavn(user.getText());
                     ValiderLoggInn.validerPassord(pass.getText());
@@ -168,11 +222,12 @@ public KomponenterListe kl = new KomponenterListe();
                     } else if (e instanceof AvvikLoggInnPassord) {
                         lblMessage.setText("Feil i passord! Passord må være minst 5 bokstaver langt.");
                     }
-                }
+                }*/
+
                 break;
 
             default:
-                setLabelTekst("alert", "Bruker eksisterer");
+                setLabelTekst("alert", invalidInputs);
         }
 
     }

@@ -2,7 +2,7 @@ package org.openjfx.Models.Avvik;
 
 import java.util.regex.Pattern;
 
-public class ValidationHelper {
+public class ValideringBruker {
 
     private StringBuilder invalidValues = new StringBuilder();
 
@@ -11,12 +11,12 @@ public class ValidationHelper {
         if(!checkRegistrationFields(username, password, password1)){
             checkName(username);
             checkDoublePassword(password, password1);
-
         }
         return invalidValues.toString();
     }
 
     public String getLogInInvalidInputs(String brukernavn, String passord){
+
         if(!checkLogInFields(brukernavn, passord)){
             checkName(brukernavn);
             checkSinglePassword(passord);
@@ -27,17 +27,15 @@ public class ValidationHelper {
 
 
     private boolean checkUserNameFormat(String username) throws InvalidUsernameFormatException {
-        if((!Pattern.matches("^[aA-zZ]\\w{5,15}$",username)) &&
-                (!username.equals("N/A") && !username.isEmpty())){
+        if((!Pattern.matches("^[aA-zZ]\\w{5,15}$",username)) && !username.isEmpty()){
             throw new InvalidUsernameFormatException("Brukernavnet må ha minst 5 tegn, og maks 15\n");
         }
         return true;
     }
 
     private boolean checkSinglePasswordFormat(String passord) throws InvalidPasswordException{
-        if(!passord.matches("^[A-ZÆØÅa-zæøå]{5,50}$")){
-            throw new InvalidPasswordException("Feil i passord \n" +
-                    "Passord må være minst 5 bokstaver langt\n");
+        if((!Pattern.matches("^[A-ZÆØÅa-zæøå]{5,50}$", passord)) && !passord.isEmpty()){
+            throw new InvalidPasswordException("Passord må være minst 5 bokstaver langt\n");
         }
         return true;
     }
@@ -48,15 +46,15 @@ public class ValidationHelper {
                 return true;
             }
         } catch (InvalidPasswordException e) {
-            e.printStackTrace();
+            invalidValues.append(e.getMessage());
         }
         return false;
     }
 
     private boolean checkDoublePasswordFormat(String passord, String passord1) throws InvalidPasswordException{
-        if(!passord.matches("^[A-ZÆØÅa-zæøå]{5,50}$") ||
-            !passord1.matches("^[A-ZÆØÅa-zæøå]{5,50}$")){
-            throw new InvalidPasswordException("Feil i passord!" + "\n" + "Passordene må være minst 5 bokstaver langt.\n");
+        if((!Pattern.matches("^[A-ZÆØÅa-zæøå]{5,50}$", passord)  && !passord.isEmpty()) ||
+                (!Pattern.matches("^[A-ZÆØÅa-zæøå]{5,50}$", passord1) && !passord1.isEmpty())){
+            throw new InvalidPasswordException("Passordene må være minst 5 bokstaver langt.\n");
         }
             return true;
     }

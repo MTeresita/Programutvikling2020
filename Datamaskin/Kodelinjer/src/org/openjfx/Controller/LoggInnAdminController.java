@@ -10,13 +10,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
 import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
-import org.openjfx.Models.Avvik.ValidationHelper;
-import org.openjfx.Models.Validering.ValiderLoggInn;
+import org.openjfx.Models.Avvik.ValideringBruker;
 
 import java.io.IOException;
 
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
-import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
 
 public class LoggInnAdminController {
     @FXML
@@ -66,15 +64,15 @@ public class LoggInnAdminController {
             }
         }
          */
-        ValidationHelper validationHelper = new ValidationHelper();
-        String invalidInputs = validationHelper.getLogInInvalidInputs(txtadminuser.getText(), txtadminpass.getText());
+        ValideringBruker valideringBruker = new ValideringBruker();
+        String invalidInputs = valideringBruker.getLogInInvalidInputs(txtadminuser.getText(), txtadminpass.getText());
 
         if(!invalidInputs.isEmpty()){
             lblMessage.setText(invalidInputs);
         }
         else {
             if(verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
-                newScene(btnLogin, "scene");
+                newScene(btnLogin, "registrerProdukt");
             }
             else{
                 lblMessage.setText("Feil brukernavn eller passord");

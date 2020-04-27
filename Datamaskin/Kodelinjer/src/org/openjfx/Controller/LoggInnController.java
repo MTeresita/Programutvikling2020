@@ -1,29 +1,18 @@
 package org.openjfx.Controller;
 
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
-import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
-import org.openjfx.Models.Avvik.ValidationHelper;
-import org.openjfx.Models.Validering.ValiderLoggInn;
+import org.openjfx.Models.Avvik.ValideringBruker;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
-import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
 
 public class LoggInnController {
 
@@ -86,8 +75,8 @@ public class LoggInnController {
 
         }*/
 
-        ValidationHelper validationHelper = new ValidationHelper();
-        String invalidInputs = validationHelper.getLogInInvalidInputs(txtuser.getText(), txtpass.getText());
+        ValideringBruker valideringBruker = new ValideringBruker();
+        String invalidInputs = valideringBruker.getLogInInvalidInputs(txtuser.getText(), txtpass.getText());
 
         if(!invalidInputs.isEmpty()){
             lblMessage.setText(invalidInputs);
@@ -97,9 +86,11 @@ public class LoggInnController {
                 newScene(btnLogin, "scene");
             }
             else{
-                lblMessage.setText("Feil brukernavn eller passord");
+                lblMessage.setText(invalidInputs);
+
             }
         }
+
     }
 
     public void registrerbruker(ActionEvent actionEvent) throws IOException {

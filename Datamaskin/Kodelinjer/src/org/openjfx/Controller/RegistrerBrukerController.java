@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
 import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
-import org.openjfx.Models.Avvik.ValidationHelper;
+import org.openjfx.Models.Avvik.ValideringBruker;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 
@@ -36,8 +36,8 @@ public class RegistrerBrukerController {
     public void registerEvent(ActionEvent actionEvent) throws IOException, AvvikLoggInnBrukernavn, AvvikLoggInnPassord {
 
         //oppretter et objekt av klassen
-        ValidationHelper validationHelper = new ValidationHelper();
-        String invalidInputs = validationHelper.getRegistrationInvalidInput(txtuser.getText(), txtpass.getText(), txtpass1.getText());
+        ValideringBruker valideringBruker = new ValideringBruker();
+        String invalidInputs = valideringBruker.getRegistrationInvalidInput(txtuser.getText(), txtpass.getText(), txtpass1.getText());
 
         /*
         try {
