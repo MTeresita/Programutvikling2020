@@ -52,6 +52,9 @@ public class LoggInnAdminController {
             if (verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
                 newScene(btnLogin, "registrerProdukt");
             }
+            else{
+                lblMessage.setText("Feil brukernavn eller passord.");
+            }
 
         } catch (AvvikLoggInnBrukernavn | AvvikLoggInnPassord e) {
             if(e instanceof AvvikLoggInnBrukernavn){
