@@ -20,6 +20,7 @@ import java.util.Optional;
 import static org.openjfx.Models.Avvik.AlertHelper.*;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.checkExistingBruker;
 import static org.openjfx.Models.KomponenterListe.endringITableView;
+import static org.openjfx.Models.KomponenterListe.searchTableView;
 
 
 public class RegistrerProduktController {
@@ -59,6 +60,7 @@ public KomponenterListe kl = new KomponenterListe();
         populateTableWithJobj();
         komponenter.getSortOrder().add(pris);
         komponenter.setEditable(true);
+        searchTableView(kl,filteredData,komponenter);
         endringITableView(produktnavn,kategori, pris);
         lblMessage.setWrapText(true);
     }

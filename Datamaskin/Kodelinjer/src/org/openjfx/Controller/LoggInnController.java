@@ -54,16 +54,19 @@ public class LoggInnController {
             if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
                 newScene(btnLogin, "scene");
             }
+            else{
+                lblMessage.setText("Feil brukernavn eller passord.\nHvis du ikke er bruker, vennligst registrer deg nedenfor. ");
+            }
         } catch (AvvikLoggInnBrukernavn | FileNotFoundException | AvvikLoggInnPassord e){
 
             if (e instanceof AvvikLoggInnBrukernavn){
-                lblMessage.setText("Feil i brukernavn! Brukernavn må være minst 5 bokstaver langt.");
+                lblMessage.setText("Feil i brukernavn! Brukernavn må være mellom 5-50 bokstaver langt.");
             }
             else if (e instanceof FileNotFoundException){
                 lblMessage.setText("Fil ikke funnet");
             }
             else if(e instanceof AvvikLoggInnPassord){
-                lblMessage.setText("Feil i passord! Passord må være minst fem bokstaver langt.");
+                lblMessage.setText("Feil i passord! Passord må være mellom 5-50 bokstaver langt.");
             }
 
         }
