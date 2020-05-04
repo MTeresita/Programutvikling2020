@@ -20,8 +20,9 @@ public class ValiderLoggInn {
     }
 
     public String sjekkUgyldigRegistrering(String brukernavn, String passord, String passord1){
-        sjekkUgyldigData(brukernavn, passord);
-        sjekkTomtPassord(passord, passord1);
+        if(!sjekkTomtPassord(brukernavn, passord, passord1)){
+            sjekkPassord(passord);
+        }
         return ugyldigData.toString();
     }
 
@@ -118,14 +119,20 @@ public class ValiderLoggInn {
         return false;
     }
 
-    public boolean validerTomtPassord(String passord, String passord1) throws EmptyFieldsException{
+    public boolean validerTomtPassord(String brukernavn, String passord, String passord1) throws EmptyFieldsException{
         StringBuilder sb = new StringBuilder();
 
+        if(brukernavn.isEmpty() || brukernavn.isBlank()){
+            sb.append("Brukernavnet kan ikke være tomt\n");
+        }
+        if(!brukernavn.isEmpty()){
+            sjekkBrukerNavn(brukernavn);
+        }
 
-        if(passord1.isEmpty() || passord1.isBlank()){
+        if((passord1.isEmpty() || passord1.isBlank()) && (passord.isEmpty() || passord.isBlank())){
             sb.append("Passord feltene kan ikke være tomme\n");
         }
-        if(!passord1.isEmpty()){
+        if(!passord1.isEmpty() && !passord.isEmpty()){
             sjekkPassord(passord);
         }
         if(!passord.equals(passord1)){
@@ -138,9 +145,9 @@ public class ValiderLoggInn {
         return true;
     }
 
-    public boolean sjekkTomtPassord(String passord, String passord1){
+    public boolean sjekkTomtPassord(String brukernavn, String passord, String passord1){
         try {
-            if (validerTomtPassord(passord, passord1)) {
+            if (validerTomtPassord(brukernavn, passord, passord1)) {
                 return true;
             }
         }
