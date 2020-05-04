@@ -32,7 +32,7 @@ public class ValiderLoggInn {
         //matcher alle bokstaver A-ÆØÅ mellom 2-50 i lengde og tegn som !-.,
         //"^[A-æøå]((?![-]$)[A-æøå.,'-]?){2,50}$"
 
-        if(!brukernavn.matches("^[A-ZÆØÅa-zæøå]{5,50}$") && !brukernavn.isEmpty()){
+        if(!brukernavn.matches("^[A-ZÆØÅa-zæøå]{5,50}$")){
             throw new AvvikLoggInnBrukernavn("Brukernavn må være mellom 5-50 bokstaver langt \n");
         }
         return true;
@@ -56,13 +56,6 @@ public class ValiderLoggInn {
         return true;
     }
 
-    public boolean validerGjentattPassord(String passord) throws AvvikLoggInnPassord {
-        if(!passord.matches("^[A-ZÆØÅa-zæøå]{5,50}$") && !passord.isEmpty()){
-            throw new AvvikLoggInnPassord("Passord må være mellom 5-50 bokstaver langt\n");
-        }
-        return true;
-    }
-
     public boolean sjekkPassord(String passord){
         try {
             if(validerPassord(passord)){
@@ -73,16 +66,7 @@ public class ValiderLoggInn {
         }
         return false;
     }
-    public boolean sjekkGjentattPassord(String passord){
-        try {
-            if(validerGjentattPassord(passord)){
-                return true;
-            }
-        } catch (AvvikLoggInnPassord avvikLoggInnPassord) {
-            ugyldigData.append(avvikLoggInnPassord.getMessage());
-        }
-        return false;
-    }
+
 
     public boolean validerTommeFelt(String brukernavn, String passord) throws EmptyFieldsException {
         StringBuilder sb = new StringBuilder();
@@ -92,6 +76,9 @@ public class ValiderLoggInn {
         }
         if(!brukernavn.isEmpty()){
             sjekkBrukerNavn(brukernavn);
+        }
+        if(!brukernavn.isEmpty() && passord.isEmpty()){
+            sb.append(" ");
         }
 
         if(passord.isEmpty() || passord.isBlank()){
@@ -125,7 +112,7 @@ public class ValiderLoggInn {
         if(brukernavn.isEmpty() || brukernavn.isBlank()){
             sb.append("Brukernavnet kan ikke være tomt\n");
         }
-        if(!brukernavn.isEmpty()){
+        if(!brukernavn.isEmpty() || !brukernavn.isBlank()){
             sjekkBrukerNavn(brukernavn);
         }
 
@@ -135,7 +122,11 @@ public class ValiderLoggInn {
         if(!passord1.isEmpty() && !passord.isEmpty()){
             sjekkPassord(passord);
         }
-        if(!passord.equals(passord1)){
+        if(!passord.isEmpty() && passord1.isEmpty()){
+            sjekkPassord(passord);
+        }
+
+        if(!passord.equals(passord1) && !passord1.isEmpty()){
             sb.append("Passordene er ikke like \n");
         }
 
