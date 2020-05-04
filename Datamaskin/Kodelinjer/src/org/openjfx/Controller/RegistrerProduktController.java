@@ -101,6 +101,7 @@ public KomponenterListe kl = new KomponenterListe();
 
     }
 
+    /*
     public void registrerbtn(ActionEvent actionEvent) throws IOException {
         ValidationHelper validationHelper = new ValidationHelper();
         String invalidInputs = validationHelper.getInvalidInput(user.getText(), pass.getText(), pass.getText());
@@ -175,7 +176,7 @@ public KomponenterListe kl = new KomponenterListe();
                 setLabelTekst("alert", "Bruker eksisterer");
         }
 
-    }
+    }*/
     public void clear(){
         //resetter inputfeltene
         user.clear();

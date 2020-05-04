@@ -48,6 +48,7 @@ public class LoggInnController {
     
     public void loginEvent() throws Exception, AvvikLoggInnBrukernavn, FileNotFoundException {
 
+        /*
         try{
             ValiderLoggInn.valideringBrukernavn(txtuser.getText());
             ValiderLoggInn.validerPassord(txtpass.getText());
@@ -70,6 +71,23 @@ public class LoggInnController {
             }
 
         }
+         */
+        ValiderLoggInn validerLoggInn = new ValiderLoggInn();
+
+        String validering = validerLoggInn.sjekkUgyldigData(txtuser.getText(), txtpass.getText());
+
+        if(!validering.isEmpty()){
+            lblMessage.setText(validering);
+        }
+        else {
+            if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
+                newScene(btnLogin, "scene");
+            }
+            else {
+                lblMessage.setText("Feil brukernavn/passord");
+            }
+        }
+
     }
 
     public void registrerbruker(ActionEvent actionEvent) {
