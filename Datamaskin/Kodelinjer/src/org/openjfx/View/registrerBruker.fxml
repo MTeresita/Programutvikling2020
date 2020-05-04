@@ -23,6 +23,7 @@
          <right>
             <Pane prefHeight="386.0" prefWidth="395.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
                <children>
+
                   <Button fx:id="registrerbtn" layoutX="191.0" layoutY="270.0" mnemonicParsing="false" onAction="#registerEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
                   <Text fill="#393939" layoutX="86.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn" />
                   <Text fill="#393939" layoutX="86.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord" />
@@ -30,6 +31,15 @@
                   <PasswordField fx:id="txtpass" layoutX="86.0" layoutY="142.0" prefHeight="29.0" prefWidth="185.0" stylesheets="@../styles.css" />
                   <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="44.0" layoutY="312.0" prefHeight="67.0" prefWidth="260.0" textFill="#f50000" />
                   <Text fill="#f79977" layoutX="-13.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer deg" wrappingWidth="160.541015625">
+
+                  <Button fx:id="registrerbtn" layoutX="212.0" layoutY="282.0" mnemonicParsing="false" onAction="#registerEvent" prefHeight="25.0" prefWidth="80.0" styleClass="save" stylesheets="@../styles.css" text="Registrer" />
+                  <Text fill="#393939" layoutX="107.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn*" />
+                  <Text fill="#393939" layoutX="107.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord*" />
+                  <TextField fx:id="txtuser" layoutX="107.0" layoutY="105.0" prefWidth="185.0" stylesheets="@../styles.css" />
+                  <PasswordField fx:id="txtpass" layoutX="107.0" layoutY="171.0" prefHeight="29.0" prefWidth="185.0" stylesheets="@../styles.css" />
+                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="17.0" layoutY="315.0" prefHeight="77.0" prefWidth="286.0" textFill="#ee0404" wrapText="true"/>
+                  <Text fill="#f79977" layoutX="106.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer deg" wrappingWidth="160.541015625">
+
                      <font>
                         <Font size="21.0" />
                      </font>
