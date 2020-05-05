@@ -17,7 +17,8 @@ import org.openjfx.Models.Validering.ValideringKomponent;
 import java.io.IOException;
 import java.util.Optional;
 
-import static org.openjfx.Models.Avvik.AlertHelper.*;
+import static org.openjfx.Models.Avvik.AlertHelper.showAlertWindow;
+import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.checkExistingBruker;
 import static org.openjfx.Models.KomponenterListe.endringITableView;
 import static org.openjfx.Models.KomponenterListe.searchTableView;
