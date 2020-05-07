@@ -102,15 +102,40 @@ public KomponenterListe kl = new KomponenterListe();
 
     }
 
+
     public void registrerbtn(ActionEvent actionEvent) throws IOException {
-        ValidationHelper validationHelper = new ValidationHelper();
-        String invalidInputs = validationHelper.getInvalidInput(user.getText(), pass.getText(), pass.getText());
+        ValiderLoggInn validerLoggInn = new ValiderLoggInn();
+        String ugyldigRegistreering =
+                validerLoggInn.sjekkUgyldigData(user.getText(), pass.getText());
 
         // er det admin eller bruker sjek --> hvilken fil skal den til
         String value = String.valueOf(adminORuser.getValue());
 
         switch (value) {
             case "Admin":
+
+                if(!ugyldigRegistreering.isEmpty()){
+                    lblMessage.setText(ugyldigRegistreering);
+                }
+                else {
+                    if (!checkExistingBruker(user.getText(), "./Admin.csv")) {
+                        lblMessage.setText("");
+                        //en ny bruker blir registrer
+                        BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
+
+                        //skrives til Admin.csv
+                        WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
+                        showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
+                                "Administrator opprettet");
+                        //resetter inputs for registrering
+                        clear();
+                    } else {
+                        //eksisterer bruker, send feilmelding
+                        setLabelTekst("alert", "Administrator eksisterer");
+                        //lblMessage.setText("Administrator eksisterer");
+                    }
+                }
+                /*
                 try {
                     ValiderLoggInn.valideringBrukernavn(user.getText());
                     ValiderLoggInn.validerPassord(pass.getText());
@@ -138,9 +163,37 @@ public KomponenterListe kl = new KomponenterListe();
                     }
 
                 }
+                 */
+
                 break;
 
             case "Bruker":
+
+                if(!ugyldigRegistreering.isEmpty()){
+                    lblMessage.setText(ugyldigRegistreering);
+                }
+                else {
+                    if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
+                        lblMessage.setText("");
+                        //opprett ny bruker
+                        BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
+
+                        //skriver til Brukere.csv
+                        WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
+
+                        //popup vindu som bekrefter at en ny bruker har blitt opprettet
+                        showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Ny bruker opprettet",
+                                "Bruker opprettet");
+                        //showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
+                        //resetter inputs for registrering
+                        clear();
+
+                    } else {
+                        //eksisterer bruker, send f eilmelding
+                        setLabelTekst("alert", "Bruker eksisterer.");
+                    }
+                }
+                /*
                 try {
                     ValiderLoggInn.valideringBrukernavn(user.getText());
                     ValiderLoggInn.validerPassord(pass.getText());
@@ -170,6 +223,8 @@ public KomponenterListe kl = new KomponenterListe();
                         lblMessage.setText("Feil i passord! Passord må være minst 5 bokstaver langt.");
                     }
                 }
+
+                 */
                 break;
 
             default:
@@ -177,6 +232,7 @@ public KomponenterListe kl = new KomponenterListe();
         }
 
     }
+
     public void clear(){
         //resetter inputfeltene
         user.clear();

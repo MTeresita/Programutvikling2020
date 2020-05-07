@@ -45,6 +45,7 @@ public class LoggInnAdminController {
 
     public void loginEvent() throws IOException, AvvikLoggInnBrukernavn, AvvikLoggInnPassord {
 
+        /*
         //Validering av brukernavn og passord:
         try {
             ValiderLoggInn.valideringBrukernavn(txtadminuser.getText());
@@ -63,11 +64,25 @@ public class LoggInnAdminController {
             else if(e instanceof AvvikLoggInnPassord){
                 lblMessage.setText("Feil i passord! Passord må være minst 5 bokstaver langt.");
             }
+        }*/
+
+        ValiderLoggInn validerLoggInn = new ValiderLoggInn();
+
+        String validering = validerLoggInn.sjekkUgyldigData(txtadminuser.getText(), txtadminpass.getText());
+
+        if(!validering.isEmpty()){
+            lblMessage.setText(validering);
+        }
+        else {
+            if(verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
+                newScene(btnLogin, "registrerProdukt");
+            }
+            else {
+                lblMessage.setText("Feil brukernavn/passord");
+            }
         }
 
     }
-
-
 
     public void tilbakeKnapp(ActionEvent actionEvent) {
         routeToSite(actionEvent, "loggInn");
