@@ -82,6 +82,7 @@ public class FXMLController {
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
         //komponenter.setItems(kl.createTableFromFile());
         komponenter.setItems(kl.getObservableList());
+        populateFilListeComboBox();
     }
 
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
@@ -137,21 +138,35 @@ public class FXMLController {
     }
 
     public void populateFilListeComboBox(){
-        filListe.getItems().add("Ny Fil..."); //legger til "Ny Fil..." som førstevalg
+        if (!filListe.getItems().contains("Ny Fil...")){
+            filListe.getItems().add("Ny Fil..."); //legger til "Ny Fil..." som førstevalg
+        }
+        File aDirectory = new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/");
+        String[] filesInDir = aDirectory.list();
+        for ( int i=0; i<filesInDir.length; i++ )
+        {
+             filListe.getItems().add(filesInDir[i]);
+        }
 
     }
     private String session = BrukerSession.getBrukerSession(); //henter brukersession/brukernavnet til den som er logget inn
     public void lagreKonfigurasjon() throws IOException {
-
-        WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/konfigtest.csv", false);
+        if(filListe.getSelectionModel().getSelectedItem() == "Ny Fil..."){
+            File aDirectory = new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/");
+            String[] filesInDir = aDirectory.list();
+            int versjon = filesInDir.length + 1;
+            WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/konfigurasjon-"+versjon+".csv", false);
+        }else{
+            WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/"+filListe.getSelectionModel().getSelectedItem(), false);
+        }
 
     }
     public void hentKonfigurasjon() throws IOException {
         //gjør parsing, sett som en kompoentliste
         FilHentingBruker fhb = new FilHentingBruker();
         ArrayList<Komponent> kompliste;
-        
-        kompliste = fhb.lesingFraFil("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/konfigtest.csv");
+
+        kompliste = fhb.lesingFraFil("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/"+filListe.getSelectionModel().getSelectedItem());
 
         k.setKonfigListe(kompliste);
         populateListview();
