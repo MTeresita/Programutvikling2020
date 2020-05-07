@@ -6,6 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import org.openjfx.Models.Avvik.AlertHelper.*;
+import org.openjfx.Models.Filbehandling.FilHenting.FilHentingBruker;
+import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
+import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
+import org.openjfx.Models.HjelpeKlasser.BrukerSession;
 import org.openjfx.Models.Interfaces.SceneChanger;
 
 import org.openjfx.Models.Konfigurasjon;
@@ -14,6 +18,10 @@ import org.openjfx.Models.KomponenterListe;
 import org.openjfx.Models.Komponent;
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.openjfx.Models.KomponenterListe.searchTableView;
@@ -30,6 +38,8 @@ public class FXMLController {
     @FXML
     private Button newProduct;
 
+    @FXML
+    public ComboBox filListe;
 
     @FXML
     private Button leggTilProdukt;
@@ -53,6 +63,7 @@ public class FXMLController {
 
     public Konfigurasjon k = new Konfigurasjon(); //lager en generell liste av konfigurasjon som brukes gjennom kontrolleren
     public KomponenterListe kl = new KomponenterListe();
+
 
     public void initialize() {
          //bruker disse for å resette jobj filen med komponenter fra csv
@@ -123,5 +134,28 @@ public class FXMLController {
             alert.close();
         }
 
+    }
+
+    public void populateFilListeComboBox(){
+        filListe.getItems().add("Ny Fil..."); //legger til "Ny Fil..." som førstevalg
+
+    }
+    private String session = BrukerSession.getBrukerSession(); //henter brukersession/brukernavnet til den som er logget inn
+    public void lagreKonfigurasjon() throws IOException {
+
+        WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/konfigtest.csv", false);
+
+    }
+    public void hentKonfigurasjon() throws IOException {
+        //gjør parsing, sett som en kompoentliste
+        FilHentingBruker fhb = new FilHentingBruker();
+        ArrayList<Komponent> kompliste;
+        
+        kompliste = fhb.lesingFraFil("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/konfigtest.csv");
+
+        k.setKonfigListe(kompliste);
+        populateListview();
+        //k.setKonfigListe(komponentlisten);
+        //k.setKonfigListeOvservable(komponentlisten);
     }
 }

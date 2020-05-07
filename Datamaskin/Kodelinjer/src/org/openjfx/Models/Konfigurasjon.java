@@ -60,7 +60,7 @@ public class Konfigurasjon {
         setSluttPris(sluttPrisIterator);
     }
 
-    public void setKonfigListe(ArrayList<Komponent> konfigListe) {
+    public void setKonfigListe(ArrayList<Komponent> konfigListe) throws NullPointerException {
         this.konfigListe = konfigListe;
         konfigListeObservable = FXCollections.observableArrayList(konfigListe);
         lagSluttPris(); //hver gang konfigListe endres på, kjøres lagSluttPris
@@ -86,15 +86,13 @@ public class Konfigurasjon {
     //proof of concept
 
     public String toString(){
-        String ut ="Dette er listen over valgte komponeneter: \n";
+        StringBuilder ut = new StringBuilder();
 
-        Iterator itr = konfigListe.iterator(); //lager en iterator
-
-        while(itr.hasNext()){ //usikker om dette funker
-            Komponent p = (Komponent) itr.next();
-            ut += "Navn: "+p.getNavn()+", Kategori: "+p.getKategori()+", Pris: "+p.getPris()+"\n";
+        //lager en iterator
+        for (Komponent p : konfigListe) {
+            ut.append(p.getNavn()).append(";").append(p.getKategori()).append(";").append(p.getPris()).append(";").append("\n");
         }
-        ut += "Sluttpris: "+getSluttPris();
-        return ut;
+        ut.append(sluttPris+";");
+        return ut.toString();
     }
 }

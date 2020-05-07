@@ -75,5 +75,13 @@ public class Komponent implements Serializable {
         this.pris.set(pris);
     }
 
-
+    @Override
+    public String toString() {
+        return "Komponent{" +
+                "navn=" + navn +
+                ", kategori=" + kategori +
+                ", pris=" + pris +
+                ", duplikat=" + duplikat +
+                '}';
+    }
 }
