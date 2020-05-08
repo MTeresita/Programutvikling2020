@@ -351,14 +351,17 @@ public KomponenterListe kl = new KomponenterListe();
 
     @FXML
     public void endreTableViewDataString(TableColumn.CellEditEvent<Komponent, String> event) throws AvvikKomponentProduktnavn, AvvikKomponentNyKategori{ //Fra henrik
-        /*
+
         try{
             if(event.getTableColumn().getText().equals("Produktnavn")){
                 ValideringKomponent.validerProduktnavn(event.getNewValue());
                 event.getRowValue().setNavn(event.getNewValue());
+                kl.lagreTilObjectFil(); // denn kan brukes til å lagre til fil så fort man skriver i tableviewet
             }else{
                 ValideringKomponent.validerNyKategori(event.getNewValue());
                 event.getRowValue().setKategori(event.getNewValue());
+                kl.lagreTilObjectFil(); // denn kan brukes til å lagre til fil så fort man skriver i tableviewet
+
             }
         }catch (AvvikKomponentProduktnavn | AvvikKomponentNyKategori e) {
             komponenter.refresh();
@@ -372,7 +375,7 @@ public KomponenterListe kl = new KomponenterListe();
             }
         }
 
-         */
+
 
     }
     @FXML

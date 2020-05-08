@@ -67,7 +67,7 @@ public class ValideringKomponent {
     }
 
 
-    public boolean validerNyKategori(String nyKategori) throws AvvikKomponentNyKategori {
+    public static boolean validerNyKategori(String nyKategori) throws AvvikKomponentNyKategori {
 
         if(!nyKategori.matches("^[A-ZÆØÅa-zæøå]{2,50}$") && !nyKategori.isEmpty()){
             throw new AvvikKomponentNyKategori("Kategori må være mellom 2 og 50 tegn.\n");
