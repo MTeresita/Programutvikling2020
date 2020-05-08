@@ -115,6 +115,33 @@ public class FXMLController {
         } catch(Exception e){
 
         }*/
+        List<ListView<String>> ss = new ArrayList<>();
+        ss.add(listviewMB);
+        ss.add(listviewCPU);
+        for(ListView<String> teller : ss){
+
+            StringBuilder sb = new StringBuilder("");
+            sb.append(ss.get(ss.indexOf(teller)).getSelectionModel().getSelectedItem());
+            String text = sb.toString();
+            String[] lines = text.split("\\r?\\n");
+
+            for(Komponent komp : k.getKonfigListe()){
+                if(komp.getNavn().contains(lines[0])){
+                    System.out.println("fant komponent hurra");
+                }
+                else{
+                    System.out.println("fant IKKE komponent hurra");
+                }
+            }
+
+            for(Komponent komp : k.getKonfigListe()){
+                if(komp.getNavn().contains("asd")){ //!!!!!!!!!!!!!
+                    System.out.println("fant komponent hurra");
+                }
+            }
+
+        }
+
     }
 
     public void populateListview(){ //legger ut komponeter fra konfigurasjon sin ArrayList
