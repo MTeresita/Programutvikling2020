@@ -36,10 +36,13 @@ public class FXMLController {
     private Label lblSluttPris;
 
     @FXML
-    private Button newProduct;
+    private Button newProduct, lagreKonfig, slettKonfig, hentKonfig;
 
     @FXML
-    public ComboBox filListe;
+    private ComboBox filListe;
+
+    @FXML
+    private Label lblKonfigurasjonsNavn;
 
     @FXML
     private Button leggTilProdukt;
@@ -115,7 +118,7 @@ public class FXMLController {
     public void populateListview(){ //legger ut komponeter fra konfigurasjon sin ArrayList
         listview.getItems().clear();
         for(Komponent ktv : k.getKonfigListe()){
-            listview.getItems().add(ktv.getNavn() + "\n" +ktv.getPris()+" NOK");
+            listview.getItems().add(ktv.getNavn() + "\n" + ktv.getKategori() + "\n" +ktv.getPris()+" NOK");
         }
         listview.refresh();
 
@@ -123,18 +126,29 @@ public class FXMLController {
     }
 
     public void logOutEvent(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Bekreft utlogging");
-        alert.setHeaderText("Endringer gjort uten å trykke lagre vil bli slettet!");
-        alert.setContentText("Er du sikker på at du vil logge ut?");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        boolean ok = alertBox("Bekreft utlogging", "Endringer gjort uten å trykke lagre vil bli slettet!", "Er du sikker på at du vil logge ut?");
+        if (ok) {
             SceneChanger.routeToSite(event, "loggInn");
-        } else {
-            alert.close();
         }
+    }
 
+
+    private String sistValgteFil; //brukes for å oppdatere combobox med filen som faktisk er valgt etter lagring/henting
+    public void setFilListeTilgjengelig(ActionEvent event) throws NullPointerException{
+        try {
+            if (filListe.getSelectionModel().getSelectedItem().toString().equals("Ny Fil...")) {
+                slettKonfig.setDisable(true);
+                hentKonfig.setDisable(true);
+            } else {
+                slettKonfig.setDisable(false);
+                hentKonfig.setDisable(false);
+            }
+            sistValgteFil = filListe.getSelectionModel().getSelectedItem().toString();
+            filListe.getSelectionModel().select(sistValgteFil);
+        }catch (NullPointerException e){
+            System.out.println("Nullpointer excec");
+            //grunnet hvordan combobox er bugget, vil den alltid kalle på denne metoden med en nullpointer når man kjører "populateFilListeComboBox" etter å ha lagret fil
+        }
     }
 
     public void populateFilListeComboBox(){
@@ -153,26 +167,38 @@ public class FXMLController {
             System.out.println("Ingen filer funnet");
         }
     }
+
     private String session = BrukerSession.getBrukerSession(); //henter brukersession/brukernavnet til den som er logget inn
     public void lagreKonfigurasjon() throws IOException {
-        if(filListe.getSelectionModel().getSelectedItem() == "Ny Fil..."){
-            File aDirectory = new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/");
-            String[] filesInDir = aDirectory.list();
 
-            if(filesInDir != null){
-                int versjon = filesInDir.length + 1;
-                WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/konfigurasjon-"+versjon+".csv", false);
-            }else{
-                int versjon = 1;
-                WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/konfigurasjon-"+versjon+".csv", false);
+        if(!k.getKonfigListe().isEmpty()) {
+            if (filListe.getSelectionModel().getSelectedItem() == "Ny Fil...") {
+                File aDirectory = new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" + session + "/");
+                String[] filesInDir = aDirectory.list();
+
+                if (filesInDir != null) {
+                    int versjon = filesInDir.length + 1;
+                    WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" + session + "/konfigurasjon-" + versjon + ".csv", false); //tar utgangspunkt i ekisterende versjoner, adderer 1
+                    sistValgteFil = "konfigurasjon-" + versjon + ".csv";
+                    lblKonfigurasjonsNavn.setText("konfigurasjon-" + versjon + ".csv");
+                } else {
+                    int versjon = 1;
+                    WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" + session + "/konfigurasjon-" + versjon + ".csv", false); //lager første versjon (1)
+                    sistValgteFil = "konfigurasjon-" + versjon + ".csv";
+                    lblKonfigurasjonsNavn.setText("konfigurasjon-" + versjon + ".csv");
+                }
+            } else {
+                boolean ok = alertBox("Bekreft overskriving", "Endringer gjort vil overskrive valgt fil!", "Er du sikker på at du vil skrive over?");
+                if (ok) {
+                    WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" + session + "/" + filListe.getSelectionModel().getSelectedItem(), false);
+                }
             }
-
+            populateFilListeComboBox();
+            filListe.getSelectionModel().select(sistValgteFil);
+            //alert at fil er blitt lagret!
         }else{
-            WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/"+filListe.getSelectionModel().getSelectedItem(), false);
+            boolean ok = alertBox("Feilmelding", "Ingen komponeneter er valgt!", "");
         }
-        populateFilListeComboBox();
-        //alert at fil er blitt lagret!
-
     }
     public void hentKonfigurasjon() throws IOException {
         FilHentingBruker fhb = new FilHentingBruker();
@@ -181,7 +207,23 @@ public class FXMLController {
         kompliste = fhb.lesingFraFil("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/"+filListe.getSelectionModel().getSelectedItem());
 
         k.setKonfigListe(kompliste);
+        lblKonfigurasjonsNavn.setText(filListe.getSelectionModel().getSelectedItem().toString());
         populateListview();
         //alert om henting av fil!
+    }
+
+    public boolean alertBox(String title, String header, String content){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+           return true;
+        } else {
+            alert.close();
+            return false;
+        }
     }
 }
