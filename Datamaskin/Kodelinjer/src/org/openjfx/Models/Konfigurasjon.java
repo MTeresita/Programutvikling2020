@@ -31,8 +31,9 @@ public class Konfigurasjon {
         }
     }
 
-    public void slettKomponent(int index){
-        konfigListe.remove(index);
+    public void slettKomponent(Komponent k){
+        konfigListe.remove(k);
+        konfigListeObservable.remove(k);
         lagSluttPris();
     }
 

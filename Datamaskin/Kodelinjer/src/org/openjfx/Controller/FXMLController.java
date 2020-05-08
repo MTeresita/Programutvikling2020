@@ -115,6 +115,27 @@ public class FXMLController {
         } catch(Exception e){
 
         }*/
+        String ss = listviewMB.getSelectionModel().getSelectedItem();
+        StringBuilder sb = new StringBuilder("");
+        sb.append(ss);
+        String text = sb.toString();
+        String[] lines = text.split("\\r?\\n");
+        Komponent slett = new Komponent();
+        for(Komponent komp : k.getKonfigListe()){
+            if(komp.getNavn().contains(lines[0])){
+                k.slettKomponent(komp);
+                populateListview();
+                System.out.println("fant  komponent hurra");
+                break;
+            }
+            else{
+                System.out.println("fant IKKE komponent hurra");
+            }
+
+        }
+
+
+       /*
         List<ListView<String>> ss = new ArrayList<>();
         ss.add(listviewMB);
         ss.add(listviewCPU);
@@ -140,7 +161,7 @@ public class FXMLController {
                 }
             }
 
-        }
+         }*/
 
     }
 
