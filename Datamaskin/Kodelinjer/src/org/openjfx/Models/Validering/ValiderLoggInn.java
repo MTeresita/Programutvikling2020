@@ -18,9 +18,16 @@ public class ValiderLoggInn {
     }
 
     public String sjekkUgyldigRegistrering(String brukernavn, String passord, String passord1){
-        if(!sjekkTomtPassord(passord, passord1)){
-            sjekkBrukerNavn(brukernavn);
-            sjekkToPassord(passord, passord1);
+        sjekkBrukerNavn(brukernavn);
+        if((passord.isEmpty() || passord1.isBlank()) && (passord1.isEmpty() || passord1.isBlank())){
+            ugyldigData.append("Et eller flere passord felt er tomme \n");
+        }
+        else{
+            sjekkPassord(passord);
+            sjekkGjentattPassord(passord1);
+        }
+        if(!passord.equals(passord1)){
+                ugyldigData.append("Passordene er ikke like\n");
         }
 
         return ugyldigData.toString();
@@ -62,6 +69,16 @@ public class ValiderLoggInn {
         return true;
     }
 
+    public boolean validerGjentattPassord(String gjentattPassord) throws AvvikLoggInnPassord {
+        if(!gjentattPassord.matches("^[A-ZÆØÅa-zæøå]{5,50}$") && (!gjentattPassord.isEmpty() && !gjentattPassord.isBlank())){
+            throw new AvvikLoggInnPassord("Gjentatt passord felt må være mellom 5-50 bokstaver langt\n");
+        }
+        else if(gjentattPassord.isBlank() || gjentattPassord.isEmpty()) {
+            throw new AvvikLoggInnPassord("Gjentatt passord feltet kan ikke være tomt\n");
+        }
+        return true;
+    }
+
     public boolean sjekkPassord(String passord){
         try {
             if(validerPassord(passord)){
@@ -72,9 +89,9 @@ public class ValiderLoggInn {
         }
         return false;
     }
-    public boolean sjekkToPassord(String passord, String passord1){
+    public boolean sjekkGjentattPassord(String passord){
         try{
-            if(validerPassord(passord) && validerPassord(passord1)){
+            if(validerGjentattPassord(passord)){
                 return true;
             }
         } catch (AvvikLoggInnPassord avvikLoggInnPassord) {
@@ -85,6 +102,7 @@ public class ValiderLoggInn {
     }
 
 
+    /*
     public boolean validerDobbelPassord(String passord, String passord1) throws EmptyFieldsException{
         StringBuilder sb = new StringBuilder();
 
@@ -113,5 +131,7 @@ public class ValiderLoggInn {
         }
         return false;
     }
+
+     */
 
 }

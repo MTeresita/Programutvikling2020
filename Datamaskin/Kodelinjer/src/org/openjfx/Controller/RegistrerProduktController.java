@@ -111,30 +111,33 @@ public KomponenterListe kl = new KomponenterListe();
         // er det admin eller bruker sjek --> hvilken fil skal den til
         String value = String.valueOf(adminORuser.getValue());
 
-        switch (value) {
-            case "Admin":
+        if(adminORuser.getSelectionModel().isEmpty()){
+            setLabelTekst("alert", "Bruker type har ikke blitt valgt");
+        }
+        else {
+            switch (value) {
+                case "Admin":
 
-                if(!ugyldigRegistreering.isEmpty()){
-                    lblMessage.setText(ugyldigRegistreering);
-                }
-                else {
-                    if (!checkExistingBruker(user.getText(), "./Admin.csv")) {
-                        lblMessage.setText("");
-                        //en ny bruker blir registrer
-                        BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
-
-                        //skrives til Admin.csv
-                        WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
-                        showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
-                                "Administrator opprettet");
-                        //resetter inputs for registrering
-                        clear();
+                    if (!ugyldigRegistreering.isEmpty()) {
+                        lblMessage.setText(ugyldigRegistreering);
                     } else {
-                        //eksisterer bruker, send feilmelding
-                        setLabelTekst("alert", "Administrator eksisterer");
-                        //lblMessage.setText("Administrator eksisterer");
+                        if (!checkExistingBruker(user.getText(), "./Admin.csv")) {
+                            lblMessage.setText("");
+                            //en ny bruker blir registrer
+                            BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
+
+                            //skrives til Admin.csv
+                            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
+                            showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
+                                    "Administrator opprettet");
+                            //resetter inputs for registrering
+                            clear();
+                        } else {
+                            //eksisterer bruker, send feilmelding
+                            setLabelTekst("alert", "Administrator eksisterer");
+                            //lblMessage.setText("Administrator eksisterer");
+                        }
                     }
-                }
                 /*
                 try {
                     ValiderLoggInn.valideringBrukernavn(user.getText());
@@ -165,34 +168,33 @@ public KomponenterListe kl = new KomponenterListe();
                 }
                  */
 
-                break;
+                    break;
 
-            case "Bruker":
+                case "Bruker":
 
-                if(!ugyldigRegistreering.isEmpty()){
-                    lblMessage.setText(ugyldigRegistreering);
-                }
-                else {
-                    if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
-                        lblMessage.setText("");
-                        //opprett ny bruker
-                        BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
-
-                        //skriver til Brukere.csv
-                        WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
-
-                        //popup vindu som bekrefter at en ny bruker har blitt opprettet
-                        showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Ny bruker opprettet",
-                                "Bruker opprettet");
-                        //showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
-                        //resetter inputs for registrering
-                        clear();
-
+                    if (!ugyldigRegistreering.isEmpty()) {
+                        lblMessage.setText(ugyldigRegistreering);
                     } else {
-                        //eksisterer bruker, send f eilmelding
-                        setLabelTekst("alert", "Bruker eksisterer.");
+                        if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
+                            lblMessage.setText("");
+                            //opprett ny bruker
+                            BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
+
+                            //skriver til Brukere.csv
+                            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
+
+                            //popup vindu som bekrefter at en ny bruker har blitt opprettet
+                            showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Ny bruker opprettet",
+                                    "Bruker opprettet");
+                            //showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
+                            //resetter inputs for registrering
+                            clear();
+
+                        } else {
+                            //eksisterer bruker, send f eilmelding
+                            setLabelTekst("alert", "Bruker eksisterer.");
+                        }
                     }
-                }
                 /*
                 try {
                     ValiderLoggInn.valideringBrukernavn(user.getText());
@@ -225,10 +227,11 @@ public KomponenterListe kl = new KomponenterListe();
                 }
 
                  */
-                break;
+                    break;
 
-            default:
-                setLabelTekst("alert", "Bruker eksisterer");
+                default:
+                    setLabelTekst("alert", "Bruker eksisterer");
+            }
         }
 
     }
