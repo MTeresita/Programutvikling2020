@@ -11,18 +11,18 @@ public class ValiderLoggInn {
     private StringBuilder ugyldigData = new StringBuilder();
 
     public String sjekkUgyldigData(String brukernavn, String passord){
-        if(!sjekkTommeFelt(brukernavn, passord)){
             sjekkBrukerNavn(brukernavn);
             sjekkPassord(passord);
-        }
 
         return ugyldigData.toString();
     }
 
     public String sjekkUgyldigRegistrering(String brukernavn, String passord, String passord1){
-        if(!sjekkTomtPassord(brukernavn, passord, passord1)){
-            sjekkPassord(passord);
+        if(!sjekkTomtPassord(passord, passord1)){
+            sjekkBrukerNavn(brukernavn);
+            sjekkToPassord(passord, passord1);
         }
+
         return ugyldigData.toString();
     }
 
@@ -32,8 +32,11 @@ public class ValiderLoggInn {
         //matcher alle bokstaver A-ÆØÅ mellom 2-50 i lengde og tegn som !-.,
         //"^[A-æøå]((?![-]$)[A-æøå.,'-]?){2,50}$"
 
-        if(!brukernavn.matches("^[A-ZÆØÅa-zæøå]{5,50}$")){
+        if(!brukernavn.matches("^[A-ZÆØÅa-zæøå]{5,50}$") && !brukernavn.isEmpty()){
             throw new AvvikLoggInnBrukernavn("Brukernavn må være mellom 5-50 bokstaver langt \n");
+        }
+        else if(brukernavn.isBlank() || brukernavn.isEmpty()) {
+            throw new AvvikLoggInnBrukernavn("Brukernavn kan ikke være tomt\n");
         }
         return true;
     }
@@ -50,8 +53,11 @@ public class ValiderLoggInn {
 
     public boolean validerPassord(String passord) throws AvvikLoggInnPassord {
 
-        if(!passord.matches("^[A-ZÆØÅa-zæøå]{5,50}$") && !passord.isEmpty()){
+        if(!passord.matches("^[A-ZÆØÅa-zæøå]{5,50}$") && (!passord.isEmpty() && !passord.isBlank())){
             throw new AvvikLoggInnPassord("Passord må være mellom 5-50 bokstaver langt\n");
+        }
+        else if(passord.isBlank() || passord.isEmpty()) {
+            throw new AvvikLoggInnPassord("Passord feltet kan ikke være tomt\n");
         }
         return true;
     }
@@ -66,64 +72,24 @@ public class ValiderLoggInn {
         }
         return false;
     }
-
-
-    public boolean validerTommeFelt(String brukernavn, String passord) throws EmptyFieldsException {
-        StringBuilder sb = new StringBuilder();
-
-        if(brukernavn.isEmpty() || brukernavn.isBlank()){
-            sb.append("Brukernavnet kan ikke være tomt\n");
-        }
-        if(!brukernavn.isEmpty()){
-            sjekkBrukerNavn(brukernavn);
-        }
-        if(!brukernavn.isEmpty() && passord.isEmpty()){
-            sb.append(" ");
-        }
-
-        if(passord.isEmpty() || passord.isBlank()){
-            sb.append("Passord feltet kan ikke være tomt\n");
-        }
-        if(!passord.isEmpty()){
-            sjekkPassord(passord);
-        }
-
-        if(!sb.toString().isBlank()){
-            throw new EmptyFieldsException(sb.toString());
-        }
-
-        return true;
-    }
-
-    public boolean sjekkTommeFelt(String brukernavn, String passord){
-        try {
-            if (validerTommeFelt(brukernavn,passord)) {
+    public boolean sjekkToPassord(String passord, String passord1){
+        try{
+            if(validerPassord(passord) && validerPassord(passord1)){
                 return true;
             }
-        } catch (EmptyFieldsException ef) {
-            ugyldigData.append(ef.getMessage());
+        } catch (AvvikLoggInnPassord avvikLoggInnPassord) {
+            ugyldigData.append(avvikLoggInnPassord.getMessage());
         }
         return false;
+
     }
 
-    public boolean validerTomtPassord(String brukernavn, String passord, String passord1) throws EmptyFieldsException{
-        StringBuilder sb = new StringBuilder();
 
-        if(brukernavn.isEmpty() || brukernavn.isBlank()){
-            sb.append("Brukernavnet kan ikke være tomt\n");
-        }
-        if(!brukernavn.isEmpty() || !brukernavn.isBlank()){
-            sjekkBrukerNavn(brukernavn);
-        }
+    public boolean validerDobbelPassord(String passord, String passord1) throws EmptyFieldsException{
+        StringBuilder sb = new StringBuilder();
 
         if((passord1.isEmpty() || passord1.isBlank()) && (passord.isEmpty() || passord.isBlank())){
             sb.append("Passord feltene kan ikke være tomme\n");
-        }
-        if(!passord1.isEmpty() && !passord.isEmpty()){
-            sjekkPassord(passord);
-        }
-        if(!passord.isEmpty() && passord1.isEmpty()){
-            sjekkPassord(passord);
         }
 
         if(!passord.equals(passord1) && !passord1.isEmpty()){
@@ -136,9 +102,9 @@ public class ValiderLoggInn {
         return true;
     }
 
-    public boolean sjekkTomtPassord(String brukernavn, String passord, String passord1){
+    public boolean sjekkTomtPassord(String passord, String passord1){
         try {
-            if (validerTomtPassord(brukernavn, passord, passord1)) {
+            if (validerDobbelPassord(passord, passord1)) {
                 return true;
             }
         }
