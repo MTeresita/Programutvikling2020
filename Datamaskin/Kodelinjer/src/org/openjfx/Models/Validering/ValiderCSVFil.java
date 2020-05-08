@@ -24,6 +24,7 @@ public class ValiderCSVFil {
                 }
                 else{
                     System.out.println("Linje "+ linjeTeller+" er ikke riktig formatert."+ linje);
+                    //Slette linje. evt alert boks med valg om sletting.
                 }
                 linje= br.readLine();
                 linjeTeller++;
@@ -48,6 +49,7 @@ public class ValiderCSVFil {
                 }
                 else{
                     System.out.println("Linje "+ linjeTeller+" er ikke riktig formatert."+ linje);
+                    //Slette linje. evt alert boks med valg om sletting.
                 }
                 linje= br.readLine();
                 linjeTeller++;
@@ -70,9 +72,11 @@ public class ValiderCSVFil {
 
                 if(linje.matches(TXT_STRENG_BRUKER)){
                     System.out.println("Linje "+ linjeTeller + " er riktig formatert. "+ linje);
+
                 }
                 else{
                     System.out.println("Linje "+ linjeTeller+" er ikke riktig formatert."+ linje);
+                    //Slette linje. evt alert boks med valg om sletting.
                 }
                 linje= br.readLine();
                 linjeTeller++;
