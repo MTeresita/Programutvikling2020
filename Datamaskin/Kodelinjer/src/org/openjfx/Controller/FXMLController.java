@@ -138,31 +138,43 @@ public class FXMLController {
     }
 
     public void populateFilListeComboBox(){
+        filListe.getItems().clear();
         if (!filListe.getItems().contains("Ny Fil...")){
             filListe.getItems().add("Ny Fil..."); //legger til "Ny Fil..." som førstevalg
         }
-        File aDirectory = new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/");
-        String[] filesInDir = aDirectory.list();
-        for ( int i=0; i<filesInDir.length; i++ )
-        {
-             filListe.getItems().add(filesInDir[i]);
-        }
 
+        File aDirectory = new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" + session + "/");
+        String[] filesInDir = aDirectory.list();
+        if(filesInDir != null){ //om directory ikke har filer/er null, legger den ikke til filnavn
+            for (String s : filesInDir) {
+                filListe.getItems().add(s);
+            }
+        }else{
+            System.out.println("Ingen filer funnet");
+        }
     }
     private String session = BrukerSession.getBrukerSession(); //henter brukersession/brukernavnet til den som er logget inn
     public void lagreKonfigurasjon() throws IOException {
         if(filListe.getSelectionModel().getSelectedItem() == "Ny Fil..."){
             File aDirectory = new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/");
             String[] filesInDir = aDirectory.list();
-            int versjon = filesInDir.length + 1;
-            WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/konfigurasjon-"+versjon+".csv", false);
+
+            if(filesInDir != null){
+                int versjon = filesInDir.length + 1;
+                WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/konfigurasjon-"+versjon+".csv", false);
+            }else{
+                int versjon = 1;
+                WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/konfigurasjon-"+versjon+".csv", false);
+            }
+
         }else{
             WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/"+filListe.getSelectionModel().getSelectedItem(), false);
         }
+        populateFilListeComboBox();
+        //alert at fil er blitt lagret!
 
     }
     public void hentKonfigurasjon() throws IOException {
-        //gjør parsing, sett som en kompoentliste
         FilHentingBruker fhb = new FilHentingBruker();
         ArrayList<Komponent> kompliste;
 
@@ -170,7 +182,6 @@ public class FXMLController {
 
         k.setKonfigListe(kompliste);
         populateListview();
-        //k.setKonfigListe(komponentlisten);
-        //k.setKonfigListeOvservable(komponentlisten);
+        //alert om henting av fil!
     }
 }

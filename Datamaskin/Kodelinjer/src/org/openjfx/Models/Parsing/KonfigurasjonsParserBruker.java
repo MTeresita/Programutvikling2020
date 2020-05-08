@@ -12,14 +12,12 @@ public class KonfigurasjonsParserBruker {
         try {
             String[] stringArray = str.split(KonfigurasjonsFormatererBruker.DELIMITER);
 
-            //løkke:
             System.out.println(stringArray[0] + ", " + stringArray[1] + ", " + stringArray[2]);
             String navn = stringArray[0];
             String kategori = stringArray[1];
             String pris = stringArray[2];
 
             double prisDouble = 0;
-
             try {
                 prisDouble = Double.parseDouble(pris);
             } catch (Exception e) {
@@ -29,8 +27,8 @@ public class KonfigurasjonsParserBruker {
             Komponent enKomponent = new Komponent(navn, kategori, prisDouble, false);
             return enKomponent;
         } catch(ArrayIndexOutOfBoundsException e){
-            //ettersom sluttpris er en egen value helt i bånn av csv filen, vil denne exception alltid kastes ettersom stringArray alltid vil kun ha 1 element med sluttprisen,
-            // dette vil vi skal skje ettersom sluttpris ikke trenger å være medi parsingen, den lages direkte i konfigurasjonsklassen
+            //ettersom sluttpris er en egen value helt i bånn av csv filen, vil denne exception alltid kastes ettersom stringArray alltid vil kun ha 1 element når dne skal parse sluttprisen,
+            // dette vil vi skal skje ettersom sluttpris ikke trenger å være med i parsingen, den lages direkte i konfigurasjonsklassen
         }
         return null;
     }
