@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
 import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 import org.openjfx.Models.Avvik.ValidationHelper;
@@ -17,9 +18,12 @@ import java.io.IOException;
 
 import static org.openjfx.Models.Avvik.AlertHelper.showAlertWindow;
 import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
+import static org.openjfx.Models.HjelpeKlasser.SceneHåndtering.slideSceneFraTopp;
 import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
 
 public class RegistrerBrukerController {
+    @FXML
+    AnchorPane parentContainer;
 
     @FXML
     TextField txtuser, txtpass, txtpass1;
@@ -93,7 +97,7 @@ public class RegistrerBrukerController {
 
 
 
-    public void tilbakeKnapp(ActionEvent actionEvent) {
-        routeToSite(actionEvent, "loggInn");
+    public void tilbakeKnapp(ActionEvent actionEvent) throws IOException {
+        slideSceneFraTopp("loggInn", parentContainer);
     }
 }

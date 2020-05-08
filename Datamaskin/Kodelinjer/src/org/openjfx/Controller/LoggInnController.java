@@ -4,16 +4,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
-import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
+import org.openjfx.Models.HjelpeKlasser.SceneHåndtering;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
+import static org.openjfx.Models.HjelpeKlasser.SceneHåndtering.slideSceneFraBunn;
 import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
 
 public class LoggInnController {
+    @FXML
+    AnchorPane parentContainer;
 
     @FXML
     TextField txtuser;
@@ -80,7 +85,7 @@ public class LoggInnController {
         }
         else {
             if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
-                newScene(btnLogin, "scene");
+                SceneHåndtering.newScene(btnLogin, "scene");
             }
             else {
                 if(!checkExistingBruker(txtuser.getText(), "./Brukere.csv")){
@@ -96,14 +101,22 @@ public class LoggInnController {
     public void registrerbruker(ActionEvent actionEvent) {
         //når den klikkes på, vil du bli sendt til registrer bruker siden
         registrerbruker.setOnMouseClicked(e -> {
-            routeToSite(actionEvent, "registrerBruker");
+            try {
+                slideSceneFraBunn(registrerbruker, "registrerBruker", parentContainer);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
     }
 
     public void loginAdmin(ActionEvent actionEvent) {
         //når den klikkes på, vil du bli sendt til logg inn admin siden
         loginAdmin.setOnMouseClicked(e -> {
-            routeToSite(actionEvent, "loggInnAdmin");
+            try {
+                slideSceneFraBunn(loginAdmin, "loggInnAdmin", parentContainer);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
     }
 

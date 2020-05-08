@@ -7,16 +7,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
 import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
+import org.openjfx.Models.HjelpeKlasser.SceneHåndtering;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.IOException;
 
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
-import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
+import static org.openjfx.Models.HjelpeKlasser.SceneHåndtering.slideSceneFraTopp;
 
 public class LoggInnAdminController {
+    @FXML
+    AnchorPane parentContainer;
     @FXML
     TextField txtadminuser;
 
@@ -74,7 +78,7 @@ public class LoggInnAdminController {
         }
         else {
             if(verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
-                newScene(btnLogin, "registrerProdukt");
+                SceneHåndtering.newScene(btnLogin, "registrerProdukt");
             }
             else {
                 if(!checkExistingBruker(txtadminuser.getText(), "./Admin.csv")){
@@ -87,8 +91,7 @@ public class LoggInnAdminController {
 
     }
 
-    public void tilbakeKnapp(ActionEvent actionEvent) {
-        routeToSite(actionEvent, "loggInn");
-    }
+    public void tilbakeKnapp(ActionEvent actionEvent) throws IOException {
+        slideSceneFraTopp("loggInn", parentContainer);    }
 
 }
