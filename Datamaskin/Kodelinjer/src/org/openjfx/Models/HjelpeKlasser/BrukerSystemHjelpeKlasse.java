@@ -39,6 +39,7 @@ public class BrukerSystemHjelpeKlasse {
                 if (user.equals(split[0]) && pass.equals(split[1])) {
                     found = true;
                 }
+
             }
         }
         return found;

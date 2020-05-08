@@ -13,8 +13,7 @@ import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.IOException;
 
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.newScene;
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.verifyLogin;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
 import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
 
 public class LoggInnAdminController {
@@ -78,7 +77,11 @@ public class LoggInnAdminController {
                 newScene(btnLogin, "registrerProdukt");
             }
             else {
-                lblMessage.setText("Feil brukernavn/passord");
+                if(!checkExistingBruker(txtadminuser.getText(), "./Admin.csv")){
+                    lblMessage.setText(txtadminuser.getText() + "eksisterer ikke");
+                } else {
+                    lblMessage.setText("Feil brukernavn/passord");
+                }
             }
         }
 

@@ -10,8 +10,7 @@ import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.FileNotFoundException;
 
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.newScene;
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.verifyLogin;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
 import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
 
 public class LoggInnController {
@@ -84,7 +83,11 @@ public class LoggInnController {
                 newScene(btnLogin, "scene");
             }
             else {
-                lblMessage.setText("Feil brukernavn/passord");
+                if(!checkExistingBruker(txtuser.getText(), "./Brukere.csv")){
+                    lblMessage.setText("Bruker eksisterer ikke, vennligst registrer deg under");
+                } else {
+                    lblMessage.setText("Feil brukernavn/passord");
+                }
             }
         }
 
