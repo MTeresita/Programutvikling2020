@@ -22,7 +22,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.openjfx.Models.KomponenterListe.searchTableView;
 
@@ -48,7 +50,7 @@ public class FXMLController {
     private Button leggTilProdukt;
 
     @FXML
-    private ListView<String> listview;
+    private ListView<String> listviewMB, listviewCPU, listviewRAM, listviewPSU, listviewGPU, listviewCAB, listviewHDD, listviewANNET;
 
     @FXML
     TextField filterData;
@@ -106,23 +108,67 @@ public class FXMLController {
 
     @FXML
     public void slettKomponentViaListView(){
-        System.out.println(listview.getSelectionModel().getSelectedIndex());
+       /* System.out.println(listview.getSelectionModel().getSelectedIndex());
         try {
             k.slettKomponent(listview.getSelectionModel().getSelectedIndex());
             populateListview();
         } catch(Exception e){
 
-        }
+        }*/
     }
 
     public void populateListview(){ //legger ut komponeter fra konfigurasjon sin ArrayList
-        listview.getItems().clear();
+        
         for(Komponent ktv : k.getKonfigListe()){
-            listview.getItems().add(ktv.getNavn() + "\n" + ktv.getKategori() + "\n" +ktv.getPris()+" NOK");
+            if(ktv.getKategori().equals("MOTHERBOARD")){
+                listviewMB.getItems().add(ktv.getNavn() + "\n" +ktv.getPris()+" NOK");
+            }
+            else if(ktv.getKategori().equals("CPU")){
+                listviewCPU.getItems().add(ktv.getNavn() + "\n" +ktv.getPris()+" NOK");
+            }
+            else if(ktv.getKategori().equals("RAM")){
+                listviewRAM.getItems().add(ktv.getNavn() + "\n" +ktv.getPris()+" NOK");
+            }
+            else if(ktv.getKategori().equals("PSU")){
+                listviewPSU.getItems().add(ktv.getNavn() + "\n" +ktv.getPris()+" NOK");
+            }
+            else if(ktv.getKategori().equals("GPU")){
+                listviewGPU.getItems().add(ktv.getNavn() + "\n" +ktv.getPris()+" NOK");
+            }
+            else if(ktv.getKategori().equals("CABINET")){
+                listviewCAB.getItems().add(ktv.getNavn() + "\n" +ktv.getPris()+" NOK");
+            }
+            else if(ktv.getKategori().equals("HARD DRIVE")){
+                listviewHDD.getItems().add(ktv.getNavn() + "\n" +ktv.getPris()+" NOK");
+            }
+            else{
+                listviewANNET.getItems().add(ktv.getNavn() + "\n" +ktv.getPris()+" NOK");
+            }
+
         }
-        listview.refresh();
+        listviewRefresh();
 
         lblSluttPris.setText(Double.toString(k.getSluttPris())+" NOK");
+    }
+    public void listviewClear(){
+        listviewMB.getItems().clear();
+        listviewCPU.getItems().clear();
+        listviewRAM.getItems().clear();
+        listviewPSU.getItems().clear();
+        listviewGPU.getItems().clear();
+        listviewCAB.getItems().clear();
+        listviewHDD.getItems().clear();
+        listviewANNET.getItems().clear();
+    }
+    public void listviewRefresh(){
+        listviewMB.refresh();
+        listviewCPU.refresh();
+        listviewRAM.refresh();
+        listviewPSU.refresh();
+        listviewGPU.refresh();
+        listviewCAB.refresh();
+        listviewHDD.refresh();
+        listviewANNET.refresh();
     }
 
     public void logOutEvent(ActionEvent event) {

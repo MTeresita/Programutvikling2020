@@ -22,18 +22,8 @@
          <left>
             <Pane prefHeight="1080.0" prefWidth="282.0" styleClass="gradient" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="lblSluttPris" alignment="center" layoutX="1.0" layoutY="411.0" prefHeight="0.0" prefWidth="280.0" styleClass="label-price" stylesheets="@../styles.css" text="Total pris" />
-                  <Button fx:id="lagreKonfig" layoutX="13.0" layoutY="605.0" mnemonicParsing="false" onMouseReleased="#lagreKonfigurasjon" prefHeight="35.0" prefWidth="75.0" styleClass="save" stylesheets="@../styles.css" text="Lagre">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="14.0" layoutY="357.0" mnemonicParsing="false" onAction="#slettKomponentViaListView" prefHeight="35.0" prefWidth="254.0" styleClass="delete" stylesheets="@../styles.css" text="Slett valgt komponent">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="hentKonfig" layoutX="102.0" layoutY="605.0" mnemonicParsing="false" onAction="#hentKonfigurasjon" prefHeight="35.0" prefWidth="75.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent">
+                  <Label fx:id="lblSluttPris" alignment="center" layoutX="1.0" layoutY="729.0" prefHeight="0.0" prefWidth="280.0" styleClass="label-price" stylesheets="@../styles.css" text="Total pris" />
+                  <Button layoutX="14.0" layoutY="674.0" mnemonicParsing="false" onAction="#slettKomponentViaListView" prefHeight="35.0" prefWidth="254.0" styleClass="delete" stylesheets="@../styles.css" text="Slett valgt komponent">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -44,17 +34,17 @@
                      </font>
                   </Text>
 
-                  <ImageView fitHeight="23.0" fitWidth="21.0" layoutX="18.0" layoutY="714.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="23.0" fitWidth="21.0" layoutX="18.0" layoutY="814.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Bilder/images.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="newProduct" layoutX="49.0" layoutY="712.0" mnemonicParsing="false" onAction="#logOutEvent" prefHeight="23.0" prefWidth="210.0" styleClass="button-basket" stylesheets="@../styles.css" text="Logg ut">
+                  <Button fx:id="newProduct" layoutX="49.0" layoutY="812.0" mnemonicParsing="false" onAction="#logOutEvent" prefHeight="23.0" prefWidth="210.0" styleClass="button-basket" stylesheets="@../styles.css" text="Logg ut">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>
-                  <ListView fx:id="listview" layoutX="14.0" layoutY="149.0" prefHeight="199.0" prefWidth="254.0" />
-                  <Text fill="WHITE" layoutX="14.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konfigurasjon">
+                  <ListView fx:id="listviewMB" layoutX="14.0" layoutY="166.0" prefHeight="38.0" prefWidth="254.0" />
+                  <Text layoutX="14.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konfigurasjon">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -65,22 +55,58 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <ComboBox fx:id="filListe" layoutX="13.0" layoutY="571.0" onAction="#setFilListeTilgjengelig" prefHeight="25.0" prefWidth="253.0" promptText="Velg konfigurasjon å lagre/hente" styleClass="choicebox-product" stylesheets="@../styles.css" />
-                  <Text fill="WHITE" layoutX="14.0" layoutY="559.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konfigurasjon management">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Button fx:id="slettKonfig" layoutX="191.0" layoutY="605.0" mnemonicParsing="false" onAction="#slettKomponentViaListView" prefHeight="35.0" prefWidth="75.0" styleClass="delete" stylesheets="@../styles.css" text="Slett">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Label fx:id="lblKonfigurasjonsNavn" layoutX="112.0" layoutY="130.0" text="Konfigurasjonsnavn">
+                  <Label fx:id="lblKonfigurasjonsNavn" layoutX="112.0" layoutY="117.0" text="Konfigurasjonsnavn">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
+                  <ListView fx:id="listviewCPU" layoutX="14.0" layoutY="226.0" prefHeight="38.0" prefWidth="254.0" />
+                  <ListView fx:id="listviewRAM" layoutX="14.0" layoutY="286.0" prefHeight="38.0" prefWidth="254.0" />
+                  <ListView fx:id="listviewPSU" layoutX="14.0" layoutY="346.0" prefHeight="38.0" prefWidth="254.0" />
+                  <ListView fx:id="listviewGPU" layoutX="14.0" layoutY="406.0" prefHeight="38.0" prefWidth="254.0" />
+                  <ListView fx:id="listviewCAB" layoutX="14.0" layoutY="466.0" prefHeight="38.0" prefWidth="254.0" />
+                  <ListView fx:id="listviewHDD" layoutX="14.0" layoutY="526.0" prefHeight="38.0" prefWidth="254.0" />
+                  <ListView fx:id="listviewANNET" layoutX="14.0" layoutY="586.0" prefHeight="79.0" prefWidth="254.0" />
+                  <Text fill="WHITE" layoutX="14.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motherboard">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPU">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RAM">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PSU">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GPU">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cabinet">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="521.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hard Drive">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="581.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Annet (optional)">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
                </children></Pane>
          </left>
          <center>
@@ -104,6 +130,27 @@
                      </font>
                   </Button>
                   <TextField fx:id="filterData" layoutX="89.0" layoutY="661.0" prefHeight="37.0" prefWidth="362.0" promptText="Søk" styleClass="search-bar" stylesheets="@../styles.css" />
+                  <Button fx:id="lagreKonfig" layoutX="90.0" layoutY="780.0" mnemonicParsing="false" onMouseReleased="#lagreKonfigurasjon" prefHeight="35.0" prefWidth="75.0" styleClass="save" stylesheets="@../styles.css" text="Lagre">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="hentKonfig" layoutX="179.0" layoutY="780.0" mnemonicParsing="false" onAction="#hentKonfigurasjon" prefHeight="35.0" prefWidth="75.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <ComboBox fx:id="filListe" layoutX="90.0" layoutY="746.0" onAction="#setFilListeTilgjengelig" prefHeight="25.0" prefWidth="253.0" promptText="Velg konfigurasjon å lagre/hente" styleClass="choicebox-product" stylesheets="@../styles.css" />
+                  <Text layoutX="91.0" layoutY="734.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konfigurasjon management">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="slettKonfig" layoutX="268.0" layoutY="780.0" mnemonicParsing="false" onAction="#slettKomponentViaListView" prefHeight="35.0" prefWidth="75.0" styleClass="delete" stylesheets="@../styles.css" text="Slett">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                </children></Pane>
          </center>
       </BorderPane>
