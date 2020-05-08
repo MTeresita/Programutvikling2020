@@ -273,6 +273,34 @@ public KomponenterListe kl = new KomponenterListe();
     @FXML
     public void registererProdukt(ActionEvent event) throws AvvikKomponentProduktnavn, AvvikKomponentPris, AvvikKomponentNyKategori, NumberFormatException {
         //System.out.println("Fra combobox: "+kategoriCombobox.getSelectionModel().getSelectedItem().toString());
+        ValideringKomponent valideringKomponent = new ValideringKomponent();
+        String validering =
+                valideringKomponent.sjekkUgyldigKomponent(produktNavn.getText(), kategoriNavn.getText(),
+                        (produktPris.getText()));
+
+        if(!validering.isEmpty() && kategoriCombobox.getSelectionModel().isEmpty()){
+            setLabelTekst("alert", validering);
+        }
+        else {
+            if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Velg kategori")) {
+                setLabelTekst("alert", "Du må velge en eksisterende eller lage en ny kategori.");
+            }
+            else if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(),
+                        Double.parseDouble(produktPris.getText()), checkBox.isSelected());
+                sjekkForDuplikater(nyKomponent);
+            } else {
+                Komponent nyKomponent = new Komponent(produktNavn.getText(),
+                        kategoriCombobox.getSelectionModel().getSelectedItem().toString(),
+                        Double.parseDouble(produktPris.getText()), checkBox.isSelected()); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                sjekkForDuplikater(nyKomponent);
+            }
+
+            clear();
+            komponenter.refresh();
+            populateKategoriCombobox();
+        }
+        /*
         try {
             if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Velg kategori")){
                 setLabelTekst("alert", "Du må velge en eksisterende eller lage en ny kategori.");
@@ -307,12 +335,14 @@ public KomponenterListe kl = new KomponenterListe();
                 setLabelTekst("alert", "Pris må være høyere enn 0 NOK og mindre enn 1 000 000 NOK.");
             }
         }
+         */
     }
     public boolean sjekkForDuplikater(Komponent nyKomponent){
         if(kl.finnDuplikat(nyKomponent)){
             setLabelTekst("alert", "Komponeneten er allerede registrert");
             return true;
-        }else{
+        }
+        else{
             kl.setKomponenter(nyKomponent);
             setLabelTekst("success", "Komponent lagt til i liste!");
             return false;
@@ -321,6 +351,7 @@ public KomponenterListe kl = new KomponenterListe();
 
     @FXML
     public void endreTableViewDataString(TableColumn.CellEditEvent<Komponent, String> event) throws AvvikKomponentProduktnavn, AvvikKomponentNyKategori{ //Fra henrik
+        /*
         try{
             if(event.getTableColumn().getText().equals("Produktnavn")){
                 ValideringKomponent.validerProduktnavn(event.getNewValue());
@@ -340,6 +371,8 @@ public KomponenterListe kl = new KomponenterListe();
                 //lblMessage.setText("Feil i kategori! Kategori må være minst to tegn.");
             }
         }
+
+         */
 
     }
     @FXML

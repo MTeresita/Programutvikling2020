@@ -4,7 +4,6 @@ package org.openjfx.Models.Validering;
 
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
 import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
-import org.openjfx.Models.Avvik.EmptyFieldsException;
 
 public class ValiderLoggInn {
 

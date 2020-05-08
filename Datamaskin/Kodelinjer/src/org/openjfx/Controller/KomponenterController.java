@@ -19,7 +19,7 @@ import java.util.Optional;
 import static org.openjfx.Models.KomponenterListe.searchTableView;
 
 
-public class FXMLController {
+public class KomponenterController {
 
     @FXML
     private Label label;
