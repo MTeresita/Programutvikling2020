@@ -278,7 +278,7 @@ public KomponenterListe kl = new KomponenterListe();
                 valideringKomponent.sjekkUgyldigKomponent(produktNavn.getText(), kategoriNavn.getText(),
                         (produktPris.getText()));
 
-        if(!validering.isEmpty() && kategoriCombobox.getSelectionModel().isEmpty()){
+        if(!validering.isEmpty()){
             setLabelTekst("alert", validering);
         }
         else {

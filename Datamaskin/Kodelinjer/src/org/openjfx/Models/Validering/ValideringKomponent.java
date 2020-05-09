@@ -23,7 +23,7 @@ public class ValideringKomponent {
                 if (innPris > 999999) {
                     ugyldigData.append("Pris kan ikke være høyere enn\n 999 999 NOK\n");
                 }
-                if ((innPris <= 0)) {
+                if (innPris <= 0) {
                     ugyldigData.append("Pris kan ikke være mindre enn 0\n");
                 } else {
                     sjekkPris(pris);
