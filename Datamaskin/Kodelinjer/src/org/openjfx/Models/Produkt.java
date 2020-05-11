@@ -19,6 +19,7 @@ public class Produkt extends Object implements Serializable { //ER EN HJELPEKLAS
             this.duplikat = duplikat;
         }
 
+        //TODO en del set metoder blir ikke brukt
         public String getNavn () {
             return navn;
         }

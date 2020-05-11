@@ -36,6 +36,7 @@ public class Konfigurasjon {
         lagSluttPris();
     }
 
+    //TODO denne blir ikke brukt ?
     public void setValgteKomponenter(ArrayList<Komponent> komponenter) { //for bruker
         konfigListe.clear();
         ArrayList<Komponent> konfigListeIterator = konfigListe;

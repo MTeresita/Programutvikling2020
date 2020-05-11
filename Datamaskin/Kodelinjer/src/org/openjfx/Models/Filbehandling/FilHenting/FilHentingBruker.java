@@ -2,7 +2,6 @@ package org.openjfx.Models.Filbehandling.FilHenting;
 
 import org.openjfx.Models.Interfaces.FilHenting;
 import org.openjfx.Models.Komponent;
-import org.openjfx.Models.Konfigurasjon;
 import org.openjfx.Models.Parsing.KonfigurasjonsParserBruker;
 
 import java.io.BufferedReader;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FilHentingBruker implements FilHenting {
     @Override

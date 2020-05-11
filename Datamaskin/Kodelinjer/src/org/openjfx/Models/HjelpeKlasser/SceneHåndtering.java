@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -20,7 +19,7 @@ public class SceneHåndtering {
 
 
     public static void slideSceneFraBunn(Hyperlink link, String path, Pane parentContainer) throws IOException {
-        Parent root = FXMLLoader.load(BrukerSystemHjelpeKlasse.class.getResource("/org/openjfx/View/" + path + ".fxml"));
+        Parent root = FXMLLoader.load(BrukerSystemSjekk.class.getResource("/org/openjfx/View/" + path + ".fxml"));
         Scene scene = link.getScene();
 
         root.translateYProperty().set(scene.getHeight());
@@ -34,7 +33,7 @@ public class SceneHåndtering {
     }
 
     public static void slideSceneFraTopp(String path, Pane pane) throws IOException {
-        Parent root = FXMLLoader.load(BrukerSystemHjelpeKlasse.class.getResource("/org/openjfx/View/" + path + ".fxml"));
+        Parent root = FXMLLoader.load(BrukerSystemSjekk.class.getResource("/org/openjfx/View/" + path + ".fxml"));
 
         root.translateYProperty().set(-1 * pane.getHeight());
         pane.getChildren().add(root);
@@ -52,7 +51,7 @@ public class SceneHåndtering {
 
         Stage stage = (Stage) button.getScene().getWindow();
         Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(BrukerSystemHjelpeKlasse.class.getResource(BASE_PATH + path + FILE_ENDING));
+        Parent root = FXMLLoader.load(BrukerSystemSjekk.class.getResource(BASE_PATH + path + FILE_ENDING));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

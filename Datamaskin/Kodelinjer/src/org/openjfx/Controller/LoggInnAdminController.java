@@ -8,14 +8,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
-import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 import org.openjfx.Models.HjelpeKlasser.SceneHåndtering;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.IOException;
 
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemSjekk.*;
 import static org.openjfx.Models.HjelpeKlasser.SceneHåndtering.slideSceneFraTopp;
 
 public class LoggInnAdminController {
@@ -46,28 +44,7 @@ public class LoggInnAdminController {
         });
     }
 
-    public void loginEvent() throws IOException, AvvikLoggInnBrukernavn, AvvikLoggInnPassord {
-
-        /*
-        //Validering av brukernavn og passord:
-        try {
-            ValiderLoggInn.valideringBrukernavn(txtadminuser.getText());
-            ValiderLoggInn.validerPassord(txtadminpass.getText());
-            if (verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
-                newScene(btnLogin, "registrerProdukt");
-            }
-            else{
-                lblMessage.setText("Feil brukernavn eller passord.");
-            }
-
-        } catch (AvvikLoggInnBrukernavn | AvvikLoggInnPassord e) {
-            if(e instanceof AvvikLoggInnBrukernavn){
-                lblMessage.setText("Feil i brukernavn! Brukernavn må være minst 5 bokstaver langt.");
-            }
-            else if(e instanceof AvvikLoggInnPassord){
-                lblMessage.setText("Feil i passord! Passord må være minst 5 bokstaver langt.");
-            }
-        }*/
+    public void loginEvent() throws IOException {
 
         ValiderLoggInn validerLoggInn = new ValiderLoggInn();
 

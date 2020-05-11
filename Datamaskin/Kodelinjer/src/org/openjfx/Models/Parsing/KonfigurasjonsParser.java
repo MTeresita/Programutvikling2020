@@ -3,6 +3,7 @@ package org.openjfx.Models.Parsing;
 import org.openjfx.Models.Formaterer.*;
 import org.openjfx.Models.Produkt;
 
+//TODO denne blir ikke brukt ?
 public class KonfigurasjonsParser {
 /*
 
