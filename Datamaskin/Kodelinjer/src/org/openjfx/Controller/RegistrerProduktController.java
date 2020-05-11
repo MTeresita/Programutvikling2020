@@ -356,11 +356,11 @@ public KomponenterListe kl = new KomponenterListe();
             if(event.getTableColumn().getText().equals("Produktnavn")){
                 ValideringKomponent.validerProduktnavn(event.getNewValue());
                 event.getRowValue().setNavn(event.getNewValue());
-                kl.lagreTilObjectFil(); // denn kan brukes til å lagre til fil så fort man skriver i tableviewet
+                //kl.lagreTilObjectFil(); // denn kan brukes til å lagre til fil så fort man skriver i tableviewet
             }else{
                 ValideringKomponent.validerNyKategori(event.getNewValue());
                 event.getRowValue().setKategori(event.getNewValue());
-                kl.lagreTilObjectFil(); // denn kan brukes til å lagre til fil så fort man skriver i tableviewet
+                //kl.lagreTilObjectFil(); // denn kan brukes til å lagre til fil så fort man skriver i tableviewet
 
             }
         }catch (AvvikKomponentProduktnavn | AvvikKomponentNyKategori e) {
