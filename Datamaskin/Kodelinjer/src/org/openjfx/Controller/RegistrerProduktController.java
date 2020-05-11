@@ -127,7 +127,7 @@ public KomponenterListe kl = new KomponenterListe();
                             BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
 
                             //skrives til Admin.csv
-                            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
+                            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv", true);
                             showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
                                     "Administrator opprettet");
                             //resetter inputs for registrering
@@ -181,7 +181,7 @@ public KomponenterListe kl = new KomponenterListe();
                             BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
 
                             //skriver til Brukere.csv
-                            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
+                            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv", true);
 
                             //popup vindu som bekrefter at en ny bruker har blitt opprettet
                             showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Ny bruker opprettet",
