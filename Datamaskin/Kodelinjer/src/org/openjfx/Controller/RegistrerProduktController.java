@@ -102,15 +102,43 @@ public KomponenterListe kl = new KomponenterListe();
 
     }
 
+
     public void registrerbtn(ActionEvent actionEvent) throws IOException {
-        ValidationHelper validationHelper = new ValidationHelper();
-        String invalidInputs = validationHelper.getInvalidInput(user.getText(), pass.getText(), pass.getText());
+        ValiderLoggInn validerLoggInn = new ValiderLoggInn();
+        String ugyldigRegistreering =
+                validerLoggInn.sjekkUgyldigData(user.getText(), pass.getText());
 
         // er det admin eller bruker sjek --> hvilken fil skal den til
         String value = String.valueOf(adminORuser.getValue());
 
-        switch (value) {
-            case "Admin":
+        if(adminORuser.getSelectionModel().isEmpty()){
+            setLabelTekst("alert", "Bruker type har ikke blitt valgt");
+        }
+        else {
+            switch (value) {
+                case "Admin":
+
+                    if (!ugyldigRegistreering.isEmpty()) {
+                        lblMessage.setText(ugyldigRegistreering);
+                    } else {
+                        if (!checkExistingBruker(user.getText(), "./Admin.csv")) {
+                            lblMessage.setText("");
+                            //en ny bruker blir registrer
+                            BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
+
+                            //skrives til Admin.csv
+                            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv");
+                            showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
+                                    "Administrator opprettet");
+                            //resetter inputs for registrering
+                            clear();
+                        } else {
+                            //eksisterer bruker, send feilmelding
+                            setLabelTekst("alert", "Administrator eksisterer");
+                            //lblMessage.setText("Administrator eksisterer");
+                        }
+                    }
+                /*
                 try {
                     ValiderLoggInn.valideringBrukernavn(user.getText());
                     ValiderLoggInn.validerPassord(pass.getText());
@@ -138,9 +166,36 @@ public KomponenterListe kl = new KomponenterListe();
                     }
 
                 }
-                break;
+                 */
 
-            case "Bruker":
+                    break;
+
+                case "Bruker":
+
+                    if (!ugyldigRegistreering.isEmpty()) {
+                        lblMessage.setText(ugyldigRegistreering);
+                    } else {
+                        if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
+                            lblMessage.setText("");
+                            //opprett ny bruker
+                            BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
+
+                            //skriver til Brukere.csv
+                            WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
+
+                            //popup vindu som bekrefter at en ny bruker har blitt opprettet
+                            showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Ny bruker opprettet",
+                                    "Bruker opprettet");
+                            //showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
+                            //resetter inputs for registrering
+                            clear();
+
+                        } else {
+                            //eksisterer bruker, send f eilmelding
+                            setLabelTekst("alert", "Bruker eksisterer.");
+                        }
+                    }
+                /*
                 try {
                     ValiderLoggInn.valideringBrukernavn(user.getText());
                     ValiderLoggInn.validerPassord(pass.getText());
@@ -170,13 +225,17 @@ public KomponenterListe kl = new KomponenterListe();
                         lblMessage.setText("Feil i passord! Passord må være minst 5 bokstaver langt.");
                     }
                 }
-                break;
 
-            default:
-                setLabelTekst("alert", "Bruker eksisterer");
+                 */
+                    break;
+
+                default:
+                    setLabelTekst("alert", "Bruker eksisterer");
+            }
         }
 
     }
+
     public void clear(){
         //resetter inputfeltene
         user.clear();
@@ -214,6 +273,34 @@ public KomponenterListe kl = new KomponenterListe();
     @FXML
     public void registererProdukt(ActionEvent event) throws AvvikKomponentProduktnavn, AvvikKomponentPris, AvvikKomponentNyKategori, NumberFormatException {
         //System.out.println("Fra combobox: "+kategoriCombobox.getSelectionModel().getSelectedItem().toString());
+        ValideringKomponent valideringKomponent = new ValideringKomponent();
+        String validering =
+                valideringKomponent.sjekkUgyldigKomponent(produktNavn.getText(), kategoriNavn.getText(),
+                        (produktPris.getText()));
+
+        if(!validering.isEmpty()){
+            setLabelTekst("alert", validering);
+        }
+        else {
+            if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Velg kategori")) {
+                setLabelTekst("alert", "Du må velge en eksisterende eller lage en ny kategori.");
+            }
+            else if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
+                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(),
+                        Double.parseDouble(produktPris.getText()), checkBox.isSelected());
+                sjekkForDuplikater(nyKomponent);
+            } else {
+                Komponent nyKomponent = new Komponent(produktNavn.getText(),
+                        kategoriCombobox.getSelectionModel().getSelectedItem().toString(),
+                        Double.parseDouble(produktPris.getText()), checkBox.isSelected()); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                sjekkForDuplikater(nyKomponent);
+            }
+
+            clear();
+            komponenter.refresh();
+            populateKategoriCombobox();
+        }
+        /*
         try {
             if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Velg kategori")){
                 setLabelTekst("alert", "Du må velge en eksisterende eller lage en ny kategori.");
@@ -248,12 +335,14 @@ public KomponenterListe kl = new KomponenterListe();
                 setLabelTekst("alert", "Pris må være høyere enn 0 NOK og mindre enn 1 000 000 NOK.");
             }
         }
+         */
     }
     public boolean sjekkForDuplikater(Komponent nyKomponent){
         if(kl.finnDuplikat(nyKomponent)){
             setLabelTekst("alert", "Komponeneten er allerede registrert");
             return true;
-        }else{
+        }
+        else{
             kl.setKomponenter(nyKomponent);
             setLabelTekst("success", "Komponent lagt til i liste!");
             return false;
@@ -262,13 +351,17 @@ public KomponenterListe kl = new KomponenterListe();
 
     @FXML
     public void endreTableViewDataString(TableColumn.CellEditEvent<Komponent, String> event) throws AvvikKomponentProduktnavn, AvvikKomponentNyKategori{ //Fra henrik
+
         try{
             if(event.getTableColumn().getText().equals("Produktnavn")){
                 ValideringKomponent.validerProduktnavn(event.getNewValue());
                 event.getRowValue().setNavn(event.getNewValue());
+                kl.lagreTilObjectFil(); // denn kan brukes til å lagre til fil så fort man skriver i tableviewet
             }else{
                 ValideringKomponent.validerNyKategori(event.getNewValue());
                 event.getRowValue().setKategori(event.getNewValue());
+                kl.lagreTilObjectFil(); // denn kan brukes til å lagre til fil så fort man skriver i tableviewet
+
             }
         }catch (AvvikKomponentProduktnavn | AvvikKomponentNyKategori e) {
             komponenter.refresh();
@@ -281,6 +374,8 @@ public KomponenterListe kl = new KomponenterListe();
                 //lblMessage.setText("Feil i kategori! Kategori må være minst to tegn.");
             }
         }
+
+
 
     }
     @FXML

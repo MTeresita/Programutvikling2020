@@ -39,6 +39,7 @@ public class BrukerSystemHjelpeKlasse {
                 if (user.equals(split[0]) && pass.equals(split[1])) {
                     found = true;
                 }
+
             }
         }
         return found;
@@ -69,17 +70,4 @@ public class BrukerSystemHjelpeKlasse {
 
     }
 
-    public static void newScene(Button button, String path) throws IOException {
-        String BASE_PATH = "/org/openjfx/View/";
-        String FILE_ENDING = ".fxml";
-
-        Stage stage = (Stage) button.getScene().getWindow();
-        Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(BrukerSystemHjelpeKlasse.class.getResource(BASE_PATH + path + FILE_ENDING));
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        stage.close();
-        stage.centerOnScreen();
-    }
 }
