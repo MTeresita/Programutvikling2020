@@ -1,40 +1,36 @@
 package org.openjfx.Models.Parsing;
 
 import org.openjfx.Models.Formaterer.KonfigurasjonsFormatererBruker;
+import org.openjfx.Models.Komponent;
 import org.openjfx.Models.Konfigurasjon;
 
 public class KonfigurasjonsParserBruker {
 
 
     //Parser produkt fra fil til string:
-    public static Konfigurasjon parseKonfigurasjonBruker(String str){
+    public static Komponent parseKonfigurasjonBruker(String str){
+        try {
+            String[] stringArray = str.split(KonfigurasjonsFormatererBruker.DELIMITER);
 
-        String[] string = str.split(KonfigurasjonsFormatererBruker.DELIMITER);
+            System.out.println(stringArray[0] + ", " + stringArray[1] + ", " + stringArray[2]);
+            String navn = stringArray[0];
+            String kategori = stringArray[1];
+            String pris = stringArray[2];
 
-        //løkke:
+            double prisDouble = 0;
+            try {
+                prisDouble = Double.parseDouble(pris);
+            } catch (Exception e) {
+                e.getMessage();
+            }
 
-
-        String navn= string[0];
-        String kategori= string[1];
-        String pris= string[2];
-        String sluttPris=string[3];
-
-        double prisDouble=0;
-        double sluttprisDouble=0;
-
-        try{
-            prisDouble=Double.parseDouble(pris);
-            sluttprisDouble=Double.parseDouble(sluttPris);
+            Komponent enKomponent = new Komponent(navn, kategori, prisDouble, false);
+            return enKomponent;
+        } catch(ArrayIndexOutOfBoundsException e){
+            //ettersom sluttpris er en egen value helt i bånn av csv filen, vil denne exception alltid kastes ettersom stringArray alltid vil kun ha 1 element når dne skal parse sluttprisen,
+            // dette vil vi skal skje ettersom sluttpris ikke trenger å være med i parsingen, den lages direkte i konfigurasjonsklassen
         }
-        catch(Exception e){
-            e.getMessage();
-        }
-
-
-        //Skal returnere en liste med komponenterTableView
-        Konfigurasjon enKonfigurasjon= new Konfigurasjon();
-        return enKonfigurasjon;
-
+        return null;
     }
 
 }

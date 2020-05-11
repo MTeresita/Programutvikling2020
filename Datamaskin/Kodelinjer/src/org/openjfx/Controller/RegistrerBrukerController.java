@@ -52,7 +52,7 @@ public class RegistrerBrukerController {
                 //hvis ikke så ...
             } else {
                 BrukerRegister enBruker = new BrukerRegister(txtuser.getText(), txtpass.getText());
-                WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv");
+                WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv", true);
 
                 //Pop up melding om at brukeren er registrert
                 showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerbtn), "Velkommen",

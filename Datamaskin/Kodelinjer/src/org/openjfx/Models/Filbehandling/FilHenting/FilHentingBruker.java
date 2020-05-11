@@ -1,5 +1,7 @@
 package org.openjfx.Models.Filbehandling.FilHenting;
 
+import org.openjfx.Models.Interfaces.FilHenting;
+import org.openjfx.Models.Komponent;
 import org.openjfx.Models.Konfigurasjon;
 import org.openjfx.Models.Parsing.KonfigurasjonsParserBruker;
 
@@ -10,11 +12,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-/*
-public class FilHentingBruker implements org.openjfx.Model.Interfaces.FilHenting {
-   /* @Override
-    public List<Produkt> lesingFraFil(String path) throws IOException {
-        ArrayList<Produkt> list = new ArrayList<>();
+
+public class FilHentingBruker implements FilHenting {
+    @Override
+    public ArrayList<Komponent> lesingFraFil(String path) throws IOException {
+
+        ArrayList<Komponent> list = new ArrayList<>();
+
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(path))) {
             String linje;
 
@@ -22,8 +26,10 @@ public class FilHentingBruker implements org.openjfx.Model.Interfaces.FilHenting
             while ((linje = reader.readLine()) != null) {
 
                 //bruker parseProdukt til å gjøre om til et objekt fra fil.
-                list.add((KonfigurasjonsParserBruker.parseKonfigurasjonBruker(linje)));
-
+                //System.out.println("linje: "+linje);
+                if(KonfigurasjonsParserBruker.parseKonfigurasjonBruker(linje) != null){
+                    list.add((KonfigurasjonsParserBruker.parseKonfigurasjonBruker(linje)));
+                }
             }
             return list;
         }
@@ -36,4 +42,3 @@ public class FilHentingBruker implements org.openjfx.Model.Interfaces.FilHenting
 
 }
 
- */

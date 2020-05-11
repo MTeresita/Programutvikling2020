@@ -7,6 +7,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
 import org.openjfx.Models.HjelpeKlasser.SceneHåndtering;
+import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
+import org.openjfx.Models.HjelpeKlasser.BrukerSession;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.FileNotFoundException;
@@ -35,6 +37,7 @@ public class LoggInnController {
     @FXML
     Hyperlink registrerbruker, loginAdmin;
 
+
     public void initialize(){
         txtpass.setOnKeyPressed(e ->{
             KeyCode key = e.getCode();
@@ -49,7 +52,7 @@ public class LoggInnController {
             }
         });
     }
-    
+
     public void loginEvent() throws Exception, AvvikLoggInnBrukernavn, FileNotFoundException {
 
         /*
@@ -57,6 +60,7 @@ public class LoggInnController {
             ValiderLoggInn.valideringBrukernavn(txtuser.getText());
             ValiderLoggInn.validerPassord(txtpass.getText());
             if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
+                BrukerSession.setBrukerSession(txtuser.getText());
                 newScene(btnLogin, "scene");
             }
             else{
