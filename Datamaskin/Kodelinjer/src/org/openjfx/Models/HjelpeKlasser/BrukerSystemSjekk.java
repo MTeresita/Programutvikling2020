@@ -1,21 +1,12 @@
 package org.openjfx.Models.HjelpeKlasser;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 
-public class BrukerSystemHjelpeKlasse {
+public class BrukerSystemSjekk {
 
     // generell metode som går gjennom filene for å finne bruker.
     public static boolean verifyLogin(String user, String pass, String file) throws IOException {

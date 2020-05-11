@@ -42,7 +42,7 @@ public class KomponenterController {
     private ComboBox filListe;
 
     @FXML
-    private Label lblKonfigurasjonsNavn;
+    private Label lblKonfigurasjonsNavn, loggetInn;
 
     @FXML
     private Button leggTilProdukt;
@@ -63,7 +63,7 @@ public class KomponenterController {
     TableColumn<Komponent, Double> pris;
 
 
-
+    private String session = BrukerSession.getBrukerSession(); //henter brukersession/brukernavnet til den som er logget inn
     public Konfigurasjon k = new Konfigurasjon(); //lager en generell liste av konfigurasjon som brukes gjennom kontrolleren
     public KomponenterListe kl = new KomponenterListe();
 
@@ -76,6 +76,7 @@ public class KomponenterController {
         */
         populateTable();
         searchTableView(kl, filterData, komponenter);
+        loggetInn.setText(session);
     }
 
     public void populateTable() { //henter fra .csv fil
@@ -88,6 +89,7 @@ public class KomponenterController {
         populateFilListeComboBox();
     }
 
+    //TODO: Bruker vi denne lenger eller kan den slettes?
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
@@ -122,11 +124,12 @@ public class KomponenterController {
         }
         listview.refresh();
 
-        lblSluttPris.setText(Double.toString(k.getSluttPris())+" NOK");
+        lblSluttPris.setText(k.getSluttPris() +" NOK");
     }
 
     public void logOutEvent(ActionEvent event) {
-        boolean ok = alertBox("Bekreft utlogging", "Endringer gjort uten å trykke lagre vil bli slettet!", "Er du sikker på at du vil logge ut?");
+        boolean ok = alertBox("Bekreft utlogging", "Endringer gjort uten å trykke lagre vil bli slettet!",
+                "Er du sikker på at du vil logge ut?");
         if (ok) {
             SceneChanger.routeToSite(event, "loggInn");
         }
@@ -147,7 +150,8 @@ public class KomponenterController {
             filListe.getSelectionModel().select(sistValgteFil);
         }catch (NullPointerException e){
             System.out.println("Nullpointer excec");
-            //grunnet hvordan combobox er bugget, vil den alltid kalle på denne metoden med en nullpointer når man kjører "populateFilListeComboBox" etter å ha lagret fil
+            //grunnet hvordan combobox er bugget, vil den alltid kalle på denne metoden med en
+            // nullpointer når man kjører "populateFilListeComboBox" etter å ha lagret fil
         }
     }
 
@@ -168,29 +172,39 @@ public class KomponenterController {
         }
     }
 
-    private String session = BrukerSession.getBrukerSession(); //henter brukersession/brukernavnet til den som er logget inn
-    public void lagreKonfigurasjon() throws IOException {
+
+    public void lagreKonfigurasjon() {
 
         if(!k.getKonfigListe().isEmpty()) {
             if (filListe.getSelectionModel().getSelectedItem() == "Ny Fil...") {
-                File aDirectory = new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" + session + "/");
+                File aDirectory = new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" +
+                                            session + "/");
                 String[] filesInDir = aDirectory.list();
 
                 if (filesInDir != null) {
                     int versjon = filesInDir.length + 1;
-                    WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" + session + "/konfigurasjon-" + versjon + ".csv", false); //tar utgangspunkt i ekisterende versjoner, adderer 1
+                    WriteTo.writeToCSVFile(new WriteTo(), k,
+                            "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" + session +
+                                    "/konfigurasjon-" + versjon + ".csv", false);
+                    //tar utgangspunkt i ekisterende versjoner, adderer 1
+
                     sistValgteFil = "konfigurasjon-" + versjon + ".csv";
                     lblKonfigurasjonsNavn.setText("konfigurasjon-" + versjon + ".csv");
                 } else {
                     int versjon = 1;
-                    WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" + session + "/konfigurasjon-" + versjon + ".csv", false); //lager første versjon (1)
+                    WriteTo.writeToCSVFile(new WriteTo(), k,
+                            "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" + session +
+                                    "/konfigurasjon-" + versjon + ".csv", false); //lager første versjon (1)
                     sistValgteFil = "konfigurasjon-" + versjon + ".csv";
                     lblKonfigurasjonsNavn.setText("konfigurasjon-" + versjon + ".csv");
                 }
             } else {
-                boolean ok = alertBox("Bekreft overskriving", "Endringer gjort vil overskrive valgt fil!", "Er du sikker på at du vil skrive over?");
+                boolean ok = alertBox("Bekreft overskriving", "Endringer gjort vil overskrive valgt fil!",
+                                    "Er du sikker på at du vil skrive over?");
                 if (ok) {
-                    WriteTo.writeToCSVFile(new WriteTo(), k, "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" + session + "/" + filListe.getSelectionModel().getSelectedItem(), false);
+                    WriteTo.writeToCSVFile(new WriteTo(), k,
+                            "Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" + session + "/" +
+                                    filListe.getSelectionModel().getSelectedItem(), false);
                 }
             }
             populateFilListeComboBox();
@@ -204,7 +218,8 @@ public class KomponenterController {
         FilHentingBruker fhb = new FilHentingBruker();
         ArrayList<Komponent> kompliste;
 
-        kompliste = fhb.lesingFraFil("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/"+filListe.getSelectionModel().getSelectedItem());
+        kompliste = fhb.lesingFraFil("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/"+
+                                            filListe.getSelectionModel().getSelectedItem());
 
         k.setKonfigListe(kompliste);
         lblKonfigurasjonsNavn.setText(filListe.getSelectionModel().getSelectedItem().toString());

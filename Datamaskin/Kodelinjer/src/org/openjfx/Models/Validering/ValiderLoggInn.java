@@ -100,37 +100,4 @@ public class ValiderLoggInn {
 
     }
 
-
-    /*
-    public boolean validerDobbelPassord(String passord, String passord1) throws EmptyFieldsException{
-        StringBuilder sb = new StringBuilder();
-
-        if((passord1.isEmpty() || passord1.isBlank()) && (passord.isEmpty() || passord.isBlank())){
-            sb.append("Passord feltene kan ikke være tomme\n");
-        }
-
-        if(!passord.equals(passord1) && !passord1.isEmpty()){
-            sb.append("Passordene er ikke like \n");
-        }
-
-        if(!sb.toString().isBlank()){
-            throw new EmptyFieldsException(sb.toString());
-        }
-        return true;
-    }
-
-    public boolean sjekkTomtPassord(String passord, String passord1){
-        try {
-            if (validerDobbelPassord(passord, passord1)) {
-                return true;
-            }
-        }
-        catch (EmptyFieldsException e){
-            ugyldigData.append(e.getMessage());
-        }
-        return false;
-    }
-
-     */
-
 }

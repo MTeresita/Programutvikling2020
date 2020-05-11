@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.KomponenterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.KomponenterController">
    <children>
       <BorderPane prefHeight="780.0" prefWidth="1100.0">
          <left>
@@ -112,11 +112,17 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Text fill="#f89a76" layoutX="90.0" layoutY="637.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konfigurasjon management" wrappingWidth="287.13671875">
+                  <TextField fx:id="filterData" layoutX="89.0" layoutY="661.0" prefHeight="37.0" prefWidth="362.0" promptText="Søk" styleClass="search-bar" stylesheets="@../styles.css" />
+                  <ImageView fitHeight="32.0" fitWidth="34.0" layoutX="14.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Bilder/userIcon.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="loggetInn" layoutX="47.0" layoutY="23.0" prefHeight="24.0" prefWidth="87.0" stylesheets="@../styles.css" textFill="#f89a76">
                      <font>
-                        <Font size="21.0" />
+                        <Font size="15.0" />
                      </font>
-                  </Text>
+                  </Label>
                </children></Pane>
          </center>
       </BorderPane>

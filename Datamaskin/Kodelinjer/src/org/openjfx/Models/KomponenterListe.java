@@ -59,6 +59,7 @@ public class KomponenterListe {
         komponenterListeObservable.addAll(komponenter);
     }
 
+    //TODO denne metoden er ikke brukt
     public ArrayList<Komponent> getProdukter(Komponent... produkter) {
         ArrayList<Komponent> produkterIterator = new ArrayList<Komponent>();
 
@@ -72,11 +73,12 @@ public class KomponenterListe {
         return komponenterListeObservable;
     }
 
+    //TODO brukes ikke
     public ArrayList<Komponent> getList(){
         return komponenter;
     }
 
-    //brukes ikke lengre
+    //TODO brukes ikke
     public ObservableList<Komponent> createTableFromFile() { //henter fra fil og skriver til global observablelist
         try {
             BufferedReader reader = new BufferedReader(new FileReader("./komponenter.csv"));
@@ -107,11 +109,11 @@ public class KomponenterListe {
         // setter som default at hvis den ikke finner noe, skal Ingen treff dukke opp i tableviewet
         tableView.setPlaceholder(new Label("Ingen treff"));
 
-        //En obersable list i en filteredlist --> denne har all data
+        //En obersvable list i en filteredlist --> denne har all data
         FilteredList<Komponent> filteredData = new FilteredList<>
                 (kl.getObservableList(), p -> true);
 
-        // Setter filter predicate for når bruker søker eller endre inout i skrivefeltet
+        // Setter filter predicate( en listener) for når bruker søker eller endre input i skrivefeltet
         sokefelt.textProperty().addListener((observableValue, oldValue, newValue) ->{
             filteredData.setPredicate(searchTableView -> {
 
@@ -170,26 +172,5 @@ public class KomponenterListe {
         }
         return false;
     }
-
-    /*
-    public static void doChange(TableColumn produktnavn, TableColumn kategori, TableColumn pris){
-        produktnavn.setOnEditCommit(
-                (EventHandler<TableColumn.CellEditEvent<Komponent, String>>) t -> (t.getTableView().getItems().get(
-                        t.getTablePosition().getRow())
-                ).setNavn(t.getNewValue()));
-
-        kategori.setOnEditCommit(
-                (EventHandler<TableColumn.CellEditEvent<Komponent, String>>) t -> (t.getTableView().getItems().get(
-                        t.getTablePosition().getRow())
-                ).setKategori(t.getNewValue()));
-
-        pris.setOnEditCommit(
-                (EventHandler<TableColumn.CellEditEvent<Komponent, String>>) t -> (t.getTableView().getItems().get(
-                        t.getTablePosition().getRow())
-                ).setPris(Double.parseDouble(t.getNewValue())));
-
-    }
-
-     */
 
 }

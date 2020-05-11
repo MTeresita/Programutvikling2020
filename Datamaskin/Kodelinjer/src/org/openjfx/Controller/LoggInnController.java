@@ -5,18 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
+import java.io.IOException;
+
 import org.openjfx.Models.HjelpeKlasser.SceneHåndtering;
-import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 import org.openjfx.Models.HjelpeKlasser.BrukerSession;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemHjelpeKlasse.*;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemSjekk.*;
 import static org.openjfx.Models.HjelpeKlasser.SceneHåndtering.slideSceneFraBunn;
-import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
+
 
 public class LoggInnController {
     @FXML
@@ -53,33 +50,8 @@ public class LoggInnController {
         });
     }
 
-    public void loginEvent() throws Exception, AvvikLoggInnBrukernavn, FileNotFoundException {
+    public void loginEvent() throws Exception {
 
-        /*
-        try{
-            ValiderLoggInn.valideringBrukernavn(txtuser.getText());
-            ValiderLoggInn.validerPassord(txtpass.getText());
-            if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
-                BrukerSession.setBrukerSession(txtuser.getText());
-                newScene(btnLogin, "scene");
-            }
-            else{
-                lblMessage.setText("Feil brukernavn eller passord.\nHvis du ikke er bruker, vennligst registrer deg nedenfor. ");
-            }
-        } catch (AvvikLoggInnBrukernavn | FileNotFoundException | AvvikLoggInnPassord e){
-
-            if (e instanceof AvvikLoggInnBrukernavn){
-                lblMessage.setText("Feil i brukernavn! Brukernavn må være mellom 5-50 bokstaver langt.");
-            }
-            else if (e instanceof FileNotFoundException){
-                lblMessage.setText("Fil ikke funnet");
-            }
-            else if(e instanceof AvvikLoggInnPassord){
-                lblMessage.setText("Feil i passord! Passord må være mellom 5-50 bokstaver langt.");
-            }
-
-        }
-         */
         ValiderLoggInn validerLoggInn = new ValiderLoggInn();
 
         String validering = validerLoggInn.sjekkUgyldigData(txtuser.getText(), txtpass.getText());
@@ -94,7 +66,8 @@ public class LoggInnController {
             }
             else {
                 if(!checkExistingBruker(txtuser.getText(), "./Brukere.csv")){
-                    lblMessage.setText("Bruker eksisterer ikke, vennligst registrer deg under");
+                    lblMessage.setText("Bruker eksisterer ikke, vennligst registrer deg under \n" +
+                            "eller sjekk om du har skrevet inn feil");
                 } else {
                     lblMessage.setText("Feil brukernavn/passord");
                 }

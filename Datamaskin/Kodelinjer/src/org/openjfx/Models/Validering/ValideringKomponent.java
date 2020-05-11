@@ -92,15 +92,6 @@ public class ValideringKomponent {
 
     public static boolean validerPris(String pris) throws AvvikKomponentPris {
 
-        /*
-        if(pris <= 0 || pris > 999999){
-            throw new AvvikKomponentPris("Pris må være over 0 NOK og under 1 000 000 NOK");
-        }
-        else{
-            return true;
-        }
-         */
-
         if((!Pattern.matches("[0-9]+", pris) ||
                 pris.startsWith("0")) && !pris.equals("")){
             throw new AvvikKomponentPris("Pris må skrives inn som tall\n");

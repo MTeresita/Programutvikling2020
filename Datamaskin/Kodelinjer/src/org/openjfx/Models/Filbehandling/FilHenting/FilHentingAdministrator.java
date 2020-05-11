@@ -1,23 +1,15 @@
 package org.openjfx.Models.Filbehandling.FilHenting;
 
 import org.openjfx.Models.Produkt;
-import org.openjfx.Models.Parsing.*;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class FilHentingAdministrator {
 
-    public ArrayList<Produkt> list = new ArrayList<Produkt>();
+    public ArrayList<Produkt> list = new ArrayList<>();
 
     public ArrayList<Produkt> hentFraFil() {
         try {
