@@ -90,7 +90,7 @@ public class ValideringKomponent {
         return false;
     }
 
-    public boolean validerPris(String pris) throws AvvikKomponentPris {
+    public static boolean validerPris(String pris) throws AvvikKomponentPris {
 
         /*
         if(pris <= 0 || pris > 999999){
