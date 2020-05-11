@@ -42,7 +42,7 @@ public class KomponenterController {
     private ComboBox filListe;
 
     @FXML
-    private Label lblKonfigurasjonsNavn;
+    private Label lblKonfigurasjonsNavn, loggetInn;
 
     @FXML
     private Button leggTilProdukt;
@@ -63,7 +63,7 @@ public class KomponenterController {
     TableColumn<Komponent, Double> pris;
 
 
-
+    private String session = BrukerSession.getBrukerSession(); //henter brukersession/brukernavnet til den som er logget inn
     public Konfigurasjon k = new Konfigurasjon(); //lager en generell liste av konfigurasjon som brukes gjennom kontrolleren
     public KomponenterListe kl = new KomponenterListe();
 
@@ -76,6 +76,7 @@ public class KomponenterController {
         */
         populateTable();
         searchTableView(kl, filterData, komponenter);
+        loggetInn.setText(session);
     }
 
     public void populateTable() { //henter fra .csv fil
@@ -168,7 +169,7 @@ public class KomponenterController {
         }
     }
 
-    private String session = BrukerSession.getBrukerSession(); //henter brukersession/brukernavnet til den som er logget inn
+
     public void lagreKonfigurasjon() throws IOException {
 
         if(!k.getKonfigListe().isEmpty()) {

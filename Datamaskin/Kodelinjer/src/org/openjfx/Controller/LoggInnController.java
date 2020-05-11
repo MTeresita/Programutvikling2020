@@ -94,7 +94,8 @@ public class LoggInnController {
             }
             else {
                 if(!checkExistingBruker(txtuser.getText(), "./Brukere.csv")){
-                    lblMessage.setText("Bruker eksisterer ikke, vennligst registrer deg under");
+                    lblMessage.setText("Bruker eksisterer ikke, vennligst registrer deg under \n" +
+                            "eller sjekk om du har skrevet inn feil");
                 } else {
                     lblMessage.setText("Feil brukernavn/passord");
                 }
