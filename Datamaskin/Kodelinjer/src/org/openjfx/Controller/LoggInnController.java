@@ -89,6 +89,7 @@ public class LoggInnController {
         }
         else {
             if(verifyLogin(txtuser.getText(), txtpass.getText(), "./Brukere.csv")) {
+                BrukerSession.setBrukerSession(txtuser.getText());
                 SceneHåndtering.newScene(btnLogin, "scene");
             }
             else {
