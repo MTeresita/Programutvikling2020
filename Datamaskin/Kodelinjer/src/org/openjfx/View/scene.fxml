@@ -112,7 +112,6 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="filterData" layoutX="89.0" layoutY="661.0" prefHeight="37.0" prefWidth="362.0" promptText="Søk" styleClass="search-bar" stylesheets="@../styles.css" />
                   <ImageView fitHeight="32.0" fitWidth="34.0" layoutX="14.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Bilder/userIcon.png" />
