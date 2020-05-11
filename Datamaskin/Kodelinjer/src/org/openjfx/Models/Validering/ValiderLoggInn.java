@@ -33,7 +33,7 @@ public class ValiderLoggInn {
     }
 
 
-    public boolean valideringBrukernavn(String brukernavn) throws AvvikLoggInnBrukernavn {
+    public static boolean valideringBrukernavn(String brukernavn) throws AvvikLoggInnBrukernavn {
 
         //matcher alle bokstaver A-ÆØÅ mellom 2-50 i lengde og tegn som !-.,
         //"^[A-æøå]((?![-]$)[A-æøå.,'-]?){2,50}$"
@@ -57,7 +57,7 @@ public class ValiderLoggInn {
         return false;
     }
 
-    public boolean validerPassord(String passord) throws AvvikLoggInnPassord {
+    public static boolean validerPassord(String passord) throws AvvikLoggInnPassord {
 
         if(!passord.matches("^[A-ZÆØÅa-zæøå]{5,50}$") && (!passord.isEmpty() && !passord.isBlank())){
             throw new AvvikLoggInnPassord("Passord må være mellom 5-50 bokstaver langt\n");
