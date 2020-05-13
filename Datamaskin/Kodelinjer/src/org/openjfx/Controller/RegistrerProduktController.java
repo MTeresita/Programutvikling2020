@@ -29,7 +29,7 @@ public class RegistrerProduktController {
 public TextField user, pass, produktNavn, kategoriNavn, produktPris, filteredData;
 
 @FXML
-public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilFil;
+public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilFil, hentFraFil1;
 
 @FXML
 public ComboBox adminORuser, kategoriCombobox;
@@ -326,5 +326,9 @@ public KomponenterListe kl = new KomponenterListe();
                 lblMessage.setText(msg);
                 break;
         }
+    }
+
+    public void hentFraFil(ActionEvent actionEvent) {
+        lblMessage.setText("");
     }
 }

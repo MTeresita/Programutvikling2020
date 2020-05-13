@@ -139,7 +139,7 @@
                         <Font size="11.0" />
                      </font></TextField>
                   <Line endX="529.0" layoutX="191.0" layoutY="474.0" startX="-100.0" stroke="#c6c6c6" />
-                  <Button fx:id="lagreTilFil1" layoutX="84.0" layoutY="384.0" mnemonicParsing="false" onAction="#lagreTilFil" prefHeight="25.0" prefWidth="86.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent fra fil" />
+                  <Button fx:id="hentFraFil1" layoutX="84.0" layoutY="384.0" mnemonicParsing="false" onAction="#hentFraFil" prefHeight="25.0" prefWidth="86.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent fra fil" />
                   <Text fill="#5e5e5e" layoutX="230.0" layoutY="659.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duplikat" wrappingWidth="72.02001953125" />
                   <Circle fill="#ffffff00" layoutX="565.0" layoutY="320.0" radius="7.0" stroke="#7c7c7c" strokeType="INSIDE" strokeWidth="2.5" />
                   <Line endX="-95.0" endY="8.0" layoutX="669.0" layoutY="323.0" startX="-100.0" startY="1.666656494140625" stroke="#7c7c7c" strokeWidth="2.5" />
