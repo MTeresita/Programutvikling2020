@@ -214,7 +214,7 @@ public KomponenterListe kl = new KomponenterListe();
         ValideringKomponent valideringKomponent = new ValideringKomponent();
         String validering =
                 valideringKomponent.sjekkUgyldigKomponent(produktNavn.getText(), kategoriNavn.getText(),
-                        (produktPris.getText()));
+                        (produktPris.getText()), kategoriCombobox);
 
         if(!validering.isEmpty()){
             setLabelTekst("alert", validering);
@@ -260,7 +260,7 @@ public KomponenterListe kl = new KomponenterListe();
                 ValideringKomponent.validerProduktnavn(event.getNewValue());
                 event.getRowValue().setNavn(event.getNewValue());
             }else{
-                ValideringKomponent.validerNyKategori(event.getNewValue());
+                ValideringKomponent.validerNyKategori(event.getNewValue(), kategoriCombobox);
                 event.getRowValue().setKategori(event.getNewValue());
 
             }

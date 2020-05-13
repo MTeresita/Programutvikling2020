@@ -1,5 +1,6 @@
 package org.openjfx.Models.Validering;
 
+import javafx.scene.control.ComboBox;
 import org.openjfx.Models.Avvik.AvvikKomponentNyKategori;
 import org.openjfx.Models.Avvik.AvvikKomponentPris;
 import org.openjfx.Models.Avvik.AvvikKomponentProduktnavn;
@@ -10,9 +11,9 @@ public class ValideringKomponent {
 
     StringBuilder ugyldigData = new StringBuilder();
 
-    public String sjekkUgyldigKomponent(String produktnavn, String nyKategori, String pris){
+    public String sjekkUgyldigKomponent(String produktnavn, String nyKategori, String pris, ComboBox box){
         sjekkProduktNavn(produktnavn);
-        sjekkNyKatergori(nyKategori);
+        sjekkNyKatergori(nyKategori, box);
 
 
         if(!pris.isEmpty() || !pris.isBlank()) {
@@ -65,28 +66,29 @@ public class ValideringKomponent {
     }
 
 
-    public static boolean validerNyKategori(String nyKategori) throws AvvikKomponentNyKategori {
-        //RegistrerProduktController kontroller= new RegistrerProduktController();
-        //kontroller.initialize();
+    public static boolean validerNyKategori(String nyKategori, ComboBox box) throws AvvikKomponentNyKategori {
 
         if(!nyKategori.matches("^[A-ZÆØÅa-zæøå]{2,50}$") && !nyKategori.isEmpty()){
             throw new AvvikKomponentNyKategori("Kategori må være mellom 2 og 50 tegn.\n");
         }
-        else if(nyKategori.isBlank() || nyKategori.isEmpty()){
+        else if((nyKategori.isBlank() || nyKategori.isEmpty()) && box.getSelectionModel().isEmpty()){
+            throw new AvvikKomponentNyKategori("Kategori er ikke valgt\n");
+        }
+        else if((nyKategori.isBlank() || nyKategori.isEmpty()) &&
+                box.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
             throw new AvvikKomponentNyKategori("Kategori kan ikke være tomt\n");
         }
-        /*else if(!kontroller.kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
-            if (nyKategori.isBlank() || nyKategori.isEmpty()) {
-                throw new AvvikKomponentNyKategori("Kategori kan ikke være tomt\n");
-            }
-        }*/
+        else if((nyKategori.isBlank() || nyKategori.isEmpty()) && !box.getSelectionModel().isEmpty()){
+            throw  new AvvikKomponentNyKategori("");
+        }
+
 
         return true;
     }
 
-    public boolean sjekkNyKatergori(String nykategori) {
+    public boolean sjekkNyKatergori(String nykategori, ComboBox box) {
         try {
-            if (validerNyKategori(nykategori)){
+            if (validerNyKategori(nykategori, box)){
                 return true;
             }
         } catch (AvvikKomponentNyKategori avvikKomponentNyKategori) {
