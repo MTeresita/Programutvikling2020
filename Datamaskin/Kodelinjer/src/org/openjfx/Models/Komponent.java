@@ -2,6 +2,7 @@ package org.openjfx.Models;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +14,7 @@ public class Komponent implements Serializable {
 
     private SimpleStringProperty navn, kategori;
     private SimpleDoubleProperty pris;
-    private boolean duplikat; //true = kan ha flere av komponenten i konfigurasjon, false = kan kun ha ett av komponenten i konfigurasjon
+    private SimpleIntegerProperty antall;
 
     public ObservableList<Komponent> komponenterTableViews = FXCollections.observableArrayList();
 
@@ -21,29 +22,29 @@ public class Komponent implements Serializable {
     public Komponent() {
     }
 
-    public Komponent(String navn, String kategori, double pris, boolean duplikat) {
+    public Komponent(String navn, String kategori, double pris, int antall) {
         this.navn = new SimpleStringProperty(navn);
         this.kategori = new SimpleStringProperty(kategori);
         this.pris = new SimpleDoubleProperty(pris);
-        this.duplikat = duplikat;
+        this.antall = new SimpleIntegerProperty(antall);
     }
 
-    public boolean isDuplikat() {
-        return duplikat;
+    public int getAntall() {
+        return antall.get();
     }
-
-    public void setDuplikat(boolean duplikat) {
-        this.duplikat = duplikat;
+    public void setAntall(int antall) {
+        this.antall.set(antall);
+    }
+    public SimpleIntegerProperty antallProperty() {
+        return antall;
     }
 
     public String getNavn() {
         return navn.get();
     }
-
     public SimpleStringProperty navnProperty() {
         return navn;
     }
-
     public void setNavn(String navn) {
         this.navn.set(navn);
     }
@@ -51,11 +52,9 @@ public class Komponent implements Serializable {
     public String getKategori() {
         return kategori.get();
     }
-
     public SimpleStringProperty kategoriProperty() {
         return kategori;
     }
-
     public void setKategori(String kategori) {
         this.kategori.set(kategori);
     }
@@ -63,14 +62,9 @@ public class Komponent implements Serializable {
     public double getPris() {
         return pris.get();
     }
-
     public SimpleDoubleProperty prisProperty() {
         return pris;
     }
-    public SimpleBooleanProperty duplikatProperty() {
-        return new SimpleBooleanProperty(duplikat);
-    }
-
     public void setPris(double pris) {
         this.pris.set(pris);
     }
@@ -81,7 +75,7 @@ public class Komponent implements Serializable {
                 "navn=" + navn +
                 ", kategori=" + kategori +
                 ", pris=" + pris +
-                ", duplikat=" + duplikat +
+                ", duplikat=" + antall +
                 '}';
     }
 }

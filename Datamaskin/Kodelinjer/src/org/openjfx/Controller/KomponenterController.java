@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import org.openjfx.Models.Avvik.AvvikBruker;
 import org.openjfx.Models.Filbehandling.FilHenting.FilHentingBruker;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerSession;
@@ -125,13 +126,16 @@ public class KomponenterController {
     }
 
     @FXML
-    public void leggTilKomponentEvent(ActionEvent event){ //henter valgt komponent fra tableview fra knappetrykk på "legg til komponent"
-        Komponent valgtKomponent = komponenter.getSelectionModel().getSelectedItem(); //henter valgt komponent
-        System.out.println("Dette er det valgte komponentet: "+valgtKomponent.getNavn()+", "+valgtKomponent.isDuplikat());
-        k.setNyttKomponent(valgtKomponent); //legger til i konfigurasjon
-        System.out.println(k.toString());
-        populateListview();
-        setCheckboxes(valgtKomponent, true);
+    public void leggTilKomponentEvent(ActionEvent event) throws AvvikBruker { //henter valgt komponent fra tableview fra knappetrykk på "legg til komponent"
+        try {
+            Komponent valgtKomponent = komponenter.getSelectionModel().getSelectedItem(); //henter valgt komponent
+            //System.out.println("Dette er det valgte komponentet: "+valgtKomponent.getNavn()+", "+valgtKomponent.getAntall());
+            k.setNyttKomponent(valgtKomponent); //legger til i konfigurasjon
+            populateListview();
+            setCheckboxes(valgtKomponent, true); //setter sjekkboks
+        }catch(AvvikBruker e){
+            alertBox("","",e.getMessage());
+        }
     }
 
     @FXML
@@ -163,21 +167,14 @@ public class KomponenterController {
         listview.getItems().clear();
         alleCheckboxer.forEach(checkBox -> checkBox.setSelected(false));
         for(Komponent ktv : k.getKonfigListe()){
-            listview.getItems().add(ktv.getNavn() + "\n" + ktv.getKategori() + "\n" +ktv.getPris()+" NOK");
-            setCheckboxes(ktv, true);
+            listview.getItems().add(ktv.getNavn() + "\n" + ktv.getKategori() + "\n" +ktv.getPris()+" NOK"+"\n.......................................");
+            setCheckboxes(ktv, true); //setter sjekkbokser
         }
         listview.refresh();
-
         lblSluttPris.setText(k.getSluttPris() +" NOK");
     }
 
-    public void logOutEvent(ActionEvent event) {
-        boolean ok = alertBox("Bekreft utlogging", "Endringer gjort uten å trykke lagre vil bli slettet!",
-                "Er du sikker på at du vil logge ut?");
-        if (ok) {
-            SceneChanger.routeToSite(event, "loggInn");
-        }
-    }
+
 
 
     private String sistValgteFil; //brukes for å oppdatere combobox med filen som faktisk er valgt etter lagring/henting
@@ -282,6 +279,13 @@ public class KomponenterController {
         } else {
             alert.close();
             return false;
+        }
+    }
+    public void logOutEvent(ActionEvent event) {
+        boolean ok = alertBox("Bekreft utlogging", "Endringer gjort uten å trykke lagre vil bli slettet!",
+                "Er du sikker på at du vil logge ut?");
+        if (ok) {
+            SceneChanger.routeToSite(event, "loggInn");
         }
     }
 }

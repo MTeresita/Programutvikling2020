@@ -2,6 +2,7 @@ package org.openjfx.Models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.openjfx.Models.Avvik.AvvikBruker;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,21 +14,29 @@ public class Konfigurasjon {
 
     private double sluttPris;
 
-    public void setNyttKomponent(Komponent komponent) { //for bruker
+    public void setNyttKomponent(Komponent komponent) throws AvvikBruker { //for bruker
         ArrayList<Komponent> konfigListeIterator = konfigListe; //lager en midlertidig kopi av hovedlisten
 
-        boolean ok = true; //om false er eksisterende komponent oppdatert, om true legges nytt komponent til listen
-
-        for(Komponent p : konfigListeIterator){ //sjekk om komponent med samme kategori er i listen fra før
-            if (p.getKategori().equals(komponent.getKategori()) && !komponent.isDuplikat()) {
-                konfigListeIterator.set(konfigListeIterator.indexOf(p), komponent);
+        boolean ok = true; //om false oppdateres listen med nytt valgte komponent, om true legges nytt komponent til listen
+        int maksAntall = komponent.getAntall(); //maks antall av dette komponentet i en konfigurasjon
+        int teller = 0; //antall av valgt komponeneter allerede i konfigurasjonen
+        for(Komponent k : konfigListeIterator){ //sjekk om komponent med samme kategori er i listen fra før
+            if (k.getKategori().equals(komponent.getKategori()) && maksAntall <= 1) {
+                konfigListeIterator.set(konfigListeIterator.indexOf(k), komponent);
                 setKonfigListe(konfigListeIterator);
                 ok = false;
+            }else if(k.getKategori().equals(komponent.getKategori())){
+                teller++;
             }
         }
         if(ok){
-            konfigListeIterator.add(komponent);
-            setKonfigListe(konfigListeIterator);//setter også sluttpris
+            if(teller < maksAntall){
+                konfigListeIterator.add(komponent);
+                setKonfigListe(konfigListeIterator);//setter også sluttpris
+            }else{
+                throw new AvvikBruker("Du kan kun ha "+maksAntall+" stykk per konfigurasjon av dette produktet!" +
+                        "\n For å endre konfigurasjon, slett et produkt fra din konfigurasjon med kategori: "+komponent.getKategori());
+            }
         }
     }
 

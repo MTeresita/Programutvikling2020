@@ -26,7 +26,7 @@ import static org.openjfx.Models.KomponenterListe.searchTableView;
 
 public class RegistrerProduktController {
 @FXML
-public TextField user, pass, produktNavn, kategoriNavn, produktPris, filteredData;
+public TextField user, pass, produktNavn, kategoriNavn, produktPris, filteredData, produktAntall;
 
 @FXML
 public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilFil;
@@ -38,9 +38,6 @@ public ComboBox adminORuser, kategoriCombobox;
 public Label lblMessage;
 
 @FXML
-public CheckBox checkBox;
-
-@FXML
 TableView <Komponent> komponenter;
 
 @FXML
@@ -50,7 +47,7 @@ TableColumn<Komponent, String> produktnavn, kategori;
 TableColumn<Komponent, Double> pris;
 
 @FXML
-TableColumn<Komponent, Boolean> duplikat;
+TableColumn<Komponent, Integer> duplikat;
 
 @FXML
 ImageView tilbakemeldingImg;
@@ -59,7 +56,7 @@ public KomponenterListe kl = new KomponenterListe();
 
     public void initialize() {
         populateTableWithJobj();
-        komponenter.getSortOrder().add(pris);
+        komponenter.getSortOrder().add(kategori);
         komponenter.setEditable(true);
         searchTableView(kl,filteredData,komponenter);
         endringITableView(produktnavn,kategori, pris);
@@ -71,7 +68,7 @@ public KomponenterListe kl = new KomponenterListe();
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
-        duplikat.setCellValueFactory(cellData -> cellData.getValue().duplikatProperty());
+        duplikat.setCellValueFactory(cellData -> cellData.getValue().antallProperty().asObject());
         komponenter.setItems(kl.getObservableList());
         populateKategoriCombobox();
     }
@@ -80,7 +77,7 @@ public KomponenterListe kl = new KomponenterListe();
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
-        duplikat.setCellValueFactory(cellData -> cellData.getValue().duplikatProperty());
+        duplikat.setCellValueFactory(cellData -> cellData.getValue().antallProperty().asObject());
         komponenter.setItems(kl.getObservableList());
         populateKategoriCombobox();
     }
@@ -225,12 +222,12 @@ public KomponenterListe kl = new KomponenterListe();
             }
             else if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
                 Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(),
-                        Double.parseDouble(produktPris.getText()), checkBox.isSelected());
+                        Double.parseDouble(produktPris.getText()), Integer.parseInt(produktAntall.getText()));
                 sjekkForDuplikater(nyKomponent);
             } else {
                 Komponent nyKomponent = new Komponent(produktNavn.getText(),
                         kategoriCombobox.getSelectionModel().getSelectedItem().toString(),
-                        Double.parseDouble(produktPris.getText()), checkBox.isSelected()); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                        Double.parseDouble(produktPris.getText()), Integer.parseInt(produktAntall.getText()));
                 sjekkForDuplikater(nyKomponent);
             }
 
@@ -284,8 +281,8 @@ public KomponenterListe kl = new KomponenterListe();
         event.getRowValue().setPris(event.getNewValue());
     }
     @FXML
-    public void endreTableViewDataBool(TableColumn.CellEditEvent<Komponent, Boolean> event){ //Fra henrik
-        event.getRowValue().setDuplikat(event.getNewValue());
+    public void endreTableViewDataBool(TableColumn.CellEditEvent<Komponent, Integer> event){ //Fra henrik
+        event.getRowValue().setAntall(event.getNewValue());
     }
 
     public void slettRader(ActionEvent event) {

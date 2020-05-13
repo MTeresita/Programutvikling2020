@@ -14,7 +14,7 @@ public class FilLagringAdmin {
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             for(Komponent ktv : liste){
-                Produkt produkt = new Produkt(ktv.getNavn(), ktv.getPris(), ktv.getKategori(), ktv.isDuplikat());
+                Produkt produkt = new Produkt(ktv.getNavn(), ktv.getPris(), ktv.getKategori(), ktv.getAntall());
                 o.writeObject(produkt);
             }
 
