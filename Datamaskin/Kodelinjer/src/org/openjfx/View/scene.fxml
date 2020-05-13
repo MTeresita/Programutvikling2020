@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.KomponenterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.KomponenterController">
    <children>
       <BorderPane prefHeight="780.0" prefWidth="1100.0">
          <left>
@@ -61,13 +61,13 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <CheckBox layoutX="17.0" layoutY="572.0" mnemonicParsing="false" text="GPU" textFill="WHITE" />
-                  <CheckBox layoutX="17.0" layoutY="512.0" mnemonicParsing="false" stylesheets="@../styles.css" text="CPU*" textFill="WHITE" />
-                  <CheckBox layoutX="157.0" layoutY="512.0" mnemonicParsing="false" text="Motherboard*" textFill="WHITE" />
-                  <CheckBox layoutX="17.0" layoutY="542.0" mnemonicParsing="false" text="PSU*" textFill="WHITE" />
-                  <CheckBox layoutX="87.0" layoutY="512.0" mnemonicParsing="false" text="RAM*" textFill="WHITE" />
-                  <CheckBox layoutX="157.0" layoutY="542.0" mnemonicParsing="false" text="Kabinett*" textFill="WHITE" />
-                  <CheckBox layoutX="87.0" layoutY="542.0" mnemonicParsing="false" text="RAM*" textFill="WHITE" />
+                  <CheckBox fx:id="checkGPU" layoutX="17.0" layoutY="572.0" mnemonicParsing="false" text="GPU" textFill="WHITE" />
+                  <CheckBox fx:id="checkCPU" layoutX="17.0" layoutY="512.0" mnemonicParsing="false" stylesheets="@../styles.css" text="CPU*" textFill="WHITE" />
+                  <CheckBox fx:id="checkMB" layoutX="157.0" layoutY="512.0" mnemonicParsing="false" text="Motherboard*" textFill="WHITE" />
+                  <CheckBox fx:id="checkPSU" layoutX="17.0" layoutY="542.0" mnemonicParsing="false" text="PSU*" textFill="WHITE" />
+                  <CheckBox fx:id="checkRAM" layoutX="87.0" layoutY="512.0" mnemonicParsing="false" text="RAM*" textFill="WHITE" />
+                  <CheckBox fx:id="checkKAB" layoutX="157.0" layoutY="542.0" mnemonicParsing="false" text="Kabinett*" textFill="WHITE" />
+                  <CheckBox fx:id="check" layoutX="87.0" layoutY="542.0" mnemonicParsing="false" text="RAM*" textFill="WHITE" />
                   <Text fill="WHITE" layoutX="17.0" layoutY="502.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valgte deler (*påbelagt)">
                      <font>
                         <Font size="15.0" />
