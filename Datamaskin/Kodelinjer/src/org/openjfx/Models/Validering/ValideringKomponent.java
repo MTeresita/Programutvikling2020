@@ -1,10 +1,8 @@
 package org.openjfx.Models.Validering;
 
 import org.openjfx.Models.Avvik.AvvikKomponentNyKategori;
-import org.openjfx.Models.Avvik.AvvikKomponentProduktnavn;
 import org.openjfx.Models.Avvik.AvvikKomponentPris;
-import org.openjfx.Models.Komponent;
-import org.openjfx.Models.KomponenterListe;
+import org.openjfx.Models.Avvik.AvvikKomponentProduktnavn;
 
 import java.util.regex.Pattern;
 
@@ -68,6 +66,8 @@ public class ValideringKomponent {
 
 
     public static boolean validerNyKategori(String nyKategori) throws AvvikKomponentNyKategori {
+        //RegistrerProduktController kontroller= new RegistrerProduktController();
+        //kontroller.initialize();
 
         if(!nyKategori.matches("^[A-ZÆØÅa-zæøå]{2,50}$") && !nyKategori.isEmpty()){
             throw new AvvikKomponentNyKategori("Kategori må være mellom 2 og 50 tegn.\n");
@@ -75,6 +75,11 @@ public class ValideringKomponent {
         else if(nyKategori.isBlank() || nyKategori.isEmpty()){
             throw new AvvikKomponentNyKategori("Kategori kan ikke være tomt\n");
         }
+        /*else if(!kontroller.kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
+            if (nyKategori.isBlank() || nyKategori.isEmpty()) {
+                throw new AvvikKomponentNyKategori("Kategori kan ikke være tomt\n");
+            }
+        }*/
 
         return true;
     }
