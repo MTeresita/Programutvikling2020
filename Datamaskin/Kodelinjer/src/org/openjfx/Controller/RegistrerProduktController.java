@@ -253,7 +253,7 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     @FXML
-    public void endreTableViewDataString(TableColumn.CellEditEvent<Komponent, String> event) throws AvvikKomponentProduktnavn, AvvikKomponentNyKategori{ //Fra henrik
+    public void endreTableViewDataString(TableColumn.CellEditEvent<Komponent, String> event) throws ExceptionComponentProductName, ExceptionComponentNewCategory { //Fra henrik
 
         try{
             if(event.getTableColumn().getText().equals("Produktnavn")){
@@ -264,13 +264,13 @@ public KomponenterListe kl = new KomponenterListe();
                 event.getRowValue().setKategori(event.getNewValue());
 
             }
-        }catch (AvvikKomponentProduktnavn | AvvikKomponentNyKategori e) {
+        }catch (ExceptionComponentProductName | ExceptionComponentNewCategory e) {
             komponenter.refresh();
-            if (e instanceof AvvikKomponentProduktnavn) {
+            if (e instanceof ExceptionComponentProductName) {
                 setLabelTekst("alert", "Feil i produktnavn! Produktnavn må være minst to tegn.");
                 //lblMessage.setText("Feil i produktnavn! Produktnavn må være minst to tegn.");
 
-            } else if (e instanceof AvvikKomponentNyKategori) {
+            } else if (e instanceof ExceptionComponentNewCategory) {
                 setLabelTekst("alert", "Feil i kategori! Kategori må være minst to tegn.");
                 //lblMessage.setText("Feil i kategori! Kategori må være minst to tegn.");
             }

@@ -1,17 +1,14 @@
 package org.openjfx.Models.Validering;
 
 import org.junit.jupiter.api.Test;
-import org.openjfx.Models.Avvik.AvvikKomponentNyKategori;
-import org.openjfx.Models.Avvik.AvvikKomponentPris;
-import org.openjfx.Models.Avvik.AvvikKomponentProduktnavn;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.openjfx.Models.Avvik.ExceptionComponentPrice;
+import org.openjfx.Models.Avvik.ExceptionComponentProductName;
+import org.openjfx.Models.Avvik.ExceptionComponentNewCategory;
 
 class ValideringKomponentTestTest {
 
     @Test
-    void testKomponenterTrue() throws AvvikKomponentProduktnavn, AvvikKomponentNyKategori, AvvikKomponentPris {
+    void testKomponenterTrue() throws ExceptionComponentProductName, ExceptionComponentNewCategory, ExceptionComponentPrice {
         /*
         assertTrue(ValideringKomponent.validerProduktnavn("Minnekort"));
         //grenseverdi
@@ -46,7 +43,7 @@ class ValideringKomponentTestTest {
     }
 
     @Test
-    void testKomponenterFalse() throws AvvikKomponentProduktnavn {
+    void testKomponenterFalse() throws ExceptionComponentProductName {
         /*
 
         //for kort:
