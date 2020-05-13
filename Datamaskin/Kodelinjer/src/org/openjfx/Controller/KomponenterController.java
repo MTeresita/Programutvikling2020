@@ -1,14 +1,14 @@
 package org.openjfx.Controller;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import org.openjfx.Models.Avvik.AlertHelper.*;
 import org.openjfx.Models.Filbehandling.FilHenting.FilHentingBruker;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
-import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.HjelpeKlasser.BrukerSession;
 import org.openjfx.Models.Interfaces.SceneChanger;
 
@@ -19,7 +19,6 @@ import org.openjfx.Models.Komponent;
 
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -62,7 +61,10 @@ public class KomponenterController {
     @FXML
     TableColumn<Komponent, Double> pris;
 
+    @FXML
+    private CheckBox checkCPU, checkGPU, checkRAM, checkMB, checkHDD, checkPSU, checkKAB;
 
+    private ObservableSet<CheckBox> alleCheckboxer = FXCollections.observableSet();
     private String session = BrukerSession.getBrukerSession(); //henter brukersession/brukernavnet til den som er logget inn
     public Konfigurasjon k = new Konfigurasjon(); //lager en generell liste av konfigurasjon som brukes gjennom kontrolleren
     public KomponenterListe kl = new KomponenterListe();
@@ -77,6 +79,8 @@ public class KomponenterController {
         populateTable();
         searchTableView(kl, filterData, komponenter);
         loggetInn.setText(session);
+        setAccesibleText();
+        setAlleCheckboxerTilListe();
     }
 
     public void populateTable() { //henter fra .csv fil
@@ -87,6 +91,29 @@ public class KomponenterController {
         //komponenter.setItems(kl.createTableFromFile());
         komponenter.setItems(kl.getObservableList());
         populateFilListeComboBox();
+    }
+    public void setAccesibleText(){
+        checkCPU.setAccessibleText("CPU");
+        checkGPU.setAccessibleText("GPU");
+        checkRAM.setAccessibleText("RAM");
+        checkMB.setAccessibleText("MOTHERBOARD");
+        checkHDD.setAccessibleText("HARD DRIVE");
+        checkPSU.setAccessibleText("PSU");
+        checkKAB.setAccessibleText("KABINETT");
+    }
+    public void setAlleCheckboxerTilListe(){
+        alleCheckboxer.add(checkCPU);
+        alleCheckboxer.add(checkGPU);
+        alleCheckboxer.add(checkRAM);
+        alleCheckboxer.add(checkMB);
+        alleCheckboxer.add(checkHDD);
+        alleCheckboxer.add(checkPSU);
+        alleCheckboxer.add(checkKAB);
+        disableCheckboxes();
+    }
+    public void disableCheckboxes(){
+        alleCheckboxer.forEach(checkBox -> checkBox.setDisable(true));
+        alleCheckboxer.forEach(checkBox -> checkBox.setStyle("-fx-opacity: 1")); //gjør at .setDisable ikke gjør boksene transparente
     }
 
     //TODO: Bruker vi denne lenger eller kan den slettes?
@@ -104,23 +131,40 @@ public class KomponenterController {
         k.setNyttKomponent(valgtKomponent); //legger til i konfigurasjon
         System.out.println(k.toString());
         populateListview();
+        setCheckboxes(valgtKomponent, true);
     }
 
     @FXML
     public void slettKomponentViaListView(){
         System.out.println(listview.getSelectionModel().getSelectedIndex());
         try {
+            Komponent valgtKomponent = k.getKonfigListe().get(listview.getSelectionModel().getSelectedIndex());
             k.slettKomponent(listview.getSelectionModel().getSelectedIndex());
             populateListview();
+            setCheckboxes(valgtKomponent, false);
         } catch(Exception e){
 
+        }
+    }
+    public void setCheckboxes(Komponent komp, boolean type){ //om boolean true, vil boks sjekkes, false vil den avsjekkes
+        for (CheckBox checkBox : alleCheckboxer) {
+            if(checkBox.getAccessibleText().equals(komp.getKategori())){
+                if(type){
+                    checkBox.setSelected(true);
+                }
+                else if(!type){
+                    checkBox.setSelected(false);
+                }
+            }
         }
     }
 
     public void populateListview(){ //legger ut komponeter fra konfigurasjon sin ArrayList
         listview.getItems().clear();
+        alleCheckboxer.forEach(checkBox -> checkBox.setSelected(false));
         for(Komponent ktv : k.getKonfigListe()){
             listview.getItems().add(ktv.getNavn() + "\n" + ktv.getKategori() + "\n" +ktv.getPris()+" NOK");
+            setCheckboxes(ktv, true);
         }
         listview.refresh();
 
@@ -174,7 +218,6 @@ public class KomponenterController {
 
 
     public void lagreKonfigurasjon() {
-
         if(!k.getKonfigListe().isEmpty()) {
             if (filListe.getSelectionModel().getSelectedItem() == "Ny Fil...") {
                 File aDirectory = new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/" +
@@ -220,10 +263,10 @@ public class KomponenterController {
 
         kompliste = fhb.lesingFraFil("Datamaskin/Kodelinjer/src/org/openjfx/Models/konfigCsv/"+session+"/"+
                                             filListe.getSelectionModel().getSelectedItem());
-
         k.setKonfigListe(kompliste);
         lblKonfigurasjonsNavn.setText(filListe.getSelectionModel().getSelectedItem().toString());
         populateListview();
+
         //alert om henting av fil!
     }
 

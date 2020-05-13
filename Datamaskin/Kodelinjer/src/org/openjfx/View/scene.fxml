@@ -63,11 +63,11 @@
                   </Label>
                   <CheckBox fx:id="checkGPU" layoutX="17.0" layoutY="572.0" mnemonicParsing="false" text="GPU" textFill="WHITE" />
                   <CheckBox fx:id="checkCPU" layoutX="17.0" layoutY="512.0" mnemonicParsing="false" stylesheets="@../styles.css" text="CPU*" textFill="WHITE" />
-                  <CheckBox fx:id="checkMB" layoutX="157.0" layoutY="512.0" mnemonicParsing="false" text="Motherboard*" textFill="WHITE" />
+                  <CheckBox fx:id="checkMB" layoutX="167.0" layoutY="512.0" mnemonicParsing="false" text="Motherboard*" textFill="WHITE" />
                   <CheckBox fx:id="checkPSU" layoutX="17.0" layoutY="542.0" mnemonicParsing="false" text="PSU*" textFill="WHITE" />
                   <CheckBox fx:id="checkRAM" layoutX="87.0" layoutY="512.0" mnemonicParsing="false" text="RAM*" textFill="WHITE" />
-                  <CheckBox fx:id="checkKAB" layoutX="157.0" layoutY="542.0" mnemonicParsing="false" text="Kabinett*" textFill="WHITE" />
-                  <CheckBox fx:id="check" layoutX="87.0" layoutY="542.0" mnemonicParsing="false" text="RAM*" textFill="WHITE" />
+                  <CheckBox fx:id="checkKAB" layoutX="167.0" layoutY="542.0" mnemonicParsing="false" text="Kabinett*" textFill="WHITE" />
+                  <CheckBox fx:id="checkHDD" layoutX="87.0" layoutY="542.0" mnemonicParsing="false" text="Harddisk*" textFill="WHITE" />
                   <Text fill="WHITE" layoutX="17.0" layoutY="502.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valgte deler (*påbelagt)">
                      <font>
                         <Font size="15.0" />
