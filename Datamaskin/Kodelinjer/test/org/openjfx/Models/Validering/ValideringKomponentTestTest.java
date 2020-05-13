@@ -21,13 +21,13 @@ class ValideringKomponentTestTest {
         //med tall og mellomrom
         assertTrue(ValideringKomponent.validerProduktnavn("Minnekort 899899"));
 
-        /*
+
 
         assertTrue(ValideringKomponent.validerNyKategori("Proosessor"));
         //grenseverdi
         assertTrue(ValideringKomponent.validerNyKategori("PR"));
 
-         */
+         
 
 /*
         //går ikke an å teste pris når det skal være string inn.
@@ -51,29 +51,29 @@ class ValideringKomponentTestTest {
 
         //for kort:
         assertThrows(AvvikKomponentProduktnavn.class, () -> ValideringKomponent.validerProduktnavn("j"));
-        /*
+
         assertThrows(AvvikKomponentNyKategori.class, () -> ValideringKomponent.validerNyKategori("j"));
 
-         */
+
         //tom:
         assertThrows(AvvikKomponentProduktnavn.class, () -> ValideringKomponent.validerProduktnavn(""));
-        /*
+
         assertThrows(AvvikKomponentNyKategori.class, () -> ValideringKomponent.validerNyKategori(""));
 
-         */
+
         //bare mellomrom
         assertThrows(AvvikKomponentProduktnavn.class, () -> ValideringKomponent.validerProduktnavn("       "));
-        /*
+
         assertThrows(AvvikKomponentNyKategori.class, () -> ValideringKomponent.validerNyKategori("         "));
 
-         */
+
         //for Lang:
         assertThrows(AvvikKomponentProduktnavn.class, () -> ValideringKomponent.validerProduktnavn("ajackalfkalfklafjjflafjalfjlafjjalfafjkklkalfklafklfkllkaflkfaklaklffkfkjfksksfkfkjsjkfkj"));
-        /*
+
         assertThrows(AvvikKomponentNyKategori.class, () -> ValideringKomponent.validerNyKategori("akflaflafklakflakflafklakflafkkflalkflafkflakkdfkajfksjkfjksfjkffsjkjksfkjfsjkf"));
         //Pris under 1:
 
-         */
+
         assertThrows(AvvikKomponentPris.class, () -> ValideringKomponent.validerPris("0"));
         assertThrows(AvvikKomponentPris.class, () -> ValideringKomponent.validerPris("0.0"));
         //negativ pris
