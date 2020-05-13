@@ -33,8 +33,8 @@ public class KonfigurasjonsParserBruker {
             }else{
                 System.out.println("Feil i komponent! : " + navn);
                 Alert a = new Alert(Alert.AlertType.ERROR);
-                a.setContentText("En komponent hadde ugylige verdier og er fjernet fra listen! "+navn);
-                a.show();
+                a.setContentText("En komponent hadde ugylige verdier og er fjernet fra listen! \nKomponent: "+navn);
+                a.showAndWait();
                 return null;
             }
 
