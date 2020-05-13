@@ -27,7 +27,7 @@ class ValideringKomponentTestTest {
         //grenseverdi
         assertTrue(ValideringKomponent.validerNyKategori("PR"));
 
-         
+
 
 /*
         //går ikke an å teste pris når det skal være string inn.

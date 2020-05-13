@@ -42,7 +42,7 @@ public class ValideringKomponent {
 
     public static boolean validerProduktnavn(String produktnavn) throws AvvikKomponentProduktnavn {
 
-        if(!produktnavn.matches("^[A-ZÆØÅa-zæøå0-9 ]{2,50}$") && !produktnavn.isEmpty()){
+        if(!produktnavn.matches("^[A-ZÆØÅa-zæøå0-9 _@./#&+-]{2,50}$") && !produktnavn.isEmpty()){
             throw new AvvikKomponentProduktnavn("Produktnavn må være mellom 2 og 50 tegn. \n");
         }
         else if(produktnavn.isBlank() || produktnavn.isEmpty()){
@@ -68,7 +68,7 @@ public class ValideringKomponent {
 
     public static boolean validerNyKategori(String nyKategori, ComboBox box) throws AvvikKomponentNyKategori {
 
-        if(!nyKategori.matches("^[A-ZÆØÅa-zæøå]{2,50}$") && !nyKategori.isEmpty()){
+        if(!nyKategori.matches("^[A-ZÆØÅa-zæøå _@./#&+-]{2,50}$") && !nyKategori.isEmpty()){
             throw new AvvikKomponentNyKategori("Kategori må være mellom 2 og 50 tegn.\n");
         }
         else if((nyKategori.isBlank() || nyKategori.isEmpty()) && box.getSelectionModel().isEmpty()){
@@ -99,8 +99,7 @@ public class ValideringKomponent {
 
     public static boolean validerPris(String pris) throws AvvikKomponentPris {
 
-        if((!Pattern.matches("[0-9]+", pris) ||
-                pris.startsWith("0")) && !pris.equals("")){
+        if((!Pattern.matches("[0-9]+", pris) || !pris.equals(""))){
             throw new AvvikKomponentPris("Pris må skrives inn som tall\n");
         }
         if(pris.isBlank() || pris.isEmpty()){

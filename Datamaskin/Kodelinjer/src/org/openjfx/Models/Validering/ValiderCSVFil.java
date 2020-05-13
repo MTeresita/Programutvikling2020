@@ -12,7 +12,6 @@ public class ValiderCSVFil {
     private final String TXT_STRENG_BRUKER="^([A-ZÆØÅa-zæøå0-9 ]{2,50};)([A-ZÆØÅa-zæøå ]{2,50};)$";
 
     public void testKomponenterFil(String filnavn){
-
         try{
             BufferedReader br= new BufferedReader(new FileReader(filnavn));
             String linje= br.readLine();
@@ -36,7 +35,7 @@ public class ValiderCSVFil {
         }
 
     }
-    public void testAdminCSVFil(String filnavn){
+    public void testAdminBrukerCSVFil(String filnavn){
 
         try{
             BufferedReader br= new BufferedReader(new FileReader(filnavn));
@@ -93,7 +92,7 @@ public class ValiderCSVFil {
     public static void main(String [] args){
         ValiderCSVFil test= new ValiderCSVFil();
         test.testKomponenterFil("komponenter.csv");
-        test.testAdminCSVFil("Admin.csv");
+        test.testAdminBrukerCSVFil("Admin.csv");
         test.testBrukerCSVFil("Brukere.csv");
     }
 }
