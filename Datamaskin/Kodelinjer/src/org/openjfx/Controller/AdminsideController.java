@@ -53,11 +53,13 @@ TableColumn<Komponent, Double> pris;
 @FXML
 TableColumn<Komponent, Integer> duplikat;
 
-@FXML
-ImageView tilbakemeldingImg;
 
 public KomponenterListe kl = new KomponenterListe();
-public    ValideringKomponent valideringKomponent = new ValideringKomponent();
+public ValideringKomponent valideringKomponent = new ValideringKomponent();
+private HentFilAdminThread task;
+private void threadFailed(WorkerStateEvent event) {
+        setAlleKnapperState(false);
+    }
 
     public void initialize() {
         populateTableWithJobj();
@@ -68,7 +70,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
         lblMessage.setWrapText(true);
         populateFilListe();
     }
-    private HentFilAdminThread task;
+
     public void populateTableWithJobj(){ //henter jobj fil fra fra globale KomponeterListen "kl"
         task = new HentFilAdminThread();
         task.setOnSucceeded(this::threadDone);
@@ -96,9 +98,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
         setAlleKnapperState(false);
     }
 
-    private void threadFailed(WorkerStateEvent event) {
-        setAlleKnapperState(false);
-    }
+
     private void setAlleKnapperState(boolean state){
         setMasterFil.setDisable(state);
         registrerBruker.setDisable(state);
@@ -125,7 +125,8 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
             if (!kategoriCombobox.getItems().contains("Ny Kategori...")){
                 kategoriCombobox.getItems().add("Ny Kategori..."); //legger til "ny kategori..." som førstevalg
             }
-            if(!kategoriCombobox.getItems().contains(k.getKategori())){ //Om kategori er lagt til fra før, legges den ikke til igjen
+            //Om kategori er lagt til fra før, legges den ikke til igjen
+            if(!kategoriCombobox.getItems().contains(k.getKategori())){
                 kategoriCombobox.getItems().add(k.getKategori());
             }
         }
@@ -269,8 +270,6 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
                 populateKategoriCombobox();
             }
 
-
-
     }
     public boolean sjekkForDuplikater(Komponent nyKomponent){
         if(kl.finnDuplikat(nyKomponent)){
@@ -285,7 +284,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
     }
 
     @FXML
-    public void endreTableViewDataString(TableColumn.CellEditEvent<Komponent, String> event) throws AvvikKomponentProduktnavn, AvvikKomponentNyKategori{ //Fra henrik
+    public void endreTableViewDataString(TableColumn.CellEditEvent<Komponent, String> event) { //Fra henrik
 
         try{
             if(event.getTableColumn().getText().equals("Produktnavn")){
@@ -329,6 +328,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
                     event.getRowValue().setPris(event.getNewValue());
                 }
     }
+    
     @FXML
     public void endreTableViewDataBool(TableColumn.CellEditEvent<Komponent, Integer> event){ //Fra henrik
         event.getRowValue().setAntall(event.getNewValue());
