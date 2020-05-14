@@ -211,33 +211,33 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
     @FXML
     public void registererProdukt(ActionEvent event) throws NumberFormatException {
         //System.out.println("Fra combobox: "+kategoriCombobox.getSelectionModel().getSelectedItem().toString());
-
         String validering =
                 valideringKomponent.sjekkUgyldigKomponent(produktNavn.getText(), kategoriNavn.getText(),
-                        (produktPris.getText()), kategoriCombobox);
+                        (produktPris.getText()), kategoriCombobox, produktAntall.getText());
 
-        if(!validering.isEmpty()){
-            setLabelTekst("alert", validering);
-        }
-        else {
-            if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Velg kategori")) {
-                setLabelTekst("alert", "Du må velge en eksisterende eller lage en ny kategori.");
-            }
-            else if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
-                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(),
-                        Double.parseDouble(produktPris.getText()), Integer.parseInt(produktAntall.getText()));
-                sjekkForDuplikater(nyKomponent);
+
+            if (!validering.isEmpty()) {
+                setLabelTekst("alert", validering);
             } else {
-                Komponent nyKomponent = new Komponent(produktNavn.getText(),
-                        kategoriCombobox.getSelectionModel().getSelectedItem().toString(),
-                        Double.parseDouble(produktPris.getText()), Integer.parseInt(produktAntall.getText()));
-                sjekkForDuplikater(nyKomponent);
+                if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Velg kategori")) {
+                    setLabelTekst("alert", "Du må velge en eksisterende eller lage en ny kategori.");
+                } else if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
+                    Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(),
+                            Double.parseDouble(produktPris.getText()), Integer.parseInt(produktAntall.getText()));
+                    sjekkForDuplikater(nyKomponent);
+                } else {
+                    Komponent nyKomponent = new Komponent(produktNavn.getText(),
+                            kategoriCombobox.getSelectionModel().getSelectedItem().toString(),
+                            Double.parseDouble(produktPris.getText()), Integer.parseInt(produktAntall.getText()));
+                    sjekkForDuplikater(nyKomponent);
+                }
+
+                clear();
+                komponenter.refresh();
+                populateKategoriCombobox();
             }
 
-            clear();
-            komponenter.refresh();
-            populateKategoriCombobox();
-        }
+
 
     }
     public boolean sjekkForDuplikater(Komponent nyKomponent){

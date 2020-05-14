@@ -23,7 +23,7 @@ public class ValiderLoggInn {
         }
         else{
             sjekkPassord(passord);
-            sjekkGjentattPassord(passord1);
+            sjekkPassord(passord1);
         }
         if(!passord.equals(passord1)){
                 ugyldigData.append("Passordene er ikke like\n");
