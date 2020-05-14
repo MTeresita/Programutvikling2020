@@ -144,6 +144,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
         String value = String.valueOf(adminORuser.getValue());
 
         if(adminORuser.getSelectionModel().isEmpty()){
+
             setLabelTekst("alert", "Bruker type har ikke blitt valgt");
         }
         else {
@@ -242,34 +243,33 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
 
     @FXML
     public void registererProdukt(ActionEvent event) throws NumberFormatException {
-        //System.out.println("Fra combobox: "+kategoriCombobox.getSelectionModel().getSelectedItem().toString());
-
         String validering =
                 valideringKomponent.sjekkUgyldigKomponent(produktNavn.getText(), kategoriNavn.getText(),
-                        (produktPris.getText()), kategoriCombobox);
+                        (produktPris.getText()), kategoriCombobox, produktAntall.getText());
 
-        if(!validering.isEmpty()){
-            setLabelTekst("alert", validering);
-        }
-        else {
-            if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Velg kategori")) {
-                setLabelTekst("alert", "Du må velge en eksisterende eller lage en ny kategori.");
-            }
-            else if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
-                Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(),
-                        Double.parseDouble(produktPris.getText()), Integer.parseInt(produktAntall.getText()));
-                sjekkForDuplikater(nyKomponent);
+
+            if (!validering.isEmpty()) {
+                setLabelTekst("alert", validering);
             } else {
-                Komponent nyKomponent = new Komponent(produktNavn.getText(),
-                        kategoriCombobox.getSelectionModel().getSelectedItem().toString(),
-                        Double.parseDouble(produktPris.getText()), Integer.parseInt(produktAntall.getText()));
-                sjekkForDuplikater(nyKomponent);
+                if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Velg kategori")) {
+                    setLabelTekst("alert", "Du må velge en eksisterende eller lage en ny kategori.");
+                } else if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
+                    Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(),
+                            Double.parseDouble(produktPris.getText()), Integer.parseInt(produktAntall.getText()));
+                    sjekkForDuplikater(nyKomponent);
+                } else {
+                    Komponent nyKomponent = new Komponent(produktNavn.getText(),
+                            kategoriCombobox.getSelectionModel().getSelectedItem().toString(),
+                            Double.parseDouble(produktPris.getText()), Integer.parseInt(produktAntall.getText()));
+                    sjekkForDuplikater(nyKomponent);
+                }
+
+                clear();
+                komponenter.refresh();
+                populateKategoriCombobox();
             }
 
-            clear();
-            komponenter.refresh();
-            populateKategoriCombobox();
-        }
+
 
     }
     public boolean sjekkForDuplikater(Komponent nyKomponent){
@@ -412,6 +412,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
     }
 
     public void setLabelTekst(String type, String msg){
+
         switch (type){
             case "alert":
                 lblMessage.setTextFill(Color.web("#e3345a"));
@@ -426,7 +427,9 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
                 lblMessage.setText(msg);
                 break;
         }
+
     }
+
     public boolean alertBox(String title, String header, String content){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
