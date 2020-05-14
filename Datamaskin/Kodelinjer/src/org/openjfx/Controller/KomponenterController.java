@@ -78,7 +78,7 @@ public class KomponenterController {
         */
         populateTable();
         searchTableView(kl, filterData, komponenter);
-        loggetInn.setText(session);
+        loggetInn.setText("Velkommen, "+session);
         setAccesibleText();
         setAlleCheckboxerTilListe();
     }
