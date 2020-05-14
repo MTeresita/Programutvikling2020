@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.RegistrerProduktController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Controller.AdminsideController">
    <children>
       <BorderPane prefHeight="780.0" prefWidth="1100.0">
          <left>
@@ -38,15 +38,12 @@
                      </font>
                   </Text>
                   <Line endX="124.0" layoutX="125.0" layoutY="89.0" startX="-100.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="1.25" />
-                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="34.0" layoutY="198.0" prefHeight="121.0" prefWidth="199.0" textFill="RED">
-                     <font>
-                        <Font size="14.0" />
-                     </font></Label>
                   <Text fill="#656565" layoutX="34.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tilbakemeldinger:">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
+                  <Label fx:id="lblMessage" layoutX="36.0" layoutY="200.0" prefHeight="116.0" prefWidth="200.0" text="Label" />
                </children>
             </Pane>
          </left>

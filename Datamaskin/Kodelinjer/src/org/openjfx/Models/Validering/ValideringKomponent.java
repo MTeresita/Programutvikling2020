@@ -14,8 +14,13 @@ public class ValideringKomponent {
 
     public String sjekkUgyldigKomponent(String produktnavn, String nyKategori, String pris, ComboBox box, String antall){
 
+    public String sjekkUgyldigKomponent(String produktnavn, String nyKategori, String pris, ComboBox box){
+        ugyldigData.setLength(0);
         sjekkProduktNavn(produktnavn);
         sjekkNyKatergori(nyKategori, box);
+        ValiderPris(pris);
+        return ugyldigData.toString();
+    }
 
         if(!pris.isEmpty() || !pris.isBlank()) {
             try {
