@@ -10,7 +10,7 @@ import org.openjfx.Models.Avvik.ExceptionComponentNewCategory;
 import org.openjfx.Models.Avvik.ExceptionComponentProductName;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
-import org.openjfx.Models.HjelpeKlasser.Tråd;
+import org.openjfx.Models.HjelpeKlasser.Thread;
 import org.openjfx.Models.Interfaces.SceneChanger;
 import org.openjfx.Models.Komponent;
 import org.openjfx.Models.KomponenterListe;
@@ -306,18 +306,18 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     @FXML
-    private Tråd tråd;
+    private Thread thread;
 
     public void lagreTilFil(ActionEvent event){
         try {
-            tråd =new Tråd();
-            tråd.setOnSucceeded(this::threadDone);
-            tråd.setOnFailed(this::threadFailed);
+            thread =new Thread();
+            thread.setOnSucceeded(this::threadDone);
+            thread.setOnFailed(this::threadFailed);
             //Tråd th=new Tråd();
             lagreTilFil.setDisable(true);
             kl.lagreTilObjectFil();
             setLabelTekst("success", "Lagring var vellykket!");
-            tråd.trådKall();//gjør knappen utilgjengelig i fem sekunder.
+            thread.threadKall();//gjør knappen utilgjengelig i fem sekunder.
             lagreTilFil.setDisable(false);
 
         }catch (Exception InterruptedException ){

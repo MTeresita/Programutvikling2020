@@ -2,11 +2,11 @@ package org.openjfx.Models.HjelpeKlasser;
 
 import javafx.concurrent.Task;
 
-public class Tråd extends Task<Object> {
+public class Thread extends Task<Object> {
 
-   public void trådKall(){
+   public void threadKall(){
         try{
-            Thread.sleep(5000);
+            java.lang.Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
