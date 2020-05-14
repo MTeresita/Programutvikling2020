@@ -144,6 +144,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
         String value = String.valueOf(adminORuser.getValue());
 
         if(adminORuser.getSelectionModel().isEmpty()){
+
             setLabelTekst("alert", "Bruker type har ikke blitt valgt");
         }
         else {
@@ -242,8 +243,6 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
 
     @FXML
     public void registererProdukt(ActionEvent event) throws NumberFormatException {
-        //System.out.println("Fra combobox: "+kategoriCombobox.getSelectionModel().getSelectedItem().toString());
-
         String validering =
                 valideringKomponent.sjekkUgyldigKomponent(produktNavn.getText(), kategoriNavn.getText(),
                         (produktPris.getText()), kategoriCombobox);
@@ -412,6 +411,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
     }
 
     public void setLabelTekst(String type, String msg){
+
         switch (type){
             case "alert":
                 lblMessage.setTextFill(Color.web("#e3345a"));
@@ -426,7 +426,9 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
                 lblMessage.setText(msg);
                 break;
         }
+
     }
+
     public boolean alertBox(String title, String header, String content){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);

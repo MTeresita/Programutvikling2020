@@ -12,10 +12,10 @@ public class ValideringKomponent {
     StringBuilder ugyldigData = new StringBuilder();
 
     public String sjekkUgyldigKomponent(String produktnavn, String nyKategori, String pris, ComboBox box){
+        ugyldigData.setLength(0);
         sjekkProduktNavn(produktnavn);
         sjekkNyKatergori(nyKategori, box);
         ValiderPris(pris);
-
         return ugyldigData.toString();
     }
 
