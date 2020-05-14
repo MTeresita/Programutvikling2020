@@ -12,17 +12,13 @@ public class ValideringKomponent {
 
     StringBuffer ugyldigData = new StringBuffer();
 
-    public String sjekkUgyldigKomponent(String produktnavn, String nyKategori, String pris, ComboBox box, String antall){
+    public String sjekkUgyldigKomponent(String produktnavn, String nyKategori, String pris, ComboBox box, String antall) {
 
-    public String sjekkUgyldigKomponent(String produktnavn, String nyKategori, String pris, ComboBox box){
         ugyldigData.setLength(0);
         sjekkProduktNavn(produktnavn);
         sjekkNyKatergori(nyKategori, box);
-        ValiderPris(pris);
-        return ugyldigData.toString();
-    }
 
-        if(!pris.isEmpty() || !pris.isBlank()) {
+        if (!pris.isEmpty() || !pris.isBlank()) {
             try {
                 Double innPris = Double.parseDouble(pris);
                 if (innPris > 999999) {
@@ -36,36 +32,33 @@ public class ValideringKomponent {
             } catch (NumberFormatException e) {
                 ugyldigData.append("Pris må skrives inn som tall \n");
             }
-        }
-        else{
+        } else {
             sjekkPris(pris);
         }
 
 
-        if(!antall.isEmpty() || !antall.isBlank()){
+        if (!antall.isEmpty() || !antall.isBlank()) {
             try {
                 Integer innAntall = Integer.parseInt(antall);
 
-                if(innAntall <= 0){
+                if (innAntall <= 0) {
                     ugyldigData.append("Antall kan ikke være mindre enn 0");
                 }
-                if (innAntall > 3){
+                if (innAntall > 3) {
                     ugyldigData.append("Antall kan ikke være større enn 3");
                 }
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 ugyldigData.append("Antall må skrives inn som tall");
             }
-        }
-        else {
+        } else {
             sjekkAntall(antall);
         }
 
 
-
         return ugyldigData.toString();
 
-
     }
+
 
 
     public static boolean validerProduktnavn(String produktnavn) throws AvvikKomponentProduktnavn {
