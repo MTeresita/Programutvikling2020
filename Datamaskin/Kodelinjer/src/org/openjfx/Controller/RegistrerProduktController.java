@@ -1,5 +1,7 @@
 package org.openjfx.Controller;
 
+import javafx.collections.ObservableList;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,6 +11,7 @@ import org.openjfx.Models.Avvik.*;
 import org.openjfx.Models.Filbehandling.FilHenting.FilHentingAdministrator;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
+import org.openjfx.Models.HjelpeKlasser.HentFilAdminThread;
 import org.openjfx.Models.Interfaces.SceneChanger;
 import org.openjfx.Models.Komponent;
 import org.openjfx.Models.KomponenterListe;
@@ -30,7 +33,7 @@ public class RegistrerProduktController {
 public TextField user, pass, produktNavn, kategoriNavn, produktPris, filteredData, produktAntall;
 
 @FXML
-public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilMaster, lagreTilFil, hentFraMaster, hentFraFil;
+public Button registrerBruker,  registrerProduktBtn, slettRader, setMasterFil, lagreTilFil, hentFraMaster, hentFraFil;
 
 @FXML
 public ComboBox adminORuser, kategoriCombobox, filListe;
@@ -65,18 +68,47 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
         lblMessage.setWrapText(true);
         populateFilListe();
     }
-
+    private HentFilAdminThread task;
     public void populateTableWithJobj(){ //henter jobj fil fra fra globale KomponeterListen "kl"
-        kl.henteFraObjectFil(true, "");
+        task = new HentFilAdminThread();
+        task.setOnSucceeded(this::threadDone);
+        task.setOnFailed(this::threadFailed);
+        Thread th = new Thread(task);
+        th.setDaemon(true);
+        setAlleKnapperState(true);
+        th.start();
+
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
         duplikat.setCellValueFactory(cellData -> cellData.getValue().antallProperty().asObject());
         komponenter.setItems(kl.getObservableList());
+
+    }
+    private void threadDone(WorkerStateEvent e) {
+        ObservableList<Komponent> resultat = task.getValue();
+        kl.getObservableList().setAll(resultat);
+
         populateKategoriCombobox();
         FilHentingAdministrator fha = new FilHentingAdministrator();
         lblMaster.setText(fha.getMasterFil());
         lblFilNavn.setText(fha.getMasterFil());
+        setAlleKnapperState(false);
+    }
+
+    private void threadFailed(WorkerStateEvent event) {
+        setAlleKnapperState(false);
+    }
+    private void setAlleKnapperState(boolean state){
+        setMasterFil.setDisable(state);
+        registrerBruker.setDisable(state);
+        registrerProduktBtn.setDisable(state);
+        slettRader.setDisable(state);
+        lagreTilFil.setDisable(state);
+        hentFraMaster.setDisable(state);
+        hentFraFil.setDisable(state);
+
+
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
         kl.getObservableList();
