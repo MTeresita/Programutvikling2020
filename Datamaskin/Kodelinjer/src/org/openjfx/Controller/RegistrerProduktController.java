@@ -34,7 +34,7 @@ public class RegistrerProduktController {
 public TextField user, pass, produktNavn, kategoriNavn, produktPris, filteredData, produktAntall;
 
 @FXML
-public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilMaster, lagreTilFil, hentFraMaster, hentFraFil;
+public Button registrerBruker,  registrerProduktBtn, slettRader, setMasterFil, lagreTilFil, hentFraMaster, hentFraFil;
 
 @FXML
 public ComboBox adminORuser, kategoriCombobox, filListe;
@@ -83,14 +83,16 @@ public KomponenterListe kl = new KomponenterListe();
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
         duplikat.setCellValueFactory(cellData -> cellData.getValue().antallProperty().asObject());
         komponenter.setItems(kl.getObservableList());
-        populateKategoriCombobox();
-        FilHentingAdministrator fha = new FilHentingAdministrator();
-        lblMaster.setText(fha.getMasterFil());
-        lblFilNavn.setText(fha.getMasterFil());
+
     }
     private void threadDone(WorkerStateEvent e) {
         ObservableList<Komponent> resultat = task.getValue();
         kl.getObservableList().setAll(resultat);
+
+        populateKategoriCombobox();
+        FilHentingAdministrator fha = new FilHentingAdministrator();
+        lblMaster.setText(fha.getMasterFil());
+        lblFilNavn.setText(fha.getMasterFil());
         setAlleKnapperState(false);
     }
 
@@ -98,12 +100,14 @@ public KomponenterListe kl = new KomponenterListe();
         setAlleKnapperState(false);
     }
     private void setAlleKnapperState(boolean state){
+        setMasterFil.setDisable(state);
         registrerBruker.setDisable(state);
         registrerProduktBtn.setDisable(state);
         slettRader.setDisable(state);
         lagreTilFil.setDisable(state);
         hentFraMaster.setDisable(state);
         hentFraFil.setDisable(state);
+
 
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
