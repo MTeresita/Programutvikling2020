@@ -4,9 +4,6 @@ import org.openjfx.Models.Interfaces.FilSletting;
 import org.openjfx.Models.Parsing.KonfigurasjonsParserBruker;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 
 public class FilSlettingBruker implements FilSletting {
     @Override

@@ -12,6 +12,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.IntegerStringConverter;
+import org.openjfx.Controller.AdminsideController;
 import org.openjfx.Models.Filbehandling.FilHenting.FilHentingAdministrator;
 import org.openjfx.Models.Filbehandling.FilLagring.FilLagringAdmin;
 
@@ -163,17 +165,27 @@ public class KomponenterListe {
         return false;
     }
 
-    public static void endringITableView(TableColumn produktnavn, TableColumn kategori, TableColumn pris){
+    public static void endringITableView(TableColumn produktnavn, TableColumn kategori, TableColumn pris, TableColumn antall){
         produktnavn.setCellFactory(TextFieldTableCell.forTableColumn());
         kategori.setCellFactory(TextFieldTableCell.forTableColumn());
-
-       pris.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter() {
+        pris.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter() {
             @Override
             public Double fromString(String value) {
                 try {
                     return super.fromString(value);
                 } catch(NumberFormatException e) {
                     return Double.NaN; // An abnormal value
+                }
+            }
+        }));
+
+        antall.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter() {
+            @Override
+            public Integer fromString(String value) {
+                try {
+                    return super.fromString(value);
+                } catch(NumberFormatException e) {
+                    return 0; // An abnormal value
                 }
             }
         }));
@@ -190,5 +202,6 @@ public class KomponenterListe {
         }
         return false;
     }
+
 
 }

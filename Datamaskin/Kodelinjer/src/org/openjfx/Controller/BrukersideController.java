@@ -25,10 +25,7 @@ import org.openjfx.Models.Validering.ValideringKomponent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.openjfx.Models.KomponenterListe.searchTableView;
 

@@ -5,7 +5,6 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import org.openjfx.Models.Avvik.*;
 import org.openjfx.Models.Filbehandling.FilHenting.FilHentingAdministrator;
@@ -66,7 +65,7 @@ private void threadFailed(WorkerStateEvent event) {
         komponenter.getSortOrder().add(kategori);
         komponenter.setEditable(true);
         searchTableView(kl,filteredData,komponenter);
-        endringITableView(produktnavn,kategori, pris);
+        endringITableView(produktnavn,kategori, pris, duplikat);
         lblMessage.setWrapText(true);
         populateFilListe();
     }
@@ -331,7 +330,23 @@ private void threadFailed(WorkerStateEvent event) {
     
     @FXML
     public void endreTableViewDataBool(TableColumn.CellEditEvent<Komponent, Integer> event){ //Fra henrik
-        event.getRowValue().setAntall(event.getNewValue());
+
+        if(event.getNewValue() == 0){
+            setLabelTekst("alert", "Antall må skrives som tall\n");
+            komponenter.refresh();
+        }
+        else if(event.getNewValue() <= 0){
+            setLabelTekst("alert", "Antall kan ikke være mindre enn null\n");
+            komponenter.refresh();
+        }
+        else if(event.getNewValue() > 3){
+            setLabelTekst("alert", "Antall kan ikke være høyere enn 3\n");
+            komponenter.refresh();
+        }
+        else {
+            event.getRowValue().setAntall(event.getNewValue());
+        }
+
     }
 
     public void slettRader(ActionEvent event) {

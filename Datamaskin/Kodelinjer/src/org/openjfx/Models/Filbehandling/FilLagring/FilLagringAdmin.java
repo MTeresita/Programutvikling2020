@@ -4,7 +4,6 @@ import org.openjfx.Models.Komponent;
 import org.openjfx.Models.Produkt;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class FilLagringAdmin {

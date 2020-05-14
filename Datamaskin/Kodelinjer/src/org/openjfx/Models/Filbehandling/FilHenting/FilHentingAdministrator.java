@@ -2,7 +2,6 @@ package org.openjfx.Models.Filbehandling.FilHenting;
 
 import javafx.scene.control.Alert;
 import org.openjfx.Models.Avvik.AvvikBruker;
-import org.openjfx.Models.Parsing.KonfigurasjonsParserBruker;
 import org.openjfx.Models.Produkt;
 import java.io.IOException;
 import java.nio.file.Files;
