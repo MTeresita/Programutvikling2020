@@ -10,20 +10,22 @@ public class ValiderLoggInn {
     private StringBuilder ugyldigData = new StringBuilder();
 
     public String sjekkUgyldigData(String brukernavn, String passord){
-            sjekkBrukerNavn(brukernavn);
+        ugyldigData.setLength(0);
+        sjekkBrukerNavn(brukernavn);
             sjekkPassord(passord);
 
         return ugyldigData.toString();
     }
 
     public String sjekkUgyldigRegistrering(String brukernavn, String passord, String passord1){
+        ugyldigData.setLength(0);
         sjekkBrukerNavn(brukernavn);
         if((passord.isEmpty() || passord1.isBlank()) && (passord1.isEmpty() || passord1.isBlank())){
             ugyldigData.append("Et eller flere passord felt er tomme \n");
         }
         else{
             sjekkPassord(passord);
-            sjekkPassord(passord1);
+            sjekkGjentattPassord(passord1);
         }
         if(!passord.equals(passord1)){
                 ugyldigData.append("Passordene er ikke like\n");
@@ -42,7 +44,7 @@ public class ValiderLoggInn {
             throw new AvvikLoggInnBrukernavn("Brukernavn må være mellom 3-20 bokstaver langt \n");
         }
         else if(brukernavn.isBlank() || brukernavn.isEmpty()) {
-            throw new AvvikLoggInnBrukernavn("Brukernavn kan ikke være tomt\n");
+            throw new AvvikLoggInnBrukernavn("Brukernavn feltet kan ikke være tomt\n");
         }
         return true;
     }
@@ -59,8 +61,8 @@ public class ValiderLoggInn {
 
     public static boolean validerPassord(String passord) throws AvvikLoggInnPassord {
 
-        if(!passord.matches("^[A-ZÆØÅa-zæøå0-9 _@./#&+-]{5,50}$") && (!passord.isEmpty() && !passord.isBlank())){
-            throw new AvvikLoggInnPassord("Passord må være mellom 5-50 bokstaver langt\n");
+        if(!passord.matches("^[A-ZÆØÅa-zæøå0-9 _@./#&+-]{5,20}$") && (!passord.isEmpty() && !passord.isBlank())){
+            throw new AvvikLoggInnPassord("Passord må være mellom 5-20 bokstaver langt\n");
         }
         else if(passord.isBlank() || passord.isEmpty()) {
             throw new AvvikLoggInnPassord("Passord feltet kan ikke være tomt\n");
@@ -69,8 +71,8 @@ public class ValiderLoggInn {
     }
 
     public boolean validerGjentattPassord(String gjentattPassord) throws AvvikLoggInnPassord {
-        if(!gjentattPassord.matches("^[A-ZÆØÅa-zæøå0-9 _@./#&+-]{5,50}$") && (!gjentattPassord.isEmpty() && !gjentattPassord.isBlank())){
-            throw new AvvikLoggInnPassord("Gjentatt passord felt må være mellom 5-50 bokstaver langt\n");
+        if(!gjentattPassord.matches("^[A-ZÆØÅa-zæøå0-9 _@./#&+-]{5,20}$") && (!gjentattPassord.isEmpty() && !gjentattPassord.isBlank())){
+            throw new AvvikLoggInnPassord("Gjentatt passord må matche\n");
         }
         else if(gjentattPassord.isBlank() || gjentattPassord.isEmpty()) {
             throw new AvvikLoggInnPassord("Gjentatt passord feltet kan ikke være tomt\n");
