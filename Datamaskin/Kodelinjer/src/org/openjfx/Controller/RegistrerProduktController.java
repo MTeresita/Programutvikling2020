@@ -360,6 +360,7 @@ public KomponenterListe kl = new KomponenterListe();
             System.out.println("Ingen filer funnet");
             filListe.getSelectionModel().select(0);
         }
+        filListe.getSelectionModel().select(0);
     }
 
     public void setLabelTekst(String type, String msg){

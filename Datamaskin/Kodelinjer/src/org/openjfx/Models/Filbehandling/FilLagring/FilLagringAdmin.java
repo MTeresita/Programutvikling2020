@@ -13,7 +13,7 @@ public class FilLagringAdmin {
             try{
                 FileOutputStream f ;
                 if(master){
-                    f = new FileOutputStream(new File("komponentlist.jobj"));
+                    f = new FileOutputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/MASTER.jobj"));
                 }else{
                     if(nyFil){
                         f = new FileOutputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+filnavn+".jobj"));

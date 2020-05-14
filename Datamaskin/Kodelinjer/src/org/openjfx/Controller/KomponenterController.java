@@ -241,7 +241,6 @@ public class KomponenterController {
 
 
     public void lagreKonfigurasjon() throws AvvikKomponentProduktnavn {
-        System.out.println("KJØRER LAGREKONFIG");
         if(!k.getKonfigListe().isEmpty()) {
             if (filListe.getSelectionModel().getSelectedItem() == "Ny Fil...") {
                 boolean ok = true;
@@ -289,7 +288,6 @@ public class KomponenterController {
         }else{
             boolean ok = alertBox("Feilmelding", "Ingen komponeneter er valgt!", "");
         }
-        System.out.println("SLUTT PÅ METODE");
     }
     public void hentKonfigurasjon() throws IOException {
         FilHentingBruker fhb = new FilHentingBruker();

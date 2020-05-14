@@ -2,10 +2,14 @@ package org.openjfx.Models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import org.openjfx.Controller.KomponenterController;
 import org.openjfx.Models.Avvik.AvvikBruker;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Optional;
 
 public class Konfigurasjon {
 
@@ -22,10 +26,17 @@ public class Konfigurasjon {
         int teller = 0; //antall av valgt komponeneter allerede i konfigurasjonen
         for(Komponent k : konfigListeIterator){ //sjekk om komponent med samme kategori er i listen fra før
             if (k.getKategori().equals(komponent.getKategori()) && maksAntall <= 1) {
-                konfigListeIterator.set(konfigListeIterator.indexOf(k), komponent);
-                setKonfigListe(konfigListeIterator);
+                boolean erstatt = alertBox("","Kun 1 per konfigurasjon av dette produktet!",
+                        "Ønsker du erstatte "+k.getNavn()+" med "+komponent.getNavn()+"?");
+                if(erstatt) {
+                    konfigListeIterator.set(konfigListeIterator.indexOf(k), komponent);
+                    setKonfigListe(konfigListeIterator);
+                }
                 ok = false;
             }else if(k.getKategori().equals(komponent.getKategori())){
+                teller++;
+            }
+            if(k.getKategori().equals(komponent.getKategori())){
                 teller++;
             }
         }
@@ -104,5 +115,20 @@ public class Konfigurasjon {
         }
         ut.append(sluttPris+";");
         return ut.toString();
+    }
+
+    public boolean alertBox(String title, String header, String content){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            return true;
+        } else {
+            alert.close();
+            return false;
+        }
     }
 }

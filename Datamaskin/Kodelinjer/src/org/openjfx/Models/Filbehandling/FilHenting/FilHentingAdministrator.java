@@ -15,7 +15,7 @@ public class FilHentingAdministrator {
         try {
             FileInputStream fis;
             if(master){
-                fis = new FileInputStream(new File("komponentlist.jobj"));
+                fis = new FileInputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/MASTER.jobj"));
             }else{
                 fis = new FileInputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+filnavn));
             }
