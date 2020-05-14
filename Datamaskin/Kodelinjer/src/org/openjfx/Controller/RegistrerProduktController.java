@@ -1,13 +1,16 @@
 package org.openjfx.Controller;
 
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import org.openjfx.Models.Avvik.*;
+import org.openjfx.Models.Avvik.ExceptionComponentNewCategory;
+import org.openjfx.Models.Avvik.ExceptionComponentProductName;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
+import org.openjfx.Models.HjelpeKlasser.Tråd;
 import org.openjfx.Models.Interfaces.SceneChanger;
 import org.openjfx.Models.Komponent;
 import org.openjfx.Models.KomponenterListe;
@@ -302,13 +305,36 @@ public KomponenterListe kl = new KomponenterListe();
         }
     }
 
+    @FXML
+    private Tråd tråd;
+
     public void lagreTilFil(ActionEvent event){
         try {
+            tråd =new Tråd();
+            tråd.setOnSucceeded(this::threadDone);
+            tråd.setOnFailed(this::threadFailed);
+            //Tråd th=new Tråd();
+            lagreTilFil.setDisable(true);
             kl.lagreTilObjectFil();
             setLabelTekst("success", "Lagring var vellykket!");
-        }catch (Exception e){
+            tråd.trådKall();//gjør knappen utilgjengelig i fem sekunder.
+            lagreTilFil.setDisable(false);
+
+        }catch (Exception InterruptedException ){
             setLabelTekst("alert", "Noe gikk galt. Kunne ikke lagre fil.");
         }
+
+    }
+
+    private void threadDone(WorkerStateEvent e){
+        //lblMessage.setText("Tråden er ferdig!" );
+        System.out.println("Tråden er gjennomført.");
+        lagreTilFil.setDisable(false);
+    }
+    private void threadFailed(WorkerStateEvent event){
+        var e= event.getSource().getException();
+        System.out.println("Avviket sier:"+ e.getMessage());
+        lagreTilFil.setDisable(false);
     }
 
     public void setLabelTekst(String type, String msg){
