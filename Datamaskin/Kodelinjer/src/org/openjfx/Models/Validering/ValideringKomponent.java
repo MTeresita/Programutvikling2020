@@ -14,8 +14,12 @@ public class ValideringKomponent {
     public String sjekkUgyldigKomponent(String produktnavn, String nyKategori, String pris, ComboBox box){
         sjekkProduktNavn(produktnavn);
         sjekkNyKatergori(nyKategori, box);
+        ValiderPris(pris);
 
+        return ugyldigData.toString();
+    }
 
+    public String ValiderPris(String pris){
         if(!pris.isEmpty() || !pris.isBlank()) {
             try {
                 Double innPris = Double.parseDouble(pris);
@@ -35,7 +39,23 @@ public class ValideringKomponent {
         else{
             sjekkPris(pris);
         }
+        return ugyldigData.toString();
+    }
 
+    public String validerPrisITableView(double pris){
+        try {
+
+            if (pris > 999999) {
+                ugyldigData.append("Pris kan ikke være høyere enn\n 999 999 NOK\n");
+            }
+            if (pris <= 0) {
+                ugyldigData.append("Pris kan ikke være mindre enn 0\n");
+            }
+
+        }
+        catch (NullPointerException | NumberFormatException e){
+            ugyldigData.append("Feltet kan ikke være tomt");
+        }
 
         return ugyldigData.toString();
     }

@@ -22,8 +22,7 @@ import java.util.Optional;
 import static org.openjfx.Models.Avvik.AlertHelper.showAlertWindow;
 import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemSjekk.checkExistingBruker;
-import static org.openjfx.Models.KomponenterListe.endringITableView;
-import static org.openjfx.Models.KomponenterListe.searchTableView;
+import static org.openjfx.Models.KomponenterListe.*;
 
 
 public class RegistrerProduktController {
@@ -55,6 +54,7 @@ TableColumn<Komponent, Integer> duplikat;
 ImageView tilbakemeldingImg;
 
 public KomponenterListe kl = new KomponenterListe();
+public    ValideringKomponent valideringKomponent = new ValideringKomponent();
 
     public void initialize() {
         populateTableWithJobj();
@@ -211,7 +211,7 @@ public KomponenterListe kl = new KomponenterListe();
     @FXML
     public void registererProdukt(ActionEvent event) throws NumberFormatException {
         //System.out.println("Fra combobox: "+kategoriCombobox.getSelectionModel().getSelectedItem().toString());
-        ValideringKomponent valideringKomponent = new ValideringKomponent();
+
         String validering =
                 valideringKomponent.sjekkUgyldigKomponent(produktNavn.getText(), kategoriNavn.getText(),
                         (produktPris.getText()), kategoriCombobox);
@@ -281,7 +281,21 @@ public KomponenterListe kl = new KomponenterListe();
     }
     @FXML
     public void endreTableViewDataDouble(TableColumn.CellEditEvent<Komponent, Double> event){ //Fra henrik
-        event.getRowValue().setPris(event.getNewValue());
+                if(event.getNewValue().isNaN()){
+                    setLabelTekst("alert", "Pris må skrives som tall\n");
+                    komponenter.refresh();
+                }
+                else if(event.getNewValue() <= 0){
+                    setLabelTekst("alert", "Pris kan ikke være mindre enn null\n");
+                    komponenter.refresh();
+                }
+                else if(event.getNewValue() > 999999){
+                    setLabelTekst("alert", "Pris kan ikke være høyere enn\n 999 999 NOK\n");
+                    komponenter.refresh();
+                }
+                else {
+                    event.getRowValue().setPris(event.getNewValue());
+                }
     }
     @FXML
     public void endreTableViewDataBool(TableColumn.CellEditEvent<Komponent, Integer> event){ //Fra henrik

@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.event.EventHandler;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.DoubleStringConverter;
 import org.openjfx.Models.Filbehandling.FilHenting.FilHentingAdministrator;
@@ -160,10 +162,23 @@ public class KomponenterListe {
         }
         return false;
     }
+
     public static void endringITableView(TableColumn produktnavn, TableColumn kategori, TableColumn pris){
         produktnavn.setCellFactory(TextFieldTableCell.forTableColumn());
         kategori.setCellFactory(TextFieldTableCell.forTableColumn());
-        pris.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+
+       pris.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter() {
+            @Override
+            public Double fromString(String value) {
+                try {
+                    return super.fromString(value);
+                } catch(NumberFormatException e) {
+                    return Double.NaN; // An abnormal value
+                }
+            }
+        }));
+
+
     }
     public boolean slettKomponentFraListe(Komponent k){
         for(Komponent komponent : komponenterListeObservable){
