@@ -18,6 +18,21 @@
     -fx-background-color: #E2E2E2;
 }
 
+/*checkbox*/
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: none;
+    -fx-border-radius:3px;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #27ba6c;
+}
+
 /*buttons*/
 Button{
     -fx-cursor: hand;

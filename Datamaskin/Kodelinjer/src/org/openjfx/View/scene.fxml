@@ -23,105 +23,106 @@
          <left>
             <Pane prefHeight="1080.0" prefWidth="282.0" styleClass="gradient" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="lblSluttPris" alignment="center" layoutX="1.0" layoutY="411.0" prefWidth="280.0" styleClass="label-price" stylesheets="@../styles.css" text="Total pris" />
-                  <Button layoutX="14.0" layoutY="357.0" mnemonicParsing="false" onAction="#slettKomponentViaListView" prefHeight="35.0" prefWidth="254.0" styleClass="delete" stylesheets="@../styles.css" text="Slett valgt komponent">
+                  <Label fx:id="lblSluttPris" alignment="center" layoutX="1.0" layoutY="421.0" prefWidth="280.0" styleClass="label-price" stylesheets="@../styles.css" text="Pris total" />
+                  <Button layoutX="14.0" layoutY="274.0" mnemonicParsing="false" onAction="#slettKomponentViaListView" prefHeight="35.0" prefWidth="254.0" styleClass="delete" stylesheets="@../styles.css" text="Slett valgt komponent">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Text fill="WHITE" layoutX="25.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RÅFETDATA.NO">
+                  <Text fill="WHITE" layoutX="45.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RÅFETDATA.NO">
                      <font>
-                        <Font name="System Bold" size="30.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                   </Text>
 
-                  <ImageView fitHeight="23.0" fitWidth="21.0" layoutX="18.0" layoutY="714.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="47.0" fitWidth="43.0" layoutX="23.0" layoutY="681.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Bilder/images.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="newProduct" layoutX="49.0" layoutY="712.0" mnemonicParsing="false" onAction="#logOutEvent" prefHeight="23.0" prefWidth="210.0" styleClass="button-basket" stylesheets="@../styles.css" text="Logg ut">
+                  <Button fx:id="newProduct" layoutX="81.0" layoutY="702.0" mnemonicParsing="false" onAction="#logOutEvent" prefHeight="25.0" prefWidth="178.0" styleClass="button-basket" stylesheets="@../styles.css" text="Logg ut">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>
-                  <ListView fx:id="listview" layoutX="14.0" layoutY="149.0" prefHeight="199.0" prefWidth="254.0" />
-                  <Text fill="WHITE" layoutX="14.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konfigurasjon">
+                  <ListView fx:id="listview" layoutX="14.0" layoutY="109.0" prefHeight="161.0" prefWidth="254.0" />
+                  <Text fill="#ffffffb8" layoutX="14.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KONFIGURASJON:">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Line endX="124.0" layoutX="126.0" layoutY="90.0" startX="-100.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="1.25" />
-                  <Text fill="WHITE" layoutX="26.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KONFIGURER DATAMASKIN">
+                  <Line endX="124.0" layoutX="126.0" layoutY="70.0" startX="-100.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="1.25" />
+                  <Text fill="WHITE" layoutX="50.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KONFIGURER DATAMASKIN">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
-                  <Label fx:id="lblKonfigurasjonsNavn" layoutX="112.0" layoutY="130.0" text="Konfigurasjonsnavn">
+                  <Label fx:id="lblKonfigurasjonsNavn" layoutX="143.0" layoutY="90.0" text="Konfigurasjonsnavn" textFill="WHITE" textOverrun="LEADING_WORD_ELLIPSIS">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <CheckBox fx:id="checkGPU" layoutX="17.0" layoutY="572.0" mnemonicParsing="false" text="GPU" textFill="WHITE" />
-                  <CheckBox fx:id="checkCPU" layoutX="17.0" layoutY="512.0" mnemonicParsing="false" stylesheets="@../styles.css" text="CPU*" textFill="WHITE" />
-                  <CheckBox fx:id="checkMB" layoutX="167.0" layoutY="512.0" mnemonicParsing="false" text="Motherboard*" textFill="WHITE" />
-                  <CheckBox fx:id="checkPSU" layoutX="17.0" layoutY="542.0" mnemonicParsing="false" text="PSU*" textFill="WHITE" />
-                  <CheckBox fx:id="checkRAM" layoutX="87.0" layoutY="512.0" mnemonicParsing="false" text="RAM*" textFill="WHITE" />
-                  <CheckBox fx:id="checkKAB" layoutX="167.0" layoutY="542.0" mnemonicParsing="false" text="Kabinett*" textFill="WHITE" />
-                  <CheckBox fx:id="checkHDD" layoutX="87.0" layoutY="542.0" mnemonicParsing="false" text="Harddisk*" textFill="WHITE" />
-                  <Text fill="WHITE" layoutX="17.0" layoutY="502.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valgte deler (*påbelagt)">
+                  <CheckBox fx:id="checkGPU" layoutX="15.0" layoutY="392.0" mnemonicParsing="false" text="GPU" textFill="WHITE" />
+                  <CheckBox fx:id="checkCPU" layoutX="15.0" layoutY="342.0" mnemonicParsing="false" stylesheets="@../styles.css" text="CPU*" textFill="WHITE" />
+                  <CheckBox fx:id="checkMB" layoutX="167.0" layoutY="342.0" mnemonicParsing="false" text="Motherboard*" textFill="WHITE" />
+                  <CheckBox fx:id="checkPSU" layoutX="15.0" layoutY="367.0" mnemonicParsing="false" text="PSU*" textFill="WHITE" />
+                  <CheckBox fx:id="checkRAM" layoutX="84.0" layoutY="342.0" mnemonicParsing="false" text="RAM*" textFill="WHITE" />
+                  <CheckBox fx:id="checkKAB" layoutX="167.0" layoutY="367.0" mnemonicParsing="false" text="Kabinett*" textFill="WHITE" />
+                  <CheckBox fx:id="checkHDD" layoutX="84.0" layoutY="367.0" mnemonicParsing="false" text="Harddisk*" textFill="WHITE" />
+                  <Text fill="#ffffffb8" layoutX="15.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VALGTE DELER (*påbelagt)" />
+                  <Button fx:id="hentKonfig" layoutX="103.0" layoutY="578.0" mnemonicParsing="false" onAction="#hentKonfigurasjon" prefHeight="35.0" prefWidth="75.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <ComboBox fx:id="filListe" layoutX="14.0" layoutY="544.0" onAction="#setFilListeTilgjengelig" prefHeight="25.0" prefWidth="253.0" promptText="Velg konfigurasjon å lagre/hente/slette" styleClass="choicebox-product" stylesheets="@../styles.css" />
+                  <Button fx:id="slettKonfig" layoutX="192.0" layoutY="578.0" mnemonicParsing="false" onAction="#slettKonfigurasjon" prefHeight="35.0" prefWidth="75.0" styleClass="delete" stylesheets="@../styles.css" text="Slett">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Text fill="#ffffffb8" layoutX="14.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FILBEHANDLING">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
+                  <Label fx:id="loggetInn" layoutX="151.0" layoutY="675.0" prefHeight="24.0" prefWidth="123.0" stylesheets="@../styles.css" text="brukernavn" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Text fill="#ffffffb8" layoutX="83.0" layoutY="693.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pålogget:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="lagreKonfig" layoutX="13.0" layoutY="578.0" mnemonicParsing="false" onAction="#lagreKonfigurasjon" prefHeight="35.0" prefWidth="75.0" styleClass="save" stylesheets="@../styles.css" text="Lagre">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                </children></Pane>
          </left>
          <center>
             <Pane prefHeight="847.0" prefWidth="818.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="#f89a76" layoutX="90.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Komponentliste" wrappingWidth="287.13671875">
+                  <Text fill="#f89a76" layoutX="90.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KOMPONENTLISTE" wrappingWidth="287.13671875">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Text>
-                  <TableView fx:id="komponenter" layoutX="90.0" layoutY="124.0" prefHeight="408.0" prefWidth="634.0" stylesheets="@../styles.css">
+                  <TableView fx:id="komponenter" layoutX="90.0" layoutY="120.0" prefHeight="408.0" prefWidth="634.0" stylesheets="@../styles.css">
                      <columns>
-                        <TableColumn fx:id="produktnavn" prefWidth="320.3333740234375" text="Produktnavn" />
-                        <TableColumn fx:id="kategori" minWidth="0.0" prefWidth="164.0" text="Kategori" />
-                        <TableColumn fx:id="pris" prefWidth="148.0" text="Pris" />
+                        <TableColumn fx:id="produktnavn" prefWidth="230.0" text="Produktnavn" />
+                        <TableColumn fx:id="kategori" minWidth="0.0" prefWidth="163.0" text="Kategori" />
+                        <TableColumn fx:id="pris" prefWidth="240.0" text="Pris" />
                      </columns>
                   </TableView>
-                  <Button fx:id="leggTilKomponent" layoutX="463.0" layoutY="541.0" mnemonicParsing="false" onAction="#leggTilKomponentEvent" prefHeight="35.0" prefWidth="260.0" styleClass="save" stylesheets="@../styles.css" text="Legg til komponent">
+                  <Button fx:id="leggTilKomponent" layoutX="463.0" layoutY="537.0" mnemonicParsing="false" onAction="#leggTilKomponentEvent" prefHeight="35.0" prefWidth="260.0" styleClass="save" stylesheets="@../styles.css" text="Legg til komponent">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="filterData" layoutX="89.0" layoutY="541.0" prefHeight="37.0" prefWidth="362.0" promptText="Søk" styleClass="search-bar" stylesheets="@../styles.css" />
-                  <Button fx:id="lagreKonfig" layoutX="90.0" layoutY="689.0" mnemonicParsing="false" onMouseReleased="#lagreKonfigurasjon" prefHeight="35.0" prefWidth="75.0" styleClass="save" stylesheets="@../styles.css" text="Lagre">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="hentKonfig" layoutX="179.0" layoutY="689.0" mnemonicParsing="false" onAction="#hentKonfigurasjon" prefHeight="35.0" prefWidth="75.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <ComboBox fx:id="filListe" layoutX="90.0" layoutY="655.0" onAction="#setFilListeTilgjengelig" prefHeight="25.0" prefWidth="253.0" promptText="Velg konfigurasjon å lagre/hente" styleClass="choicebox-product" stylesheets="@../styles.css" />
-                  <Button fx:id="slettKonfig" layoutX="268.0" layoutY="689.0" mnemonicParsing="false" onAction="#slettKomponentViaListView" prefHeight="35.0" prefWidth="75.0" styleClass="delete" stylesheets="@../styles.css" text="Slett">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <ImageView fitHeight="32.0" fitWidth="34.0" layoutX="14.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Bilder/userIcon.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="loggetInn" layoutX="47.0" layoutY="23.0" prefHeight="24.0" prefWidth="87.0" stylesheets="@../styles.css" textFill="#f89a76">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
+                  <TextField fx:id="filterData" layoutX="89.0" layoutY="537.0" prefHeight="37.0" prefWidth="362.0" promptText="Søk" styleClass="search-bar" stylesheets="@../styles.css" />
                </children></Pane>
          </center>
       </BorderPane>
