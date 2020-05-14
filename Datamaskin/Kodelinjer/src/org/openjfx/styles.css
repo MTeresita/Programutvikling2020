@@ -39,13 +39,13 @@ Button{
     -fx-font-weight: bold;
 }
 .button-basket{
-    -fx-background-color: #f4f4f4;
+    -fx-background-color: #ebebeb;
 }
 .button-basket:hover{
-    -fx-background-color: #fcfcfc;
+    -fx-background-color: #f4f4f4;
 }
 .button-basket:pressed{
-    -fx-background-color: #f0f0f0;
+    -fx-background-color: #dedede;
 }
 .save{
     -fx-background-color: #27ba6c;

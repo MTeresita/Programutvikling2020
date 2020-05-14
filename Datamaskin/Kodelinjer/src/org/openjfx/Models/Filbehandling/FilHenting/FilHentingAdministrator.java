@@ -11,9 +11,15 @@ public class FilHentingAdministrator {
 
     public ArrayList<Produkt> list = new ArrayList<>();
 
-    public ArrayList<Produkt> hentFraFil() {
+    public ArrayList<Produkt> hentFraFil(boolean master, String filnavn) {
         try {
-            FileInputStream fis = new FileInputStream(new File("komponentlist.jobj"));
+            FileInputStream fis;
+            if(master){
+                fis = new FileInputStream(new File("komponentlist.jobj"));
+            }else{
+                fis = new FileInputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+filnavn));
+            }
+
             ObjectInputStream ois = new ObjectInputStream(fis);
 
             boolean ok = true;

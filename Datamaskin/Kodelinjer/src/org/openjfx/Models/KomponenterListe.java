@@ -33,13 +33,14 @@ public class KomponenterListe {
 
     }*/
 
-    public void lagreTilObjectFil(){
+    public void lagreTilObjectFil(boolean nyFil, boolean master, String filnavn){
         FilLagringAdmin fla = new FilLagringAdmin();
-        fla.lagreTilFil(this.komponenter);
+        fla.lagreTilFil(this.komponenter, master, nyFil, filnavn);
     }
-    public void henteFraObjectFil(){
+
+    public void henteFraObjectFil(boolean master, String filnavn){
         FilHentingAdministrator fha = new FilHentingAdministrator();
-        ArrayList<Produkt> produktListe = fha.hentFraFil();
+        ArrayList<Produkt> produktListe = fha.hentFraFil(master, filnavn);
         setKomponenterFraFil(produktListe);
     }
     public void setKomponenterFraFil(ArrayList<Produkt> liste){

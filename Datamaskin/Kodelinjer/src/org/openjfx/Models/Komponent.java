@@ -14,7 +14,7 @@ public class Komponent implements Serializable {
 
     private SimpleStringProperty navn, kategori;
     private SimpleDoubleProperty pris;
-    private SimpleIntegerProperty antall;
+    private SimpleIntegerProperty antall; //maks antall per konfigurasjon, baserer seg på kompoent sin kategori
 
     public ObservableList<Komponent> komponenterTableViews = FXCollections.observableArrayList();
 

@@ -14,6 +14,7 @@ import org.openjfx.Models.KomponenterListe;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 import org.openjfx.Models.Validering.ValideringKomponent;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -29,13 +30,13 @@ public class RegistrerProduktController {
 public TextField user, pass, produktNavn, kategoriNavn, produktPris, filteredData, produktAntall;
 
 @FXML
-public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilFil;
+public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilMaster, lagreTilFil, hentFraMaster, hentFraFil;
 
 @FXML
-public ComboBox adminORuser, kategoriCombobox;
+public ComboBox adminORuser, kategoriCombobox, filListe;
 
 @FXML
-public Label lblMessage;
+public Label lblMessage, lblFilNavn;
 
 @FXML
 TableView <Komponent> komponenter;
@@ -61,16 +62,18 @@ public KomponenterListe kl = new KomponenterListe();
         searchTableView(kl,filteredData,komponenter);
         endringITableView(produktnavn,kategori, pris);
         lblMessage.setWrapText(true);
+        populateFilListe();
     }
 
     public void populateTableWithJobj(){ //henter jobj fil fra fra globale KomponeterListen "kl"
-        kl.henteFraObjectFil();
+        kl.henteFraObjectFil(true, "");
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
         duplikat.setCellValueFactory(cellData -> cellData.getValue().antallProperty().asObject());
         komponenter.setItems(kl.getObservableList());
         populateKategoriCombobox();
+        lblFilNavn.setText("MASTER");
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
         kl.getObservableList();
@@ -83,7 +86,6 @@ public KomponenterListe kl = new KomponenterListe();
     }
     public void populateKategoriCombobox(){
         //kategoriCombobox.getItems().clear();
-
         for(Komponent k : kl.getObservableList()){
             if (!kategoriCombobox.getItems().contains("Ny Kategori...")){
                 kategoriCombobox.getItems().add("Ny Kategori..."); //legger til "ny kategori..." som førstevalg
@@ -95,8 +97,6 @@ public KomponenterListe kl = new KomponenterListe();
         kategoriCombobox.setValue("Velg kategori");
         kategoriCombobox.setPromptText("Velg kategori");
         kategoriNavn.setDisable(true);
-
-
     }
 
 
@@ -178,7 +178,7 @@ public KomponenterListe kl = new KomponenterListe();
         produktNavn.clear();
         kategoriNavn.clear();
         produktPris.clear();
-
+        produktAntall.clear();
     }
 
     public void forsideBtn(ActionEvent actionEvent) {
@@ -299,12 +299,66 @@ public KomponenterListe kl = new KomponenterListe();
         }
     }
 
-    public void lagreTilFil(ActionEvent event){
-        try {
-            kl.lagreTilObjectFil();
-            setLabelTekst("success", "Lagring var vellykket!");
-        }catch (Exception e){
-            setLabelTekst("alert", "Noe gikk galt. Kunne ikke lagre fil.");
+    public void lagreTilMasterFil(ActionEvent event){
+        boolean ok = alertBox("Lagring til masterfil","Masterfil styrer hvilke komponenter bruker har å " +
+                "velge mellom.\nOverskriving av denne filen medfører sletting av " +
+                "eksisterende komponeneter!","Ønsker du å fortsette?");
+        if(ok){
+            try {
+                //boolean append = alertBox("","","Ønsker du overskrive filen?");
+                kl.lagreTilObjectFil(false, true, "");
+                setLabelTekst("success", "Lagring var vellykket!");
+            }catch (Exception e){
+                setLabelTekst("alert", "Noe gikk galt. Kunne ikke lagre fil.");
+            }
+        }
+
+    }
+    public void hentMasterFil(){
+        initialize();
+    }
+    public void lagreTilFil(ActionEvent event) throws Exception {
+            String valgtFil = filListe.getSelectionModel().getSelectedItem().toString();
+            boolean nyFil = false;
+            if(valgtFil.equals("Ny Fil...")){
+                TextInputDialog td = new TextInputDialog();
+                td.setHeaderText("Skriv navn på fil");
+                Optional<String> resultat = td.showAndWait();
+                if(!resultat.isPresent()){
+                    throw new Exception();
+                }
+                nyFil = true;
+                valgtFil = td.getEditor().getText();
+            }
+            try {
+                kl.lagreTilObjectFil(nyFil, false,valgtFil);
+                setLabelTekst("success", "Lagring var vellykket!");
+            }catch (Exception e){
+                setLabelTekst("alert", "Noe gikk galt. Kunne ikke lagre fil.");
+            }
+    }
+    public void hentFraFil(){
+        String valgtFil = filListe.getSelectionModel().getSelectedItem().toString();
+        if(!valgtFil.equals("Ny Fil...")){
+            kl.henteFraObjectFil(false, valgtFil);
+            lblFilNavn.setText(valgtFil);
+        }
+    }
+
+    public void populateFilListe(){
+        filListe.getItems().clear();
+        if (!filListe.getItems().contains("Ny Fil...")){
+            filListe.getItems().add("Ny Fil..."); //legger til "Ny Fil..." som førstevalg
+        }
+        File aDirectory = new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin");
+        String[] filesInDir = aDirectory.list();
+        if(filesInDir != null){ //om directory ikke har filer/er null, legger den ikke til filnavn
+            for (String s : filesInDir) {
+                filListe.getItems().add(s);
+            }
+        }else{
+            System.out.println("Ingen filer funnet");
+            filListe.getSelectionModel().select(0);
         }
     }
 
@@ -322,6 +376,20 @@ public KomponenterListe kl = new KomponenterListe();
                 lblMessage.setTextFill(Color.web("000"));
                 lblMessage.setText(msg);
                 break;
+        }
+    }
+    public boolean alertBox(String title, String header, String content){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            return true;
+        } else {
+            alert.close();
+            return false;
         }
     }
 }

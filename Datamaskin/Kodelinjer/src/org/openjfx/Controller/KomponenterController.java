@@ -91,10 +91,11 @@ public class KomponenterController {
         slettKonfig.setDisable(true);
         hentKonfig.setDisable(true);
         lagreKonfig.setDisable(true);
+
     }
 
     public void populateTable() { //henter fra .csv fil
-        kl.henteFraObjectFil();
+        kl.henteFraObjectFil(true, "");
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());

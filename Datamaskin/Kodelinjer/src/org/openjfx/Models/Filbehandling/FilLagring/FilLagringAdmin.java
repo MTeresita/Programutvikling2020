@@ -8,24 +8,33 @@ import java.util.ArrayList;
 
 public class FilLagringAdmin {
 
-    public void lagreTilFil(ArrayList<Komponent> liste){
-        try{
-            FileOutputStream f = new FileOutputStream(new File("komponentlist.jobj"));
-            ObjectOutputStream o = new ObjectOutputStream(f);
+    public void lagreTilFil(ArrayList<Komponent> liste, boolean master, boolean nyFil, String filnavn){
 
-            for(Komponent ktv : liste){
-                Produkt produkt = new Produkt(ktv.getNavn(), ktv.getPris(), ktv.getKategori(), ktv.getAntall());
-                o.writeObject(produkt);
+            try{
+                FileOutputStream f ;
+                if(master){
+                    f = new FileOutputStream(new File("komponentlist.jobj"));
+                }else{
+                    if(nyFil){
+                        f = new FileOutputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+filnavn+".jobj"));
+                    }else{
+                        f = new FileOutputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+filnavn));
+                    }
+                }
+                ObjectOutputStream o = new ObjectOutputStream(f);
+
+                for(Komponent ktv : liste){
+                    Produkt produkt = new Produkt(ktv.getNavn(), ktv.getPris(), ktv.getKategori(), ktv.getAntall());
+                    o.writeObject(produkt);
+                }
+
+                o.close();
+                f.close();
+                System.out.println("Skrevet til object fil");
+
+            }catch(IOException e){
+                System.out.println("Feil i skriving til objectfil: "+e);
             }
-
-            o.close();
-            f.close();
-            System.out.println("Skrevet til object fil");
-
-        }catch(IOException e){
-            System.out.println("Feil i skriving til objectfil: "+e);
-        }
-
 
     }
 }
