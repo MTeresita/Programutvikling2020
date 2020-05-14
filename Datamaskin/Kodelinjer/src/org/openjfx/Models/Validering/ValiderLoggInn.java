@@ -38,8 +38,8 @@ public class ValiderLoggInn {
         //matcher alle bokstaver A-ÆØÅ mellom 2-50 i lengde og tegn som !-.,
         //"^[A-æøå]((?![-]$)[A-æøå.,'-]?){2,50}$"
 
-        if(!brukernavn.matches("^[A-ZÆØÅa-zæøå]{5,50}$") && !brukernavn.isEmpty()){
-            throw new AvvikLoggInnBrukernavn("Brukernavn må være mellom 5-50 bokstaver langt \n");
+        if(!brukernavn.matches("^[A-ZÆØÅa-zæøå0-9 _@./#&+-]{3,20}$") && !brukernavn.isEmpty()){
+            throw new AvvikLoggInnBrukernavn("Brukernavn må være mellom 3-20 bokstaver langt \n");
         }
         else if(brukernavn.isBlank() || brukernavn.isEmpty()) {
             throw new AvvikLoggInnBrukernavn("Brukernavn kan ikke være tomt\n");
@@ -59,7 +59,7 @@ public class ValiderLoggInn {
 
     public static boolean validerPassord(String passord) throws AvvikLoggInnPassord {
 
-        if(!passord.matches("^[A-ZÆØÅa-zæøå]{5,50}$") && (!passord.isEmpty() && !passord.isBlank())){
+        if(!passord.matches("^[A-ZÆØÅa-zæøå0-9 _@./#&+-]{5,50}$") && (!passord.isEmpty() && !passord.isBlank())){
             throw new AvvikLoggInnPassord("Passord må være mellom 5-50 bokstaver langt\n");
         }
         else if(passord.isBlank() || passord.isEmpty()) {
@@ -69,7 +69,7 @@ public class ValiderLoggInn {
     }
 
     public boolean validerGjentattPassord(String gjentattPassord) throws AvvikLoggInnPassord {
-        if(!gjentattPassord.matches("^[A-ZÆØÅa-zæøå]{5,50}$") && (!gjentattPassord.isEmpty() && !gjentattPassord.isBlank())){
+        if(!gjentattPassord.matches("^[A-ZÆØÅa-zæøå0-9 _@./#&+-]{5,50}$") && (!gjentattPassord.isEmpty() && !gjentattPassord.isBlank())){
             throw new AvvikLoggInnPassord("Gjentatt passord felt må være mellom 5-50 bokstaver langt\n");
         }
         else if(gjentattPassord.isBlank() || gjentattPassord.isEmpty()) {

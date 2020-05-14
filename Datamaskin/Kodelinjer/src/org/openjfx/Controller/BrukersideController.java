@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 import static org.openjfx.Models.KomponenterListe.searchTableView;
 
 
-public class KomponenterController {
+public class BrukersideController {
 
     @FXML
     private Label label;

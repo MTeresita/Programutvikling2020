@@ -28,7 +28,7 @@ import static org.openjfx.Models.HjelpeKlasser.BrukerSystemSjekk.checkExistingBr
 import static org.openjfx.Models.KomponenterListe.*;
 
 
-public class RegistrerProduktController {
+public class AdminsideController {
 @FXML
 public TextField user, pass, produktNavn, kategoriNavn, produktPris, filteredData, produktAntall;
 

@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import org.openjfx.Controller.KomponenterController;
 import org.openjfx.Models.Avvik.AvvikBruker;
 
 import java.util.ArrayList;
