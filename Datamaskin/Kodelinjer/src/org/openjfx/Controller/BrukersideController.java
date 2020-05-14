@@ -25,10 +25,7 @@ import org.openjfx.Models.Validering.ValideringKomponent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.openjfx.Models.KomponenterListe.searchTableView;
 
@@ -136,7 +133,7 @@ public class BrukersideController {
     }
 
     @FXML
-    public void leggTilKomponentEvent(ActionEvent event) throws AvvikBruker, NullPointerException { //henter valgt komponent fra tableview fra knappetrykk på "legg til komponent"
+    public void leggTilKomponentEvent() throws AvvikBruker, NullPointerException { //henter valgt komponent fra tableview fra knappetrykk på "legg til komponent"
         try {
             Komponent valgtKomponent = komponenter.getSelectionModel().getSelectedItem(); //henter valgt komponent
             //System.out.println("Dette er det valgte komponentet: "+valgtKomponent.getNavn()+", "+valgtKomponent.getAntall());
@@ -202,7 +199,7 @@ public class BrukersideController {
 
 
     private String sistValgteFil; //brukes for å oppdatere combobox med filen som faktisk er valgt etter lagring/henting
-    public void setFilListeTilgjengelig(ActionEvent event) throws NullPointerException{
+    public void setFilListeTilgjengelig() throws NullPointerException{
         try {
             if (filListe.getSelectionModel().getSelectedItem().toString().equals("Ny Fil...")) {
                 lagreKonfig.setDisable(false);

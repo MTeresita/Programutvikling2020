@@ -55,17 +55,6 @@ public class Konfigurasjon {
         lagSluttPris();
     }
 
-    //TODO denne blir ikke brukt ?
-    public void setValgteKomponenter(ArrayList<Komponent> komponenter) { //for bruker
-        konfigListe.clear();
-        ArrayList<Komponent> konfigListeIterator = konfigListe;
-        for(Komponent p : komponenter){
-           konfigListeIterator.add(p);
-        }
-        setKonfigListe(konfigListeIterator);
-
-    }
-
     public void lagSluttPris(){
         double sluttPrisIterator = 0.0;
         ArrayList<Komponent> konfigListeIterator = konfigListe; //lager en midlertidig kopi av hovedlisten
@@ -97,9 +86,6 @@ public class Konfigurasjon {
 
     public ArrayList<Komponent> getKonfigListe() {
         return konfigListe;
-    }
-    public ObservableList<Komponent> getKonfigListeObservable() {
-        return konfigListeObservable;
     }
 
 

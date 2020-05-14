@@ -1,6 +1,5 @@
 package org.openjfx.Controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -68,7 +67,7 @@ public class LoggInnAdminController {
 
     }
 
-    public void tilbakeKnapp(ActionEvent actionEvent) throws IOException {
+    public void tilbakeKnapp() throws IOException {
         slideSceneFraTopp("loggInn", parentContainer);    }
 
 }

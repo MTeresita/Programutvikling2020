@@ -7,8 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
-import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Validering.ValiderLoggInn;
@@ -59,7 +57,7 @@ public class RegistrerBrukerController {
 
 
 
-    public void tilbakeKnapp(ActionEvent actionEvent) throws IOException {
+    public void tilbakeKnapp() throws IOException {
         slideSceneFraTopp("loggInn", parentContainer);
     }
 }

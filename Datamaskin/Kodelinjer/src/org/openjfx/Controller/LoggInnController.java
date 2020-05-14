@@ -1,6 +1,5 @@
 package org.openjfx.Controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -76,7 +75,7 @@ public class LoggInnController {
 
     }
 
-    public void registrerbruker(ActionEvent actionEvent) {
+    public void registrerbruker() {
         //når den klikkes på, vil du bli sendt til registrer bruker siden
         registrerbruker.setOnMouseClicked(e -> {
             try {
@@ -87,7 +86,7 @@ public class LoggInnController {
         });
     }
 
-    public void loginAdmin(ActionEvent actionEvent) {
+    public void loginAdmin() {
         //når den klikkes på, vil du bli sendt til logg inn admin siden
         loginAdmin.setOnMouseClicked(e -> {
             try {

@@ -135,7 +135,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
     }
 
 
-    public void registrerbtn(ActionEvent actionEvent) throws IOException {
+    public void registrerbtn() throws IOException {
         ValiderLoggInn validerLoggInn = new ValiderLoggInn();
         String ugyldigRegistreering =
                 validerLoggInn.sjekkUgyldigData(user.getText(), pass.getText());
@@ -232,7 +232,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
     }
 
     @FXML
-    public void setKategoriTilgjengelig(ActionEvent event){
+    public void setKategoriTilgjengelig(){
         System.out.println("setKategori: "+kategoriCombobox.getSelectionModel().getSelectedItem().toString());
         if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
             kategoriNavn.setDisable(false);
@@ -242,7 +242,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
     }
 
     @FXML
-    public void registererProdukt(ActionEvent event) throws NumberFormatException {
+    public void registererProdukt() throws NumberFormatException {
         String validering =
                 valideringKomponent.sjekkUgyldigKomponent(produktNavn.getText(), kategoriNavn.getText(),
                         (produktPris.getText()), kategoriCombobox);
@@ -333,7 +333,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
         event.getRowValue().setAntall(event.getNewValue());
     }
 
-    public void slettRader(ActionEvent event) {
+    public void slettRader() {
         try {
             Komponent toDelete = komponenter.getSelectionModel().getSelectedItem();
             if (kl.slettKomponentFraListe(toDelete)) {
@@ -347,7 +347,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
         }
     }
 
-    public void setMasterFil(ActionEvent event){
+    public void setMasterFil(){
         boolean ok = alertBox("Set masterfil","Masterfil styrer hvilke komponenter bruker har å " +
                 "velge mellom.\nDette kan alltid reverseres til ønsket fil.","Ønsker du å fortsette?");
         if(ok){
@@ -364,7 +364,7 @@ public    ValideringKomponent valideringKomponent = new ValideringKomponent();
     public void hentMasterFil(){
         initialize();
     }
-    public void lagreTilFil(ActionEvent event) throws Exception {
+    public void lagreTilFil() throws Exception {
             String valgtFil = filListe.getSelectionModel().getSelectedItem().toString();
             boolean nyFil = false;
             if(valgtFil.equals("Ny Fil...")){
