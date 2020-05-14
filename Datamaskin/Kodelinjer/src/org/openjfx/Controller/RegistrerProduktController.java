@@ -11,7 +11,6 @@ import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Interfaces.SceneChanger;
 import org.openjfx.Models.Komponent;
 import org.openjfx.Models.KomponenterListe;
-import org.openjfx.Models.Validering.DoubleStringConverter;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 import org.openjfx.Models.Validering.ValideringKomponent;
 
