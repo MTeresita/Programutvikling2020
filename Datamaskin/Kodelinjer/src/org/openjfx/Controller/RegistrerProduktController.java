@@ -37,7 +37,7 @@ public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilMaster,
 public ComboBox adminORuser, kategoriCombobox, filListe;
 
 @FXML
-public Label lblMessage, lblFilNavn;
+public Label lblMessage, lblFilNavn,lblMaster;
 
 @FXML
 TableView <Komponent> komponenter;
@@ -75,6 +75,7 @@ public KomponenterListe kl = new KomponenterListe();
         komponenter.setItems(kl.getObservableList());
         populateKategoriCombobox();
         FilHentingAdministrator fha = new FilHentingAdministrator();
+        lblMaster.setText(fha.getMasterFil());
         lblFilNavn.setText(fha.getMasterFil());
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
@@ -301,18 +302,18 @@ public KomponenterListe kl = new KomponenterListe();
         }
     }
 
-    public void lagreTilMasterFil(ActionEvent event){
+    public void setMasterFil(ActionEvent event){
         boolean ok = alertBox("Set masterfil","Masterfil styrer hvilke komponenter bruker har å " +
                 "velge mellom.\nDette kan alltid reverseres til ønsket fil.","Ønsker du å fortsette?");
         if(ok){
             try {
-                //boolean append = alertBox("","","Ønsker du overskrive filen?");
                 kl.setMasterObjectFil(filListe.getSelectionModel().getSelectedItem().toString());
                 setLabelTekst("success", "Setting av masterfil var vellykket!");
             }catch (Exception e){
                 setLabelTekst("alert", "Noe gikk galt. Kunne ikke sette masterfil.");
             }
         }
+        initialize();
 
     }
     public void hentMasterFil(){

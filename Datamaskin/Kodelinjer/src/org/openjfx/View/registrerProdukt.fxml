@@ -25,7 +25,7 @@
          <left>
             <Pane prefHeight="200.0" prefWidth="282.0" styleClass="gradient" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0505051d" height="167.0" layoutX="24.0" layoutY="163.0" stroke="#ffffff00" strokeLineJoin="ROUND" strokeMiterLimit="15.0" strokeType="INSIDE" width="225.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffffb0" height="167.0" layoutX="24.0" layoutY="163.0" stroke="#e8e8e800" strokeLineJoin="ROUND" strokeMiterLimit="15.0" strokeType="INSIDE" width="225.0" />
                   <Button fx:id="loggOut" layoutX="18.0" layoutY="732.0" mnemonicParsing="false" onAction="#forsideBtn" prefHeight="25.0" prefWidth="243.0" styleClass="button-basket" stylesheets="@../styles.css" text="Logg ut" />
                   <Text fill="WHITE" layoutX="50.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-under-header" text="ADMINISTRATORSIDE">
                      <font>
@@ -42,7 +42,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Text fill="WHITE" layoutX="34.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tilbakemeldinger:">
+                  <Text fill="#656565" layoutX="34.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tilbakemeldinger:">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -53,7 +53,7 @@
          <center>
             <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" styleClass="bg-white" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="#f89a76" layoutX="90.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer nytt komponent">
+                  <Text fill="#f89a76" layoutX="90.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTRER NYTT KOMPONENT">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -61,7 +61,7 @@
                   <Text fill="#5e5e5e" layoutX="91.0" layoutY="608.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategori" wrappingWidth="92.73095703125" />
                   <Text fill="#5e5e5e" layoutX="91.0" layoutY="667.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris" wrappingWidth="72.02001953125" />
                   <TextField fx:id="produktPris" layoutX="91.0" layoutY="673.0" prefHeight="29.0" prefWidth="132.0" stylesheets="@../styles.css" />
-                  <Button fx:id="slettRader" layoutX="597.0" layoutY="310.0" mnemonicParsing="false" onAction="#slettRader" prefHeight="25.0" prefWidth="120.0" styleClass="delete" stylesheets="@../styles.css" text="Slett valgt rad" />
+                  <Button fx:id="slettRader" layoutX="473.0" layoutY="310.0" mnemonicParsing="false" onAction="#slettRader" prefHeight="25.0" prefWidth="244.0" styleClass="delete" stylesheets="@../styles.css" text="Slett valgt rad" />
                   <TableView fx:id="komponenter" layoutX="89.0" layoutY="68.0" prefHeight="231.0" prefWidth="628.0" stylesheets="@../styles.css">
                     <columns>
                       <TableColumn fx:id="produktnavn" onEditCommit="#endreTableViewDataString" prefWidth="202.0" text="Produktnavn">
@@ -97,12 +97,12 @@
 
                     </columns>
                   </TableView>
-                  <Text fill="#f89a76" layoutX="89.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-header-lower" text="Komponentliste">
+                  <Text fill="#f89a76" layoutX="89.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-header-lower" text="KOMPONENTLISTE">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Text>
-                  <Text fill="#f89a76" layoutX="526.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer ny bruker">
+                  <Text fill="#f89a76" layoutX="526.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTRER BRUKER">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -128,34 +128,34 @@
                </items>
                   </ComboBox>
                   <ComboBox fx:id="kategoriCombobox" layoutX="89.0" layoutY="614.0" onAction="#setKategoriTilgjengelig" prefHeight="27.0" prefWidth="135.0" styleClass="choicebox-product" stylesheets="@../styles.css" value="Velg kategori" />
-                  <Button fx:id="lagreTilMaster" layoutX="443.0" layoutY="442.0" mnemonicParsing="false" onAction="#lagreTilMasterFil" prefHeight="25.0" prefWidth="233.0" styleClass="save" stylesheets="@../styles.css" text="Sett nåværende liste som master" />
-                  <TextField fx:id="filteredData" layoutX="88.0" layoutY="308.0" prefHeight="28.0" prefWidth="499.0" promptText="Søk etter komponent" styleClass="search-bar" stylesheets="@../styles.css">
+                  <Button fx:id="setMasterFil" layoutX="443.0" layoutY="442.0" mnemonicParsing="false" onAction="#setMasterFil" prefHeight="25.0" prefWidth="261.0" styleClass="save" stylesheets="@../styles.css" text="Sett nåværende komponetliste til master" />
+                  <TextField fx:id="filteredData" layoutX="88.0" layoutY="308.0" prefHeight="28.0" prefWidth="377.0" promptText="Søk etter komponent" styleClass="search-bar" stylesheets="@../styles.css">
                      <font>
                         <Font size="11.0" />
                      </font></TextField>
                   <Line endX="529.0" layoutX="191.0" layoutY="481.0" startX="-100.0" stroke="#c6c6c6" />
-                  <Button fx:id="hentFraFil" layoutX="89.0" layoutY="422.0" mnemonicParsing="false" onAction="#hentFraFil" prefHeight="25.0" prefWidth="97.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent" />
-                  <ComboBox fx:id="filListe" layoutX="90.0" layoutY="389.0" prefHeight="25.0" prefWidth="205.0" promptText="Velg versjon" styleClass="choicebox-product" stylesheets="@../styles.css" />
+                  <Button fx:id="hentFraFil" layoutX="89.0" layoutY="437.0" mnemonicParsing="false" onAction="#hentFraFil" prefHeight="25.0" prefWidth="97.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent" />
+                  <ComboBox fx:id="filListe" layoutX="90.0" layoutY="404.0" prefHeight="25.0" prefWidth="205.0" promptText="Velg versjon" styleClass="choicebox-product" stylesheets="@../styles.css" />
                   <Text fill="#3c3c3c" layoutX="90.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filbehandling for komponentliste">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Text>
                   <Text fill="#5e5e5e" layoutX="234.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Antall pr. konfigurasjon" wrappingWidth="208.02001953125" />
-                  <Circle fill="#ffffff00" layoutX="565.0" layoutY="320.0" radius="7.0" stroke="#7c7c7c" strokeType="INSIDE" strokeWidth="2.5" />
-                  <Line endX="-95.0" endY="8.0" layoutX="669.0" layoutY="323.0" startX="-100.0" startY="1.666656494140625" stroke="#7c7c7c" strokeWidth="2.5" />
+                  <Circle fill="#ffffff00" layoutX="445.0" layoutY="320.0" radius="7.0" stroke="#7c7c7c" strokeType="INSIDE" strokeWidth="2.5" />
+                  <Line endX="-95.0" endY="8.0" layoutX="549.0" layoutY="323.0" startX="-100.0" startY="1.666656494140625" stroke="#7c7c7c" strokeWidth="2.5" />
                   <TextField fx:id="produktAntall" layoutX="232.0" layoutY="674.0" prefHeight="29.0" prefWidth="187.0" stylesheets="@../styles.css" />
-                  <Button fx:id="lagreTilFil" layoutX="198.0" layoutY="422.0" mnemonicParsing="false" onAction="#lagreTilFil" prefHeight="25.0" prefWidth="97.0" styleClass="save" stylesheets="@../styles.css" text="Lagre" />
-                  <Button fx:id="hentFraMaster" layoutX="443.0" layoutY="409.0" mnemonicParsing="false" onAction="#hentMasterFil" prefHeight="25.0" prefWidth="232.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent masterliste" />
-                  <Text layoutX="246.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastet liste:" />
-                  <Label fx:id="lblFilNavn" layoutX="310.0" layoutY="41.0" text="filnavn" />
+                  <Button fx:id="lagreTilFil" layoutX="198.0" layoutY="437.0" mnemonicParsing="false" onAction="#lagreTilFil" prefHeight="25.0" prefWidth="97.0" styleClass="save" stylesheets="@../styles.css" text="Lagre" />
+                  <Button fx:id="hentFraMaster" layoutX="443.0" layoutY="409.0" mnemonicParsing="false" onAction="#hentMasterFil" prefHeight="25.0" prefWidth="261.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent masterliste" />
+                  <Text layoutX="91.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valgt komponentliste:" />
+                  <Label fx:id="lblFilNavn" layoutX="213.0" layoutY="382.0" text="filnavn" />
                   <Text fill="#3c3c3c" layoutX="443.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filbehandling for masterliste">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Text>
-                  <Line endX="183.0" endY="-44.0" layoutX="206.0" layoutY="495.0" startX="183.0" startY="-127.0" stroke="#c6c6c6" />
-                  <Label layoutX="573.0" layoutY="382.0" text="Label" />
+                  <Line endX="183.0" endY="-30.0" layoutX="206.0" layoutY="497.0" startX="183.0" startY="-140.0" stroke="#c6c6c6" />
+                  <Label fx:id="lblMaster" layoutX="573.0" layoutY="382.0" text="master" />
                   <Text layoutX="443.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nåværende masterliste:" />
                </children>
             </Pane>

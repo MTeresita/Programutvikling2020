@@ -39,7 +39,7 @@ public class FilLagringAdmin {
 
     }
     public void setMasterFil(String filnavn) throws IOException {
-        FileWriter fw = new FileWriter("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/masterlist");
+        FileWriter fw = new FileWriter("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponentMasterlisteAdmin/masterlist");
         fw.write(filnavn);
         fw.close();
         System.out.println("Successfully wrote to the file.");

@@ -1,5 +1,7 @@
 package org.openjfx.Models.Filbehandling.FilHenting;
 
+import javafx.scene.control.Alert;
+import org.openjfx.Models.Avvik.AvvikBruker;
 import org.openjfx.Models.Parsing.KonfigurasjonsParserBruker;
 import org.openjfx.Models.Produkt;
 import java.io.IOException;
@@ -19,7 +21,17 @@ public class FilHentingAdministrator {
             FileInputStream fis;
             if(master){
                 String mastername = getMasterFil();
-                fis = new FileInputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+mastername));
+                try{
+                    fis = new FileInputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+mastername));
+                }catch (FileNotFoundException e){
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText("Fant ikke en masterfil!\nKomponentlisten vil derfor være tom.");
+                    alert.setContentText("Dette løses ved å sette en ny masterfil under " +
+                            "'Filbehandling for masterliste' på Administratorsiden.");
+                    alert.showAndWait();
+                    throw new AvvikBruker("Fant ikke masterfil!");
+                }
+
             }else{
                 fis = new FileInputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+filnavn));
             }
@@ -48,7 +60,7 @@ public class FilHentingAdministrator {
         return list;
     }
     public String getMasterFil(){
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/masterlist"))) {
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponentMasterlisteAdmin/masterlist"))) {
             String ut = "";
             String linje;
             while ((linje = reader.readLine()) != null) {
@@ -57,7 +69,7 @@ public class FilHentingAdministrator {
             return ut;
         }
         catch(FileNotFoundException fe){
-            fe.getMessage();
+            fe.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
