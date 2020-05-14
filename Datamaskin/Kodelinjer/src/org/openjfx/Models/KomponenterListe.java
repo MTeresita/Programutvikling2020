@@ -43,6 +43,10 @@ public class KomponenterListe {
         ArrayList<Produkt> produktListe = fha.hentFraFil(master, filnavn);
         setKomponenterFraFil(produktListe);
     }
+    public void setMasterObjectFil(String filnavn) throws IOException {
+        FilLagringAdmin fla = new FilLagringAdmin();
+        fla.setMasterFil(filnavn);
+    }
     public void setKomponenterFraFil(ArrayList<Produkt> liste){
         komponenter.clear();
         komponenterListeObservable.clear();

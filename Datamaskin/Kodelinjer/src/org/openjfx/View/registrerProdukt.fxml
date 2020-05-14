@@ -53,7 +53,7 @@
          <center>
             <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" styleClass="bg-white" stylesheets="@../styles.css" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="#f89a76" layoutX="90.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer nytt produkt">
+                  <Text fill="#f89a76" layoutX="90.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer nytt komponent">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -128,15 +128,15 @@
                </items>
                   </ComboBox>
                   <ComboBox fx:id="kategoriCombobox" layoutX="89.0" layoutY="614.0" onAction="#setKategoriTilgjengelig" prefHeight="27.0" prefWidth="135.0" styleClass="choicebox-product" stylesheets="@../styles.css" value="Velg kategori" />
-                  <Button fx:id="lagreTilMaster" layoutX="490.0" layoutY="407.0" mnemonicParsing="false" onAction="#lagreTilMasterFil" prefHeight="25.0" prefWidth="120.0" styleClass="save" stylesheets="@../styles.css" text="Lagre til master" />
+                  <Button fx:id="lagreTilMaster" layoutX="443.0" layoutY="442.0" mnemonicParsing="false" onAction="#lagreTilMasterFil" prefHeight="25.0" prefWidth="233.0" styleClass="save" stylesheets="@../styles.css" text="Sett nåværende liste som master" />
                   <TextField fx:id="filteredData" layoutX="88.0" layoutY="308.0" prefHeight="28.0" prefWidth="499.0" promptText="Søk etter komponent" styleClass="search-bar" stylesheets="@../styles.css">
                      <font>
                         <Font size="11.0" />
                      </font></TextField>
                   <Line endX="529.0" layoutX="191.0" layoutY="481.0" startX="-100.0" stroke="#c6c6c6" />
-                  <Button fx:id="hentFraFil" layoutX="212.0" layoutY="443.0" mnemonicParsing="false" onAction="#hentFraFil" prefHeight="25.0" prefWidth="97.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent fra fil" />
-                  <ComboBox fx:id="filListe" layoutX="88.0" layoutY="407.0" prefHeight="25.0" prefWidth="113.0" promptText="Velg versjon" styleClass="choicebox-product" stylesheets="@../styles.css" />
-                  <Text fill="#3c3c3c" layoutX="90.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filbehandling for komponenter">
+                  <Button fx:id="hentFraFil" layoutX="89.0" layoutY="422.0" mnemonicParsing="false" onAction="#hentFraFil" prefHeight="25.0" prefWidth="97.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent" />
+                  <ComboBox fx:id="filListe" layoutX="90.0" layoutY="389.0" prefHeight="25.0" prefWidth="205.0" promptText="Velg versjon" styleClass="choicebox-product" stylesheets="@../styles.css" />
+                  <Text fill="#3c3c3c" layoutX="90.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filbehandling for komponentliste">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -145,15 +145,18 @@
                   <Circle fill="#ffffff00" layoutX="565.0" layoutY="320.0" radius="7.0" stroke="#7c7c7c" strokeType="INSIDE" strokeWidth="2.5" />
                   <Line endX="-95.0" endY="8.0" layoutX="669.0" layoutY="323.0" startX="-100.0" startY="1.666656494140625" stroke="#7c7c7c" strokeWidth="2.5" />
                   <TextField fx:id="produktAntall" layoutX="232.0" layoutY="674.0" prefHeight="29.0" prefWidth="187.0" stylesheets="@../styles.css" />
-                  <Button fx:id="lagreTilFil" layoutX="213.0" layoutY="407.0" mnemonicParsing="false" onAction="#lagreTilFil" prefHeight="25.0" prefWidth="97.0" styleClass="save" stylesheets="@../styles.css" text="Lagre til fil" />
-                  <Button fx:id="hentFraMaster" layoutX="490.0" layoutY="443.0" mnemonicParsing="false" onAction="#hentMasterFil" prefHeight="25.0" prefWidth="121.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent fra master" />
-                  <Text layoutX="246.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste:" />
-                  <Label fx:id="lblFilNavn" layoutX="280.0" layoutY="41.0" text="filnavn" />
-                  <Text fill="#3c3c3c" layoutX="490.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filbehandling for masterfil">
+                  <Button fx:id="lagreTilFil" layoutX="198.0" layoutY="422.0" mnemonicParsing="false" onAction="#lagreTilFil" prefHeight="25.0" prefWidth="97.0" styleClass="save" stylesheets="@../styles.css" text="Lagre" />
+                  <Button fx:id="hentFraMaster" layoutX="443.0" layoutY="409.0" mnemonicParsing="false" onAction="#hentMasterFil" prefHeight="25.0" prefWidth="232.0" styleClass="button-basket" stylesheets="@../styles.css" text="Hent masterliste" />
+                  <Text layoutX="246.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastet liste:" />
+                  <Label fx:id="lblFilNavn" layoutX="310.0" layoutY="41.0" text="filnavn" />
+                  <Text fill="#3c3c3c" layoutX="443.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filbehandling for masterliste">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Text>
+                  <Line endX="183.0" endY="-44.0" layoutX="206.0" layoutY="495.0" startX="183.0" startY="-127.0" stroke="#c6c6c6" />
+                  <Label layoutX="573.0" layoutY="382.0" text="Label" />
+                  <Text layoutX="443.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nåværende masterliste:" />
                </children>
             </Pane>
          </center>

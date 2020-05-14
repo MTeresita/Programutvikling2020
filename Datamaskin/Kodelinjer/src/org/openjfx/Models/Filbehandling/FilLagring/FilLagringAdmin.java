@@ -4,6 +4,7 @@ import org.openjfx.Models.Komponent;
 import org.openjfx.Models.Produkt;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class FilLagringAdmin {
@@ -36,5 +37,11 @@ public class FilLagringAdmin {
                 System.out.println("Feil i skriving til objectfil: "+e);
             }
 
+    }
+    public void setMasterFil(String filnavn) throws IOException {
+        FileWriter fw = new FileWriter("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/masterlist");
+        fw.write(filnavn);
+        fw.close();
+        System.out.println("Successfully wrote to the file.");
     }
 }

@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import org.openjfx.Models.Avvik.*;
+import org.openjfx.Models.Filbehandling.FilHenting.FilHentingAdministrator;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Interfaces.SceneChanger;
@@ -73,7 +74,8 @@ public KomponenterListe kl = new KomponenterListe();
         duplikat.setCellValueFactory(cellData -> cellData.getValue().antallProperty().asObject());
         komponenter.setItems(kl.getObservableList());
         populateKategoriCombobox();
-        lblFilNavn.setText("MASTER");
+        FilHentingAdministrator fha = new FilHentingAdministrator();
+        lblFilNavn.setText(fha.getMasterFil());
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
         kl.getObservableList();
@@ -300,16 +302,15 @@ public KomponenterListe kl = new KomponenterListe();
     }
 
     public void lagreTilMasterFil(ActionEvent event){
-        boolean ok = alertBox("Lagring til masterfil","Masterfil styrer hvilke komponenter bruker har å " +
-                "velge mellom.\nOverskriving av denne filen medfører sletting av " +
-                "eksisterende komponeneter!","Ønsker du å fortsette?");
+        boolean ok = alertBox("Set masterfil","Masterfil styrer hvilke komponenter bruker har å " +
+                "velge mellom.\nDette kan alltid reverseres til ønsket fil.","Ønsker du å fortsette?");
         if(ok){
             try {
                 //boolean append = alertBox("","","Ønsker du overskrive filen?");
-                kl.lagreTilObjectFil(false, true, "");
-                setLabelTekst("success", "Lagring var vellykket!");
+                kl.setMasterObjectFil(filListe.getSelectionModel().getSelectedItem().toString());
+                setLabelTekst("success", "Setting av masterfil var vellykket!");
             }catch (Exception e){
-                setLabelTekst("alert", "Noe gikk galt. Kunne ikke lagre fil.");
+                setLabelTekst("alert", "Noe gikk galt. Kunne ikke sette masterfil.");
             }
         }
 
