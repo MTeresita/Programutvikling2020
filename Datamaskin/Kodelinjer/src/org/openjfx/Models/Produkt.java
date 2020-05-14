@@ -1,5 +1,7 @@
 package org.openjfx.Models;
 
+import javafx.beans.property.SimpleIntegerProperty;
+
 import java.io.Serializable;
 
 public class Produkt extends Object implements Serializable { //ER EN HJELPEKLASSE FOR KOMPONENTER
@@ -7,16 +9,16 @@ public class Produkt extends Object implements Serializable { //ER EN HJELPEKLAS
     private String navn;
     private double pris;
     private String kategori;
-    private boolean duplikat;
+    private int antall;
 
     public Produkt() {
     }
 
-    public Produkt(String navn, double pris, String kategori, boolean duplikat){
+    public Produkt(String navn, double pris, String kategori, int duplikat){
             this.navn = navn;
             this.pris = pris;
             this.kategori = kategori;
-            this.duplikat = duplikat;
+            this.antall = duplikat;
         }
 
         //TODO en del set metoder blir ikke brukt
@@ -44,11 +46,11 @@ public class Produkt extends Object implements Serializable { //ER EN HJELPEKLAS
             this.kategori = kategori;
         }
 
-        public boolean isDuplikat() {
-            return duplikat;
+        public int getAntall() {
+            return antall;
         }
 
-        public void setDuplikat(boolean duplikat) {
-            this.duplikat = duplikat;
+        public void setAntall(int duplikat) {
+            this.antall = duplikat;
         }
 }

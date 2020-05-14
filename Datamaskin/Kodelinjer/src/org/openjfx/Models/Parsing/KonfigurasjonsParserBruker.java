@@ -28,7 +28,7 @@ public class KonfigurasjonsParserBruker {
                 e.getMessage();
             }
             if(navn.matches("^[A-ZÆØÅa-zæøå0-9 _@./#&+-]{2,50}$") && kategori.matches("^[A-ZÆØÅa-zæøå _@./#&+-]{2,50}$") && prisDouble >= 0 && prisDouble < 1000000){
-                Komponent enKomponent = new Komponent(navn, kategori, prisDouble, false);
+                Komponent enKomponent = new Komponent(navn, kategori, prisDouble, 1);
                 return enKomponent;
             }else{
                 System.out.println("Feil i komponent! : " + navn);

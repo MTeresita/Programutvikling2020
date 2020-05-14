@@ -99,7 +99,7 @@ public class ValideringKomponent {
 
     public static boolean validerPris(String pris) throws AvvikKomponentPris {
 
-        if((!Pattern.matches("[0-9]+", pris) || !pris.equals(""))){
+        if((!Pattern.matches("[0-9]+", pris) && !pris.equals(""))){
             throw new AvvikKomponentPris("Pris må skrives inn som tall\n");
         }
         if(pris.isBlank() || pris.isEmpty()){

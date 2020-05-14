@@ -18,19 +18,34 @@
     -fx-background-color: #E2E2E2;
 }
 
+/*checkbox*/
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: none;
+    -fx-border-radius:3px;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #27ba6c;
+}
+
 /*buttons*/
 Button{
     -fx-cursor: hand;
     -fx-font-weight: bold;
 }
 .button-basket{
-    -fx-background-color: #f4f4f4;
+    -fx-background-color: #ebebeb;
 }
 .button-basket:hover{
-    -fx-background-color: #fcfcfc;
+    -fx-background-color: #f4f4f4;
 }
 .button-basket:pressed{
-    -fx-background-color: #f0f0f0;
+    -fx-background-color: #dedede;
 }
 .save{
     -fx-background-color: #27ba6c;

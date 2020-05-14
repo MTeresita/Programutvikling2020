@@ -1,11 +1,9 @@
 package org.openjfx.Models;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -35,20 +33,25 @@ public class KomponenterListe {
 
     }*/
 
-    public void lagreTilObjectFil(){
+    public void lagreTilObjectFil(boolean nyFil, boolean master, String filnavn){
         FilLagringAdmin fla = new FilLagringAdmin();
-        fla.lagreTilFil(this.komponenter);
+        fla.lagreTilFil(this.komponenter, master, nyFil, filnavn);
     }
-    public void henteFraObjectFil(){
+
+    public void henteFraObjectFil(boolean master, String filnavn){
         FilHentingAdministrator fha = new FilHentingAdministrator();
-        ArrayList<Produkt> produktListe = fha.hentFraFil();
+        ArrayList<Produkt> produktListe = fha.hentFraFil(master, filnavn);
         setKomponenterFraFil(produktListe);
+    }
+    public void setMasterObjectFil(String filnavn) throws IOException {
+        FilLagringAdmin fla = new FilLagringAdmin();
+        fla.setMasterFil(filnavn);
     }
     public void setKomponenterFraFil(ArrayList<Produkt> liste){
         komponenter.clear();
         komponenterListeObservable.clear();
         for(Produkt p : liste){
-            Komponent k = new Komponent(p.getNavn(), p.getKategori(), p.getPris(), p.isDuplikat());
+            Komponent k = new Komponent(p.getNavn(), p.getKategori(), p.getPris(), p.getAntall());
             komponenter.add(k);
             komponenterListeObservable.add(k);
         }
@@ -89,7 +92,7 @@ public class KomponenterListe {
                 String [] komponentfields = komponenter.split(";");
                 double pris = Double. parseDouble(komponentfields[2]);
                 //4.
-                Komponent inputRecord = new Komponent(komponentfields[0], komponentfields[1], pris, Boolean.parseBoolean(komponentfields[3]));
+                Komponent inputRecord = new Komponent(komponentfields[0], komponentfields[1], pris, Integer.parseInt(komponentfields[3]));
                 //5.
                 komponenterListeObservable.add(inputRecord);
                 this.komponenter.add(inputRecord);

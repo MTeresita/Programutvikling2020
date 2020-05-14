@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import org.openjfx.Models.Avvik.*;
+import org.openjfx.Models.Filbehandling.FilHenting.FilHentingAdministrator;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.Interfaces.SceneChanger;
@@ -14,6 +15,7 @@ import org.openjfx.Models.KomponenterListe;
 import org.openjfx.Models.Validering.ValiderLoggInn;
 import org.openjfx.Models.Validering.ValideringKomponent;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -26,19 +28,16 @@ import static org.openjfx.Models.KomponenterListe.searchTableView;
 
 public class RegistrerProduktController {
 @FXML
-public TextField user, pass, produktNavn, kategoriNavn, produktPris, filteredData;
+public TextField user, pass, produktNavn, kategoriNavn, produktPris, filteredData, produktAntall;
 
 @FXML
-public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilFil;
+public Button registrerBruker,  registrerProduktBtn, slettRader, lagreTilMaster, lagreTilFil, hentFraMaster, hentFraFil;
 
 @FXML
-public ComboBox adminORuser, kategoriCombobox;
+public ComboBox adminORuser, kategoriCombobox, filListe;
 
 @FXML
-public Label lblMessage;
-
-@FXML
-public CheckBox checkBox;
+public Label lblMessage, lblFilNavn,lblMaster;
 
 @FXML
 TableView <Komponent> komponenter;
@@ -50,7 +49,7 @@ TableColumn<Komponent, String> produktnavn, kategori;
 TableColumn<Komponent, Double> pris;
 
 @FXML
-TableColumn<Komponent, Boolean> duplikat;
+TableColumn<Komponent, Integer> duplikat;
 
 @FXML
 ImageView tilbakemeldingImg;
@@ -59,34 +58,37 @@ public KomponenterListe kl = new KomponenterListe();
 
     public void initialize() {
         populateTableWithJobj();
-        komponenter.getSortOrder().add(pris);
+        komponenter.getSortOrder().add(kategori);
         komponenter.setEditable(true);
         searchTableView(kl,filteredData,komponenter);
         endringITableView(produktnavn,kategori, pris);
         lblMessage.setWrapText(true);
+        populateFilListe();
     }
 
     public void populateTableWithJobj(){ //henter jobj fil fra fra globale KomponeterListen "kl"
-        kl.henteFraObjectFil();
+        kl.henteFraObjectFil(true, "");
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
-        duplikat.setCellValueFactory(cellData -> cellData.getValue().duplikatProperty());
+        duplikat.setCellValueFactory(cellData -> cellData.getValue().antallProperty().asObject());
         komponenter.setItems(kl.getObservableList());
         populateKategoriCombobox();
+        FilHentingAdministrator fha = new FilHentingAdministrator();
+        lblMaster.setText(fha.getMasterFil());
+        lblFilNavn.setText(fha.getMasterFil());
     }
     public void populateTableWithList(){ //henter observable list fra fra globale KomponeterListen "kl"
         kl.getObservableList();
         produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
         kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
         pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
-        duplikat.setCellValueFactory(cellData -> cellData.getValue().duplikatProperty());
+        duplikat.setCellValueFactory(cellData -> cellData.getValue().antallProperty().asObject());
         komponenter.setItems(kl.getObservableList());
         populateKategoriCombobox();
     }
     public void populateKategoriCombobox(){
         //kategoriCombobox.getItems().clear();
-
         for(Komponent k : kl.getObservableList()){
             if (!kategoriCombobox.getItems().contains("Ny Kategori...")){
                 kategoriCombobox.getItems().add("Ny Kategori..."); //legger til "ny kategori..." som førstevalg
@@ -98,8 +100,6 @@ public KomponenterListe kl = new KomponenterListe();
         kategoriCombobox.setValue("Velg kategori");
         kategoriCombobox.setPromptText("Velg kategori");
         kategoriNavn.setDisable(true);
-
-
     }
 
 
@@ -181,7 +181,7 @@ public KomponenterListe kl = new KomponenterListe();
         produktNavn.clear();
         kategoriNavn.clear();
         produktPris.clear();
-
+        produktAntall.clear();
     }
 
     public void forsideBtn(ActionEvent actionEvent) {
@@ -225,12 +225,12 @@ public KomponenterListe kl = new KomponenterListe();
             }
             else if (kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")) {
                 Komponent nyKomponent = new Komponent(produktNavn.getText(), kategoriNavn.getText(),
-                        Double.parseDouble(produktPris.getText()), checkBox.isSelected());
+                        Double.parseDouble(produktPris.getText()), Integer.parseInt(produktAntall.getText()));
                 sjekkForDuplikater(nyKomponent);
             } else {
                 Komponent nyKomponent = new Komponent(produktNavn.getText(),
                         kategoriCombobox.getSelectionModel().getSelectedItem().toString(),
-                        Double.parseDouble(produktPris.getText()), checkBox.isSelected()); //HER MÅ DUPLIKAT LEGGES TIL FRA BRUKERINPUT
+                        Double.parseDouble(produktPris.getText()), Integer.parseInt(produktAntall.getText()));
                 sjekkForDuplikater(nyKomponent);
             }
 
@@ -284,8 +284,8 @@ public KomponenterListe kl = new KomponenterListe();
         event.getRowValue().setPris(event.getNewValue());
     }
     @FXML
-    public void endreTableViewDataBool(TableColumn.CellEditEvent<Komponent, Boolean> event){ //Fra henrik
-        event.getRowValue().setDuplikat(event.getNewValue());
+    public void endreTableViewDataBool(TableColumn.CellEditEvent<Komponent, Integer> event){ //Fra henrik
+        event.getRowValue().setAntall(event.getNewValue());
     }
 
     public void slettRader(ActionEvent event) {
@@ -302,13 +302,67 @@ public KomponenterListe kl = new KomponenterListe();
         }
     }
 
-    public void lagreTilFil(ActionEvent event){
-        try {
-            kl.lagreTilObjectFil();
-            setLabelTekst("success", "Lagring var vellykket!");
-        }catch (Exception e){
-            setLabelTekst("alert", "Noe gikk galt. Kunne ikke lagre fil.");
+    public void setMasterFil(ActionEvent event){
+        boolean ok = alertBox("Set masterfil","Masterfil styrer hvilke komponenter bruker har å " +
+                "velge mellom.\nDette kan alltid reverseres til ønsket fil.","Ønsker du å fortsette?");
+        if(ok){
+            try {
+                kl.setMasterObjectFil(filListe.getSelectionModel().getSelectedItem().toString());
+                setLabelTekst("success", "Setting av masterfil var vellykket!");
+            }catch (Exception e){
+                setLabelTekst("alert", "Noe gikk galt. Kunne ikke sette masterfil.");
+            }
         }
+        initialize();
+
+    }
+    public void hentMasterFil(){
+        initialize();
+    }
+    public void lagreTilFil(ActionEvent event) throws Exception {
+            String valgtFil = filListe.getSelectionModel().getSelectedItem().toString();
+            boolean nyFil = false;
+            if(valgtFil.equals("Ny Fil...")){
+                TextInputDialog td = new TextInputDialog();
+                td.setHeaderText("Skriv navn på fil");
+                Optional<String> resultat = td.showAndWait();
+                if(!resultat.isPresent()){
+                    throw new Exception();
+                }
+                nyFil = true;
+                valgtFil = td.getEditor().getText();
+            }
+            try {
+                kl.lagreTilObjectFil(nyFil, false,valgtFil);
+                setLabelTekst("success", "Lagring var vellykket!");
+            }catch (Exception e){
+                setLabelTekst("alert", "Noe gikk galt. Kunne ikke lagre fil.");
+            }
+    }
+    public void hentFraFil(){
+        String valgtFil = filListe.getSelectionModel().getSelectedItem().toString();
+        if(!valgtFil.equals("Ny Fil...")){
+            kl.henteFraObjectFil(false, valgtFil);
+            lblFilNavn.setText(valgtFil);
+        }
+    }
+
+    public void populateFilListe(){
+        filListe.getItems().clear();
+        if (!filListe.getItems().contains("Ny Fil...")){
+            filListe.getItems().add("Ny Fil..."); //legger til "Ny Fil..." som førstevalg
+        }
+        File aDirectory = new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin");
+        String[] filesInDir = aDirectory.list();
+        if(filesInDir != null){ //om directory ikke har filer/er null, legger den ikke til filnavn
+            for (String s : filesInDir) {
+                filListe.getItems().add(s);
+            }
+        }else{
+            System.out.println("Ingen filer funnet");
+            filListe.getSelectionModel().select(0);
+        }
+        filListe.getSelectionModel().select(0);
     }
 
     public void setLabelTekst(String type, String msg){
@@ -325,6 +379,20 @@ public KomponenterListe kl = new KomponenterListe();
                 lblMessage.setTextFill(Color.web("000"));
                 lblMessage.setText(msg);
                 break;
+        }
+    }
+    public boolean alertBox(String title, String header, String content){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            return true;
+        } else {
+            alert.close();
+            return false;
         }
     }
 }
