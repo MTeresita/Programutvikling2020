@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface FilHenting {
 
-    public List<?> lesingFraFil(String path) throws IOException;
+    List<?> lesingFraFil(String path) throws IOException;
 }
