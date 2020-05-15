@@ -12,14 +12,14 @@ class ValiderLoggInnTestTest {
     public void testLoggInnSann() throws AvvikLoggInnBrukernavn, AvvikLoggInnPassord {
         //Bare små bokstaver:
 
-        assertTrue(ValiderLoggInn.valideringBrukernavn("camillacamilla"));
-        assertTrue(ValiderLoggInn.valideringBrukernavn("camillacamilla"));
+        assertTrue(ValideringLoggInn.valideringBrukernavn("camillacamilla"));
+        assertTrue(ValideringLoggInn.valideringBrukernavn("camillacamilla"));
         //store og små bokstaver:
-        assertTrue(ValiderLoggInn.valideringBrukernavn("HalloHallo"));
-        assertTrue(ValiderLoggInn.validerPassord("HalloHallo"));
+        assertTrue(ValideringLoggInn.valideringBrukernavn("HalloHallo"));
+        assertTrue(ValideringLoggInn.validerPassord("HalloHallo"));
         //bare store bokstaver:
-        assertTrue(ValiderLoggInn.valideringBrukernavn("HALLOEN"));
-        assertTrue(ValiderLoggInn.validerPassord("HALLOEN"));
+        assertTrue(ValideringLoggInn.valideringBrukernavn("HALLOEN"));
+        assertTrue(ValideringLoggInn.validerPassord("HALLOEN"));
 
 
 
@@ -28,14 +28,19 @@ class ValiderLoggInnTestTest {
     public void testLoggInnFeil() throws AvvikLoggInnBrukernavn, AvvikLoggInnPassord {
         //tomme felt:
 
-        assertThrows(AvvikLoggInnBrukernavn.class, () -> ValiderLoggInn.valideringBrukernavn(""));
-        assertThrows(AvvikLoggInnPassord.class, () -> ValiderLoggInn.validerPassord(""));
+        assertThrows(AvvikLoggInnBrukernavn.class, () -> ValideringLoggInn.valideringBrukernavn(""));
+        assertThrows(AvvikLoggInnPassord.class, () -> ValideringLoggInn.validerPassord(""));
         //for kort input:
-        assertThrows(AvvikLoggInnBrukernavn.class, () -> ValiderLoggInn.valideringBrukernavn("a"));
-        assertThrows(AvvikLoggInnPassord.class, () -> ValiderLoggInn.validerPassord("a"));
+        assertThrows(AvvikLoggInnBrukernavn.class, () -> ValideringLoggInn.valideringBrukernavn("a"));
+        assertThrows(AvvikLoggInnPassord.class, () -> ValideringLoggInn.validerPassord("a"));
         //for lang input:
-        assertThrows(AvvikLoggInnBrukernavn.class, () -> ValiderLoggInn.valideringBrukernavn("aaaaaaaaaaaaaaakkakflakflafkajfkalfjalfjlaffjlalfjlalfjlafjlajfjlalfjjlaljf"));
-        assertThrows(AvvikLoggInnPassord.class, () -> ValiderLoggInn.validerPassord("aklafkaøfkølaflkkfaølkaøklfkløkøakøfkøafkkjgkrjiegmkslngklsjgklsjglsjglksgjlsgjlsgjgs"));
+        assertThrows(AvvikLoggInnBrukernavn.class, () ->
+                ValideringLoggInn.valideringBrukernavn(
+                        "aaaaaaaaaaaaaaakkakflakflafkajfkalfjalfjlaffjlalfjlalfjlafjlajfjlalfjjlaljf"));
+
+        assertThrows(AvvikLoggInnPassord.class, () ->
+                ValideringLoggInn.validerPassord(
+                        "aklafkaøfkølaflkkfaølkaøklfkløkøakøfkøafkkjgkrjiegmkslngklsjgklsjglsjglksgjlsgjlsgjgs"));
 
 
 
