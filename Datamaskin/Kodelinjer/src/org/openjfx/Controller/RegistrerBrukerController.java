@@ -9,14 +9,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
-import org.openjfx.Models.Validering.ValiderLoggInn;
+import org.openjfx.Models.Validering.ValideringLoggInn;
 
 import java.io.IOException;
 
 import static org.openjfx.Models.Avvik.AlertHelper.visAlertVindu;
 import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
 import static org.openjfx.Models.HjelpeKlasser.SceneHåndtering.slideSceneFraTopp;
-import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
+import static org.openjfx.Models.Interfaces.SceneBytte.routeToSite;
 
 public class RegistrerBrukerController {
     @FXML
@@ -31,12 +31,10 @@ public class RegistrerBrukerController {
     @FXML
     Label lblMessage;
 
-
+    public ValideringLoggInn valideringLoggInn = new ValideringLoggInn();
     public void registerEvent(ActionEvent actionEvent)  {
-
-        ValiderLoggInn validerLoggInn = new ValiderLoggInn();
         String ugyldigRegistreering =
-                validerLoggInn.sjekkUgyldigRegistrering(txtuser.getText(), txtpass.getText(), txtpass1.getText());
+                valideringLoggInn.sjekkUgyldigRegistrering(txtuser.getText(), txtpass.getText(), txtpass1.getText());
 
         if(!ugyldigRegistreering.isEmpty()){
             lblMessage.setText(ugyldigRegistreering);

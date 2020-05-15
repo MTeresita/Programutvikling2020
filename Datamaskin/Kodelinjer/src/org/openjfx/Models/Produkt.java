@@ -1,6 +1,5 @@
 package org.openjfx.Models;
 
-import javafx.beans.property.SimpleIntegerProperty;
 
 import java.io.Serializable;
 

@@ -13,12 +13,15 @@ public class FilLagringAdmin {
             try{
                 FileOutputStream f ;
                 if(master){
-                    f = new FileOutputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/MASTER.jobj"));
+                    f = new FileOutputStream(new File
+                            ("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/MASTER.jobj"));
                 }else{
                     if(nyFil){
-                        f = new FileOutputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+filnavn+".jobj"));
+                        f = new FileOutputStream(new File
+                                ("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+filnavn+".jobj"));
                     }else{
-                        f = new FileOutputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+filnavn));
+                        f = new FileOutputStream(new File
+                                ("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+filnavn));
                     }
                 }
                 ObjectOutputStream o = new ObjectOutputStream(f);
@@ -38,7 +41,8 @@ public class FilLagringAdmin {
 
     }
     public void setMasterFil(String filnavn) throws IOException {
-        FileWriter fw = new FileWriter("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponentMasterlisteAdmin/masterlist");
+        FileWriter fw = new FileWriter
+                ("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponentMasterlisteAdmin/masterlist");
         fw.write(filnavn);
         fw.close();
         System.out.println("Successfully wrote to the file.");

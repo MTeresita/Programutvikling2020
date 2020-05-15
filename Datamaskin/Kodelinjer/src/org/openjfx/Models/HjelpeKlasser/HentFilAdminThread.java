@@ -10,14 +10,17 @@ public class HentFilAdminThread extends Task<ObservableList<Komponent>> {
     protected ObservableList<Komponent> call() {
         try{
             Thread.sleep(2000);
-        }catch (InterruptedException e){
+        }
+        catch (InterruptedException e){
             e.printStackTrace();
         }
+
         try{
             KomponenterListe kl = new KomponenterListe();
             kl.henteFraObjectFil(true, "");
             return kl.getObservableList();
-        }catch (Exception e){
+        }
+        catch (Exception e){
             e.printStackTrace();
             return null;
         }

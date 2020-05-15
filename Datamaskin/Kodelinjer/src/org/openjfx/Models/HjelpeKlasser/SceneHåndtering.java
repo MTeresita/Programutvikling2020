@@ -45,7 +45,7 @@ public class SceneHåndtering {
         timeline.play();
     }
 
-    public static void newScene(Button button, String path) throws IOException {
+    public static void nyScene(Button button, String path) throws IOException {
         String BASE_PATH = "/org/openjfx/View/";
         String FILE_ENDING = ".fxml";
 

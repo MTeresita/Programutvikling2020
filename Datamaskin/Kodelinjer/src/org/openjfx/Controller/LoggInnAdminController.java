@@ -1,6 +1,5 @@
 package org.openjfx.Controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import org.openjfx.Models.HjelpeKlasser.SceneHåndtering;
-import org.openjfx.Models.Validering.ValiderLoggInn;
+import org.openjfx.Models.Validering.ValideringLoggInn;
 
 import java.io.IOException;
 
@@ -31,7 +30,10 @@ public class LoggInnAdminController {
     @FXML
     Button btnLogin;
 
+    public ValideringLoggInn valideringLoggInn = new ValideringLoggInn();
+
     public void initialize(){
+        //metode som gjør at du kan trykke enter fra passord feltet og bu blir logget inn
         txtadminpass.setOnKeyPressed(e ->{
             KeyCode key = e.getCode();
             if(key.equals(KeyCode.ENTER) ){
@@ -45,20 +47,17 @@ public class LoggInnAdminController {
     }
 
     public void loginEvent() throws IOException {
-
-        ValiderLoggInn validerLoggInn = new ValiderLoggInn();
-
-        String validering = validerLoggInn.sjekkUgyldigData(txtadminuser.getText(), txtadminpass.getText());
+        String validering = valideringLoggInn.sjekkUgyldigData(txtadminuser.getText(), txtadminpass.getText());
 
         if(!validering.isEmpty()){
             lblMessage.setText(validering);
         }
         else {
-            if(verifyLogin(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
-                SceneHåndtering.newScene(btnLogin, "registrerProdukt");
+            if(verifiserLoggInn(txtadminuser.getText(), txtadminpass.getText(), "./Admin.csv")) {
+                SceneHåndtering.nyScene(btnLogin, "registrerProdukt");
             }
             else {
-                if(!checkExistingBruker(txtadminuser.getText(), "./Admin.csv")){
+                if(!sjekkOmBrukerEksiterer(txtadminuser.getText(), "./Admin.csv")){
                     lblMessage.setText(txtadminuser.getText() + ", eksisterer ikke");
                 } else {
                     lblMessage.setText("Feil passord");
@@ -68,7 +67,7 @@ public class LoggInnAdminController {
 
     }
 
-    public void tilbakeKnapp(ActionEvent actionEvent) throws IOException {
+    public void tilbakeKnapp() throws IOException {
         slideSceneFraTopp("loggInn", parentContainer);    }
 
 }

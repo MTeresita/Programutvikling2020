@@ -28,7 +28,7 @@ public class KomponenterListe {
 
 
     private ArrayList<Komponent> komponenter = new ArrayList<Komponent>();
-    private ObservableList<Komponent> komponenterListeObservable = FXCollections.observableArrayList();;
+    private ObservableList<Komponent> komponenterListeObservable = FXCollections.observableArrayList();
 
 
 
@@ -132,12 +132,10 @@ public class KomponenterListe {
                 //Sammelign inputtext med det som ligger i listen.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if(searchTableView.getNavn().toLowerCase().contains(lowerCaseFilter) ||
+                return searchTableView.getNavn().toLowerCase().contains(lowerCaseFilter) ||
                         searchTableView.getKategori().toLowerCase().contains(lowerCaseFilter)
-                || Double.toString(searchTableView.getPris()).toLowerCase().contains(lowerCaseFilter)){
-                    return true; // fant en match
-                }
-                return false; // ingen match
+                        || Double.toString(searchTableView.getPris()).toLowerCase().contains(lowerCaseFilter); // fant en match
+// ingen match
             });
         } );
 

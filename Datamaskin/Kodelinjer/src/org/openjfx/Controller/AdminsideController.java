@@ -11,10 +11,10 @@ import org.openjfx.Models.Filbehandling.FilHenting.FilHentingAdministrator;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.HjelpeKlasser.BrukerRegister;
 import org.openjfx.Models.HjelpeKlasser.HentFilAdminThread;
-import org.openjfx.Models.Interfaces.SceneChanger;
+import org.openjfx.Models.Interfaces.SceneBytte;
 import org.openjfx.Models.Komponent;
 import org.openjfx.Models.KomponenterListe;
-import org.openjfx.Models.Validering.ValiderLoggInn;
+import org.openjfx.Models.Validering.ValideringLoggInn;
 import org.openjfx.Models.Validering.ValideringKomponent;
 
 import java.io.File;
@@ -23,7 +23,7 @@ import java.util.Optional;
 
 import static org.openjfx.Models.Avvik.AlertHelper.visAlertVindu;
 import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
-import static org.openjfx.Models.HjelpeKlasser.BrukerSystemSjekk.checkExistingBruker;
+import static org.openjfx.Models.HjelpeKlasser.BrukerSystemSjekk.sjekkOmBrukerEksiterer;
 import static org.openjfx.Models.KomponenterListe.*;
 
 
@@ -98,6 +98,7 @@ private void threadFailed(WorkerStateEvent event) {
     }
 
 
+    //setter alle knappene til å være disabled under en tråd
     private void setAlleKnapperState(boolean state){
         setMasterFil.setDisable(state);
         registrerBruker.setDisable(state);
@@ -135,10 +136,10 @@ private void threadFailed(WorkerStateEvent event) {
     }
 
 
-    public void registrerbtn(ActionEvent actionEvent) throws IOException {
-        ValiderLoggInn validerLoggInn = new ValiderLoggInn();
+    public void registrerbtn() throws IOException {
+        ValideringLoggInn valideringLoggInn = new ValideringLoggInn();
         String ugyldigRegistreering =
-                validerLoggInn.sjekkUgyldigData(user.getText(), pass.getText());
+                valideringLoggInn.sjekkUgyldigData(user.getText(), pass.getText());
 
         // er det admin eller bruker sjek --> hvilken fil skal den til
         String value = String.valueOf(adminORuser.getValue());
@@ -154,7 +155,7 @@ private void threadFailed(WorkerStateEvent event) {
                     if (!ugyldigRegistreering.isEmpty()) {
                         lblMessage.setText(ugyldigRegistreering);
                     } else {
-                        if (!checkExistingBruker(user.getText(), "./Admin.csv")) {
+                        if (!sjekkOmBrukerEksiterer(user.getText(), "./Admin.csv")) {
                             lblMessage.setText("");
                             //en ny bruker blir registrer
                             BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
@@ -168,7 +169,7 @@ private void threadFailed(WorkerStateEvent event) {
                         } else {
                             //eksisterer bruker, send feilmelding
                             setLabelTekst("alert", "Administrator eksisterer");
-                            //lblMessage.setText("Administrator eksisterer");
+
                         }
                     }
                     break;
@@ -178,7 +179,7 @@ private void threadFailed(WorkerStateEvent event) {
                     if (!ugyldigRegistreering.isEmpty()) {
                         lblMessage.setText(ugyldigRegistreering);
                     } else {
-                        if (!checkExistingBruker(user.getText(), "./Brukere.csv")) {
+                        if (!sjekkOmBrukerEksiterer(user.getText(), "./Brukere.csv")) {
                             lblMessage.setText("");
                             //opprett ny bruker
                             BrukerRegister enBruker = new BrukerRegister(user.getText(), pass.getText());
@@ -187,7 +188,8 @@ private void threadFailed(WorkerStateEvent event) {
                             WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv", true);
 
                             //popup vindu som bekrefter at en ny bruker har blitt opprettet
-                            visAlertVindu(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Ny bruker opprettet",
+                            visAlertVindu(Alert.AlertType.INFORMATION, windowHelper(registrerBruker),
+                                    "Ny bruker opprettet",
                                     "Bruker opprettet");
                             //resetter inputs for registrering
                             clear();
@@ -224,14 +226,15 @@ private void threadFailed(WorkerStateEvent event) {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            SceneChanger.routeToSite(actionEvent, "loggInn");
+            SceneBytte.routeToSite(actionEvent, "loggInn");
         } else {
            alert.close();
         }
     }
 
     @FXML
-    public void setKategoriTilgjengelig(ActionEvent event){
+    //Ved ny kategori, blir tekstfeltet for ny kategorinavn disabled
+    public void setKategoriTilgjengelig(){
         System.out.println("setKategori: "+kategoriCombobox.getSelectionModel().getSelectedItem().toString());
         if(kategoriCombobox.getSelectionModel().getSelectedItem().toString().equals("Ny Kategori...")){
             kategoriNavn.setDisable(false);
@@ -241,7 +244,7 @@ private void threadFailed(WorkerStateEvent event) {
     }
 
     @FXML
-    public void registererProdukt(ActionEvent event) throws NumberFormatException {
+    public void registererProdukt() throws NumberFormatException {
         String validering =
                 valideringKomponent.sjekkUgyldigKomponent(produktNavn.getText(), kategoriNavn.getText(),
                         (produktPris.getText()), kategoriCombobox, produktAntall.getText());
@@ -282,7 +285,7 @@ private void threadFailed(WorkerStateEvent event) {
     }
 
     @FXML
-    public void endreTableViewDataString(TableColumn.CellEditEvent<Komponent, String> event) { //Fra henrik
+    public void endreTableViewDataString(TableColumn.CellEditEvent<Komponent, String> event) {
 
         try{
             if(event.getTableColumn().getText().equals("Produktnavn")){
@@ -309,7 +312,7 @@ private void threadFailed(WorkerStateEvent event) {
 
     }
     @FXML
-    public void endreTableViewDataDouble(TableColumn.CellEditEvent<Komponent, Double> event){ //Fra henrik
+    public void endreTableViewDataDouble(TableColumn.CellEditEvent<Komponent, Double> event){
                 if(event.getNewValue().isNaN()){
                     setLabelTekst("alert", "Pris må skrives som tall\n");
                     komponenter.refresh();
@@ -328,7 +331,7 @@ private void threadFailed(WorkerStateEvent event) {
     }
     
     @FXML
-    public void endreTableViewDataBool(TableColumn.CellEditEvent<Komponent, Integer> event){ //Fra henrik
+    public void endreTableViewDataBool(TableColumn.CellEditEvent<Komponent, Integer> event){
 
         if(event.getNewValue() == 0){
             setLabelTekst("alert", "Antall må skrives som tall\n");
@@ -348,7 +351,7 @@ private void threadFailed(WorkerStateEvent event) {
 
     }
 
-    public void slettRader(ActionEvent event) {
+    public void slettRader() {
         try {
             Komponent toDelete = komponenter.getSelectionModel().getSelectedItem();
             if (kl.slettKomponentFraListe(toDelete)) {
@@ -362,7 +365,7 @@ private void threadFailed(WorkerStateEvent event) {
         }
     }
 
-    public void setMasterFil(ActionEvent event){
+    public void setMasterFil(){
         boolean ok = alertBox("Set masterfil","Masterfil styrer hvilke komponenter bruker har å " +
                 "velge mellom.\nDette kan alltid reverseres til ønsket fil.","Ønsker du å fortsette?");
         if(ok){
@@ -379,7 +382,7 @@ private void threadFailed(WorkerStateEvent event) {
     public void hentMasterFil(){
         initialize();
     }
-    public void lagreTilFil(ActionEvent event) throws Exception {
+    public void lagreTilFil() throws Exception {
             String valgtFil = filListe.getSelectionModel().getSelectedItem().toString();
             boolean nyFil = false;
             if(valgtFil.equals("Ny Fil...")){

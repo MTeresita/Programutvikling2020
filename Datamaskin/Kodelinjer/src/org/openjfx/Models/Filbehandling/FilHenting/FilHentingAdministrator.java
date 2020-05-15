@@ -21,7 +21,8 @@ public class FilHentingAdministrator {
             if(master){
                 String mastername = getMasterFil();
                 try{
-                    fis = new FileInputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+mastername));
+                    fis = new FileInputStream(new File
+                            ("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+mastername));
                 }catch (FileNotFoundException e){
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setHeaderText("Fant ikke en masterfil!\nKomponentlisten vil derfor være tom.");
@@ -32,7 +33,8 @@ public class FilHentingAdministrator {
                 }
 
             }else{
-                fis = new FileInputStream(new File("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+filnavn));
+                fis = new FileInputStream(new File
+                        ("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponenterAdmin/"+filnavn));
             }
 
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -40,7 +42,7 @@ public class FilHentingAdministrator {
             boolean ok = true;
             while (ok) {
                 if(ois != null){
-                    Object produktObject = (Produkt) ois.readObject();
+                    Object produktObject = ois.readObject();
                     Produkt produkt = new Produkt();
                     produkt = (Produkt)produktObject;
 
@@ -54,12 +56,15 @@ public class FilHentingAdministrator {
 
         } catch (IOException | ClassNotFoundException e) {
             //System.out.println("Feil i lesing av objectfil: " + e);
-            //kaster visst exception uansett hva man gjør, men så lenge man handler den gpr det fint https://stackoverflow.com/questions/27409718/java-reading-multiple-objects-from-a-file-as-they-were-in-an-array
+            //kaster visst exception uansett hva man gjør, men så lenge man handler den
+            // går det fint
+            //https://stackoverflow.com/questions/27409718/java-reading-multiple-objects-from-a-file-as-they-were-in-an-array
         }
         return list;
     }
     public String getMasterFil(){
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponentMasterlisteAdmin/masterlist"))) {
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get
+                ("Datamaskin/Kodelinjer/src/org/openjfx/Models/KomponentMasterlisteAdmin/masterlist"))) {
             String ut = "";
             String linje;
             while ((linje = reader.readLine()) != null) {

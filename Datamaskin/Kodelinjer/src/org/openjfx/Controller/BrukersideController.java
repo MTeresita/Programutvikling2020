@@ -13,7 +13,7 @@ import org.openjfx.Models.Filbehandling.FilHenting.FilHentingBruker;
 import org.openjfx.Models.Filbehandling.FilSkriving.WriteTo;
 import org.openjfx.Models.Filbehandling.FilSletting.FilSlettingBruker;
 import org.openjfx.Models.HjelpeKlasser.BrukerSession;
-import org.openjfx.Models.Interfaces.SceneChanger;
+import org.openjfx.Models.Interfaces.SceneBytte;
 
 import org.openjfx.Models.Konfigurasjon;
 import org.openjfx.Models.KomponenterListe;
@@ -117,7 +117,8 @@ public class BrukersideController {
     }
     public void disableCheckboxes(){
         alleCheckboxer.forEach(checkBox -> checkBox.setDisable(true));
-        alleCheckboxer.forEach(checkBox -> checkBox.setStyle("-fx-opacity: 1")); //gjør at .setDisable ikke gjør boksene transparente
+        alleCheckboxer.forEach(checkBox -> checkBox.setStyle("-fx-opacity: 1"));
+        //gjør at .setDisable ikke gjør boksene transparente
     }
 
     //TODO: Bruker vi denne lenger eller kan den slettes?
@@ -129,7 +130,8 @@ public class BrukersideController {
     }
 
     @FXML
-    public void leggTilKomponentEvent(ActionEvent event) throws AvvikBruker, NullPointerException { //henter valgt komponent fra tableview fra knappetrykk på "legg til komponent"
+    public void leggTilKomponentEvent(ActionEvent event) throws AvvikBruker, NullPointerException {
+        //henter valgt komponent fra tableview fra knappetrykk på "legg til komponent"
         try {
             Komponent valgtKomponent = komponenter.getSelectionModel().getSelectedItem(); //henter valgt komponent
             //System.out.println("Dette er det valgte komponentet: "+valgtKomponent.getNavn()+", "+valgtKomponent.getAntall());
@@ -184,7 +186,8 @@ public class BrukersideController {
         listview.getItems().clear();
         alleCheckboxer.forEach(checkBox -> checkBox.setSelected(false));
         for(Komponent ktv : k.getKonfigListe()){
-            listview.getItems().add(ktv.getNavn() + "\n" + ktv.getKategori() + "\n" +ktv.getPris()+" NOK"+"\n.......................................");
+            listview.getItems().add(ktv.getNavn() + "\n" + ktv.getKategori() + "\n" +ktv.getPris()+
+                    " NOK"+"\n.......................................");
             setCheckboxes(ktv, true); //setter sjekkbokser
         }
         listview.refresh();
@@ -233,7 +236,7 @@ public class BrukersideController {
     }
 
 
-    public void lagreKonfigurasjon() throws AvvikKomponentProduktnavn {
+    public void lagreKonfigurasjon() {
         if(!k.getKonfigListe().isEmpty()) {
             if (filListe.getSelectionModel().getSelectedItem() == "Ny Fil...") {
                 boolean ok = true;
@@ -257,7 +260,8 @@ public class BrukersideController {
                             ok = false;
                             td.close();
                         }catch (AvvikKomponentProduktnavn e){
-                            ok = alertBox("Ikke gyldig filnavn", "ikke gyldig filnavn!", "Prøv igjen?");
+                            ok = alertBox("Ikke gyldig filnavn",
+                                    "ikke gyldig filnavn!", "Prøv igjen?");
                         }
 
                     }else{
@@ -334,7 +338,7 @@ public class BrukersideController {
         boolean ok = alertBox("Bekreft utlogging", "Endringer gjort uten å trykke lagre vil bli slettet!",
                 "Er du sikker på at du vil logge ut?");
         if (ok) {
-            SceneChanger.routeToSite(event, "loggInn");
+            SceneBytte.routeToSite(event, "loggInn");
         }
     }
 }

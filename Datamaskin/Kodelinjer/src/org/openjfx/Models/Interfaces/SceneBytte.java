@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-public interface SceneChanger {
+public interface SceneBytte {
 
     static void routeToSite(ActionEvent event, String path) {
         //generell oppsett for pathing
@@ -20,7 +20,7 @@ public interface SceneChanger {
 
         try {
             FXMLLoader loader = new FXMLLoader();
-            URL url = SceneChanger.class.getResource(BASE_PATH + path + FILE_ENDING);
+            URL url = SceneBytte.class.getResource(BASE_PATH + path + FILE_ENDING);
             loader.setLocation(url);
 
             Parent parent = loader.load();
@@ -28,7 +28,9 @@ public interface SceneChanger {
             Scene scene = new Scene(parent);
             stage.setScene(scene);
             stage.centerOnScreen();
-        }catch (IOException io){
+        }
+
+        catch (IOException io){
             io.printStackTrace();
         }
         //ikke sikkert denne er nødvending

@@ -5,7 +5,7 @@ package org.openjfx.Models.Validering;
 import org.openjfx.Models.Avvik.AvvikLoggInnBrukernavn;
 import org.openjfx.Models.Avvik.AvvikLoggInnPassord;
 
-public class ValiderLoggInn {
+public class ValideringLoggInn {
 
     private StringBuilder ugyldigData = new StringBuilder();
 
@@ -69,7 +69,8 @@ public class ValiderLoggInn {
     }
 
     public boolean validerGjentattPassord(String gjentattPassord) throws AvvikLoggInnPassord {
-        if(!gjentattPassord.matches("^[A-ZÆØÅa-zæøå0-9 _@./#&+-]{5,20}$") && (!gjentattPassord.isEmpty() && !gjentattPassord.isBlank())){
+        if(!gjentattPassord.matches("^[A-ZÆØÅa-zæøå0-9 _@./#&+-]{5,20}$") &&
+                (!gjentattPassord.isEmpty() && !gjentattPassord.isBlank())){
             throw new AvvikLoggInnPassord("Gjentatt passord må matche\n");
         }
         else if(gjentattPassord.isBlank() || gjentattPassord.isEmpty()) {
