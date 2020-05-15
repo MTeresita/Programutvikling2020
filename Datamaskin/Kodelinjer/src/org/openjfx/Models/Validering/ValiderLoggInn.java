@@ -36,9 +36,7 @@ public class ValiderLoggInn {
 
 
     public static boolean valideringBrukernavn(String brukernavn) throws AvvikLoggInnBrukernavn {
-
-        //matcher alle bokstaver A-ÆØÅ mellom 2-50 i lengde og tegn som !-.,
-        //"^[A-æøå]((?![-]$)[A-æøå.,'-]?){2,50}$"
+        
 
         if(!brukernavn.matches("^[A-ZÆØÅa-zæøå0-9 _@./#&+-]{3,20}$") && !brukernavn.isEmpty()){
             throw new AvvikLoggInnBrukernavn("Brukernavn må være mellom 3-20 bokstaver langt \n");
