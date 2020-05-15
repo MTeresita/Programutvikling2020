@@ -3,10 +3,6 @@ package org.openjfx.Models.Parsing;
 import javafx.scene.control.Alert;
 import org.openjfx.Models.Formaterer.KonfigurasjonsFormatererBruker;
 import org.openjfx.Models.Komponent;
-import org.openjfx.Models.Konfigurasjon;
-
-import static org.openjfx.Models.Avvik.AlertHelper.showAlertWindow;
-import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
 
 public class KonfigurasjonsParserBruker {
 

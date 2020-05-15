@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
-import static org.openjfx.Models.Avvik.AlertHelper.showAlertWindow;
+import static org.openjfx.Models.Avvik.AlertHelper.visAlertVindu;
 import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
 import static org.openjfx.Models.HjelpeKlasser.BrukerSystemSjekk.checkExistingBruker;
 import static org.openjfx.Models.KomponenterListe.*;
@@ -161,7 +161,7 @@ private void threadFailed(WorkerStateEvent event) {
 
                             //skrives til Admin.csv
                             WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Admin.csv", true);
-                            showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
+                            visAlertVindu(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Velkommen",
                                     "Administrator opprettet");
                             //resetter inputs for registrering
                             clear();
@@ -187,14 +187,13 @@ private void threadFailed(WorkerStateEvent event) {
                             WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv", true);
 
                             //popup vindu som bekrefter at en ny bruker har blitt opprettet
-                            showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Ny bruker opprettet",
+                            visAlertVindu(Alert.AlertType.INFORMATION, windowHelper(registrerBruker), "Ny bruker opprettet",
                                     "Bruker opprettet");
-                            //showAlertBox(Alert.AlertType.CONFIRMATION, "Ny bruker opprettet", "Ny bruker");
                             //resetter inputs for registrering
                             clear();
 
                         } else {
-                            //eksisterer bruker, send f eilmelding
+                            //eksisterer bruker, send feilmelding
                             setLabelTekst("alert", "Bruker eksisterer.");
                         }
                     }

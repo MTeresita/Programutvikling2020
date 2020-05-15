@@ -13,7 +13,7 @@ import org.openjfx.Models.Validering.ValiderLoggInn;
 
 import java.io.IOException;
 
-import static org.openjfx.Models.Avvik.AlertHelper.showAlertWindow;
+import static org.openjfx.Models.Avvik.AlertHelper.visAlertVindu;
 import static org.openjfx.Models.Avvik.AlertHelper.windowHelper;
 import static org.openjfx.Models.HjelpeKlasser.SceneHåndtering.slideSceneFraTopp;
 import static org.openjfx.Models.Interfaces.SceneChanger.routeToSite;
@@ -46,7 +46,7 @@ public class RegistrerBrukerController {
             WriteTo.writeToCSVFile(new WriteTo(), enBruker, "./Brukere.csv", true);
 
             //Pop up melding om at brukeren er registrert
-            showAlertWindow(Alert.AlertType.INFORMATION, windowHelper(registrerbtn), "Velkommen",
+            visAlertVindu(Alert.AlertType.INFORMATION, windowHelper(registrerbtn), "Velkommen",
                     "Bruker opprettet");
 
             //når du trykker ok, vil du bli sendt tilbake til logg inn siden

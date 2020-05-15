@@ -93,11 +93,7 @@ public class BrukersideController {
 
     public void populateTable() { //henter fra .csv fil
         kl.henteFraObjectFil(true, "");
-        produktnavn.setCellValueFactory(cellData -> cellData.getValue().navnProperty());
-        kategori.setCellValueFactory(cellData -> cellData.getValue().kategoriProperty());
-        pris.setCellValueFactory(cellData -> cellData.getValue().prisProperty().asObject());
-        //komponenter.setItems(kl.createTableFromFile());
-        komponenter.setItems(kl.getObservableList());
+        populateTableWithList();
         populateFilListeComboBox();
     }
     public void setAccesibleText(){
