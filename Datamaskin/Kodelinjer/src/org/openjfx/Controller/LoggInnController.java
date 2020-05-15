@@ -63,7 +63,7 @@ public class LoggInnController {
             }
             else {
                 if(!sjekkOmBrukerEksiterer(txtuser.getText(), "./Brukere.csv")){
-                    lblMessage.setText(txtuser.getText() + ", eksisterer ikke, vennligst registrer deg under \n" +
+                    lblMessage.setText(txtuser.getText() + ", eksisterer ikke, vennligst registrer deg under "+
                             "eller sjekk om du har skrevet inn feil brukernavn");
                 } else {
                     lblMessage.setText("Feil passord");
