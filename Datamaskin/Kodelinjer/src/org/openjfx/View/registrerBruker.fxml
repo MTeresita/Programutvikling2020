@@ -28,7 +28,10 @@
                   <Text fill="#393939" layoutX="107.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord" />
                   <TextField fx:id="txtuser" layoutX="107.0" layoutY="105.0" prefWidth="185.0" stylesheets="@../styles.css" />
                   <PasswordField fx:id="txtpass" layoutX="107.0" layoutY="171.0" prefHeight="29.0" prefWidth="185.0" stylesheets="@../styles.css" />
-                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="17.0" layoutY="315.0" prefHeight="77.0" prefWidth="358.0" textFill="#ee0404" wrapText="true" />
+                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="17.0" layoutY="315.0" prefHeight="77.0" prefWidth="358.0" textFill="#ee0404" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                   <Text fill="#f79977" layoutX="106.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer deg" wrappingWidth="160.541015625">
                      <font>
                         <Font size="21.0" />

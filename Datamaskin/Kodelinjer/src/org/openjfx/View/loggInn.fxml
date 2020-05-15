@@ -39,14 +39,11 @@
                   <Text fill="#393939" layoutX="105.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord" />
                   <TextField fx:id="txtuser" layoutX="106.0" layoutY="109.0" prefHeight="29.0" prefWidth="184.0" stylesheets="@../styles.css" />
                   <PasswordField fx:id="txtpass" layoutX="105.0" layoutY="167.0" prefHeight="29.0" prefWidth="185.0" stylesheets="@../styles.css" />
-                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="105.0" layoutY="243.0" prefHeight="61.0" prefWidth="256.0" textFill="#ee0404" wrapText="true">
-                     <font>
-                        <Font size="11.0" />
-                     </font></Label>
-                  <Hyperlink fx:id="registrerbruker" layoutX="192.0" layoutY="313.0" onAction="#registrerbruker" prefHeight="26.0" prefWidth="114.0" text="Registrer deg her" />
-                  <Text layoutX="107.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ikke bruker? " />
+                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="97.0" layoutY="246.0" prefHeight="61.0" prefWidth="280.0" textFill="#ee0404" wrapText="true" />
+                  <Hyperlink fx:id="registrerbruker" layoutX="192.0" layoutY="313.0" onAction="#registrerbruker" prefHeight="26.0" prefWidth="114.0" text="Registrer deg her" textFill="#e46d13" />
+                  <Text layoutX="107.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ny bruker? " />
                   <Text layoutX="105.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator" />
-                  <Hyperlink fx:id="loginAdmin" layoutX="192.0" layoutY="351.0" onAction="#loginAdmin" prefHeight="26.0" prefWidth="114.0" text="Logg på her" />
+                  <Hyperlink fx:id="loginAdmin" layoutX="192.0" layoutY="351.0" onAction="#loginAdmin" prefHeight="26.0" prefWidth="114.0" text="Logg inn her" textFill="#e46d13" />
                   <Text fill="#f79977" layoutX="105.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn bruker" wrappingWidth="189.22900390625">
                      <font>
                         <Font size="21.0" />

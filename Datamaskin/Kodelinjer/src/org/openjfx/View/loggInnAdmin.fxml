@@ -29,7 +29,7 @@
 
                   <TextField fx:id="txtadminuser" layoutX="108.0" layoutY="159.0" prefHeight="29.0" prefWidth="182.0" stylesheets="@../styles.css" />
                   <PasswordField fx:id="txtadminpass" layoutX="108.0" layoutY="217.0" prefHeight="29.0" prefWidth="181.0" stylesheets="@../styles.css" />
-                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="13.0" layoutY="293.0" prefHeight="90.0" prefWidth="416.0" textFill="#ee0404" />
+                  <Label fx:id="lblMessage" alignment="TOP_LEFT" layoutX="97.0" layoutY="296.0" prefHeight="90.0" prefWidth="313.0" textFill="#ee0404" />
                   <Text fill="#f79977" layoutX="108.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logg inn admin">
 
                      <font>

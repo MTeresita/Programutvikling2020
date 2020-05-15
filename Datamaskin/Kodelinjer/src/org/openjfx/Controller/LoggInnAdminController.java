@@ -59,9 +59,9 @@ public class LoggInnAdminController {
             }
             else {
                 if(!checkExistingBruker(txtadminuser.getText(), "./Admin.csv")){
-                    lblMessage.setText(txtadminuser.getText() + "eksisterer ikke");
+                    lblMessage.setText(txtadminuser.getText() + ", eksisterer ikke");
                 } else {
-                    lblMessage.setText("Feil brukernavn/passord");
+                    lblMessage.setText("Feil passord");
                 }
             }
         }
